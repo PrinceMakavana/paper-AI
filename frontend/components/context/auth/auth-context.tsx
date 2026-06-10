@@ -56,6 +56,17 @@ interface AuthContextType {
 /** React context instance for auth; undefined when used outside AuthProvider. */
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function getEmailNotVerifiedPayload(error: unknown) {
+  const payload = error as {
+    status?: number;
+    data?: { code?: string; email?: string };
+  };
+  if (payload?.status === 403 && payload?.data?.code === "EMAIL_NOT_VERIFIED") {
+    return payload.data;
+  }
+  return null;
+}
+
 /**
  * Wraps the app (or auth subtree) and provides login, logout, register, and user state.
  */
@@ -76,6 +87,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     skip: !hasAccessToken,
   });
   const user = profileResponse?.user;
+
+  const redirectToVerifyEmail = useCallback(
+    (emailAddress: string) => {
+      clearAllCookies();
+      clearLocalStorage();
+      setIsUserLoggedIn(false);
+      router.replace(`/verify-email?email=${encodeURIComponent(emailAddress)}`);
+    },
+    [router]
+  );
 
   /**
    * Clears cookies, localStorage, and API state; optionally navigates to "/" and refreshes.
@@ -109,12 +130,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
     try {
       await refetch().unwrap();
     } catch (err: unknown) {
+      const notVerified = getEmailNotVerifiedPayload(err);
+      if (notVerified) {
+        redirectToVerifyEmail(notVerified.email || "");
+        return;
+      }
+
       const status = (err as { status?: number })?.status;
       if (status === 401 || status === 404) {
         clearAuthStore();
       }
     }
-  }, [clearAuthStore, refetch]);
+  }, [clearAuthStore, redirectToVerifyEmail, refetch]);
 
   /**
    * Syncs login state: refetches user when access token exists but user is missing; sets logged-in when user is loaded.
@@ -127,10 +154,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsUserLoggedIn(Boolean(token && user));
   }, [user, refetchUser]);
 
+  useEffect(() => {
+    if (user && user.isEmailVerified === false) {
+      redirectToVerifyEmail(user.email);
+    }
+  }, [user, redirectToVerifyEmail]);
+
   /**
-   * Logs in with email/password or with a refresh token (remember-me flow).
-   * On success shows alert and navigates to OTP verify; on error shows error alert and rethrows.
-   * @param refresh_token - Optional; when provided, uses remember-me login instead of password.
+   * Logs in with email/password.
    */
   const login = async (
     email: string,
@@ -149,6 +180,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
       router.replace("/chat");
       router.refresh();
     } catch (err: unknown) {
+      const notVerified = getEmailNotVerifiedPayload(err);
+      if (notVerified) {
+        showAlert("Please verify your email before logging in.", "success");
+        redirectToVerifyEmail(notVerified.email || email);
+        return;
+      }
+
       const error = err as { data?: { error?: string; message?: string }; message?: string };
       showAlert(
         error?.data?.error || error?.data?.message || error?.message || "Login failed",
@@ -180,7 +218,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   /**
    * Registers a new user with the given request payload.
-   * Shows success alert and returns API result on success; returns error object on failure.
    */
   const register = async (registerRequest: {
     name: string;
@@ -189,10 +226,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }) => {
     try {
       const result = await registerMutation(registerRequest).unwrap();
-      showAlert(result?.message || "Account created successfully!", "success");
-      setIsUserLoggedIn(true);
-      router.replace("/");
-      router.refresh();
+      showAlert(
+        result?.message || "Account created. Please verify your email.",
+        "success"
+      );
+      sessionStorage.setItem(
+        "paperai_verify_email_cooldown_until",
+        String(Date.now() + 60 * 1000)
+      );
+      router.replace(
+        `/verify-email?email=${encodeURIComponent(registerRequest.email)}`
+      );
     } catch (err: unknown) {
       const error = err as { data?: { error?: string; message?: string }; message?: string };
       showAlert(
@@ -211,6 +255,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     email?: string;
   }) => {
     const result = await updateProfileMutation(profileRequest).unwrap();
+    if (result.user.isEmailVerified === false) {
+      showAlert(
+        result.message || "Please verify your new email address.",
+        "success"
+      );
+      redirectToVerifyEmail(result.user.email);
+    }
     return result.user;
   };
 

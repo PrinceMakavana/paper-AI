@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <title>PageIndex — AI Document Assistant</title>
+        <title>paperAI — AI Document Assistant</title>
       </head>
       <body className={`${fraunces.variable} ${instrumentSans.variable} antialiased`}>
         <Providers>{children}</Providers>

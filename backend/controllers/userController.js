@@ -1,24 +1,43 @@
-const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const {
+    TOKEN_TYPES,
+    verifyAuthToken,
+    signEmailVerificationToken,
+    signPasswordResetToken,
+    signSessionToken,
+} = require('../utils/authTokens');
+const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
+
+const RESEND_COOLDOWN_MS = 60 * 1000;
 
 const mapUserForClient = (user) => ({
     id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,
+    isEmailVerified: user.isEmailVerified ?? false,
     available_token_count: user.available_token_count ?? 0,
     available_page_count: user.available_page_count ?? 0,
 });
 
-// Helper — generate a signed JWT for a user document
-const generateToken = (user) => {
-    return jwt.sign(
-        { userId: user._id, email: user.email, role: user.role },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
-    );
-};
+async function sendVerificationEmailToUser(user, { enforceCooldown = false } = {}) {
+    const now = Date.now();
+    if (enforceCooldown && user.emailVerificationSentAt) {
+        const elapsed = now - new Date(user.emailVerificationSentAt).getTime();
+        if (elapsed < RESEND_COOLDOWN_MS) {
+            const retryAfterSeconds = Math.ceil((RESEND_COOLDOWN_MS - elapsed) / 1000);
+            const error = new Error('RATE_LIMITED');
+            error.retryAfterSeconds = retryAfterSeconds;
+            throw error;
+        }
+    }
+
+    const token = signEmailVerificationToken(user._id);
+    await sendVerificationEmail(user.email, token);
+    user.emailVerificationSentAt = new Date();
+    await user.save();
+}
 
 /**
  * POST /users/register
@@ -29,27 +48,29 @@ const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // Validate required fields
         if (!name || !email || !password) {
             return res.status(400).json({ error: 'Name, email, and password are required.' });
         }
 
-        // Check for duplicate email
-        const existing = await User.findOne({ email: email.toLowerCase() });
+        const normalizedEmail = email.toLowerCase().trim();
+        const existing = await User.findOne({ email: normalizedEmail });
         if (existing) {
-            return res.status(409).json({ error: 'An account with this email already exists.' });
+            return res.status(409).json({
+                error: 'An account with this email already exists. Log in or resend verification.',
+            });
         }
 
-        // Create user — password is hashed by the pre-save hook
-        const user = await User.create({ name, email, password });
+        const user = await User.create({ name, email: normalizedEmail, password });
 
-        const token = generateToken(user);
+        try {
+            await sendVerificationEmailToUser(user);
+        } catch (err) {
+            console.error('Failed to send verification email:', err.message);
+        }
 
-        
         res.status(201).json({
-            message: 'User registered successfully.',
-            token,
-            user: mapUserForClient(user),
+            message: 'Account created. Please check your email to verify your account.',
+            email: user.email,
         });
     } catch (err) {
         res.status(500).json({ error: 'Registration failed.', details: err.message });
@@ -69,8 +90,7 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ error: 'Email and password are required.' });
         }
 
-        // Find user — include password field for comparison (excluded by default)
-        const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+        const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
         if (!user) {
             return res.status(401).json({ error: 'Invalid email or password.' });
         }
@@ -80,7 +100,15 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ error: 'Invalid email or password.' });
         }
 
-        const token = generateToken(user);
+        if (!user.isEmailVerified) {
+            return res.status(403).json({
+                error: 'Please verify your email before logging in.',
+                code: 'EMAIL_NOT_VERIFIED',
+                email: user.email,
+            });
+        }
+
+        const token = signSessionToken(user);
         const profile = await User.findById(user._id).select('-password').lean();
 
         res.status(200).json({
@@ -96,11 +124,6 @@ const loginUser = async (req, res) => {
 /**
  * POST /logout
  * Logout the authenticated user.
- * Requires: Authorization: Bearer <token>
- *
- * JWTs are stateless in this app, so token removal happens on the client.
- * This endpoint confirms the supplied token is valid and gives the client a
- * consistent API response for the logout flow.
  */
 const logoutUser = async (req, res) => {
     res.status(200).json({ message: 'Logout successful.' });
@@ -109,7 +132,6 @@ const logoutUser = async (req, res) => {
 /**
  * GET /users/profile
  * Get the authenticated user's profile.
- * Requires: Authorization: Bearer <token>
  */
 const getProfile = async (req, res) => {
     try {
@@ -127,43 +149,60 @@ const getProfile = async (req, res) => {
 /**
  * PUT /users/profile
  * Update the authenticated user's name and/or email.
- * Requires: Authorization: Bearer <token>
- * Body: { name?, email? }
  */
 const updateProfile = async (req, res) => {
     try {
         const { name, email } = req.body;
+        const currentUser = await User.findById(req.user.userId);
 
-        // Build update object with only allowed fields
+        if (!currentUser) {
+            return res.status(404).json({ error: 'User not found.' });
+        }
+
         const updates = {};
-        if (name) updates.name = name.trim();
+        let emailChanged = false;
+
+        if (name) {
+            updates.name = name.trim();
+        }
+
         if (email) {
-            // Check new email is not already taken by another user
+            const normalizedEmail = email.toLowerCase().trim();
             const emailTaken = await User.findOne({
-                email: email.toLowerCase(),
+                email: normalizedEmail,
                 _id: { $ne: req.user.userId },
             });
             if (emailTaken) {
                 return res.status(409).json({ error: 'Email is already in use by another account.' });
             }
-            updates.email = email.toLowerCase().trim();
+            if (normalizedEmail !== currentUser.email) {
+                updates.email = normalizedEmail;
+                updates.isEmailVerified = false;
+                emailChanged = true;
+            }
         }
 
         if (Object.keys(updates).length === 0) {
             return res.status(400).json({ error: 'Provide at least one field to update (name or email).' });
         }
 
-        const user = await User.findByIdAndUpdate(req.user.userId, updates, {
-            new: true,
-            runValidators: true,
-        }).select('-password').lean();
+        Object.assign(currentUser, updates);
+        await currentUser.save();
 
-        if (!user) {
-            return res.status(404).json({ error: 'User not found.' });
+        if (emailChanged) {
+            try {
+                await sendVerificationEmailToUser(currentUser);
+            } catch (err) {
+                console.error('Failed to send verification email after profile update:', err.message);
+            }
         }
 
+        const user = await User.findById(currentUser._id).select('-password').lean();
+
         res.status(200).json({
-            message: 'Profile updated successfully.',
+            message: emailChanged
+                ? 'Profile updated. Please verify your new email address before logging in again.'
+                : 'Profile updated successfully.',
             user: mapUserForClient(user),
         });
     } catch (err) {
@@ -171,7 +210,111 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// 1. Request Password Reset
+/**
+ * POST /verify-email
+ * Body: { token }
+ */
+const verifyEmail = async (req, res) => {
+    try {
+        const { token } = req.body;
+        if (!token) {
+            return res.status(400).json({ error: 'Verification token is required.' });
+        }
+
+        let decoded;
+        try {
+            decoded = verifyAuthToken(token);
+        } catch (err) {
+            return res.status(400).json({ error: 'Invalid or expired verification link.', details: err.message });
+        }
+
+        if (decoded.type !== TOKEN_TYPES.EMAIL_VERIFICATION) {
+            return res.status(400).json({ error: 'Invalid verification token type.' });
+        }
+
+        const user = await User.findById(decoded.userId);
+        if (!user) {
+            return res.status(404).json({
+                error: 'No account found for this verification link.',
+                code: 'EMAIL_NOT_FOUND',
+                redirect: '/register',
+            });
+        }
+
+        if (user.isEmailVerified) {
+            return res.status(409).json({
+                error: 'Email is already verified. Please log in.',
+                code: 'EMAIL_ALREADY_VERIFIED',
+                redirect: '/login',
+            });
+        }
+
+        user.isEmailVerified = true;
+        await user.save();
+
+        res.status(200).json({
+            message: 'Email verified successfully. You can log in now.',
+            code: 'EMAIL_VERIFIED',
+            redirect: '/login',
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Email verification failed.', details: err.message });
+    }
+};
+
+/**
+ * POST /resend-verification
+ * Body: { email }
+ */
+const resendVerification = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ error: 'Email is required.' });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+        const user = await User.findOne({ email: normalizedEmail });
+
+        if (!user) {
+            return res.status(404).json({
+                error: 'No account found with this email. Please register first.',
+                code: 'EMAIL_NOT_FOUND',
+                redirect: '/register',
+            });
+        }
+
+        if (user.isEmailVerified) {
+            return res.status(409).json({
+                error: 'Email is already verified. Please log in.',
+                code: 'EMAIL_ALREADY_VERIFIED',
+                redirect: '/login',
+            });
+        }
+
+        try {
+            await sendVerificationEmailToUser(user, { enforceCooldown: true });
+        } catch (err) {
+            if (err.message === 'RATE_LIMITED') {
+                return res.status(429).json({
+                    error: 'Please wait before requesting another verification email.',
+                    retryAfterSeconds: err.retryAfterSeconds,
+                });
+            }
+            console.error('Failed to resend verification email:', err.message);
+            return res.status(500).json({ error: 'Could not send verification email.' });
+        }
+
+        res.status(200).json({
+            message: 'Verification email sent. Please check your inbox.',
+            code: 'EMAIL_SENT',
+            redirect: '/login',
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Could not resend verification email.', details: err.message });
+    }
+};
+
 const forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
@@ -181,15 +324,23 @@ const forgotPassword = async (req, res) => {
             return res.status(200).json({ message: 'If an account exists, a reset link has been sent.' });
         }
 
-        const resetToken = jwt.sign(
-            { userId: user._id, type: 'password_reset' },
-            process.env.JWT_SECRET,
-            { expiresIn: '15m' }
-        );
+        const resetToken = signPasswordResetToken(user._id);
 
-        console.log(`Reset Token for ${email}: ${resetToken}`);
+        try {
+            await sendPasswordResetEmail(user.email, resetToken);
+        } catch (err) {
+            console.error('Failed to send password reset email:', err.message);
+            if (!process.env.SMTP_HOST) {
+                console.log(`Reset Token for ${email}: ${resetToken}`);
+                return res.status(200).json({
+                    message: 'Reset link generated successfully.',
+                    token: resetToken,
+                });
+            }
+            return res.status(500).json({ error: 'Could not send reset email.' });
+        }
 
-        res.status(200).json({ message: 'Reset link generated successfully.',token: resetToken });
+        res.status(200).json({ message: 'If an account exists, a reset link has been sent.' });
     } catch (err) {
         res.status(500).json({ error: 'Error initiating reset.', details: err.message });
     }
@@ -199,16 +350,16 @@ const resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = verifyAuthToken(token);
 
-        if (decoded.type !== 'password_reset') {
+        if (decoded.type !== TOKEN_TYPES.PASSWORD_RESET) {
             return res.status(400).json({ error: 'Invalid reset token type.' });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 12);
-        
-        const user = await User.findByIdAndUpdate(decoded.userId, { 
-            password: hashedPassword 
+
+        const user = await User.findByIdAndUpdate(decoded.userId, {
+            password: hashedPassword,
         });
 
         if (!user) {
@@ -217,19 +368,22 @@ const resetPassword = async (req, res) => {
 
         res.status(200).json({ message: 'Password updated successfully.' });
     } catch (err) {
-        console.error("Reset Error:", err.message);
-       return res.status(400).json({ 
-        error: 'Token validation failed', 
-        details: err.message 
-    });
+        console.error('Reset Error:', err.message);
+        return res.status(400).json({
+            error: 'Token validation failed',
+            details: err.message,
+        });
     }
 };
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
     getProfile,
     updateProfile,
+    verifyEmail,
+    resendVerification,
     forgotPassword,
-    resetPassword
+    resetPassword,
 };

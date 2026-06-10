@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Paper-AI Project Index
 
-Three-service monorepo for PDF upload, PageIndex-style hierarchical indexing, and document-grounded chat.
+Three-service monorepo for PDF upload, PageIndex-style hierarchical indexing, and document-grounded chat. Product name: **paperAI**.
 
 ## Services
 
@@ -17,9 +17,11 @@ Three-service monorepo for PDF upload, PageIndex-style hierarchical indexing, an
 
 ## Primary Flow (use this, not legacy routes)
 
-1. **Upload**: Browser → `POST /pageindex/upload` (Express) → `POST /upload` (FastAPI) → S3 + background index job
-2. **Poll**: `GET /pageindex/documents/:id/status` → FastAPI `GET /upload/{doc_id}/status`
-3. **Chat**: `POST /pageindex/question-vectorless-rag` → fetch tree from FastAPI, build context (`utils/pageindexVectorlessContext.js`), call Gemini/Ollama
+1. **Upload**: Browser → `POST /paperai/upload` (Express) → `POST /upload` (FastAPI) → S3 + background index job
+2. **Poll**: `GET /paperai/documents/:id/status` → FastAPI `GET /upload/{doc_id}/status`
+3. **Chat**: `POST /paperai/question-vectorless-rag` → fetch tree from FastAPI, build context (`utils/pageindexVectorlessContext.js`), call Gemini/Ollama
+
+Legacy `/pageindex/*` paths are deprecated aliases. External hosted PageIndex vendor integration (`PAGEINDEX_API_URL`, `@pageindex/sdk`) is separate from the paperAI product name.
 
 Frontend calls Express via `NEXT_PUBLIC_API_URL`. Legacy Next.js routes under `frontend/app/api/pageindex/` use hosted `@pageindex/sdk` — not the main flow.
 

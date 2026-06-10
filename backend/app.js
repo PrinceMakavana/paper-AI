@@ -45,7 +45,7 @@ app.use(pageIndexAuthRoutes);
 app.use(pageIndexHostedJobRoutes);
 app.get('/', (req, res) => {
     res.status(200).json({
-        message: 'Page Index Chatbot API is running',
+        message: 'paperAI API is running',
         version: '1.0.0',
         status: 'ok',
     });
@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 // Start server — only when run directly (not during tests)
 if (require.main === module) {
     app.listen(port, () => {
-        console.log(`🚀 Page Index Chatbot API listening at http://localhost:${port}`);
+        console.log(`🚀 paperAI API listening at http://localhost:${port}`);
 
     });
 }
@@ -66,8 +66,10 @@ if (MONGODB_URI) {
         .connect(MONGODB_URI , {
             dbName: MONGODB_DB_NAME
         })
-        .then(() => {
+        .then(async () => {
             console.log('✅ Connected to MongoDB');
+            const { migrateExistingUsersEmailVerified } = require('./utils/migrateEmailVerified');
+            await migrateExistingUsersEmailVerified();
             startHostedJobRecovery();
         })
         .catch((err) => {

@@ -1,6 +1,8 @@
 const tap = require('tap');
 const supertest = require('supertest');
 const app = require('../app');
+const User = require('../models/userModel');
+const { signEmailVerificationToken } = require('../utils/authTokens');
 const server = supertest(app);
 
 // ─── Shared test state ────────────────────────────────────────────────────────
@@ -23,8 +25,20 @@ const testUser = {
 tap.test('POST /users/register — setup test user', async (t) => {
     const response = await server.post('/users/register').send(testUser);
     t.equal(response.status, 201, 'should register successfully');
-    t.ok(response.body.token, 'should return a token');
-    authToken = response.body.token;
+    t.notOk(response.body.token, 'should not return a token before email verification');
+
+    const user = await User.findOne({ email: testUser.email });
+    const verifyToken = signEmailVerificationToken(user._id);
+    const verifyResponse = await server.post('/verify-email').send({ token: verifyToken });
+    t.equal(verifyResponse.status, 200, 'should verify email for test user');
+
+    const loginResponse = await server.post('/users/login').send({
+        email: testUser.email,
+        password: testUser.password,
+    });
+    t.equal(loginResponse.status, 200, 'should login after verification');
+    t.ok(loginResponse.body.token, 'should return a token after verification');
+    authToken = loginResponse.body.token;
     t.end();
 });
 

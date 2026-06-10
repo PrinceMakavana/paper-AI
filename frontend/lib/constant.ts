@@ -1,3 +1,5 @@
+export const PAPERAI_API_PREFIX = "/paperai";
+
 export enum LOCAL_STORAGE_KEYS {
   SHOW_COMMENT_SIDEBAR = "showCommentSidebar",
   EMAIL = "email",

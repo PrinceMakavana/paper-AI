@@ -2,6 +2,7 @@
 
 import { ChatInterFace } from "@/components/chat-interface";
 import { BuyTokenDialog } from "@/components/buy-token-dialog";
+import { LogoutConfirmDialog } from "@/components/logout-confirm-dialog";
 import { DocumentHistory } from "@/components/document-history";
 import { PdfViewerDialog } from "@/components/pdf-viewer-dialog";
 import { SubjectCatalog } from "@/components/subject-catalog";
@@ -20,12 +21,27 @@ import { useDropzone } from "react-dropzone";
 import { useAlert } from "@/components/context/alert/alert-context";
 import { useAuth } from "@/components/context/auth/auth-context";
 // import type { AIModel } from "@/lib/ai-model";
+import { PAPERAI_API_PREFIX } from "@/lib/constant";
 import { loadRazorpayScript } from "@/lib/razorpay";
 import { getToken, validateFile } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-const CURRENT_DOCUMENT_ID_STORAGE_KEY = "pageindex-current-document-id";
-const CURRENT_SUBJECT_CODE_STORAGE_KEY = "pageindex-current-subject-code";
+const CURRENT_DOCUMENT_ID_STORAGE_KEY = "paperai-current-document-id";
+const CURRENT_SUBJECT_CODE_STORAGE_KEY = "paperai-current-subject-code";
+const LEGACY_DOCUMENT_ID_STORAGE_KEY = "pageindex-current-document-id";
+const LEGACY_SUBJECT_CODE_STORAGE_KEY = "pageindex-current-subject-code";
+
+function migrateStorageKey(newKey: string, legacyKey: string): string | null {
+  try {
+    const value = localStorage.getItem(newKey) ?? localStorage.getItem(legacyKey);
+    if (value === null) return null;
+    localStorage.setItem(newKey, value);
+    localStorage.removeItem(legacyKey);
+    return value;
+  } catch {
+    return null;
+  }
+}
 const BACKEND_API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 const INDEX_STATUS_POLL_INTERVAL_MS = 10000;
@@ -82,6 +98,8 @@ export default function ChatPage() {
   const [availablePageCount, setAvailablePageCount] = useState(0);
   const [isBuyTokenOpen, setIsBuyTokenOpen] = useState(false);
   const [buyingTokens, setBuyingTokens] = useState(false);
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
   const [pdfViewerDocument, setPdfViewerDocument] = useState<DocumentMetaData | undefined>(undefined);
   const [pdfViewerUrl, setPdfViewerUrl] = useState<string | undefined>(undefined);
   const [pdfViewerLoading, setPdfViewerLoading] = useState(false);
@@ -99,7 +117,19 @@ export default function ChatPage() {
     maximumFractionDigits: availablePageCount >= 1000 ? 1 : 0,
   }).format(Math.max(availablePageCount, 0));
 
-  const handleLogout = async () => { await logout(); };
+  const handleLogoutClick = () => {
+    setIsLogoutConfirmOpen(true);
+  };
+
+  const handleLogoutConfirm = async () => {
+    try {
+      setSigningOut(true);
+      await logout();
+    } finally {
+      setSigningOut(false);
+      setIsLogoutConfirmOpen(false);
+    }
+  };
   const userProfile = () => { router.push("/profile"); };
 
   useEffect(() => {
@@ -124,7 +154,7 @@ export default function ChatPage() {
   const fetchDocuments = useCallback(async () => {
     try {
       setDocumentsLoading(true);
-      const response = await fetch(`${BACKEND_API_URL}/pageindex/documents`, {
+      const response = await fetch(`${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents`, {
         headers: getAuthHeaders(),
       });
       if (!response.ok) {
@@ -135,7 +165,10 @@ export default function ChatPage() {
       const data = await response.json();
       const fetched: DocumentMetaData[] = data.documents ?? [];
       setDocuments(fetched);
-      const savedId = localStorage.getItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
+      const savedId = migrateStorageKey(
+        CURRENT_DOCUMENT_ID_STORAGE_KEY,
+        LEGACY_DOCUMENT_ID_STORAGE_KEY,
+      );
       if (savedId) {
         const match = fetched.find((d) => d.id === savedId);
         if (match) {
@@ -177,8 +210,14 @@ export default function ChatPage() {
   }, [fetchDocuments, fetchSubjectsList, isUserLoggedIn, router]);
 
   useEffect(() => {
-    const savedSubjectCode = localStorage.getItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-    const savedDocumentId = localStorage.getItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
+    const savedSubjectCode = migrateStorageKey(
+      CURRENT_SUBJECT_CODE_STORAGE_KEY,
+      LEGACY_SUBJECT_CODE_STORAGE_KEY,
+    );
+    const savedDocumentId = migrateStorageKey(
+      CURRENT_DOCUMENT_ID_STORAGE_KEY,
+      LEGACY_DOCUMENT_ID_STORAGE_KEY,
+    );
     if (!savedSubjectCode || currentSubject || currentDocument || savedDocumentId) return;
 
     let ignore = false;
@@ -235,7 +274,7 @@ export default function ChatPage() {
           pendingDocuments.map(async (doc) => {
             try {
               const response = await fetch(
-                `${BACKEND_API_URL}/pageindex/documents/${encodeURIComponent(doc.id)}/status`,
+                `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(doc.id)}/status`,
                 { headers: getAuthHeaders() },
               );
               const data: DocumentStatusResponse = await response.json();
@@ -324,7 +363,7 @@ export default function ChatPage() {
         const formData = new FormData();
         formData.append("file", acceptedFiles[0]);
         formData.append("model_provider", selectedModel);
-        const response = await fetch(`${BACKEND_API_URL}/pageindex/upload`, {
+        const response = await fetch(`${BACKEND_API_URL}${PAPERAI_API_PREFIX}/upload`, {
           method: "POST",
           body: formData,
           headers: getAuthHeaders(),
@@ -397,7 +436,7 @@ export default function ChatPage() {
     try {
       setDeletingDocumentId(documentId);
       const response = await fetch(
-        `${BACKEND_API_URL}/pageindex/documents/${encodeURIComponent(documentId)}`,
+        `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(documentId)}`,
         { method: "DELETE", headers: getAuthHeaders() },
       );
       const data = await response.json();
@@ -437,7 +476,7 @@ export default function ChatPage() {
 
       try {
         const response = await fetch(
-          `${BACKEND_API_URL}/pageindex/documents/${encodeURIComponent(document.id)}/pdf-url`,
+          `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(document.id)}/pdf-url`,
           { headers: getAuthHeaders() },
         );
         const data: PdfUrlResponse = await response.json();
@@ -485,7 +524,7 @@ export default function ChatPage() {
         key: key_id,
         amount,
         currency,
-        name: "PageIndex",
+        name: "paperAI",
         description: "Payment for tokens",
         order_id,
         notes,
@@ -542,6 +581,12 @@ export default function ChatPage() {
         onClose={() => setIsBuyTokenOpen(false)}
         onBuy={handleBuyTokens}
       />
+      <LogoutConfirmDialog
+        open={isLogoutConfirmOpen}
+        signingOut={signingOut}
+        onClose={() => setIsLogoutConfirmOpen(false)}
+        onConfirm={handleLogoutConfirm}
+      />
       <PdfViewerDialog
         open={!!pdfViewerDocument}
         filename={pdfViewerDocument?.filename}
@@ -567,7 +612,7 @@ export default function ChatPage() {
             style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.375rem", letterSpacing: "-0.02em" }}
             onClick={() => router.push("/")}
           >
-            PageIndex
+            paperAI
           </span>
 
           <div className="flex items-center gap-1 sm:gap-2">
@@ -621,7 +666,7 @@ export default function ChatPage() {
               <UserCircle size={18} />
             </button>
             <button
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               title="Sign out"
               className="flex items-center justify-center p-1.5 rounded transition-colors"
               style={{ color: "var(--ed-muted)" }}

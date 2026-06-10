@@ -1,7 +1,10 @@
-# PageIndex Hosted Upload — Automation Flow
+# Hosted Upload Automation Flow
 
 > Status: **Implemented** as a resumable background job.
-> Entry point: `POST /pageindex/hosted-jobs` (JWT required) with `email` + optional PDF `file`.
+> Entry point: `POST /paperai/hosted-jobs` (JWT required) with `email` + optional PDF `file`.
+> Legacy alias: `POST /pageindex/hosted-jobs`.
+>
+> Note: This flow integrates with the external **PageIndex** hosted service (`PAGEINDEX_API_URL`). The paperAI product API uses `/paperai/*` paths.
 
 ## Hosts
 
@@ -174,10 +177,12 @@ Each registration attempt creates one document in `pageindex_hosted_jobs` (linke
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `POST` | `/pageindex/hosted-jobs` | Create job (202, returns `job_id`) |
-| `GET` | `/pageindex/hosted-jobs/:jobId` | Poll job status |
-| `GET` | `/pageindex/hosted-jobs` | List user's jobs |
-| `POST` | `/pageindex/hosted-jobs/:jobId/retry` | Manual retry for failed jobs |
+| `POST` | `/paperai/hosted-jobs` | Create job (202, returns `job_id`) |
+| `GET` | `/paperai/hosted-jobs/:jobId` | Poll job status |
+| `GET` | `/paperai/hosted-jobs` | List user's jobs |
+| `POST` | `/paperai/hosted-jobs/:jobId/retry` | Manual retry for failed jobs |
+
+Legacy `/pageindex/*` paths remain as aliases.
 
 ### Implementation files
 
@@ -186,11 +191,11 @@ Each registration attempt creates one document in `pageindex_hosted_jobs` (linke
 - Steps: `backend/services/pageindexHosted/steps.js`
 - Routes: `backend/routes/pageIndexHostedJobRoutes.js`
 
-Legacy `POST /pageindex/register` returns `410 Gone`.
+Legacy `POST /paperai/register` (alias: `/pageindex/register`) returns `410 Gone`.
 
 ### Main app upload integration
 
-`POST /pageindex/upload` (existing chat UI route) now:
+`POST /paperai/upload` (existing chat UI route) now:
 
 1. Generates a random dummy source email (`paperai-{hex}@upload.local` → YOPmail)
 2. Creates a hosted job + placeholder `pageindex_documents` row (`document_id` = job id)

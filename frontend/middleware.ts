@@ -8,6 +8,9 @@ export async function middleware(req: NextRequest) {
     const isProtectedRoute = protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route));
 
     if (isPublicRoute) {
+        if (token && req.nextUrl.pathname.startsWith("/verify-email")) {
+            return NextResponse.next();
+        }
         if (token) {
             return NextResponse.redirect(new URL("/chat", req.url))
         }

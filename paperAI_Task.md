@@ -2,13 +2,14 @@
 (Done) => After Complete Indexing , delete temporary 
 (Done) => filter on subject and only show subject which is pageindexStatus is "ready"  | "partial"
 (Done) => Dont show this Partial , Red , Pending , Failed Status on Subject Catalog and There Files 
-=> Hide model selection from top it will be default gemini
-=> Remove Name Page Index From Every Where and change it with PaperAI
+(Done) => Hide model selection from top it will be default gemini
+(Done) => Remove Name Page Index From Every Where and change it with PaperAI
 => Uploda Landing Page => It has to show promote for Paper Solution AI
+(Done) => on logout set conformation popup
 => remove all Bitly and change it with actual url and add subjects here
-=> on logout set conformation popup
-=> Add Email Verification on Signup and Signin
+(Done) => Add Email Verification on Signup and Signin
 => Add one view into Right side of the subject file 
+=> Add Forgot and Reset Passwrod Feature 
 
 
 -- after Prod -- 

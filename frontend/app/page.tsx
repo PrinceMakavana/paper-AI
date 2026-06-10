@@ -22,7 +22,7 @@ const workflow = [
   },
   {
     title: "Index content",
-    text: "PageIndex prepares the document structure so answers can stay grounded.",
+    text: "paperAI prepares the document structure so answers can stay grounded.",
     icon: Search,
   },
   {
@@ -48,7 +48,7 @@ export default function LandingPage() {
             <span className="flex size-9 items-center justify-center rounded-md bg-foreground text-background">
               <Bot className="size-5" />
             </span>
-            PageIndex AI
+            paperAI
           </Link>
 
           <nav className="flex items-center gap-2">
@@ -73,10 +73,10 @@ export default function LandingPage() {
           <div className="max-w-2xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-1 text-sm text-muted-foreground">
               <Sparkles className="size-4 text-amber-500" />
-              AI document assistant for PageIndex workflows
+              AI document assistant for exam paper workflows
             </div>
             <h1 className="text-5xl font-bold tracking-normal text-foreground sm:text-6xl lg:text-7xl">
-              PageIndex AI
+              paperAI
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
               Upload a PDF, generate a clear summary, and ask focused questions

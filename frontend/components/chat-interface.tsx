@@ -7,6 +7,7 @@ import type { Components } from "react-markdown";
 import { Eye, FileText, Loader2, Send } from "lucide-react";
 import type { AIModel } from "@/lib/ai-model";
 import { useAlert } from "./context/alert/alert-context";
+import { PAPERAI_API_PREFIX } from "@/lib/constant";
 import { getToken } from "@/lib/utils";
 
 const BACKEND_API_URL =
@@ -176,8 +177,8 @@ export function ChatInterFace({
       try {
         setHistoryLoading(true);
         const historyUrl = currentSubject
-          ? `${BACKEND_API_URL}/pageindex/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-          : `${BACKEND_API_URL}/pageindex/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
+          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
+          : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
         const response = await fetch(historyUrl, { headers: getAuthHeaders() });
         const data: ChatMessagesResponse = await response.json();
         if (ignore) return;
@@ -236,8 +237,8 @@ export function ChatInterFace({
     try {
       setLoading(true);
       const endpoint = isSubjectMode
-        ? `${BACKEND_API_URL}/pageindex/subject-question-rag`
-        : `${BACKEND_API_URL}/pageindex/question-vectorless-rag`;
+        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/subject-question-rag`
+        : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/question-vectorless-rag`;
       const body = isSubjectMode
         ? { question, subjectCode: currentSubject!.subjectCode, chatModel: selectedModel }
         : { question, documentId: currentDocument!.id, chatModel: selectedModel };
@@ -284,8 +285,8 @@ export function ChatInterFace({
     try {
       setHistoryLoading(true);
       const deleteUrl = currentSubject
-        ? `${BACKEND_API_URL}/pageindex/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-        : `${BACKEND_API_URL}/pageindex/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
+        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
+        : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
       const response = await fetch(deleteUrl, { method: "DELETE", headers: getAuthHeaders() });
       const data = await response.json();
       if (!response.ok || data.status !== 200) {

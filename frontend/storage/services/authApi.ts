@@ -21,6 +21,7 @@ export interface AuthUser {
   name: string;
   email: string;
   role?: string;
+  isEmailVerified?: boolean;
   available_token_count?: number;
   available_page_count?: number;
 }
@@ -28,6 +29,15 @@ export interface AuthResponse {
   message?: string;
   user: AuthUser;
   token: string;
+}
+export interface RegisterResponse {
+  message?: string;
+  email: string;
+}
+export interface MessageResponse {
+  message?: string;
+  code?: string;
+  redirect?: string;
 }
 export interface ProfileResponse {
   message?: string;
@@ -49,6 +59,14 @@ const persistAuthSession = (response: AuthResponse) => {
   setCookie(COOKIE_STORAGE_KEYS.EMAIL, response.user.email);
 };
 
+function isEmailNotVerifiedError(error?: { status?: number; data?: unknown }) {
+  if (!error || error.status !== 403) {
+    return false;
+  }
+  const data = error.data as { code?: string } | undefined;
+  return data?.code === "EMAIL_NOT_VERIFIED";
+}
+
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: axiosBaseQuery(),
@@ -68,7 +86,7 @@ export const authApi = createApi({
       },
       invalidatesTags: ['User'],
     }),
-    register: builder.mutation<AuthResponse, RegisterRequest>({
+    register: builder.mutation<RegisterResponse, RegisterRequest>({
       query: (payload) => {
         return {
           url: "/users/register",
@@ -76,11 +94,21 @@ export const authApi = createApi({
           data: payload,
         };
       },
-      transformResponse: (response: AuthResponse) => {
-        persistAuthSession(response);
-        return response;
-      },
       invalidatesTags: ['User'],
+    }),
+    verifyEmail: builder.mutation<MessageResponse, { token: string }>({
+      query: (payload) => ({
+        url: "/verify-email",
+        method: "POST",
+        data: payload,
+      }),
+    }),
+    resendVerification: builder.mutation<MessageResponse, { email: string }>({
+      query: (payload) => ({
+        url: "/resend-verification",
+        method: "POST",
+        data: payload,
+      }),
     }),
     logoutUser: builder.mutation<AuthResponse, unknown>({
       query: () => {
@@ -115,7 +143,7 @@ export const authApi = createApi({
         });
         if (result.error) {
           const status = result.error.status;
-          if (status === 401 || status === 404) {
+          if (status === 401 || status === 404 || isEmailNotVerifiedError(result.error)) {
             clearAllCookies();
             clearLocalStorage();
           }
@@ -157,6 +185,8 @@ export const authApi = createApi({
 export const {
   useLoginMutation,
   useRegisterMutation,
+  useVerifyEmailMutation,
+  useResendVerificationMutation,
   useLogoutUserMutation,
   useGetMeQuery,
   useUpdateProfileMutation,

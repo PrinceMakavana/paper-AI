@@ -1,6 +1,6 @@
-# PageIndex AI POC
+# paperAI
 
-Proof-of-concept document chat app for uploading PDFs, indexing them with a local PageIndex-style Python service, and asking questions through an Express API using Gemini or Ollama.
+Document chat app for uploading PDFs, indexing them with a local PageIndex-style Python service, and asking questions through an Express API using Gemini or Ollama.
 
 ## What Is In This Repo
 
@@ -12,10 +12,10 @@ Proof-of-concept document chat app for uploading PDFs, indexing them with a loca
 
 The current main flow is:
 
-1. Browser uploads a PDF to Express: `POST /pageindex/upload`.
+1. Browser uploads a PDF to Express: `POST /paperai/upload`.
 2. Express validates the PDF, then forwards it to FastAPI: `POST /upload`.
 3. FastAPI stores the file and indexes it in the background.
-4. Browser asks Express: `POST /pageindex/question-vectorless-rag`.
+4. Browser asks Express: `POST /paperai/question-vectorless-rag`.
 5. Express fetches indexed structure/page text from FastAPI, builds context, and calls Gemini or Ollama.
 
 The old Next.js local API routes under `frontend/app/api/local-pageindex/` have been removed. The UI now calls the Express backend directly.
@@ -99,6 +99,17 @@ Key variables:
 | `PAGEINDEX_API_DASHBOARD_URL` | Hosted PageIndex dashboard URL (password reset, API keys) |
 | `PAGEINDEX_SECRETS_KEY` | Base64 32-byte key for encrypting stored PageIndex credentials |
 | `PAGEINDEX_JOB_TEMP_ROOT` | Temp directory for staged PDFs during hosted upload jobs |
+| `MONGODB_URI` | MongoDB connection string for users, documents, and chat |
+| `JWT_SECRET` | Secret used to sign login and verification tokens |
+| `SMTP_HOST` | SMTP server host for verification and password-reset emails |
+| `SMTP_PORT` | SMTP port (default `587`) |
+| `SMTP_SECURE` | Set to `true` for TLS on port 465 |
+| `SMTP_USER` | SMTP username (optional for open relays) |
+| `SMTP_PASS` | SMTP password |
+| `SMTP_FROM` | From address, e.g. `PaperAI <noreply@yourdomain.com>` |
+| `EMAIL_VERIFICATION_EXPIRES_IN` | Verification link lifetime (default `24h`) |
+
+If SMTP is not configured, verification and reset links are logged to the backend console instead of being emailed. Set `FRONTEND_URL` to the public Next.js URL so links point to `/verify-email` and `/reset-password`.
 
 ### Python PageIndex Service
 
@@ -157,11 +168,13 @@ These are the endpoints used by the frontend:
 | `GET` | `/catalog/subjects` | Lists GTU subject catalog entries from `data/*.json` |
 | `GET` | `/catalog/subjects/:subjectCode` | Returns subject metadata and indexed books |
 | `GET` | `/catalog/subjects/:subjectCode/books/:bookId/pdf-url` | Signed URL for a catalog book PDF (when uploaded to S3) |
-| `POST` | `/pageindex/upload` | Accepts multipart `file` and optional `chatModel`; validates PDF and forwards it to FastAPI |
-| `POST` | `/pageindex/question-vectorless-rag` | Accepts `question`, `documentId`, and `chatModel`; builds context and returns an answer |
-| `POST` | `/pageindex/subject-question-rag` | Accepts `question`, `subjectCode`, and `chatModel`; searches all ready books in the subject |
-| `GET` | `/pageindex/chat-messages/subject/:subjectCode` | Chat history for a subject session |
-| `DELETE` | `/pageindex/chat-messages/subject/:subjectCode` | Clears subject chat history |
+| `POST` | `/paperai/upload` | Accepts multipart `file` and optional `chatModel`; validates PDF and forwards it to FastAPI |
+| `POST` | `/paperai/question-vectorless-rag` | Accepts `question`, `documentId`, and `chatModel`; builds context and returns an answer |
+| `POST` | `/paperai/subject-question-rag` | Accepts `question`, `subjectCode`, and `chatModel`; searches all ready books in the subject |
+| `GET` | `/paperai/chat-messages/subject/:subjectCode` | Chat history for a subject session |
+| `DELETE` | `/paperai/chat-messages/subject/:subjectCode` | Clears subject chat history |
+
+Legacy `/pageindex/*` paths remain as backward-compatible aliases.
 
 Set `CATALOG_DATA_DIR` in `backend/.env` to the folder containing subject JSON files (default: repo `data/`).
 
@@ -229,7 +242,7 @@ npm test
 - `frontend/components/` - Chat UI, upload UI, document history, and shared UI primitives.
 - `frontend/utils/` - Frontend helpers and legacy PageIndex utilities.
 - `backend/app.js` - Express app setup, CORS, route mounting.
-- `backend/routes/pageIndexRoutes.js` - Express PageIndex routes used by the frontend.
+- `backend/routes/pageIndexRoutes.js` - Express paperAI routes (`/paperai/*`) used by the frontend.
 - `backend/controllers/pageIndexController.js` - Upload validation, FastAPI calls, context building, and model invocation.
 - `backend/utils/` - Backend model selection and vectorless context helpers.
 - `pageindex-backend/main.py` - FastAPI upload/status/page-text API.

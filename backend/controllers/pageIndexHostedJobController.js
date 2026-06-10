@@ -40,7 +40,7 @@ async function createJob(req, res) {
             const sourceEmail = email || generateDummySourceEmail();
             logHostedJobEvent('INFO', {
                 step: 'api',
-                message: 'POST /pageindex/hosted-jobs with file',
+                message: 'POST /paperai/hosted-jobs with file',
                 meta: { userId: req.user.userId, sourceEmail, fileName: uploadedFile.originalname, pageCount },
             });
 
@@ -59,7 +59,7 @@ async function createJob(req, res) {
             }
 
             return res.status(202).json({
-                message: 'Hosted PageIndex job created.',
+                message: 'Hosted upload job created.',
                 job: mapJobForClient(job),
                 documentId,
             });
@@ -75,26 +75,26 @@ async function createJob(req, res) {
         logHostedJobEvent('SUCCESS', {
             jobId: job._id.toString(),
             step: 'api',
-            message: 'POST /pageindex/hosted-jobs without file',
+            message: 'POST /paperai/hosted-jobs without file',
             meta: { userId: req.user.userId, sourceEmail },
         });
 
         enqueueHostedJob(job._id.toString());
 
         return res.status(202).json({
-            message: 'Hosted PageIndex job created.',
+            message: 'Hosted upload job created.',
             job: mapJobForClient(job),
         });
     } catch (error) {
         logHostedJobEvent('ERROR', {
             step: 'api',
-            message: 'Failed to create hosted PageIndex job',
+            message: 'Failed to create hosted upload job',
             error,
             meta: { userId: req.user?.userId },
         });
         const status = error.statusCode || 500;
         return res.status(status).json({
-            message: error.message || 'Failed to create hosted PageIndex job.',
+            message: error.message || 'Failed to create hosted upload job.',
         });
     }
 }
@@ -114,7 +114,7 @@ async function getJob(req, res) {
     } catch (error) {
         const status = error.statusCode || 500;
         return res.status(status).json({
-            message: error.message || 'Failed to fetch hosted PageIndex job.',
+            message: error.message || 'Failed to fetch hosted upload job.',
         });
     }
 }
@@ -138,7 +138,7 @@ async function listJobs(req, res) {
     } catch (error) {
         const status = error.statusCode || 500;
         return res.status(status).json({
-            message: error.message || 'Failed to list hosted PageIndex jobs.',
+            message: error.message || 'Failed to list hosted upload jobs.',
         });
     }
 }
@@ -174,13 +174,13 @@ async function retryJob(req, res) {
         enqueueHostedJob(job._id.toString());
 
         return res.status(202).json({
-            message: 'Hosted PageIndex job retry enqueued.',
+            message: 'Hosted upload job retry enqueued.',
             job: mapJobForClient(job),
         });
     } catch (error) {
         const status = error.statusCode || 500;
         return res.status(status).json({
-            message: error.message || 'Failed to retry hosted PageIndex job.',
+            message: error.message || 'Failed to retry hosted upload job.',
         });
     }
 }
