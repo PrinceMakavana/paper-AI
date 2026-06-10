@@ -1,0 +1,64 @@
+{
+  "subject_name": "Basic Mechanical Engineering",
+  "known_as": "BME",
+  "subjecet_code": "3110006",
+  "syllabus": "https://bit.ly/3rfv5lB",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110006.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110006.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110006.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110006.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3110006.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3110006.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3110006.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3z06d3Z"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3z2eyUH"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3hJTrke"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/2XfHo6l"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://3.bp.blogspot.com/-c0sdMe3HVK4/V0lELHW8cwI/AAAAAAAAAck/S-ZGKflj6Mwa10yyvUKpWMF0vBEdnDhjwCLcB/s1600/Mech-eng.jpg",
+      "download_link": "https://drive.google.com/drive/folders/1A_NJFv4FNORH3GV7Ivrtv5FIr8f0Uqa-?usp=sharing",
+      "alt_data": "Basic Mechanical Engineering "
+    }
+  ]
+}

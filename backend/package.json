@@ -1,0 +1,52 @@
+{
+  "name": "page-index-chatbot",
+  "version": "1.0.0",
+  "description": "Page Index Chatbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "pretest": "node -e \"if (process.version.slice(1).split('.')[0] < 18) { console.error('Unsupported Node.js version, please use version 18'); process.exit(1); }\"",
+    "test": "tap test/*.js --disable-coverage",
+    "generate:secrets-key": "node -e \"console.log(require('crypto').randomBytes(32).toString('base64'))\""
+  },
+  "author": "Docformist",
+  "license": "ISC",
+  "devDependencies": {
+    "supertest": "^6.3.4",
+    "tap": "^21.7.4"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1065.0",
+    "@langchain/community": "^1.1.29",
+    "@langchain/core": "^1.1.43",
+    "@langchain/google-genai": "^2.1.30",
+    "@langchain/ollama": "^1.2.7",
+    "@langchain/pinecone": "^1.0.3",
+    "@pageindex/sdk": "^0.8.0",
+    "@pinecone-database/pinecone": "^5.1.2",
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.0",
+    "connect-mongo": "^5.1.0",
+    "cord": "^1.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "easy-yopmail": "^5.2.2",
+    "express": "^4.21.2",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "langchain": "^1.4.4",
+    "mongoose": "^8.18.1",
+    "morgan": "^1.10.1",
+    "multer": "^2.1.1",
+    "nodemon": "^3.1.10",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0",
+    "pdf-lib": "^1.17.1",
+    "razorpay": "^2.9.6"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  }
+}

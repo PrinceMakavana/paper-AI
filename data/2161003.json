@@ -1,0 +1,77 @@
+{
+  "subject_name": "Antennas and Propagation",
+  "subjecet_code": "2161003",
+  "known_as": "A&P",
+  "syllabus": "https://bit.ly/3eh9TGz",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/2161003.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/2161003.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/2161003.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/2161003.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/2161003.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3qlMEBM"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3nlnKjz"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3HYK4HO"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3qlRPSe"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3toY75g"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3Fh1P3b"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3reiRtI"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3GmlxvQ"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhIPEpF3rFBi0B8CraOQoxqcGmGW4WgWEj4U15iazmdpyQLakW3NNNbhbsFMIiQixIG7rZK93xki8je4vbpTITpyuvX5naoX0xGI9RXtAaeav4FI-pgfpRTPVWGxEv3HdThAyCcb3r29BbzxJ0Ff8oGtkh95p2ln5kxYxBcHqB6Ay63ZGXaC-1kGMMJkg",
+      "link": "https://bit.ly/33zsyLv",
+      "alt_data": "Antennas for all applications"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEinDjwhQnrvyOLUBZ7eB8bwHZvhaPZYSDZZIGrlqqPT0JKXGc8GVwvObOBANuY_LlM6A_kUZOm2Y4iaiQO_i7T5fGtCzZ0j8FWBHNAirku9tvMkfA47gfGJ9dE-53kRx08GsGZGT4XVSRepQvxBggOFWEOATOBox5smwt8tWJc1K3b9KMAaFToEVZAjsQ",
+      "link": "https://bit.ly/3nA2tCU",
+      "alt_data": "Antenna Theory: Analysis and Design"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}
