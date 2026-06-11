@@ -2,6 +2,20 @@ import nodemailer from 'nodemailer';
 
 let transporter;
 
+function isEmailDisabled() {
+    if (process.env.DISABLE_EMAIL === 'true') {
+        return true;
+    }
+    if (process.env.NODE_ENV === 'test') {
+        return true;
+    }
+    // tap test runner (npm test)
+    if (process.env.TAP) {
+        return true;
+    }
+    return false;
+}
+
 function getTransporter() {
     if (transporter) {
         return transporter;
@@ -36,6 +50,11 @@ function getFromAddress() {
 }
 
 async function sendMail({ to, subject, text, html }) {
+    if (isEmailDisabled()) {
+        console.warn(`[emailService] Email disabled (test mode) — skipped to ${to}: ${subject}`);
+        return { skipped: true };
+    }
+
     const mailTransporter = getTransporter();
     if (!mailTransporter) {
         console.warn(`[emailService] SMTP not configured — would send to ${to}: ${subject}`);

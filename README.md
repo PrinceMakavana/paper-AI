@@ -65,9 +65,11 @@ Create `frontend/.env` or `frontend/.env.local`:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
+# Production only — omit locally so dev traffic is not sent to GA4
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-WPXWX6KJ1V
 ```
 
-Because this value is exposed to the browser, only put the public Express API URL here.
+Because these values are exposed to the browser, only put the public Express API URL and GA measurement ID here.
 
 ### Express Backend
 
