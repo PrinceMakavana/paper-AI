@@ -8,7 +8,7 @@
     "start": "node app.js",
     "dev": "node --watch app.js",
     "pretest": "node -e \"if (process.version.slice(1).split('.')[0] < 18) { console.error('Unsupported Node.js version, please use version 18'); process.exit(1); }\"",
-    "test": "tap test/*.js --disable-coverage",
+    "test": "NODE_ENV=test tap test/*.js --disable-coverage",
     "generate:secrets-key": "node -e \"console.log(require('crypto').randomBytes(32).toString('base64'))\""
   },
   "author": "Docformist",
