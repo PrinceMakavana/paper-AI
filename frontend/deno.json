@@ -9,7 +9,7 @@
   ],
   "deploy": {
     "framework": "nextjs",
-    "install": "npm install",
+    "install": "rm -rf node_modules && npm install --ignore-scripts --legacy-peer-deps",
     "build": "rm -rf .next && npm run build"
   }
 }
