@@ -1,0 +1,51 @@
+---
+description: Paper-AI monorepo architecture and data flow
+alwaysApply: true
+---
+
+# Paper-AI Project Index
+
+Three-service monorepo for PDF upload, PageIndex-style hierarchical indexing, and document-grounded chat. Product name: **paperAI**.
+
+## Services
+
+| Service | Path | Port | Entry |
+|---------|------|------|-------|
+| Frontend | `frontend/` | 3000 | `app/chat/page.tsx` |
+| Express API | `backend/` | 5000 | `app.js` |
+| PageIndex indexer | `pageindex-backend/` | 8000 | `main.py` |
+
+## Primary Flow (use this, not legacy routes)
+
+1. **Upload**: Browser → `POST /paperai/upload` (Express) → `POST /upload` (FastAPI) → S3 + background index job
+2. **Poll**: `GET /paperai/documents/:id/status` → FastAPI `GET /upload/{doc_id}/status`
+3. **Chat**: `POST /paperai/question-vectorless-rag` → fetch tree from FastAPI, build context (`utils/pageindexVectorlessContext.js`), call Gemini/Ollama
+
+Legacy `/pageindex/*` paths are deprecated aliases. External hosted PageIndex vendor integration (`PAGEINDEX_API_URL`, `@pageindex/sdk`) is separate from the paperAI product name.
+
+Frontend calls Express via `NEXT_PUBLIC_API_URL`. Legacy Next.js routes under `frontend/app/api/pageindex/` use hosted `@pageindex/sdk` — not the main flow.
+
+## Key Files
+
+- Upload + chat logic: `backend/controllers/pageIndexController.js`
+- Tree context (no vectors): `backend/utils/pageindexVectorlessContext.js`, `backend/utils/localPageindexTree.js`
+- Indexing pipeline: `pageindex-backend/pageindex/page_index.py`, `pageindex/utils.py`
+- Indexing config: `pageindex-backend/pageindex/config.yaml`
+- Chat UI: `frontend/components/chat-interface.tsx`
+
+## Storage
+
+- MongoDB: users, documents, chat messages, index status
+- S3: `source.pdf` and `page_index.json` per document
+- Temp PDFs: `PAGEINDEX_TEMP_ROOT` (default system temp `/pageindex`)
+
+## Env (see README.md)
+
+Express: `PAGEINDEX_BACKEND_API_URL`, `MONGODB_URI`, `GEMINI_API_KEY`, `OLLAMA_API_URL`
+Python: `PAGEINDEX_MAX_CONCURRENT`, LiteLLM provider keys, `AWS_S3_BUCKET_NAME`
+
+## Conventions
+
+- Match existing patterns per service; minimal diffs
+- Node 18+ backend, Python 3.10+ indexer, Next.js 15 frontend
+- Do not commit `.env` files or secrets

@@ -1,0 +1,61 @@
+{
+  "subject_name": "System Programing",
+  "known_as": "SP",
+  "subjecet_code": "2150708",
+  "syllabus": "https://bit.ly/3iuVM2V",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/2150708.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/2150708.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/2150708.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://www.gtu.ac.in/uploads/W2021/BE/2150704.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/2U5VN44"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3iudKm3"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/2WUcGj1"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3rXRcNC"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3yxx73d"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhdACOZa4nsriDfu2oJpR6FmQvrEUxWe6TKkt5YoRsBtA8ftj4D6V2ZnNiShZhn4sU3fO3l3jadYyDsJnvQaxYkqip0cAIINdef_-1N5l-jtzcd9dgLDXRnXGmvkX0UrPS7ViHFetU_Po1Apbk2Lykl70LZMeMUfPma7vYUMfsvkoQkzDIrqLjZ0jm6Hw",
+      "download_link": "https://bit.ly/3eeLktv",
+      "alt_data": "System Software_ An Introduction To Systems Programming "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhoWuxY_wREfF3UtK7r0Bm8_UFjiLi5g5YBhE8ojeRMqfL2cellxs4DhRofyfRYH6-6tOJ8SKVrTVCK9o0leo57k7lptIL3jT0zpRBd9O3g4zYEYOxGggKs7tbWtGrWqzDGIcBmgFcd_26y6_yMUYIr7iZevOHhs0nk3N6HoJddp-oOzU0KJEbdSRNkJA",
+      "download_link": "https://bit.ly/3svIE2K",
+      "alt_data": "System _ Progrraming spos-by-dhamdhere "
+    }
+  ]
+}

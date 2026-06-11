@@ -1,0 +1,72 @@
+{
+  "subject_name": "Microprocessor and Interfacing",
+  "known_as": "MAI",
+  "subjecet_code": "2150707",
+  "syllabus": "https://bit.ly/2VrIxrc",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/2150707.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/2150707.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/2150707.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/2150707.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/2150707.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/2150707.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3ApfJhR"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3lHEzVN"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/2WUcGj1"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3lHEwJB"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3xpHRzv"
+    },
+    {
+      "year": "Winter-17",
+      "link": "https://bit.ly/3yw2mMa"
+    },
+    {
+      "year": "Summer-17",
+      "link": "https://bit.ly/3yzDjYz"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjVXHVPsn97kzqHDczjG_kUq59ogwWbc7pkLh0VJL1hdNYFAS2dlV4L-D22DH8FJGBLMEVefErYl4mW5etKP1UT55YBw0qrwo7gTLJRgGnuWUP93CIQKnAIT1JCZolvsYnFTBWI_qiXkX918qUkgrAdMmEjdpAOTzec9aVgz7-9xhoYKNNquSTclL_Ukg",
+      "download_link": "https://bit.ly/327Vp9i",
+      "alt_data": "Microprocessors and Interfacing, N. Senthil Kumar, M. Saravanan, S. Jeevanathan, S. K. Shah"
+    }
+  ]
+}
