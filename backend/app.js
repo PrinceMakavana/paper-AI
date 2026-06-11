@@ -1,41 +1,41 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { fileURLToPath } from 'node:url';
+import logger from './middleware/loggerMiddleware.js';
+import userRoutes from './routes/userRoutes.js';
+import pageIndexRoutes from './routes/pageIndexRoutes.js';
+import catalogRoutes from './routes/catalogRoutes.js';
+import ragChatRoutes from './routes/RagChatRoutes.js';
+import PaymentRouter from './routes/paymentRoutes.js';
+import pageIndexAuthRoutes from './routes/pageindexAuthRoutes.js';
+import pageIndexHostedJobRoutes from './routes/pageIndexHostedJobRoutes.js';
+import { startHostedJobRecovery } from './services/pageindexHosted/jobRecovery.js';
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3075;
 
-// Middleware
-const cors = require('cors');
-const logger = require('./middleware/loggerMiddleware');
 const allowedOrigins = [
     process.env.FRONTEND_URL,
     'http://localhost:3000',
-  ];
-  app.use(cors({
+];
+app.use(cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     credentials: true
-  }));
+}));
 app.use(express.json());
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-const userRoutes = require('./routes/userRoutes');
-const pageIndexRoutes = require('./routes/pageIndexRoutes');
-const catalogRoutes = require('./routes/catalogRoutes');
-const ragChatRoutes = require('./routes/RagChatRoutes');
-const PaymentRouter = require('./routes/paymentRoutes');
-const pageIndexAuthRoutes = require('./routes/pageindexAuthRoutes');
-const pageIndexHostedJobRoutes = require('./routes/pageIndexHostedJobRoutes');
-const { startHostedJobRecovery } = require('./services/pageindexHosted/jobRecovery');
 app.use(userRoutes);
 app.use(pageIndexRoutes);
 app.use(catalogRoutes);
@@ -50,15 +50,18 @@ app.get('/', (req, res) => {
         status: 'ok',
     });
 });
-// Start server — only when run directly (not during tests)
-if (require.main === module) {
+
+const isMainModule =
+    import.meta.main ??
+    (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]);
+
+if (isMainModule) {
     app.listen(port, () => {
         console.log(`🚀 paperAI API listening at http://localhost:${port}`);
 
     });
 }
 
-// MongoDB Connection (non-fatal — auth routes require DB, task routes work without it)
 const MONGODB_URI = process.env.MONGODB_URI || '';
 const MONGODB_DB_NAME = process.env.MONGODB_DB_NAME || 'page-index-chatbot';
 if (MONGODB_URI) {
@@ -68,8 +71,6 @@ if (MONGODB_URI) {
         })
         .then(async () => {
             console.log('✅ Connected to MongoDB');
-            const { migrateExistingUsersEmailVerified } = require('./utils/migrateEmailVerified');
-            await migrateExistingUsersEmailVerified();
             startHostedJobRecovery();
         })
         .catch((err) => {
@@ -79,4 +80,4 @@ if (MONGODB_URI) {
     console.warn('⚠️  MONGODB_URI not set — auth routes unavailable.');
 }
 
-module.exports = app;
+export default app;

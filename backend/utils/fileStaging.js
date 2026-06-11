@@ -1,6 +1,6 @@
-const fs = require('fs/promises');
-const path = require('path');
-const os = require('os');
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
 
 function getJobTempRoot() {
     return process.env.PAGEINDEX_JOB_TEMP_ROOT || path.join(os.tmpdir(), 'pageindex-jobs');
@@ -24,7 +24,7 @@ async function deleteStagedJobFile(filePath) {
     }
 }
 
-module.exports = {
+export {
     getJobTempRoot,
     stageJobFile,
     deleteStagedJobFile,

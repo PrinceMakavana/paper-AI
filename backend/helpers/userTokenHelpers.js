@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const User = require('../models/userModel');
+import mongoose from 'mongoose';
+import User from '../models/userModel.js';
 
 const TOKEN_EXHAUSTED_MESSAGE = 'Token balance exhausted.';
 
@@ -74,7 +74,7 @@ function isTokenBalanceError(error) {
     return error instanceof TokenBalanceError || error?.statusCode === 402;
 }
 
-module.exports = {
+export {
     TOKEN_EXHAUSTED_MESSAGE,
     TokenBalanceError,
     assertUserHasTokens,

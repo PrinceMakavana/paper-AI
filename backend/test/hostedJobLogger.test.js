@@ -1,7 +1,7 @@
-const { test } = require('tap');
-const fs = require('fs');
-const path = require('path');
-const { createHostedJobLogger, HOSTED_JOB_LOG_DIR } = require('../utils/hostedJobLogger');
+import { test } from 'tap';
+import fs from 'node:fs';
+import path from 'node:path';
+import { createHostedJobLogger, HOSTED_JOB_LOG_DIR } from '../utils/hostedJobLogger.js';
 
 test('createHostedJobLogger writes events to log file', (t) => {
     const jobId = `test-${Date.now()}`;

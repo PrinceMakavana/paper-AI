@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import * as userController from '../controllers/userController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+
 const router = express.Router();
-const userController = require('../controllers/userController');
-const authMiddleware = require('../middleware/authMiddleware');
 
 // Public routes (no auth required)
 router.post('/users/register', userController.registerUser);
@@ -16,4 +17,4 @@ router.post('/logout', authMiddleware, userController.logoutUser);
 router.get('/users/profile', authMiddleware, userController.getProfile);
 router.put('/users/profile', authMiddleware, userController.updateProfile);
 
-module.exports = router;
+export default router;

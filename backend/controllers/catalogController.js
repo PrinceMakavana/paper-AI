@@ -1,13 +1,13 @@
-const {
+import {
     findBookInSubject,
     getSubject,
     listSubjects,
-} = require('../helpers/catalogDataHelpers');
-const {
+} from '../helpers/catalogDataHelpers.js';
+import {
     buildSignedPdfUrl,
     getPdfSignedUrlExpiresSeconds,
     parseS3Location,
-} = require('./pageIndexController');
+} from './pageIndexController.js';
 
 async function listCatalogSubjects(req, res) {
     try {
@@ -75,7 +75,7 @@ async function getCatalogBookPdfUrl(req, res) {
     }
 }
 
-module.exports = {
+export {
     listCatalogSubjects,
     getCatalogSubject,
     getCatalogBookPdfUrl,

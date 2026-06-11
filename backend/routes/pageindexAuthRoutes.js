@@ -1,5 +1,5 @@
-const express = require('express');
-const { registerRoutes } = require('../utils/registerApiRoutes');
+import express from 'express';
+import { registerRoutes } from '../utils/registerApiRoutes.js';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ function deprecatedRegister(req, res) {
 
 registerRoutes(router, 'post', '/register', deprecatedRegister);
 
-module.exports = router;
+export default router;

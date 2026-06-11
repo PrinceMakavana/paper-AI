@@ -1,8 +1,8 @@
-const tap = require('tap');
-const supertest = require('supertest');
-const app = require('../app');
-const User = require('../models/userModel');
-const { signEmailVerificationToken } = require('../utils/authTokens');
+import tap from 'tap';
+import supertest from 'supertest';
+import app from '../app.js';
+import User from '../models/userModel.js';
+import { signEmailVerificationToken } from '../utils/authTokens.js';
 const server = supertest(app);
 
 // ─── Shared test state ────────────────────────────────────────────────────────

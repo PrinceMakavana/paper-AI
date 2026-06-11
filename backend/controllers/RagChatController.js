@@ -1,5 +1,9 @@
-const { randomUUID } = require('crypto');
-const { getModelConfig } = require('../utils/modelSelector');
+import { randomUUID } from 'node:crypto';
+import { getModelConfig } from '../utils/modelSelector.js';
+import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf';
+import { PineconeStore } from '@langchain/pinecone';
+import { Pinecone } from '@pinecone-database/pinecone';
+import { RecursiveCharacterTextSplitter } from '@langchain/classic/text_splitter';
 
 let pinecone;
 
@@ -11,10 +15,10 @@ function contentToString(content) {
 
 function getRagDependencies() {
     return {
-        PDFLoader: require('@langchain/community/document_loaders/fs/pdf').PDFLoader,
-        PineconeStore: require('@langchain/pinecone').PineconeStore,
-        Pinecone: require('@pinecone-database/pinecone').Pinecone,
-        RecursiveCharacterTextSplitter: require('langchain/text_splitter').RecursiveCharacterTextSplitter,
+        PDFLoader,
+        PineconeStore,
+        Pinecone,
+        RecursiveCharacterTextSplitter,
     };
 }
 
@@ -130,7 +134,7 @@ async function uploadDocument(req, res) {
     }
 }
 
-module.exports = {
+export {
     uploadDocument,
     chatWithDocument,
 };

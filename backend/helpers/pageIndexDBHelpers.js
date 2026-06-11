@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const { default: IndexStatus } = require('../utils/enums');
+import mongoose from 'mongoose';
+import IndexStatus from '../utils/enums.js';
 
 // Save Page Index Document to Database
-const pageIndexSchema = require('../models/pageIndexModal');
-const PageIndexChatMessages = require('../models/pageIndexChatMessagesModal');
+import pageIndexSchema from '../models/pageIndexModal.js';
+import PageIndexChatMessages from '../models/pageIndexChatMessagesModal.js';
 
 function ensureMongoConnected() {
     if (mongoose.connection.readyState !== 1) {
@@ -292,7 +292,7 @@ async function updatePageIndexDocumentStatus({
     );
 }
 
-module.exports = {
+export {
     savePageIndexDocument,
     createHostedUploadPlaceholderDocument,
     updateHostedPageIndexDocumentAfterUpload,

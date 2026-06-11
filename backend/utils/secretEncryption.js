@@ -1,10 +1,10 @@
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 12;
 const AUTH_TAG_LENGTH = 16;
 
-const SECRETS_KEY_HINT = 'Generate one with: node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'base64\'))"';
+const SECRETS_KEY_HINT = 'Generate one with: npm run generate:secrets-key';
 
 function getEncryptionKey() {
     const raw = process.env.PAGEINDEX_SECRETS_KEY?.trim();
@@ -68,7 +68,7 @@ function decryptSecret(cipherText) {
     return decrypted.toString('utf8');
 }
 
-module.exports = {
+export {
     encryptSecret,
     decryptSecret,
     getEncryptionKey,

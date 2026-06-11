@@ -6,7 +6,7 @@ function pagesForTokenPurchase(tokenCount) {
     return Math.floor(Number(tokenCount) / TOKENS_PER_RUPEE);
 }
 
-module.exports = {
+export {
     TOKENS_PER_RUPEE,
     PAGES_PER_RUPEE,
     SIGNUP_PAGE_BONUS,

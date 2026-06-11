@@ -1,23 +1,23 @@
-const { PDFDocument } = require('pdf-lib');
-const crypto = require('crypto');
-const { getModelConfig } = require('../utils/modelSelector');
-const { default: IndexStatus } = require('../utils/enums');
-const { localStructureToTreeNodes } = require('../utils/localPageindexTree');
-const {
+import { PDFDocument } from 'pdf-lib';
+import crypto from 'node:crypto';
+import { getModelConfig } from '../utils/modelSelector.js';
+import IndexStatus from '../utils/enums.js';
+import { localStructureToTreeNodes } from '../utils/localPageindexTree.js';
+import {
     buildContextFromMultipleTrees,
     buildContextFromTree,
     formatPagesArg,
     pickTopPagesForFetch,
     pickTopPagesForFetchByBook,
     truncateToBudget,
-} = require('../utils/pageindexVectorlessContext');
-const {
+} from '../utils/pageindexVectorlessContext.js';
+import {
     getReadyBooks,
     getSubject,
     getSubjectChatSessionId,
     loadSubjectByCode,
-} = require('../helpers/catalogDataHelpers');
-const {
+} from '../helpers/catalogDataHelpers.js';
+import {
     deletePageIndexChatMessageById,
     deletePageIndexChatMessages,
     deletePageIndexDocument,
@@ -31,24 +31,24 @@ const {
     updatePageIndexDocumentStatus,
     updateHostedPageIndexDocumentStatus,
     verifyPageIndexDocumentOwner,
-} = require('../helpers/pageIndexDBHelpers');
-const { getHostedJobByLinkedDocument } = require('../helpers/pageIndexHostedJobHelpers');
-const { mapHostedJobToIndexStatus } = require('../services/pageindexHosted/jobHelpers');
-const { createHostedUploadJob } = require('../services/pageindexHosted/createUploadJob');
-const { loadHostedTreeJson } = require('../utils/hostedTreeStorage');
-const { deleteObjectsByLocation } = require('../utils/s3Storage');
-const { logHostedJobEvent } = require('../utils/hostedJobLogger');
-const {
+} from '../helpers/pageIndexDBHelpers.js';
+import { getHostedJobByLinkedDocument } from '../helpers/pageIndexHostedJobHelpers.js';
+import { mapHostedJobToIndexStatus } from '../services/pageindexHosted/jobHelpers.js';
+import { createHostedUploadJob } from '../services/pageindexHosted/createUploadJob.js';
+import { loadHostedTreeJson } from '../utils/hostedTreeStorage.js';
+import { deleteObjectsByLocation } from '../utils/s3Storage.js';
+import { logHostedJobEvent } from '../utils/hostedJobLogger.js';
+import {
     assertUserHasTokens,
     consumeUserTokens,
     isTokenBalanceError,
-} = require('../helpers/userTokenHelpers');
-const {
+} from '../helpers/userTokenHelpers.js';
+import {
     assertUserHasPages,
     consumeUserPages,
     refundUserPages,
-} = require('../helpers/userPageHelpers');
-const { parseSubjectExamQuestion } = require('../utils/subjectExamQuestion');
+} from '../helpers/userPageHelpers.js';
+import { parseSubjectExamQuestion } from '../utils/subjectExamQuestion.js';
 
 const MAX_TREE_CONTEXT_CHARS = 28_000;
 const MIN_CONTEXT_CHARS_BEFORE_PAGE_TEXT = 500;
@@ -1080,7 +1080,7 @@ async function getDocumentIndexStatus(req, res) {
 }
 
 
-module.exports = {
+export {
     buildSignedPdfUrl,
     deleteChatMessages,
     deleteDocument,

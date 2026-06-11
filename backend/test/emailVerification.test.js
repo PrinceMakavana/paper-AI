@@ -1,9 +1,9 @@
-const tap = require('tap');
-const supertest = require('supertest');
-const mongoose = require('mongoose');
-const app = require('../app');
-const User = require('../models/userModel');
-const { signEmailVerificationToken } = require('../utils/authTokens');
+import tap from 'tap';
+import supertest from 'supertest';
+import mongoose from 'mongoose';
+import app from '../app.js';
+import User from '../models/userModel.js';
+import { signEmailVerificationToken } from '../utils/authTokens.js';
 
 const server = supertest(app);
 

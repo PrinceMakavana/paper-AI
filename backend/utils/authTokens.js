@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const TOKEN_TYPES = {
     EMAIL_VERIFICATION: 'email_verification',
@@ -35,7 +35,7 @@ function signSessionToken(user) {
     );
 }
 
-module.exports = {
+export {
     TOKEN_TYPES,
     signAuthToken,
     verifyAuthToken,

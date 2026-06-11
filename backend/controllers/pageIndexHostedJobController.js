@@ -1,21 +1,21 @@
-const { validatePdfFile } = require('./pageIndexController');
-const { assertUserHasTokens } = require('../helpers/userTokenHelpers');
-const {
+import { validatePdfFile } from './pageIndexController.js';
+import { assertUserHasTokens } from '../helpers/userTokenHelpers.js';
+import {
     assertUserHasPages,
     consumeUserPages,
     refundUserPages,
-} = require('../helpers/userPageHelpers');
-const { generateDummySourceEmail } = require('../utils/generateDummyEmail');
-const { JOB_STATUS } = require('../utils/pageindexHostedJobConstants');
-const {
+} from '../helpers/userPageHelpers.js';
+import { generateDummySourceEmail } from '../utils/generateDummyEmail.js';
+import { JOB_STATUS } from '../utils/pageindexHostedJobConstants.js';
+import {
     createHostedJob,
     getHostedJobByIdForUser,
     listHostedJobsForUser,
     mapJobForClient,
-} = require('../helpers/pageIndexHostedJobHelpers');
-const { enqueueHostedJob } = require('../services/pageindexHosted/jobRunner');
-const { createHostedUploadJob } = require('../services/pageindexHosted/createUploadJob');
-const { logHostedJobEvent } = require('../utils/hostedJobLogger');
+} from '../helpers/pageIndexHostedJobHelpers.js';
+import { enqueueHostedJob } from '../services/pageindexHosted/jobRunner.js';
+import { createHostedUploadJob } from '../services/pageindexHosted/createUploadJob.js';
+import { logHostedJobEvent } from '../utils/hostedJobLogger.js';
 
 async function createJob(req, res) {
     try {
@@ -185,7 +185,7 @@ async function retryJob(req, res) {
     }
 }
 
-module.exports = {
+export {
     createJob,
     getJob,
     listJobs,

@@ -1,7 +1,8 @@
-const { test } = require('tap');
+import { test } from 'tap';
+import * as runner from '../services/pageindexHosted/jobRunner.js';
+import * as recovery from '../services/pageindexHosted/jobRecovery.js';
 
 test('jobRunner exports processHostedJob and enqueueHostedJob', (t) => {
-    const runner = require('../services/pageindexHosted/jobRunner');
     t.type(runner.processHostedJob, 'function');
     t.type(runner.enqueueHostedJob, 'function');
     t.type(runner.scheduleJobRetry, 'function');
@@ -9,7 +10,6 @@ test('jobRunner exports processHostedJob and enqueueHostedJob', (t) => {
 });
 
 test('jobRecovery exports startHostedJobRecovery', (t) => {
-    const recovery = require('../services/pageindexHosted/jobRecovery');
     t.type(recovery.startHostedJobRecovery, 'function');
     t.type(recovery.recoverHostedJobs, 'function');
     t.end();

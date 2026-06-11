@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const User = require('../models/userModel');
-const { updateHostedJob } = require('./pageIndexHostedJobHelpers');
+import mongoose from 'mongoose';
+import User from '../models/userModel.js';
+import { updateHostedJob } from './pageIndexHostedJobHelpers.js';
 
 const PAGE_EXHAUSTED_MESSAGE = 'Page credits exhausted.';
 
@@ -133,7 +133,7 @@ function isPageBalanceError(error) {
     return error instanceof PageBalanceError || error?.statusCode === 402;
 }
 
-module.exports = {
+export {
     PAGE_EXHAUSTED_MESSAGE,
     PageBalanceError,
     assertUserHasPages,

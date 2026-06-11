@@ -1,5 +1,5 @@
-const { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectsCommand } = require('@aws-sdk/client-s3');
-const dotenv = require('dotenv');
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectsCommand } from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
 dotenv.config();
 const PDF_CONTENT_TYPE = 'application/pdf';
 const JSON_CONTENT_TYPE = 'application/json';
@@ -167,7 +167,7 @@ async function deleteObjectsByLocation(locations) {
     return { deletedCount: uniqueKeys.length };
 }
 
-module.exports = {
+export {
     PDF_CONTENT_TYPE,
     JSON_CONTENT_TYPE,
     buildObjectKey,

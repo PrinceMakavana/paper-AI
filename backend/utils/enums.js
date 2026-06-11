@@ -6,4 +6,4 @@ const IndexStatus = {
     UNKNOWN: "unknown",
 }
 
-module.exports = { default: IndexStatus };
+export default IndexStatus;

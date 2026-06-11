@@ -1,13 +1,13 @@
-const { test } = require('tap');
-const {
+import { test } from 'tap';
+import {
     getNextStep,
     shouldSkipStep,
     hasRetriesRemaining,
     computeRetryBackoffMs,
     isNonFatalStep,
     buildTerminalStatus,
-} = require('../services/pageindexHosted/jobHelpers');
-const { JOB_STEPS, JOB_STATUS } = require('../utils/pageindexHostedJobConstants');
+} from '../services/pageindexHosted/jobHelpers.js';
+import { JOB_STEPS, JOB_STATUS } from '../utils/pageindexHostedJobConstants.js';
 
 function buildJob(overrides = {}) {
     return {

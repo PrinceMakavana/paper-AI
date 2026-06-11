@@ -54,7 +54,7 @@ function defaultStepRetries() {
     }, {});
 }
 
-module.exports = {
+export {
     JOB_STEPS,
     STEP_ORDER,
     JOB_STATUS,

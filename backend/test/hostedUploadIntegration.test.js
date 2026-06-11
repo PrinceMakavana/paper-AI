@@ -1,13 +1,13 @@
-const { test } = require('tap');
-const { generateDummySourceEmail } = require('../utils/generateDummyEmail');
-const { mapHostedJobToIndexStatus } = require('../services/pageindexHosted/jobHelpers');
-const { JOB_STEPS, JOB_STATUS } = require('../utils/pageindexHostedJobConstants');
-const { default: IndexStatus } = require('../utils/enums');
+import { test } from 'tap';
+import { generateDummySourceEmail } from '../utils/generateDummyEmail.js';
+import { mapHostedJobToIndexStatus } from '../services/pageindexHosted/jobHelpers.js';
+import { JOB_STEPS, JOB_STATUS } from '../utils/pageindexHostedJobConstants.js';
+import IndexStatus from '../utils/enums.js';
 
 test('generateDummySourceEmail returns unique local-part emails', (t) => {
     const emailA = generateDummySourceEmail();
     const emailB = generateDummySourceEmail();
-    t.match(emailA, /^paperai-[a-f0-9]+@upload\.local$/);
+    t.match(emailA, /^[a-f0-9]+-[a-f0-9]+@yopmail\.com$/);
     t.not(emailA, emailB);
     t.end();
 });
