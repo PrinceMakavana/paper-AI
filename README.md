@@ -187,7 +187,7 @@ Express calls these internally:
 | `POST` | `/upload` | Stores PDF and starts background indexing |
 | `GET` | `/upload/{doc_id}/status` | Returns queued/running/complete/error status and indexed structure |
 | `GET` | `/upload/{doc_id}/page-text?pages=1,2` | Returns extracted text for selected PDF pages |
-| `GET` | `/catalog/page-index?storage_path=` | Loads pre-indexed `page_index.json` from S3 by object key |
+| `GET` | `/catalog/page-index?s3_uri=` | Loads pre-indexed `page_index.json` from S3 by `s3://` URI |
 | `GET` | `/catalog/page-text?storage_path=&pages=` | Returns extracted text from a catalog PDF in S3 |
 
 ## Ollama Notes

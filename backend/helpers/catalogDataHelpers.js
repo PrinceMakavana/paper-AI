@@ -34,7 +34,6 @@ function mapBookForClient(book, subjectCode, index) {
         downloadLink: book.download_link,
         pageindexStatus: book.pageindex_status || 'pending',
         pageindexSizeBytes: book.pageindex_size_bytes,
-        pageindexStoragePath: book.pageindex_storage_path,
         pageindexS3Uri: book.pageindex_s3_uri,
         pdfStoragePath: book.pdf_storage_path,
         pdfS3Uri: book.pdf_s3_uri,
@@ -46,7 +45,7 @@ function mapBookForClient(book, subjectCode, index) {
 
 function countReadyBooks(books = []) {
     return books.filter(
-        (book) => book.pageindex_status === 'ready' && book.pageindex_storage_path
+        (book) => book.pageindex_status === 'ready' && book.pageindex_s3_uri
     ).length;
 }
 
@@ -122,7 +121,7 @@ function getReadyBooks(subject) {
             book_id: inferBookId(book, subjectCode, index),
             title: book.title || book.alt_data?.trim() || inferBookId(book, subjectCode, index),
         }))
-        .filter((book) => book.pageindex_status === 'ready' && book.pageindex_storage_path);
+        .filter((book) => book.pageindex_status === 'ready' && book.pageindex_s3_uri);
 }
 
 function listSubjects() {

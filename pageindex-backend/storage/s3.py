@@ -92,6 +92,19 @@ def retry_with_backoff(max_retries: int = 3, initial_delay: int = 1):
     return decorator
 
 
+def object_key_from_s3_uri(s3_uri: str | None) -> str | None:
+    if not s3_uri or not str(s3_uri).startswith("s3://"):
+        return None
+
+    without_protocol = str(s3_uri)[len("s3://") :]
+    slash_index = without_protocol.find("/")
+    if slash_index < 0:
+        return None
+
+    key = without_protocol[slash_index + 1 :].strip()
+    return key or None
+
+
 def build_object_name(user_id: str | None, doc_id: str, filename: str) -> str:
     safe_user_id = _safe_path_part(user_id, "anonymous")
     safe_doc_id = _safe_path_part(doc_id, "document")

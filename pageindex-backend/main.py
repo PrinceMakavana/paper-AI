@@ -31,6 +31,7 @@ from storage.s3 import (
     download_bytes,
     download_json,
     object_exists,
+    object_key_from_s3_uri,
     upload_bytes,
     upload_json,
 )
@@ -82,6 +83,18 @@ def _pdf_object_name(doc_id: str, user_id: str | None) -> str:
 
 def _index_object_name(doc_id: str, user_id: str | None) -> str:
     return build_object_name(user_id, doc_id, "page_index.json")
+
+
+def _resolve_index_object_key(doc_id: str, doc: dict | None, job: dict | None) -> str:
+    for source in (doc, job):
+        if not source:
+            continue
+        key = object_key_from_s3_uri(source.get("pageindex_s3_uri"))
+        if key:
+            return key
+
+    user_id = doc.get("user_id") if doc else job.get("user_id") if job else None
+    return _index_object_name(doc_id, user_id)
 
 
 MODEL_ENV_BY_PROVIDER = {
@@ -150,7 +163,6 @@ def _map_pdf_storage_metadata(storage_metadata: dict[str, str]) -> dict[str, str
 
 def _map_index_storage_metadata(storage_metadata: dict[str, str]) -> dict[str, str]:
     return {
-        "pageindex_storage_path": storage_metadata["storage_path"],
         "pageindex_s3_uri": storage_metadata["s3_uri"],
         "storage_status": "uploaded",
         "storage_error_message": None,
@@ -186,7 +198,6 @@ async def run_page_index_job(doc_id: str, file_path: str, model: str | None = No
                 **jobs.get(doc_id, {}),
                 "status": IndexStatus.COMPLETE.value,
                 "user_id": user_id,
-                "pageindex_storage_path": index_storage["storage_path"],
                 "pageindex_s3_uri": index_storage["s3_uri"],
             }
         except S3StorageError as e:
@@ -335,13 +346,8 @@ async def get_upload_index_status(doc_id: str):
     except Exception:
         doc = None
 
-    index_object_name = doc.get("pageindex_storage_path") if doc else None
     job = jobs.get(doc_id)
-    if not index_object_name and job:
-        index_object_name = job.get("pageindex_storage_path")
-    if not index_object_name:
-        user_id = doc.get("user_id") if doc else job.get("user_id") if job else None
-        index_object_name = _index_object_name(doc_id, user_id)
+    index_object_name = _resolve_index_object_key(doc_id, doc, job)
 
     try:
         if await asyncio.to_thread(object_exists, index_object_name):
@@ -364,6 +370,13 @@ async def get_upload_index_status(doc_id: str):
 
     if page_index_payload is not None:
         bucket_name = os.getenv("AWS_S3_BUCKET_NAME")
+        pageindex_s3_uri = (
+            doc.get("pageindex_s3_uri")
+            if doc and doc.get("pageindex_s3_uri")
+            else job.get("pageindex_s3_uri")
+            if job and job.get("pageindex_s3_uri")
+            else f"s3://{bucket_name}/{index_object_name}" if bucket_name else None
+        )
         return {
             "doc_id": doc_id,
             "job_status": IndexStatus.COMPLETE.value,
@@ -372,8 +385,7 @@ async def get_upload_index_status(doc_id: str):
             "page_index": page_index_payload,
             "pdf_storage_path": doc.get("pdf_storage_path") if doc else job.get("pdf_storage_path") if job else None,
             "pdf_s3_uri": doc.get("pdf_s3_uri") if doc else job.get("pdf_s3_uri") if job else None,
-            "pageindex_storage_path": index_object_name,
-            "pageindex_s3_uri": f"s3://{bucket_name}/{index_object_name}" if bucket_name else None,
+            "pageindex_s3_uri": pageindex_s3_uri,
             "storage_status": "uploaded",
         }
 
@@ -442,14 +454,18 @@ async def get_upload_page_text(doc_id: str, pages: str = "1"):
 
 
 @app.get("/catalog/page-index")
-async def get_catalog_page_index(storage_path: str):
-    """Load a pre-indexed page_index.json from S3 by object key."""
-    clean_path = (storage_path or "").strip().lstrip("/")
-    if not clean_path:
-        raise HTTPException(status_code=400, detail="storage_path is required")
+async def get_catalog_page_index(s3_uri: str):
+    """Load a pre-indexed page_index.json from S3 by s3:// URI."""
+    clean_uri = (s3_uri or "").strip()
+    if not clean_uri:
+        raise HTTPException(status_code=400, detail="s3_uri is required")
+
+    object_name = object_key_from_s3_uri(clean_uri)
+    if not object_name:
+        raise HTTPException(status_code=400, detail="Invalid s3_uri")
 
     try:
-        page_index_payload = await asyncio.to_thread(download_json, clean_path)
+        page_index_payload = await asyncio.to_thread(download_json, object_name)
     except S3StorageError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
     except Exception as exc:
@@ -458,13 +474,11 @@ async def get_catalog_page_index(storage_path: str):
             detail=f"Failed to read catalog page index: {exc}",
         ) from exc
 
-    bucket_name = os.getenv("AWS_S3_BUCKET_NAME")
     return {
         "index_status": IndexStatus.COMPLETE.value,
         "indexed": True,
         "page_index": page_index_payload,
-        "pageindex_storage_path": clean_path,
-        "pageindex_s3_uri": f"s3://{bucket_name}/{clean_path}" if bucket_name else None,
+        "pageindex_s3_uri": clean_uri,
     }
 
 
@@ -512,13 +526,8 @@ async def chat_with_document(doc_id: str, request: ChatRequest):
     except Exception:
         doc = None
 
-    index_object_name = doc.get("pageindex_storage_path") if doc else None
     job = jobs.get(doc_id)
-    if not index_object_name and job:
-        index_object_name = job.get("pageindex_storage_path")
-    if not index_object_name:
-        user_id = doc.get("user_id") if doc else job.get("user_id") if job else None
-        index_object_name = _index_object_name(doc_id, user_id)
+    index_object_name = _resolve_index_object_key(doc_id, doc, job)
 
     try:
         page_index_data = await asyncio.to_thread(download_json, index_object_name)

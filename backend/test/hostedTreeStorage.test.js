@@ -21,12 +21,10 @@ test('loadHostedTreeJson downloads tree using pageindex_s3_uri', async (t) => {
 
     const tree = await loadHostedTreeJson({
         pageindex_s3_uri: 's3://pageindex-json-store/pageindex/user/doc/page_index.json',
-        pageindex_storage_path: 'pageindex/user/doc/page_index.json',
     });
 
     t.same(received, {
         s3Uri: 's3://pageindex-json-store/pageindex/user/doc/page_index.json',
-        storagePath: 'pageindex/user/doc/page_index.json',
     });
     t.same(tree, [{ title: 'Chapter 1' }]);
     t.end();
