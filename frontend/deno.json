@@ -1,0 +1,15 @@
+{
+  "nodeModulesDir": "manual",
+  "unstable": [
+    "bare-node-builtins",
+    "detect-cjs",
+    "node-globals",
+    "unsafe-proto",
+    "sloppy-imports"
+  ],
+  "deploy": {
+    "framework": "nextjs",
+    "install": "npm install",
+    "build": "rm -rf .next && npm run build"
+  }
+}
