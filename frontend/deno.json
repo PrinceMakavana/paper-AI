@@ -9,7 +9,7 @@
   ],
   "deploy": {
     "framework": "nextjs",
-    "install": "rm -rf node_modules && npm install --ignore-scripts --legacy-peer-deps",
-    "build": "rm -rf .next && npm run build"
+    "install": "rm -rf node_modules deno.lock && npm install --ignore-scripts --legacy-peer-deps",
+    "build": "rm -rf .next && deno run -A npm:next build"
   }
 }
