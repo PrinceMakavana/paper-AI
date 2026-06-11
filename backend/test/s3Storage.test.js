@@ -1,5 +1,5 @@
-const { test } = require('tap');
-const { buildObjectKey, parseS3Uri, resolveObjectLocation } = require('../utils/s3Storage');
+import { test } from 'tap';
+import { buildObjectKey, parseS3Uri, resolveObjectLocation } from '../utils/s3Storage.js';
 
 test('buildObjectKey uses pageindex prefix and sanitized path parts', (t) => {
     const originalPrefix = process.env.AWS_S3_PREFIX;

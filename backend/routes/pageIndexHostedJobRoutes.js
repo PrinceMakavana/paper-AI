@@ -1,8 +1,8 @@
-const express = require('express');
-const multer = require('multer');
-const authMiddleware = require('../middleware/authMiddleware');
-const pageIndexHostedJobController = require('../controllers/pageIndexHostedJobController');
-const { registerRoutes } = require('../utils/registerApiRoutes');
+import express from 'express';
+import multer from 'multer';
+import authMiddleware from '../middleware/authMiddleware.js';
+import * as pageIndexHostedJobController from '../controllers/pageIndexHostedJobController.js';
+import { registerRoutes } from '../utils/registerApiRoutes.js';
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -19,4 +19,4 @@ registerRoutes(router, 'get', '/hosted-jobs', authMiddleware, pageIndexHostedJob
 registerRoutes(router, 'get', '/hosted-jobs/:jobId', authMiddleware, pageIndexHostedJobController.getJob);
 registerRoutes(router, 'post', '/hosted-jobs/:jobId/retry', authMiddleware, pageIndexHostedJobController.retryJob);
 
-module.exports = router;
+export default router;

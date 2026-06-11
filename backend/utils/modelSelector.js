@@ -1,5 +1,5 @@
-const { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } = require('@langchain/google-genai');
-const { ChatOllama, OllamaEmbeddings } = require('@langchain/ollama');
+import { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } from '@langchain/google-genai';
+import { ChatOllama, OllamaEmbeddings } from '@langchain/ollama';
 
 function getModelConfig(chatModel = 'gemini') {
     switch (chatModel) {
@@ -32,6 +32,6 @@ function getModelConfig(chatModel = 'gemini') {
     }
 }
 
-module.exports = {
+export {
     getModelConfig,
 };

@@ -1,8 +1,8 @@
-const axios = require('axios');
-const crypto = require('crypto');
-const fs = require('fs/promises');
-const easyYopmail = require('easy-yopmail');
-const { PageIndexClient } = require('@pageindex/sdk');
+import axios from 'axios';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import easyYopmail from 'easy-yopmail';
+import { PageIndexClient } from '@pageindex/sdk';
 
 function noopLogger() {
     return {
@@ -582,7 +582,7 @@ async function runStep4_3Tree(job, apiKey, logger) {
     throw new Error('Document tree fetch failed.');
 }
 
-module.exports = {
+export {
     buildYopmailEmail,
     obtainChatSession,
     runStep1Account,

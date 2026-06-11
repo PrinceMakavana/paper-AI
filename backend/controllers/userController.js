@@ -1,12 +1,12 @@
-const User = require('../models/userModel');
-const {
+import User from '../models/userModel.js';
+import {
     TOKEN_TYPES,
     verifyAuthToken,
     signEmailVerificationToken,
     signPasswordResetToken,
     signSessionToken,
-} = require('../utils/authTokens');
-const { sendVerificationEmail, sendPasswordResetEmail } = require('../utils/emailService');
+} from '../utils/authTokens.js';
+import { sendVerificationEmail, sendPasswordResetEmail } from '../utils/emailService.js';
 
 const RESEND_COOLDOWN_MS = 60 * 1000;
 
@@ -436,7 +436,7 @@ const resetPassword = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     registerUser,
     loginUser,
     logoutUser,

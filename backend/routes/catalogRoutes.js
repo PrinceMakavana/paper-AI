@@ -1,6 +1,6 @@
-const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');
-const catalogController = require('../controllers/catalogController');
+import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
+import * as catalogController from '../controllers/catalogController.js';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.get(
     catalogController.getCatalogBookPdfUrl
 );
 
-module.exports = router;
+export default router;

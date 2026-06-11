@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const PageIndexHostedJob = require('../models/pageIndexHostedJobModel');
-const {
+import mongoose from 'mongoose';
+import PageIndexHostedJob from '../models/pageIndexHostedJobModel.js';
+import {
     JOB_STATUS,
     JOB_STEPS,
     HOSTED_INDEX_STATUS,
     defaultCompletedSteps,
     defaultStepRetries,
-} = require('../utils/pageindexHostedJobConstants');
+} from '../utils/pageindexHostedJobConstants.js';
 
 function ensureMongoConnected() {
     if (mongoose.connection.readyState !== 1) {
@@ -173,7 +173,7 @@ async function findJobsReadyForRecovery(limit = 10) {
         .limit(limit);
 }
 
-module.exports = {
+export {
     mapJobForClient,
     createHostedJob,
     getHostedJobByIdForUser,

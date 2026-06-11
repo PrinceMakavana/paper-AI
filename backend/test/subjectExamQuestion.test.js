@@ -1,5 +1,5 @@
-const { test } = require('tap');
-const { parseSubjectExamQuestion } = require('../utils/subjectExamQuestion');
+import { test } from 'tap';
+import { parseSubjectExamQuestion } from '../utils/subjectExamQuestion.js';
 
 test('parseSubjectExamQuestion strips 3 mark formatting from retrieval query', (t) => {
     const result = parseSubjectExamQuestion(

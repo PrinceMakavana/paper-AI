@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const PageIndexChatMessagesSchema = new mongoose.Schema(
     {
@@ -58,4 +58,4 @@ PageIndexChatMessagesSchema.index({ document_id: 1, createdAt: 1 });
 
 
 
-module.exports = mongoose.model('pageindex_chat_messages', PageIndexChatMessagesSchema, 'pageindex_chat_messages');
+export default mongoose.model('pageindex_chat_messages', PageIndexChatMessagesSchema, 'pageindex_chat_messages');

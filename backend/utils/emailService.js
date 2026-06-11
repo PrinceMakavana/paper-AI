@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 let transporter;
 
@@ -105,7 +105,7 @@ async function sendPasswordResetEmail(email, token) {
     return sendMail({ to: email, subject, text, html });
 }
 
-module.exports = {
+export {
     sendVerificationEmail,
     sendPasswordResetEmail,
 };

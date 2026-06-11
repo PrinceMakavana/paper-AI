@@ -1,10 +1,10 @@
-const { stageJobFile } = require('../../utils/fileStaging');
-const { generateDummySourceEmail } = require('../../utils/generateDummyEmail');
-const { logHostedJobEvent } = require('../../utils/hostedJobLogger');
-const { createHostedJob } = require('../../helpers/pageIndexHostedJobHelpers');
-const { createHostedUploadPlaceholderDocument } = require('../../helpers/pageIndexDBHelpers');
-const { uploadPdf } = require('../../utils/s3Storage');
-const { enqueueHostedJob } = require('./jobRunner');
+import { stageJobFile } from '../../utils/fileStaging.js';
+import { generateDummySourceEmail } from '../../utils/generateDummyEmail.js';
+import { logHostedJobEvent } from '../../utils/hostedJobLogger.js';
+import { createHostedJob } from '../../helpers/pageIndexHostedJobHelpers.js';
+import { createHostedUploadPlaceholderDocument } from '../../helpers/pageIndexDBHelpers.js';
+import { uploadPdf } from '../../utils/s3Storage.js';
+import { enqueueHostedJob } from './jobRunner.js';
 
 async function createHostedUploadJob({
     user_id,
@@ -104,6 +104,6 @@ async function createHostedUploadJob({
     };
 }
 
-module.exports = {
+export {
     createHostedUploadJob,
 };

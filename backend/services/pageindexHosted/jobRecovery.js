@@ -1,6 +1,6 @@
-const { findJobsReadyForRecovery } = require('../../helpers/pageIndexHostedJobHelpers');
-const { logHostedJobEvent } = require('../../utils/hostedJobLogger');
-const { processHostedJob } = require('./jobRunner');
+import { findJobsReadyForRecovery } from '../../helpers/pageIndexHostedJobHelpers.js';
+import { logHostedJobEvent } from '../../utils/hostedJobLogger.js';
+import { processHostedJob } from './jobRunner.js';
 
 const RECOVERY_CONCURRENCY = 2;
 let recoveryStarted = false;
@@ -84,7 +84,7 @@ function startHostedJobRecovery() {
     });
 }
 
-module.exports = {
+export {
     recoverHostedJobs,
     startHostedJobRecovery,
 };

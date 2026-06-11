@@ -26,6 +26,6 @@ function localStructureToTreeNodes(structure) {
     return structure.map(localNodeToTreeNode);
 }
 
-module.exports = {
+export {
     localStructureToTreeNodes,
 };

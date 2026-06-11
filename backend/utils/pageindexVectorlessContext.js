@@ -237,7 +237,7 @@ function formatPagesArg(pages) {
     return pages.join(',');
 }
 
-module.exports = {
+export {
     buildContextFromMultipleTrees,
     buildContextFromTree,
     expandQuestionForRetrieval,

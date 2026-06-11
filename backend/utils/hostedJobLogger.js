@@ -1,5 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = import.meta.dirname ?? path.dirname(fileURLToPath(import.meta.url));
 
 const LOG_PREFIX = '[PageIndexHostedJob]';
 const HOSTED_JOB_LOG_DIR = path.join(__dirname, '..', 'logs', 'hosted-jobs');
@@ -155,7 +158,7 @@ function logHostedJobEvent(level, { jobId, step, message, meta, error }) {
     writeToConsole(level, line, consoleMeta);
 }
 
-module.exports = {
+export {
     createHostedJobLogger,
     logHostedJobEvent,
     HOSTED_JOB_LOG_DIR,

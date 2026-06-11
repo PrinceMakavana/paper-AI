@@ -1,9 +1,10 @@
-const express = require('express');
-const multer = require('multer');
+import express from 'express';
+import multer from 'multer';
+import * as pageIndexController from '../controllers/pageIndexController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+import { registerRoutes } from '../utils/registerApiRoutes.js';
+
 const router = express.Router();
-const pageIndexController = require('../controllers/pageIndexController');
-const authMiddleware = require('../middleware/authMiddleware');
-const { registerRoutes } = require('../utils/registerApiRoutes');
 const upload = multer({ storage: multer.memoryStorage() });
 
 registerRoutes(router, 'get', '/documents', authMiddleware, pageIndexController.getDocuments);
@@ -30,4 +31,4 @@ registerRoutes(
     pageIndexController.deleteSubjectChatMessages,
 );
 
-module.exports = router;
+export default router;

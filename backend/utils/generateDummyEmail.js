@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 function generateDummySourceEmail() {
     const token = crypto.randomBytes(8).toString('hex');
@@ -7,6 +7,6 @@ function generateDummySourceEmail() {
     return `${name}-${token}@yopmail.com`;
 }
 
-module.exports = {
+export {
     generateDummySourceEmail,
 };

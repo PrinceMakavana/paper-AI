@@ -49,4 +49,4 @@ function parseSubjectExamQuestion(question) {
     return { originalQuestion, retrievalQuestion, markHint };
 }
 
-module.exports = { parseSubjectExamQuestion };
+export { parseSubjectExamQuestion };

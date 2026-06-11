@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const {
+import mongoose from 'mongoose';
+import {
     JOB_STEPS,
     JOB_STATUS,
     HOSTED_INDEX_STATUS,
     DEFAULT_MAX_RETRIES_PER_STEP,
     defaultCompletedSteps,
     defaultStepRetries,
-} = require('../utils/pageindexHostedJobConstants');
+} from '../utils/pageindexHostedJobConstants.js';
 
 const attemptLogSchema = new mongoose.Schema(
     {
@@ -142,4 +142,4 @@ const pageIndexHostedJobSchema = new mongoose.Schema(
 pageIndexHostedJobSchema.index({ user_id: 1, createdAt: -1 });
 pageIndexHostedJobSchema.index({ job_status: 1, next_retry_at: 1 });
 
-module.exports = mongoose.model('pageindex_hosted_jobs', pageIndexHostedJobSchema);
+export default mongoose.model('pageindex_hosted_jobs', pageIndexHostedJobSchema);

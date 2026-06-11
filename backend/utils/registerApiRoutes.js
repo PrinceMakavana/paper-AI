@@ -6,7 +6,7 @@ function registerRoutes(router, method, subpath, ...handlers) {
     }
 }
 
-module.exports = {
+export {
     API_PREFIXES,
     registerRoutes,
 };

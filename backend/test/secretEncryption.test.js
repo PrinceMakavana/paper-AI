@@ -1,6 +1,6 @@
-const { test } = require('tap');
-const crypto = require('crypto');
-const { encryptSecret, decryptSecret } = require('../utils/secretEncryption');
+import { test } from 'tap';
+import crypto from 'node:crypto';
+import { encryptSecret, decryptSecret } from '../utils/secretEncryption.js';
 
 test('encryptSecret round-trips values', (t) => {
     const originalKey = process.env.PAGEINDEX_SECRETS_KEY;

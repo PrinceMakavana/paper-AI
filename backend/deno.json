@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "deploy": {
-    "install": "npm install",
+    "install": "npm install --legacy-peer-deps",
     "runtime": {
       "type": "dynamic",
       "entrypoint": "./app.js"

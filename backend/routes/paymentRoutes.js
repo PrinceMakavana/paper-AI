@@ -1,9 +1,10 @@
-const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');
+import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
+import { createOrder, webhook } from '../controllers/paymentController.js';
+
 const PaymentRouter = express.Router();
-const { createOrder, webhook } = require('../controllers/paymentController');
 
 PaymentRouter.post('/payment/create-order', authMiddleware , createOrder);
 PaymentRouter.post('/payment/webhook',  webhook);
 
-module.exports = PaymentRouter ;
+export default PaymentRouter;

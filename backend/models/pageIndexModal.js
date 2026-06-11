@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { default: IndexStatus } = require('../utils/enums');
+import mongoose from 'mongoose';
+import IndexStatus from '../utils/enums.js';
 
 const pageIndexSchema = new mongoose.Schema(
     {
@@ -110,4 +110,4 @@ const pageIndexSchema = new mongoose.Schema(
 
 
 
-module.exports = mongoose.model('pageindex_documents', pageIndexSchema);
+export default mongoose.model('pageindex_documents', pageIndexSchema);

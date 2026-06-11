@@ -1,4 +1,4 @@
-const s3Storage = require('./s3Storage');
+import * as s3Storage from './s3Storage.js';
 
 async function saveHostedTreeJson({ user_id, document_id, tree }) {
     const storage = await s3Storage.uploadPageIndexJson(tree, user_id, document_id);
@@ -20,7 +20,7 @@ async function loadHostedTreeJson({ pageindex_s3_uri, pageindex_storage_path } =
     });
 }
 
-module.exports = {
+export {
     saveHostedTreeJson,
     loadHostedTreeJson,
 };

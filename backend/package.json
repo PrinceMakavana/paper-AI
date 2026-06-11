@@ -2,7 +2,7 @@
   "name": "page-index-chatbot",
   "version": "1.0.0",
   "description": "Page Index Chatbot",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
@@ -19,7 +19,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1065.0",
+    "@langchain/classic": "^1.0.0",
     "@langchain/community": "^1.1.29",
+    "axios": "^1.17.0",
     "@langchain/core": "^1.1.43",
     "@langchain/google-genai": "^2.1.30",
     "@langchain/ollama": "^1.2.7",

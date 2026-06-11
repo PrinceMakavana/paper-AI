@@ -1,28 +1,28 @@
-const { encryptSecret, decryptSecret, assertSecretsKeyConfigured } = require('../../utils/secretEncryption');
-const { deleteStagedJobFile } = require('../../utils/fileStaging');
-const { createHostedJobLogger } = require('../../utils/hostedJobLogger');
-const { HOSTED_INDEX_STATUS, JOB_STEPS, JOB_STATUS } = require('../../utils/pageindexHostedJobConstants');
-const { default: IndexStatus } = require('../../utils/enums');
-const {
+import { encryptSecret, decryptSecret, assertSecretsKeyConfigured } from '../../utils/secretEncryption.js';
+import { deleteStagedJobFile } from '../../utils/fileStaging.js';
+import { createHostedJobLogger } from '../../utils/hostedJobLogger.js';
+import { HOSTED_INDEX_STATUS, JOB_STEPS, JOB_STATUS } from '../../utils/pageindexHostedJobConstants.js';
+import IndexStatus from '../../utils/enums.js';
+import {
     claimHostedJob,
     updateHostedJob,
     appendAttemptLog,
     getHostedJobByIdForUser,
-} = require('../../helpers/pageIndexHostedJobHelpers');
-const {
+} from '../../helpers/pageIndexHostedJobHelpers.js';
+import {
     updateHostedPageIndexDocumentAfterUpload,
     updateHostedPageIndexDocumentStatus,
-} = require('../../helpers/pageIndexDBHelpers');
-const { saveHostedTreeJson } = require('../../utils/hostedTreeStorage');
-const {
+} from '../../helpers/pageIndexDBHelpers.js';
+import { saveHostedTreeJson } from '../../utils/hostedTreeStorage.js';
+import {
     getNextStep,
     computeRetryBackoffMs,
     isNonFatalStep,
     buildTerminalStatus,
     hasRetriesRemaining,
-} = require('./jobHelpers');
-const { refundPageCreditsForJob } = require('../../helpers/userPageHelpers');
-const {
+} from './jobHelpers.js';
+import { refundPageCreditsForJob } from '../../helpers/userPageHelpers.js';
+import {
     obtainChatSession,
     runStep1Account,
     runStep2Upload,
@@ -31,7 +31,7 @@ const {
     runStep4_2ApiKey,
     runStep4_3Tree,
     generateRandomApiKeyName,
-} = require('./steps');
+} from './steps.js';
 
 const activeJobLocks = new Map();
 const scheduledRetries = new Map();
@@ -495,7 +495,7 @@ function enqueueHostedJob(jobId) {
     });
 }
 
-module.exports = {
+export {
     processHostedJob,
     enqueueHostedJob,
     scheduleJobRetry,

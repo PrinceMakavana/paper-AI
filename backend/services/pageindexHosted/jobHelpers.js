@@ -1,10 +1,11 @@
-const {
+import {
     JOB_STEPS,
     STEP_ORDER,
     JOB_STATUS,
     NON_FATAL_STEPS,
     DEFAULT_MAX_RETRIES_PER_STEP,
-} = require('../../utils/pageindexHostedJobConstants');
+} from '../../utils/pageindexHostedJobConstants.js';
+import IndexStatus from '../../utils/enums.js';
 
 function shouldSkipStep(job, step) {
     if (step === JOB_STEPS.STEP2_UPLOAD) {
@@ -50,8 +51,6 @@ function hasRetriesRemaining(job, step) {
     return used < maxRetries;
 }
 
-const { default: IndexStatus } = require('../../utils/enums');
-
 function mapHostedJobToIndexStatus(job) {
     if (!job) {
         return IndexStatus.UNKNOWN;
@@ -80,7 +79,7 @@ function mapHostedJobToIndexStatus(job) {
     }
 }
 
-module.exports = {
+export {
     shouldSkipStep,
     getNextStep,
     computeRetryBackoffMs,
