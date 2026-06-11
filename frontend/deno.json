@@ -9,7 +9,7 @@
   ],
   "deploy": {
     "framework": "nextjs",
-    "install": "npm install",
+    "install": "npm install --ignore-scripts",
     "build": "rm -rf .next && npm run build"
   }
 }
