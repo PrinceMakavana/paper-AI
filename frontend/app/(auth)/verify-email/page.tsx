@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
@@ -48,7 +48,7 @@ function VerifyEmailContent() {
 
     const isResendDisabled = resending || cooldownSeconds > 0;
 
-    const handleApiRedirect = (data?: ApiErrorData, fallbackMessage?: string) => {
+    const handleApiRedirect = useCallback((data?: ApiErrorData, fallbackMessage?: string) => {
         const message = data?.error || data?.message || fallbackMessage;
         if (message) {
             showAlert(message, data?.code === 'EMAIL_SENT' || data?.code === 'EMAIL_VERIFIED' ? 'success' : 'error');
@@ -75,7 +75,7 @@ function VerifyEmailContent() {
         }
 
         return false;
-    };
+    }, [showAlert, router]);
 
     useEffect(() => {
         setEmail(emailParam);
@@ -135,7 +135,7 @@ function VerifyEmailContent() {
         };
 
         runVerification();
-    }, [token, verifyEmail, router, showAlert]);
+    }, [token, verifyEmail, router, showAlert, handleApiRedirect]);
 
     const handleResend = async (e: React.FormEvent) => {
         e.preventDefault();
