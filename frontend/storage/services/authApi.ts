@@ -38,6 +38,8 @@ export interface MessageResponse {
   message?: string;
   code?: string;
   redirect?: string;
+  token?: string;
+  retryAfterSeconds?: number;
 }
 export interface ProfileResponse {
   message?: string;
@@ -106,6 +108,20 @@ export const authApi = createApi({
     resendVerification: builder.mutation<MessageResponse, { email: string }>({
       query: (payload) => ({
         url: "/resend-verification",
+        method: "POST",
+        data: payload,
+      }),
+    }),
+    forgotPassword: builder.mutation<MessageResponse, { email: string }>({
+      query: (payload) => ({
+        url: "/forgot-password",
+        method: "POST",
+        data: payload,
+      }),
+    }),
+    resetPassword: builder.mutation<MessageResponse, { token: string; newPassword: string }>({
+      query: (payload) => ({
+        url: "/reset-password",
         method: "POST",
         data: payload,
       }),
@@ -187,6 +203,8 @@ export const {
   useRegisterMutation,
   useVerifyEmailMutation,
   useResendVerificationMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
   useLogoutUserMutation,
   useGetMeQuery,
   useUpdateProfileMutation,

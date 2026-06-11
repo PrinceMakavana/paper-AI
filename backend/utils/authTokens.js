@@ -23,7 +23,7 @@ function signEmailVerificationToken(userId) {
 function signPasswordResetToken(userId) {
     return signAuthToken(
         { userId, type: TOKEN_TYPES.PASSWORD_RESET },
-        '15m'
+        process.env.PASSWORD_RESET_EXPIRES_IN || '15m'
     );
 }
 

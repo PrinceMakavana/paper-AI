@@ -42,6 +42,9 @@ const userSchema = new mongoose.Schema(
         emailVerificationSentAt: {
             type: Date,
         },
+        passwordResetSentAt: {
+            type: Date,
+        },
     },
     { timestamps: true }
 );

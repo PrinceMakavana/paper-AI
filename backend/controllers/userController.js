@@ -1,5 +1,4 @@
 const User = require('../models/userModel');
-const bcrypt = require('bcryptjs');
 const {
     TOKEN_TYPES,
     verifyAuthToken,
@@ -37,6 +36,26 @@ async function sendVerificationEmailToUser(user, { enforceCooldown = false } = {
     await sendVerificationEmail(user.email, token);
     user.emailVerificationSentAt = new Date();
     await user.save();
+}
+
+async function sendPasswordResetEmailToUser(user, { enforceCooldown = false } = {}) {
+    const now = Date.now();
+    if (enforceCooldown && user.passwordResetSentAt) {
+        const elapsed = now - new Date(user.passwordResetSentAt).getTime();
+        if (elapsed < RESEND_COOLDOWN_MS) {
+            const retryAfterSeconds = Math.ceil((RESEND_COOLDOWN_MS - elapsed) / 1000);
+            const error = new Error('RATE_LIMITED');
+            error.retryAfterSeconds = retryAfterSeconds;
+            throw error;
+        }
+    }
+
+    const resetToken = signPasswordResetToken(user._id);
+    const result = await sendPasswordResetEmail(user.email, resetToken);
+    user.passwordResetSentAt = new Date();
+    await user.save();
+
+    return { resetToken, result };
 }
 
 /**
@@ -318,29 +337,46 @@ const resendVerification = async (req, res) => {
 const forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
-        const user = await User.findOne({ email: email.toLowerCase().trim() });
-
-        if (!user) {
-            return res.status(200).json({ message: 'If an account exists, a reset link has been sent.' });
+        if (!email) {
+            return res.status(400).json({ error: 'Email is required.' });
         }
 
-        const resetToken = signPasswordResetToken(user._id);
+        const normalizedEmail = email.toLowerCase().trim();
+        const user = await User.findOne({ email: normalizedEmail });
+
+        if (!user) {
+            return res.status(200).json({
+                message: 'If an account exists, a reset link has been sent.',
+                code: 'RESET_EMAIL_SENT',
+            });
+        }
 
         try {
-            await sendPasswordResetEmail(user.email, resetToken);
-        } catch (err) {
-            console.error('Failed to send password reset email:', err.message);
-            if (!process.env.SMTP_HOST) {
-                console.log(`Reset Token for ${email}: ${resetToken}`);
+            const { resetToken, result } = await sendPasswordResetEmailToUser(user, { enforceCooldown: true });
+
+            if (result?.skipped) {
+                console.log(`Reset Token for ${normalizedEmail}: ${resetToken}`);
                 return res.status(200).json({
                     message: 'Reset link generated successfully.',
+                    code: 'RESET_LINK_GENERATED',
                     token: resetToken,
                 });
             }
+
+            return res.status(200).json({
+                message: 'If an account exists, a reset link has been sent.',
+                code: 'RESET_EMAIL_SENT',
+            });
+        } catch (err) {
+            if (err.message === 'RATE_LIMITED') {
+                return res.status(429).json({
+                    error: 'Please wait before requesting another reset email.',
+                    retryAfterSeconds: err.retryAfterSeconds,
+                });
+            }
+            console.error('Failed to send password reset email:', err.message);
             return res.status(500).json({ error: 'Could not send reset email.' });
         }
-
-        res.status(200).json({ message: 'If an account exists, a reset link has been sent.' });
     } catch (err) {
         res.status(500).json({ error: 'Error initiating reset.', details: err.message });
     }
@@ -350,27 +386,51 @@ const resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
 
-        const decoded = verifyAuthToken(token);
-
-        if (decoded.type !== TOKEN_TYPES.PASSWORD_RESET) {
-            return res.status(400).json({ error: 'Invalid reset token type.' });
+        if (!token || !newPassword) {
+            return res.status(400).json({ error: 'Token and new password are required.' });
         }
 
-        const hashedPassword = await bcrypt.hash(newPassword, 12);
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: 'Password must be at least 6 characters.' });
+        }
 
-        const user = await User.findByIdAndUpdate(decoded.userId, {
-            password: hashedPassword,
-        });
+        let decoded;
+        try {
+            decoded = verifyAuthToken(token);
+        } catch (err) {
+            const code = err.name === 'TokenExpiredError' ? 'RESET_TOKEN_EXPIRED' : 'INVALID_RESET_TOKEN';
+            return res.status(400).json({
+                error: 'Invalid or expired reset link.',
+                code,
+                details: err.message,
+            });
+        }
 
+        if (decoded.type !== TOKEN_TYPES.PASSWORD_RESET) {
+            return res.status(400).json({
+                error: 'Invalid reset token type.',
+                code: 'INVALID_RESET_TOKEN',
+            });
+        }
+
+        const user = await User.findById(decoded.userId);
         if (!user) {
             return res.status(404).json({ error: 'User no longer exists.' });
         }
 
-        res.status(200).json({ message: 'Password updated successfully.' });
+        user.password = newPassword;
+        await user.save();
+
+        res.status(200).json({
+            message: 'Password updated successfully.',
+            code: 'PASSWORD_UPDATED',
+            redirect: '/login',
+        });
     } catch (err) {
         console.error('Reset Error:', err.message);
         return res.status(400).json({
-            error: 'Token validation failed',
+            error: 'Password reset failed.',
+            code: 'INVALID_RESET_TOKEN',
             details: err.message,
         });
     }
