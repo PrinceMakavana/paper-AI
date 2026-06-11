@@ -305,7 +305,6 @@ async function executeStep(job, step, runContext, logger) {
                     tree: result.tree,
                 });
                 logger.success(step, 'Document tree JSON saved to S3', {
-                    path: treeStorage.pageindex_storage_path,
                     s3Uri: treeStorage.pageindex_s3_uri,
                     rootNodeCount: Array.isArray(result.tree) ? result.tree.length : 0,
                 });
@@ -319,7 +318,6 @@ async function executeStep(job, step, runContext, logger) {
                     document_id: linkedDocumentId,
                     index_status: IndexStatus.COMPLETE,
                     page_count: job.page_count ?? undefined,
-                    pageindex_storage_path: treeStorage?.pageindex_storage_path,
                     pageindex_s3_uri: treeStorage?.pageindex_s3_uri,
                 });
                 logger.success(step, 'Document index status set to complete', {

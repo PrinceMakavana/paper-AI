@@ -503,7 +503,7 @@ async function questionVectorlessRag(req, res) {
         if (document.source === 'hosted') {
             if (
                 document.index_status !== IndexStatus.COMPLETE
-                || !(document.pageindex_s3_uri || document.pageindex_storage_path)
+                || !document.pageindex_s3_uri
             ) {
                 return res.json({
                     answer: 'This document is not ready for questions yet. Please wait until indexing finishes and try again.',
@@ -514,7 +514,6 @@ async function questionVectorlessRag(req, res) {
             try {
                 const tree = await loadHostedTreeJson({
                     pageindex_s3_uri: document.pageindex_s3_uri,
-                    pageindex_storage_path: document.pageindex_storage_path,
                 });
                 roots = Array.isArray(tree) ? tree : null;
             } catch (error) {
@@ -640,16 +639,11 @@ async function questionVectorlessRag(req, res) {
     }
 }
 
-async function fetchCatalogPageIndex(storagePath) {
-    const base = getPageIndexBaseUrl();
-    const response = await fetch(
-        `${base}/catalog/page-index?storage_path=${encodeURIComponent(storagePath)}`
-    );
-    if (!response.ok) {
-        const message = await response.text();
-        throw new Error(message || `Failed to load page index: ${storagePath}`);
-    }
-    return response.json();
+function catalogTreeToRoots(tree) {
+    if (!tree) return undefined;
+    if (Array.isArray(tree)) return localStructureToTreeNodes(tree);
+    if (Array.isArray(tree.structure)) return localStructureToTreeNodes(tree.structure);
+    return undefined;
 }
 
 async function subjectQuestionVectorlessRag(req, res) {
@@ -677,8 +671,14 @@ async function subjectQuestionVectorlessRag(req, res) {
         const bookTrees = [];
 
         for (const book of readyBooks) {
-            const status = await fetchCatalogPageIndex(book.pageindex_storage_path);
-            const roots = localStructureToTreeNodes(status.page_index?.structure);
+            let roots;
+            try {
+                const tree = await loadHostedTreeJson({ pageindex_s3_uri: book.pageindex_s3_uri });
+                roots = catalogTreeToRoots(tree);
+            } catch (error) {
+                console.error(`catalog tree load failed for ${book.book_id}:`, error);
+                continue;
+            }
             if (!roots?.length) continue;
             bookTrees.push({
                 bookId: book.book_id,
@@ -905,7 +905,7 @@ async function deleteDocument(req, res) {
         try {
             await deleteObjectsByLocation([
                 { s3Uri: document.pdf_s3_uri, storagePath: document.pdf_storage_path },
-                { s3Uri: document.pageindex_s3_uri, storagePath: document.pageindex_storage_path },
+                { s3Uri: document.pageindex_s3_uri },
             ]);
         } catch (s3Error) {
             console.error('Error deleting S3 objects for document:', documentId, s3Error);
@@ -1056,7 +1056,6 @@ async function getDocumentIndexStatus(req, res) {
             error_message: data.error,
             pdf_storage_path: data.pdf_storage_path,
             pdf_s3_uri: data.pdf_s3_uri,
-            pageindex_storage_path: data.pageindex_storage_path,
             pageindex_s3_uri: data.pageindex_s3_uri,
             storage_status: data.storage_status,
             storage_error_message: data.storage_error_message,

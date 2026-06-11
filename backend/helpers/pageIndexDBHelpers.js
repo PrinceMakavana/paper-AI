@@ -25,7 +25,6 @@ async function savePageIndexDocument({
     model,
     pdf_storage_path,
     pdf_s3_uri,
-    pageindex_storage_path,
     pageindex_s3_uri,
     storage_status,
     storage_error_message,
@@ -46,7 +45,6 @@ async function savePageIndexDocument({
             model: model,
             pdf_storage_path,
             pdf_s3_uri,
-            pageindex_storage_path,
             pageindex_s3_uri,
             storage_status,
             storage_error_message,
@@ -123,7 +121,6 @@ async function updateHostedPageIndexDocumentStatus({
     document_id,
     index_status,
     error_message,
-    pageindex_storage_path,
     pageindex_s3_uri,
     page_count,
 }) {
@@ -132,9 +129,6 @@ async function updateHostedPageIndexDocumentStatus({
     const update = { index_status };
     if (error_message !== undefined) {
         update.error_message = error_message;
-    }
-    if (pageindex_storage_path !== undefined) {
-        update.pageindex_storage_path = pageindex_storage_path;
     }
     if (pageindex_s3_uri !== undefined) {
         update.pageindex_s3_uri = pageindex_s3_uri;
@@ -257,7 +251,7 @@ async function getPageIndexDocuments({ user_id }) {
     return pageIndexSchema
         .find({ user_id })
         .sort({ createdAt: -1 })
-        .select('document_id document_name file_size mime_type index_status token_count summary page_count pdf_storage_path pdf_s3_uri pageindex_storage_path pageindex_s3_uri storage_status storage_error_message source hosted_job_id hosted_pageindex_doc_id createdAt');
+        .select('document_id document_name file_size mime_type index_status token_count summary page_count pdf_storage_path pdf_s3_uri pageindex_s3_uri storage_status storage_error_message source hosted_job_id hosted_pageindex_doc_id createdAt');
 }
 
 async function updatePageIndexDocumentStatus({
@@ -267,7 +261,6 @@ async function updatePageIndexDocumentStatus({
     error_message = undefined,
     pdf_storage_path = undefined,
     pdf_s3_uri = undefined,
-    pageindex_storage_path = undefined,
     pageindex_s3_uri = undefined,
     storage_status = undefined,
     storage_error_message = undefined,
@@ -280,7 +273,6 @@ async function updatePageIndexDocumentStatus({
     }
     if (pdf_storage_path !== undefined) update.pdf_storage_path = pdf_storage_path;
     if (pdf_s3_uri !== undefined) update.pdf_s3_uri = pdf_s3_uri;
-    if (pageindex_storage_path !== undefined) update.pageindex_storage_path = pageindex_storage_path;
     if (pageindex_s3_uri !== undefined) update.pageindex_s3_uri = pageindex_s3_uri;
     if (storage_status !== undefined) update.storage_status = storage_status;
     if (storage_error_message !== undefined) update.storage_error_message = storage_error_message;

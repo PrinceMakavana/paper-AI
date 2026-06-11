@@ -54,11 +54,6 @@ const pageIndexSchema = new mongoose.Schema(
             required: false,
             trim: true,
         },
-        pageindex_storage_path: {
-            type: String,
-            required: false,
-            trim: true,
-        },
         pageindex_s3_uri: {
             type: String,
             required: false,

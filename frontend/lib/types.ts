@@ -22,7 +22,6 @@ export interface CatalogBook {
     downloadLink?: string;
     pageindexStatus?: "ready" | "pending" | "failed";
     pageindexSizeBytes?: number;
-    pageindexStoragePath?: string;
     pageindexS3Uri?: string;
     pdfStoragePath?: string;
     pdfS3Uri?: string;
