@@ -49,7 +49,7 @@ function getFromAddress() {
     return process.env.SMTP_FROM || 'PaperAI <noreply@localhost>';
 }
 
-async function sendMail({ to, subject, text, html }) {
+async function sendMail({ to, subject, text, html, replyTo }) {
     if (isEmailDisabled()) {
         console.warn(`[emailService] Email disabled (test mode) — skipped to ${to}: ${subject}`);
         return { skipped: true };
@@ -68,6 +68,7 @@ async function sendMail({ to, subject, text, html }) {
         subject,
         text,
         html,
+        ...(replyTo ? { replyTo } : {}),
     });
     console.log(`[emailService] Sent "${subject}" to ${to} (messageId: ${result.messageId})`);
     return result;
@@ -124,7 +125,48 @@ async function sendPasswordResetEmail(email, token) {
     return sendMail({ to: email, subject, text, html });
 }
 
+async function sendContactFormEmail({ to, name, email, subject, message }) {
+    const mailSubject = `[paperAI Contact] ${subject}`;
+    const text = [
+        'New contact form submission',
+        '',
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Subject: ${subject}`,
+        '',
+        'Message:',
+        message,
+    ].join('\n');
+
+    const html = `
+        <p><strong>New contact form submission</strong></p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+        <p><strong>Message:</strong></p>
+        <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
+    `;
+
+    return sendMail({
+        to,
+        subject: mailSubject,
+        text,
+        html,
+        replyTo: `${name} <${email}>`,
+    });
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 export {
     sendVerificationEmail,
     sendPasswordResetEmail,
+    sendContactFormEmail,
 };

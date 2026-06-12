@@ -11,6 +11,7 @@ import ragChatRoutes from './routes/RagChatRoutes.js';
 import PaymentRouter from './routes/paymentRoutes.js';
 import pageIndexAuthRoutes from './routes/pageindexAuthRoutes.js';
 import pageIndexHostedJobRoutes from './routes/pageIndexHostedJobRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 import { startHostedJobRecovery } from './services/pageindexHosted/jobRecovery.js';
 
 dotenv.config();
@@ -43,6 +44,7 @@ app.use(ragChatRoutes);
 app.use(PaymentRouter);
 app.use(pageIndexAuthRoutes);
 app.use(pageIndexHostedJobRoutes);
+app.use(contactRoutes);
 app.get('/', (req, res) => {
     res.status(200).json({
         message: 'paperAI API is running',

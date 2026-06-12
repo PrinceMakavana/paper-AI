@@ -9,8 +9,9 @@
 => remove all Bitly and change it with actual url and add subjects here
 (Done) => Add Email Verification on Signup and Signin
 => Add one view into Right side of the subject file 
-=> Add Forgot and Reset Passwrod Feature 
-
+(Done) => Add Forgot and Reset Passwrod Feature 
+=> Follow up chat Context
+=> Find Document using AI
 
 -- after Prod -- 
 => pageindex provide 1000 free pages per user , so if user upload file less than 1000 pages, then next file wlii be sent to same email

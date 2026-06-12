@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   // missing webpack chunk errors during "Collecting page data".
   experimental: {
     cpus: 1,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationRetryCount: 3,
   },
 };
 

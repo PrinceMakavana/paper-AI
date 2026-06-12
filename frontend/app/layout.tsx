@@ -19,7 +19,19 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "paperAI — AI Document Assistant",
+  title: "paperAI — AI-Powered GTU Paper Solutions & Document Assistant",
+  description:
+    "Upload GTU papers, generate accurate AI solutions, chat with PDFs, summarize notes, and prepare smarter for exams. Gemini + Ollama support.",
+  icons: {
+    icon: [
+      { url: "/paper_ai_logo.png", media: "(prefers-color-scheme: light)" },
+      { url: "/paper_ai_logo_dark_mode.png", media: "(prefers-color-scheme: dark)" },
+    ],
+    apple: [
+      { url: "/paper_ai_logo.png", media: "(prefers-color-scheme: light)" },
+      { url: "/paper_ai_logo_dark_mode.png", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
   verification: {
     google: "HWShO_Zn-OoWzGjGpBwHPMDJh45QT2dWuPoLhNVamZg",
   },
@@ -34,7 +46,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${fraunces.variable} ${instrumentSans.variable} antialiased`}>
         <Providers>{children}</Providers>
