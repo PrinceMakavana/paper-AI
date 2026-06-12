@@ -1,0 +1,63 @@
+{
+  "subject_name": "Analog & Digital Electronics",
+  "known_as": "ADE",
+  "subjecet_code": "3130907",
+  "syllabus": "https://bit.ly/3wCS7E7",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3130907.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3130907.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3130907.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3130907.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3130907.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3130907.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3130907.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg-EDooDFWit1X9BF59y1I-9p8_LQoxqb_6hNJTgpKohBWhkFGIU55fRTQPS388QUBg2c3EijiZcHK7liQ1pmMy8sTMQAMOBDx3_3MmB3FUiunv3FAs-zfliUB14GyjUFF_WEZoAJjHdsVcMzMuweiZlTOTKnEq3R_APEYMJIFx1nxBnFPAi6ubMKWipA=s320",
+      "download_link": "https://bit.ly/ADETechnical",
+      "alt_data": "Technical"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiraSNCeQcTYsEvK8_WoYHrlFyzpvLxP-2kN4t3PqlXywOI9FvWPQr-stqKHdmyNPFWTAY3b6g53uD5OiP0im3jBjzj8B91FXB3F9jSq9DNgNTWzYNg1WF8ObnPI63aIr7ihA8uJhwswWhrm6JTK__Khi8-gbKUOjbtpgNStCVgAPqpDKWC5OTL9BQYvQ",
+      "download_link": "https://bit.ly/ADEAanandkumar",
+      "alt_data": "ADE Aanand Kumar Notes"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhLg4HtEZsIvyLnabNy3Dp0fJQId7PJzuLQAAwKw19bqEbsUw1qPJNsWLGBQkvL-eAJLLtAac4at705WqgYhnJVsr2h-KzfgRYR0G9EPFEhBKbH82kuoumTHKIDzHzyjotSpElrYUxSbGClZYSceAXJZd2cNGISFn0MYubzlreiga_SCx_gE5NKXGys8g=s320",
+      "download_link": "https://bit.ly/3ja0KSt",
+      "alt_data": "John Wiley & Sons"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiN1EQiUvsgvFTasaN6neRpPcjGkwdRQft57QTZwSVwePzpfMdlYrw9iiiVl_88B7fpWHreFJRvmdjQf9BZ9FA0ZnQCe9a5kzkIHLOf6kF3YUlvaqW1fTMiiMTwliCxsjpqtnqq2pAbFG7FfIEjy6ZddB_z2PrWtn85UK3rUFvgPf2bov8SJzLuuXffSA=s320",
+      "download_link": "https://bit.ly/ADEDarshanNotes",
+      "alt_data": "Darshan Notes"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "subject_name": "Distributed System",
+  "known_as": "DS",
+  "subjecet_code": "3170719",
+  "syllabus": "https://bit.ly/3aOjl5j",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3170719.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3170719.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3170719.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170719.pdf"
+    },
+    {
+      "year": "Summer-22",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3170719.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3170719.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://drive.google.com/file/d/1Ce4KyntEKJy7zV2jAI-Qm_ChY3q5vV29/view?usp=share_link",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNkj41T8G0tHZaLv7n3Qs9IWCRQvUjp6zMKiT_O2IEX_LkyZE6TeQGJf8WUJ-hLwc8eGpKhRC3TUOx58mOO9PAjZHaCLIRPkzOnSsJQ1CIU7qWeZe1kbJGztbhKKdj6ry38R-SIVhfiTSetfI9DMew6rFJi_7OSHul4WhT13uAaZmiWRJZGNHOSKp7/s1600/download%20(12).jpeg",
+      "download_link": "https://drive.google.com/file/d/1ls3aMhWI765Uza9BU3XYozSQPK-wvMZ0/view?usp=sharing",
+      "alt_data": "Distributed System 3170719 GTU Technical "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://drive.google.com/file/d/1Dvb-Sd5kv2RAzewqLuyPLfmUi86-fhuy/view?usp=share_link",
+      "alt_data": "Distributed System 3170719 GTU Darshan Material"
+    }
+  ]
+}

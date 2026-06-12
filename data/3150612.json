@@ -1,0 +1,67 @@
+{
+  "subject_name": "Design of Structures",
+  "known_as": "DS",
+  "subjecet_code": "3150612",
+  "syllabus": "https://bit.ly/3AgZpPZ",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150612.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150612.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150612.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150612.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150612.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3qxJPNQ"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/32bi98k"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3FBzJQv"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhF8RTCgW03UjUYHMZd7-nhqm2l066a4Os9iPimPSEjJW6BZ9PwdNDDSUP2LBYziuuqEzg6HFZ9AGlPxU9jQsnUkCyOYBNjn7tW6k4pGLMcxXwECozmoN9TinpDn3mJML9szz_yZZ1uoefCXinxOvv2mD8CDxS-NvKox6W74PcFh5DluN3oAjpazkJpsQ",
+      "download_link": "https://bit.ly/3EIjfp7",
+      "alt_data": "Design of Concrete Structure"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjUwv2iS_SHkRqowoJrjBgRj9-z4VJDZlJPJyLCUs7IyM7nHNd9E2gsobyArERB17_VsY4xI5LRHmZQdDLVbUi4ltPCje-N8_Rcv-qg3HstLsZr3gKVUs0caIRE90lNYD7gxbdpYxZC_2gpY-DobAeiN2FqNajJfEIzl_kUq0ioVAdgimSRwSEiqZPJ9w",
+      "download_link": "https://bit.ly/3eGRx1p",
+      "alt_data": "Steel Structures-Theory & Practice by N. Subramanian"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhNrB5nshbLeHn6pSohyz4bR5jlRE6veOfPRV30rDZBiXHmIlednCAcP5C7HBY5ceWqdrWqO1MZwVnb9D9qcPJN6O3Tj7y0JxjH6WWpaOGQ_pyKs_-hpYRZiAnemSDKtbiJrWQWKY4X-hiHlk66fg89SwFEMt8gUvdcfVSqpBJ_L4ZT9xr43wJ36TvmEA",
+      "download_link": "https://bit.ly/3HxpZbn",
+      "alt_data": "Design-of-Steel-Structures"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgzkO1iAiN4rEjeSV_4E_mm2Iwqv3h8QaFi_qlnKaojSuGBxe0QKWMJieZF41AuI4D4TeRuvP1_p_TwFTjTwkPmLB8F5YK-jxaPsLewXXtZepfEhgoGCz2j3b5O-0ollQrM62_q-zkwflmhnRIhvdbc7xaJT_Fz8UGVkwNadQiocZfC14sOUpzh-EjRBA",
+      "download_link": "https://bit.ly/3Jzhrmc",
+      "alt_data": "Design-of-Reinforced-Concrete-Structures"
+    }
+  ]
+}

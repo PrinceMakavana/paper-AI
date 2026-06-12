@@ -1,0 +1,81 @@
+{
+  "subject_name": "Analog Circuit Design",
+  "subjecet_code": "3141002",
+  "known_as": "ACD",
+  "syllabus": "https://bit.ly/2ULmLxC",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3141002.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3141002.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3141002.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3141002.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3141002.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3141002.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3141002.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3141002.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3FjAvSU"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3srNIp1"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/32pPcFs"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3Fna9PE"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3EohOfo"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3EqNm4w"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgC-c0RTsROr1hrIqIw_yquRpgxFL66rz0aT0nerw_nuJQ-6tAqDtFX0uu9iipg5ekRd1w_n0peopocOQIGGeBHN6W3nUM3jXdD_6XasuXp9T0xOWWHcwyfF5pkkcRgymg8EScgwG00UObXYotTBVMT-_UwasebjK7xfLT002jbL4rxKVJ0QukrAoqNEw",
+      "link": "https://bit.ly/3J8hIMD",
+      "alt_data": "Op-Amps-And-Linear-Integrated-Circuits by Ramakant Gaikwadhttps"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEggLBnMzseHY2B9rIy9bxGWCZSZ6p8cWq34tPWt8znJq1vyTGRGeSz3Ik2a-WnjDZQbXKUtl2dD7-3hrhPFuT3YXN0Jf6GsQZbC5NPFr0FiwfCDSUuR3cox9-X8qjYm8-dsPj1XfNdQfsFw1f2qripDrEdLfz3Cx_izApdRWtC23TTYc043Kahw4thq1A",
+      "link": "https://bit.ly/3pjkUx5",
+      "alt_data": "Analog integrated circuits design"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

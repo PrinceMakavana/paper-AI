@@ -1,0 +1,49 @@
+{
+  "subject_name": "Digital Forensics",
+  "known_as": "DF",
+  "subjecet_code": "3170725",
+  "syllabus": "https://bit.ly/3Hcgy1U",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3170725.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3170725.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3170725.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170725.pdf"
+    },
+    {
+      "year": "Summer-22",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3170725.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3170725.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://drive.google.com/file/d/1jFHaPJbbdLzIiWEY_Yre8R29axh6udqp/view?usp=sharing",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRDe_UrKcP04-m91dev_z97mTp9FO-1ayVlyi8ta4Woa5UR2_i-M3QnmcA0Uccfq4v7Y6APznaCUlSfKVXebsmOqQUasvmMNwYkHKoxG3zGulWoiKzd3-ojmO0vYyAyzab4nQlx_jaQJ6IjvdzaPFwstS4EaZG-e01c9iEA9dJteympe1P6QqbASM0aA/s320/Screenshot%20from%202023-01-06%2010-40-12.png",
+      "download_link": "https://drive.google.com/file/d/1AU73g0g7Ufj3TRG-ez3XNPcYFDxZYyU2/view?usp=share_link",
+      "alt_data": "DF IMP Questions"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvf3Y1KGLaOizWOesfAsswOnd7LuEXo3mtMj_Eq5pT2N51LmWaOUzdVzM1dhXQPguRYZKNzpeds3yzYCykxZ5fS4FojUJIhTdrcFyM-PAfpYdpLAAZjOoYJ9PJqktbKDbNjocJXU8gJ5MQNy-PD3fqMIERn3F7DJoNHOEJ30HKPrvcK5j_MvkDhxAZMA/s500/Screenshot%20from%202023-01-06%2010-39-20.png",
+      "download_link": "https://drive.google.com/file/d/1SDbCIBLNEvkeMRAjLoFKjhY-mo0sN6JC/view?usp=share_link",
+      "alt_data": "DF Book"
+    }
+  ]
+}

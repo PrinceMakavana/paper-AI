@@ -1,0 +1,93 @@
+{
+  "subject_name": "Signal & Systems",
+  "subjecet_code": "3141005",
+  "known_as": "SAS",
+  "syllabus": "https://bit.ly/3wICHOy",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3141005.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3141005.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3141005.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3141005.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3141005.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3141005.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3141005.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3141005.pdf"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3qjI31r"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3yPhbKE"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/33QiPQV"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/32nbDv0"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjCok_NcLodlUoafzxXrf4W7jsSl6mqCns1ze9P2lvL5StplEbuwzbkA9vM-Y8LBufj9BI9x-baIex4DLnKYTDOm5qsHkA1tniyYYVc3RxBpDcGgrtYQ6qcP8q4diciGhn9l9Z4qzzIUEtnqPfLbO-2k9Z66OievMN37fQQWNRlRuOEY3sFZhjZVMIQuw",
+      "link": "https://bit.ly/3Fo7V2B",
+      "alt_data": "Solution manual Signals and Systems by Alan V. Oppenheim, Alan S. Wilsky and Nawab, Prentice Hall (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgdwZ81JBSjCrw8u4RL6iVeD8-gqZYuE7mTess5NdfzSrP8iuZNBeba5Wxk2OVIzFxYTbAa86wnixDK4RPX7XtiWt26mzhkxRik56C6G472KqoAMo6N6hHKy4IYGv98OPbz7dfyXfO-Asys7_KvZHGEKzrQU3mdCKXlUbYAAKRErDNmTwrjUI39QDWdWA",
+      "link": "https://bit.ly/3qjOiSV",
+      "alt_data": "signals-and-systems-by-ananda-kumarpdf (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgchhnzRO5RBJSrs7yGmvGzk5C1EbeynL1eKOOi0BDKHpB7h6hswK6EnbmYm8ov3yfbTuUuDLAHHOGSlE7xXothRtrsLNvFeeGHtiFl8bB8EViumNBgx5rKWSt9MOX_saBaxcBMIIiBwmD-6NyHVr8C4cEeGHI814z_scP0dWQ0s8yrxKOgHiOaktJAqA",
+      "link": "https://bit.ly/3EmvZlb",
+      "alt_data": "Signals and Systems using MATLAB (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjQwxREzcL-D3vDJhPCFxTvEEDJ1D_VpPU-g0E5W8b0OzCNmRwiA_2PSddr3cddsF0PyoXcXtxwt1VtDat0T0x1wcay5WFWXGrZMH6vKZh_1OH2Tp3IJMs1r8165PEgLHeMvAy8SYyDLWrnWw6_qZDPMSO5JutE9WNOBGwvgY8M2urhJ944WwvZSqtYfA",
+      "link": "https://bit.ly/3H2PNvv",
+      "alt_data": "Signals and Systems by Alan V. Oppenheim, Alan S. Wilsky and Nawab, Prentice Hall (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEid2q31W7aSDMvmyT05u6-ooioftpwW3l1roj6ENpEUD8ZlqHXZyTeSiXLHrFOi_rWnrc1q2hfSjx2ZJFdQ-P6KlaForRvYVcZODDkmWCNsPWSNVuxALmfWEgJEAUzmkwFpWDrgUpnLE1NrUNs0buTOR0qFtZY16T0pp72goqvwR0QnA46aUCMr5fEHAw",
+      "link": "https://bit.ly/3Fl69PT",
+      "alt_data": "Signal, Systems and Transforms by Charles L. Philips, J. M. Parr and E. A. Riskin, Pearson Education (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEghWVsMm_7BNVkcVNYkb6FZvakjPlL8FgxN0enK5rpvLSt6p0O_T-KwEDRZJ6NwmDjBOJAS3xBbALS_XT33Erk9fasXvs3VN4C4LDNS3R3lMCLrgitPiKr10a1SmYExAFMFJ64rdHd0RpOSrbqQOPa1-wz6yb0IVuTgJKo2LtCBmffLowndpGRthw1ZgA",
+      "link": "https://bit.ly/3mmPSTa",
+      "alt_data": "Linear_Systems_and_Signals_2nd_Edition__BP_Lathi (APY Material)"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

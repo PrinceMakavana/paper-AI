@@ -1,0 +1,74 @@
+{
+  "subject_name": "Computer Networks",
+  "known_as": "CN",
+  "subjecet_code": "3150710",
+  "syllabus": "https://bit.ly/2VFps4c",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150710.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150710.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150710.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150710.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150710.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3pLsReL"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/2Vx2GMo"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/2VCmptC"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3AjUZI3"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3yuMI3y"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3Aj4gQB"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://www.gtuapymaterials.com/2021/12/computer-network-3150710-chapterwise.html",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-V36QR-zx4Mk/YKSbCyDekpI/AAAAAAAAAfk/keOYKauzjk4StKZJ7HKj3qLHFXDogR3VACNcBGAsYHQ/s320/Screenshot_3.png",
+      "download_link": "https://bit.ly/34ehgMR",
+      "alt_data": "Person Computer Networks"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-UvzxjcIiy1Y/YMHuxJGZ3uI/AAAAAAAAAiY/GIHB4J_OpkwdKa8ZAfLB-5Sb4iwUFXGBACNcBGAsYHQ/s320/Screenshot_39.png",
+      "download_link": "https://bit.ly/3eFqGD5",
+      "alt_data": "Technical Computer Networks"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://bit.ly/3sP8D5r",
+      "alt_data": "Darshan Computer Networks"
+    }
+  ]
+}

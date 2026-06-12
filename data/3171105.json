@@ -1,0 +1,44 @@
+{
+  "subject_name": "Introduction of Artificial Intelligence",
+  "subjecet_code": "3171105",
+  "known_as": "AI",
+  "syllabus": "https://bit.ly/3kbSu5Y",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3171105.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3171105.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3171105.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3171105.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3171105.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3fhLFvV"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisa47gDfyTKwIDDc3-PiG39SSbHdo0zNWTXiQNVyxLH7wS158PxmRYizw3rSJF4PKcHSuNr3pEpLyYU1oNipHwiiYF0XR02F2mzKvWOnWCCWqLPbJWVWbbgLEIgFThKoClk5gTBon5QucWmqSccMz_IwT8-C2qAXiuzPQGaVEGEqe4C_QxUJ70RRJRHA/s320/Screenshot_104.png",
+      "download_link": "https://drive.google.com/drive/folders/1wg7rYSmYtQgBZEoZjCsF6jSiajs51C_F?usp=sharing",
+      "alt_data": "3171005 Introduction of Artificial Intelligence - Techknowledge publications sem 7"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

@@ -1,0 +1,88 @@
+{
+  "subject_name": "Structural analysis-II",
+  "known_as": "SA-II",
+  "subjecet_code": "3150614",
+  "syllabus": "https://bit.ly/3jnuH0E",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150614.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150614.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150614.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150614.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150614.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3FA78uR"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3nyuf2x"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3fyf30Y"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3tzazzr"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3FAnzXS"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3nwUAhD"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3Ktr7z4"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEh6aqu-2_BQpxXzuR614Ocplv3PA_JncF-c_xXMZwsaiqrmj2Y_opTXgVrHbQHDpxiCubLRBpE8AF41mRNAYSDjJAQ0l3cvmZg1aqaIKoLpgB9fxhMnmiNXnjIy1S8IFq-oYH5rX-FLiLxBGBl7_U3me522hNR3h8eO3VW-YYLq2Yy8hMwvQ8oL23-OLA",
+      "download_link": "https://bit.ly/3mKMaTde",
+      "alt_data": "Structural Analysis 2 by Salah, Khlafallah"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiWHvMhJgr1nWdYD1cMVJVmfqSuRcFSMDxlXnpi_9OLVxcTlc_gVNdCs2OSfulvg61ot5GnOLJNwl95pYF4OHDlQFezMKjvJdJ9VNmv54X6lR0PsGXmNlN3O_oTEWuAI-5_mRZY15PVuswUZeq1ItWwxC1GlJTDSBFXnVDTxpQwRfbcgZxBLn-qHNczAQ",
+      "download_link": "https://bit.ly/3eXYADj",
+      "alt_data": "Structural Analysis by R.C.Hibbler"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhH2dy1PXVjx5V5nd_xA1HHp5vm956uMITtr-TSE9E1dFE_yB6wKsKoXAjPGsAx1CXteteREF-7cvz6a84xBrixShYMiJpniI52k1j4uQHwnK88PbSBqkpFWCqR_RMSjo0sFVmkrfY2rSuECtfAgi-iAW5LM-iqnG90ZgwOrbnkVljqJy93tBNrNeyFwQ",
+      "download_link": "https://bit.ly/32UkqV7",
+      "alt_data": "Matrix Analysis of Structures by Aslam Kassimali"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEh6rU7ElI8q-UGcWfoYMuT2wFjV1zmSsVP7sLg6QaHUD_WmmNs33bH245eovx73tGuuiFr0094dMot_uVSie4JyxzkGN40f4m_bhD6PzlPomgqq_9cG3xdoY_V5qbsH0fbsQnHCJ_X7jdgSJ440I6ZDnREMCezXX-3hLfn3QnHgCudWANVI5en4XYJbnA",
+      "download_link": "https://bit.ly/3eIiodA",
+      "alt_data": "Theory of Structures by S. Timoshenko"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEh9A3_a-Hf8cptPeBBCFGoWknZSlIvvOZiuCaDGF5ex7wgN_3ZqmkrXFb-_MOzWeKdC4v0dLyhOV25aKxR5iyl49WrGFr7UgTTKKEKaiAK1ymRAPkUJKBPxCN_-J9qLbCIlbY1hbRcInhJ5lfVrJHlO5UMEO-po6Rb_PNIHdpFNacJuuXItSCC5vCbEgg",
+      "download_link": "https://bit.ly/3Hn63HY",
+      "alt_data": "Theory of Structures SMTS 2 by B.C. Punmia"
+    }
+  ]
+}

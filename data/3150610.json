@@ -1,0 +1,82 @@
+{
+  "subject_name": "Concrete Technology",
+  "known_as": "CT",
+  "subjecet_code": "3150610",
+  "syllabus": "https://bit.ly/37oJYJ7",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150610.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150610.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150610.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150610.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150610.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3GCY2ij"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3FDPNB4"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3Kigqzb"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3FCfmTb"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3fxKcSg"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3tyjH7n"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3rsJD1w"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3AdarqH"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjsHjzMVN8CF2V_v4RRZFXqkijE4PVVS1UXkQz4-olWu5OsLfKiey-35qSDZbskbePu-lUmm_rQmBo9ZiCYQ-NZFbPo7g1dk1RJ-TO3rnhvihhUoRKPs06NyZd9DUhVlKTSADa-A7IHBNL-ek21kJFb_rjQTpsYR-d63ulznTEPYip_jK90j4Bge6n6ZA",
+      "download_link": "https://bit.ly/3qN1y30",
+      "alt_data": "Concrete-Technology"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEim1vA6n79MMqvS5WU22gFRGghRkAzXPAIJLEJ-KKn59kFHStTU0BHBIMakpd0xAemQ2RsNvGgmvac3VNljbXUWcXpcPPjtE1PGCFxL5WgR8i9fgKCdMV5tXORdtR1j3MlQBnttlHowflqCxlJ71AbTmEYUnDIboYUqSy6YS6XmbEbHnria6iDRy_Mkxw",
+      "download_link": "https://bit.ly/3eJeUaM",
+      "alt_data": "Concrete Technology by M.L.Gambhir"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgkYILvq7Vmjnj90NwD9vIO3zLPao_EmV9kxqCvJxeiMO0Kp0xFxyjIWNRWw4KxUcAT_YzAq0ncUdAEFd9h396lb35FHJyRG2QUL9-Ldk1ApqdZYrB1XDLUoFlOCUKYFqRzSLHBa6iEA7t0JTBALwA-L-OKLOa2EMzFhFGSOEL-NJQf4qNHrIfIKNycvQ",
+      "download_link": "https://bit.ly/3eKolXk",
+      "alt_data": "Concrete Technology by A.M.Neville & J.J.Brooks"
+    }
+  ]
+}

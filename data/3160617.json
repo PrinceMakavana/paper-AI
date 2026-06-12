@@ -1,0 +1,77 @@
+{
+  "subject_name": "Construction Equipment and Automation",
+  "known_as": "CEA",
+  "subjecet_code": "3160617",
+  "syllabus": "https://bit.ly/3s1WTdI",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160617.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160617.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160617.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160617.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160617.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3GH8g0R"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3rv9C8T"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3FM0r8R"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3Agx3qu"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3fG43il"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3fF2Zep"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/33HZ265"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3nFJgjb"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgR3GBIhVfiaEJeayfvqw5q-Ujl_0-NZMtjAYcBcMaWHVhz9W02AymjkzpfkpbDQ_6Sr7Azik51VaUCnFP4dV4qEwW38DtUFDlsCsI-nysbe5uhHGfaQ5TP7x8vQbvho7rLEgC45fMw1NXTErYPeds7FhH1I1xzXn6ytvXfB9Pt2_Ja4WM1KRniJYA8iw",
+      "download_link": "https://bit.ly/3nDGxH6",
+      "alt_data": "Construction Planning, Equipment, and Methods"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgR3GBIhVfiaEJeayfvqw5q-Ujl_0-NZMtjAYcBcMaWHVhz9W02AymjkzpfkpbDQ_6Sr7Azik51VaUCnFP4dV4qEwW38DtUFDlsCsI-nysbe5uhHGfaQ5TP7x8vQbvho7rLEgC45fMw1NXTErYPeds7FhH1I1xzXn6ytvXfB9Pt2_Ja4WM1KRniJYA8iw",
+      "download_link": "https://bit.ly/3Kngspq",
+      "alt_data": "Construction Project Management: Theory and Practices"
+    }
+  ]
+}

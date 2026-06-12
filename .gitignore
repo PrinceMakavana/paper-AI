@@ -118,3 +118,9 @@ pageindex-backend/uploads/
 pageindex-backend/.coverage
 pageindex-backend/htmlcov/
 backend/.tap
+
+# Google Drive OAuth (fix_broken_link.py)
+client_secret*.json
+scripts/drive_credentials.json
+scripts/drive_token.json
+scripts/link_fix_log.json

@@ -1,0 +1,78 @@
+{
+  "subject_name": "Object Oriented Programming -I",
+  "known_as": "OOPI",
+  "subjecet_code": "3140705",
+  "syllabus": "https://bit.ly/37t1Mmm",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140705.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140705.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140705.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://gtu.ac.in/uploads/S2019/BE/3140705.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3140705.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://gtu.ac.in/uploads/S2018/BE/3140705.pdf"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://gtu.ac.in/uploads/W2018/BE/3140705.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://bit.ly/3ttncLB",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-3rgrngsFzpU/YE7bPyBS_DI/AAAAAAAAAQg/buc0yJuhbHwnzxgeiD11sHWdMFTNdYgXwCNcBGAsYHQ/w245-h345/Screenshot_457.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=12KtLG3adj1qCKi4X2TjenlmXRyyy5fz4",
+      "alt_data": "Y-Daniel Pearson Object Oriented Programming -I 3140705"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-pm9tIFf8sIs/YE7cEl1nBYI/AAAAAAAAAQo/Im_tsHHXjq8BLLSGy_7Ao_oPdfpc3NfpwCNcBGAsYHQ/s320/Screenshot_458.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1622exg3JUCViPo6xaJFxyZFKPBJsMlH0",
+      "alt_data": "Pearson 10th Adition Object Oriented Programming -I 3140705"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-0qj1Sf9qkPc/YCIU7QsoM-I/AAAAAAAAAKc/UexUdqWQA1kkkQHVOmpHb_0e93hXs_8XgCNcBGAsYHQ/s320/Screenshot_378.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1S-9Qzl8CJ3Z_bwrs2Ywv4BgGDEp59p9K",
+      "alt_data": "Object Oriented Programming -I 3140705"
+    }
+  ]
+}

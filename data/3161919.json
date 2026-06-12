@@ -1,0 +1,73 @@
+{
+  "subject_name": "Energy Conservation and Management",
+  "known_as": "ECM",
+  "subjecet_code": "3161919",
+  "syllabus": "https://bit.ly/2T5PIUC",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161919.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161919.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161919.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161919.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161919.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3GYTdiT"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3HPQ2KM"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3HPG4cq"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3ffJ5qo"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/33uuvsw"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3zNAYup"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3fjbYle"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjyQDlcyo4uDmVB7MnrdTTk6mrH8jmDFiglZXaQCAL1I-qNfk90d6RplqPYSf_GqVIWO5xWpVAqyDf4zD8yJ2ustgYx-IBF09ZlBF9GoHj1Fin8RzfBr4qqNFCq4sbYcktaRhbAXLxubpK_xWhT8TFwp0ARtcgwJIMwQ1YBUUhedAEMt1tteYIpD2iMfA",
+      "download_link": "https://bit.ly/33HAxpD",
+      "alt_data": "Energy Conservation Guidebook"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgzZn2MHqBppDWXO01p3dVUqqWtR6AWStgzzMkQCaOXWm-51DtRe1JkNdu0sSrMHLrWJ4cFymAfJ-ThRHH_NRB88WOz0tMeG5UCmBjf3QV1Wc8NOmo0nf9bv5Y4EeYjhtluG9bNIn6IajyRJXGB60DbaP-G-ct87ucyB-CDz6HaZsyB5SVYYFERUkDzdQ",
+      "download_link": "https://bit.ly/3qF8bFo",
+      "alt_data": "Handbook of Energy Audits: Sixth Edition"
+    }
+  ]
+}

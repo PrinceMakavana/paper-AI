@@ -1,0 +1,54 @@
+{
+  "subject_name": "Industry",
+  "known_as": "IND",
+  "subjecet_code": "3161926",
+  "syllabus": "https://bit.ly/3khY2fn",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161926.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161926.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161926.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161926.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161926.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/32eJ5UD"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjLErqGwOzGx_c1bekkD3z8hc_ZdM3kFWr7HtrPQHc0GCPvxTWfW9mTr1u0xdHAnH4YrDBft6ky9FxHovsUuyXbs_-YFTlLshFupjgdYELYWdYbAyGyv6ZW5gMsCfwienvTwITUF7zSRhIFB2xeA_bWEAxtsX2H1CVi9fXkYL8aabZlNPPIgCWy3XlW1w",
+      "download_link": "https://bit.ly/3GMEhor",
+      "alt_data": "Industry 4.0 : managing the digital transformation"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEi_x4MP0j84vUgB_KnSv15lNJP3shW2Oqcf5Oc3XC63XgkHLr86jmUqrSG4dh4VcehF1-2GIC8kzmvVxYCk_JjK1ObwZU2Hkhf0b2OZg76sni5kBzcEZtB1N5WaD-17K4m5lYIDzS0Omqjf9o4sOmmdmyAwKRG6679cBxbG4PJGR22coB6WvbG0WxVnlQ",
+      "download_link": "https://bit.ly/33qSKYW",
+      "alt_data": "The Concept Industry 4.0"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjmK9aX0zSGkqe-iAUXrk5AEw3SA2e3OqojrV7tWF62cPvR5HuHbg3iRFDosjOIE-vhMKGFcV5_nGFo-O83UE0BF2CduUMEktvDIqyCpztG_kqv6vve1x0GKey0YLWdPRm73uA39AHXYK4g0_PeRNzE-d64JbeaXAQmQ1fe4JvD0UgPXrDz1u_S4ZIaQA",
+      "download_link": "https://bit.ly/3tFf23R",
+      "alt_data": "The Fourth Industrial Revolution"
+    }
+  ]
+}

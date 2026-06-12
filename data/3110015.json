@@ -1,0 +1,61 @@
+{
+  "subject_name": "Mathematics - II ",
+  "known_as": "Maths II",
+  "subjecet_code": "3110015",
+  "syllabus": "https://bit.ly/3k61qcU",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110015.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110015.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110015.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110015.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3110015.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3110015.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/2UR2ruK"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3z14LOM"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3yEKmPS"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-1y0rNOYpGe0/YIJZD3BKqSI/AAAAAAAAAaU/9merjrdS_RASkY-ONsFSlCmhtjZqVIMzACNcBGAsYHQ/s320/Screenshot_419.png",
+      "download_link": "https://bit.ly/2Uaz1Im",
+      "alt_data": "Mathematics - II Thomas"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-zRXUdRS62GQ/YIJYI1oYqNI/AAAAAAAAAaM/9-YT1Kkz_EA197atZWmICiRr5fF8FizZACNcBGAsYHQ/s300/Engineering-Mathematics-for-Semesters-I-and-II-205x300.jpg",
+      "download_link": "https://bit.ly/3xLRPvQ",
+      "alt_data": "Mathematics - II McGrewHill "
+    }
+  ]
+}

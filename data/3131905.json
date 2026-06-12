@@ -1,0 +1,66 @@
+{
+  "subject_name": "Engineering Thermodynamics",
+  "known_as": "ET",
+  "subjecet_code": "3131905",
+  "syllabus": "https://bit.ly/37mHR8z",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3131905.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3131905.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3131905.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3131905.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3131905.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3131905.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3131905.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3131905.pdf"
+    },
+    {
+      "year": "Summer-2019",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3131905.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjBIWDKTV5kEFJvO0btgPXgk6uDRjMKXuJVsARgIZJgzr0KUHVXYLrz0XswntQmDc8h16agNQoO5kFPBcaHAC0FPgXNE6xlO38kOANTkZ2S82SkrquAYe-FuTowwqUJ6fSO4tprT0B9BTaR-3xXqzevJRQoFsOGCZKkE4k3jPGDAId2rR4jFvVbvHUJoA=s320",
+      "download_link": "https://bit.ly/3qTdiAV",
+      "alt_data": "MC Graw Hill"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEh7Dp_m8IDuW6YY8Ab77Ngvl96KjiCSE0w2M7IHyfssBegMoklHqPSvgAStHqvMUhPaukmZmXeLBuInxZzPExKCss3IKNVAuXamJQhueVugNn-9Fxp7bPlq2OcPdUBljEObfsQywu6gcbs1KMJrdUfi_0tz3-hfSUTPJUYGt-gvQf_lVg7fpvz_m__gvA=s320",
+      "download_link": "https://bit.ly/3G46uH9",
+      "alt_data": "Jones & Bartlett Publishers"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiDb2eZYxztWzQGdqLIMkfqfHuGAHb1Zz2hPz7nvIY5NxC9Ncp4pPjw6EwNIGuauZF18SQKc2LI9cY3t4o8k5zGTe2BEq3uxSN31cNQa7D0RtQ8rxeqyZts3uwfVpVKVJ3hMEUY4KtY_6mGEIHpob58ZXMGvPqYsuaw7A5opBfmrgNNK7KRmXSRUB1CYw=s320",
+      "download_link": "https://bit.ly/3t47bfK",
+      "alt_data": "MC Graw Hill"
+    }
+  ]
+}

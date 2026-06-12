@@ -1,0 +1,54 @@
+{
+  "subject_name": "Object Oriented Analysis and Design",
+  "known_as": "OOAD",
+  "subjecet_code": "3151604",
+  "syllabus": "https://bit.ly/3r8SAwy",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3151604.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3151604.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3151604.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3151604.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3151604.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/2U5DoEl"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjH0xlhE26lK7RxNU1Nn1qcD1823VPAT9Oi3OzFVJZIwAzgKPLmTcEXEO50E5uQBhgxdwqQDr9_SMkc9gq05m_wMGxZ5xabe4VY79qnhCR71neW_JBkquCHg7Wz7DzSfpAkvhfU1MfUP4eVmRM8ldEYPn3JvbE96yxKCMotr_oQ5jI94Le__O4zqZA0Ew",
+      "download_link": "https://bit.ly/3AejF5Y",
+      "alt_data": "Pearson - "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhJWQ9uI0P_NTPjVvtDPgiRaGpwFYPV3Rr_-FsfBjP_i04TrXD5lD821OJ2zivambCZGekn7A2LRTE9KkoogKzjtA-6X7q6W0nYKrQJtvxLoHPTS4jgJmC3NRnLOtqFWYZdgDpsOc8DXhqAEhfFsttt8QO5w6DN5cqWS46agWKjkpGGwlGuhihF2oB5UQ",
+      "download_link": "https://bit.ly/35bShud",
+      "alt_data": "University Press - "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiPnfB_fhhWvFQuoVjSu9IlkHspn-qZE3xbTxPQRmgXM_dVJMSzrzZiaUWuI-CwQ5v5JguhNv48XMyA0ugd6WIU--gsaZk_X_XFUAneLa8ms_UPbyttsOZKfAMBOKI-EvojJNDc6ZVRHJT2IMOS5CtYXHRv54xVQu3rH1Xlhe1m8WvvtxSw1eL_vZeHpw",
+      "download_link": "https://bit.ly/3IiSCJJ",
+      "alt_data": "McGrawHill - "
+    }
+  ]
+}

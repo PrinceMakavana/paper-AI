@@ -1,0 +1,61 @@
+{
+  "subject_name": "Fundamentals of Machine Design",
+  "known_as": "FMD",
+  "subjecet_code": "3141907",
+  "syllabus": "https://bit.ly/3yvWK4r",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3141907.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3141907.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3141907.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3141907.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3141907.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3141907.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3141907.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3141907.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3141907.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiUYmsbCDfUMTouz1z_WhhTm88zXWKuh0CePCCYQCOYH9ul0Pc8eiAfvNz1vXRd8THXuhSOEJd_vGAUcK14i5TZvf7pylTHe4MTjI_hhX747N1LUp9KKSMPif3Dwqx3Bf8Zw_V046vUSvQz5Vv3nGcwNZV_OCS87d0SPS7itP9wM0p0IYVv0ZMwSYR-aQ",
+      "download_link": "https://bit.ly/33bHNKy",
+      "alt_data": "A_Textbook_of_Machine_Design_by_R_S_KHURMI"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://bit.ly/3nGweSv",
+      "alt_data": "Darshan Fundamentals of Machine Design 3141907"
+    }
+  ]
+}

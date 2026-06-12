@@ -1,0 +1,48 @@
+{
+  "subject_name": "Automotive Manufacturing Processes and Technology",
+  "known_as": "AMPT",
+  "subjecet_code": "3140204",
+  "syllabus": "https://bit.ly/2T2QCkH",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140204.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140204.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140204.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140204.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140204.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140204.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140204.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhR3YfdNtIKlzWmXyH1ICvGbyoj9AaOiX8VqN7nHXfaU1e7HFx6qx3rq6WwayfiUgJCr0RAe5PedzV50g4d2UNImbDjWa3mZ616uYyh7QJpPQoi2OOdej2-dWlCXMl1CqqBL_zXEwCf-RXMDzcwca2AxS66yTTCJovvY-B3brDS21eeodlN0FCulgevbg",
+      "download_link": "https://bit.ly/3niVgqE",
+      "alt_data": "Introduction to Manufacturing Processes McGraw-Hil"
+    }
+  ]
+}

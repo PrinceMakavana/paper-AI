@@ -1,0 +1,42 @@
+{
+  "subject_name": "Finite Element Methods",
+  "known_as": "FEM",
+  "subjecet_code": "3171920",
+  "syllabus": "https://bit.ly/3K3g5jN",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3171920.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3171920.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3171920.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3171920.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3KUuDT4"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3uchBL1"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3IMab59"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": []
+}

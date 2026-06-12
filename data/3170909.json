@@ -1,0 +1,73 @@
+{
+  "subject_name": "AC Machine Design",
+  "subjecet_code": "3170909",
+  "known_as": "DACM",
+  "syllabus": "https://bit.ly/3r8REYZ",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3170909.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3170909.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3170909.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3170909.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170909.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3KLfrrr"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3FZS0qV"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3KRzHYG"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3H25Ytw"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3g4TdTf"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/34hZJU8"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/34hZSqE"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhEIxBmwCLM_BoT5cg6GoxxmEJmZ5Sgwalh4pnxvttonCeW0Y9z2YspFgv3ZQHXTQ5wYhYGJXQdwfWjYmuUraRjM0rf0my5YiVZwGMt2yaz7s4-cech_ivOCxPHsa4DFP8Syl9xLz-eN4vTD64K9eu3Q8x3wNRiDyKHJ2R_79bvUYcpQTHGVOQjMuYHIQ",
+      "link": "https://bit.ly/3Ipw9dQ",
+      "alt_data": "Darshan"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgR_KzdUajodfR-K6pZMaNJ2lMtdTVsEYPeh8p3J7lCTBux2Rifc114m1_eX5CYbOqSmyQLhjujlLAONjNw-l8FQ9LG0mDno4UQaOI3Uu5Ad_56Dc92p6O7J3j5ZaqrSig4HKU_7sXV7bMHvp_AJV3HlE91SJ4SEXQsbfFrWMNV6kC7NH6blBk9JxH5hg",
+      "link": "https://bit.ly/33UuGx8",
+      "alt_data": "Atul"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

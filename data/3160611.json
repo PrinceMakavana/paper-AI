@@ -1,0 +1,64 @@
+{
+  "subject_name": "Environmental Engineering",
+  "known_as": "EE",
+  "subjecet_code": "3160611",
+  "syllabus": "https://bit.ly/37qgqLi",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160611.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160611.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160611.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160611.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160611.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3160611.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3fAYUI7"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3qCBFnw"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3Ar0KoV"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/33QtElN"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3tFDq56"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjeyLwkd0QPqd_49-1jHuUm5PHd-EOOzovzb-TrEZet6mQpwoB041ypgf7NwFbMadRhoJTvqE_bEvw2-alJfLhTX2ZrkvrTU6E-G9pQSn7FqB_54RPFtx8pra8ymbcr5OQEwXyDahVIoS8ZQqQd3kPZXEAhxKkjp_MYRz4sQYDuI6KVsgdbDQts9xwrNA",
+      "download_link": "https://bit.ly/3tFYpVM",
+      "alt_data": "Environmental Engineering by Peavy and Rowe"
+    }
+  ]
+}

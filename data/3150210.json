@@ -1,0 +1,78 @@
+{
+  "subject_name": "Automobile Engines",
+  "known_as": "AE",
+  "subjecet_code": "3150210",
+  "syllabus": "https://bit.ly/3e7Q5oO",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150210.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150210.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150210.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150210.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150210.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3150210.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3150210.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3t2AGg5"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3kHPsF7"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3Bt8qGk"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/2WI9CH6"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3mNkePD"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhi_zx4DCPkcv_zVd1hpEw-XHk-0EdzRFnR-nCTxEMUnbqSm0-crfFfsojQw2iuevIIXJYj9wVg_fdkBDA3GHD77uIJIMxBqbHlauaqcld7Af056yu0fT64D36NljsGb-8TnLqiXKUfm0m-2kt8xzZSZttZ67HJdYBcQJ4ktzxHsOTTv3lC8hfsvhQ3Vw",
+      "download_link": "https://bit.ly/3f1c15m",
+      "alt_data": "Download Internal Combustion Engines by Ganesan V"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgTUhcb7A-kKT6Ut024c2qYeIocdV-dJQjgTvTdIKFoRBPyllrll_jJ0esSIidbxQWQW9Byp6SMkmTA2fQEwX5Mz-xmf0jp15SkC9MH11f1KEuQ1ENtedYwssnh3T-eXTZiL8mXogA0RJlJSmFLCx7bD6eiGaDVTOP2sYzoLTUlCq2GblRFx3Wgh1ru0w",
+      "download_link": "https://bit.ly/3JSexc7",
+      "alt_data": "Download Internal Combustion Engines by Edward F Obert; Burgess Hill Jennings"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiH_mPCLkXp5KkZmSqMPUhOwnaBmdNzvj41smiR7Hi1bni75h0YBGtYOrS8PDBPQcoJzuaguz4zFKE7kuxubOZdsmhxmkuG7PfVgMS2xwRMxmy7v7D4GSvHl9YhKXogXoUNDG3_6RWI4j3m3n6JvMgOyh5rHX3ObBa16w--NSCxBD0wixgxi8-wQaG5BA=s398",
+      "download_link": "https://bit.ly/3F3YEM7",
+      "alt_data": "James D. Halderman Publisher: Prentice Hall, Year: 2014"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "subject_name": "Network Theory",
+  "subjecet_code": "3131103",
+  "known_as": "NT",
+  "syllabus": "https://bit.ly/3AZXHDH",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3131103.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3131103.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3131103.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3131103.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3131103.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3131103.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/32accIR"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgWOpQDKjWiI1wQcmA7G_3RdwaO9ZOsikngx21T-qvdo1TjwaL6cjP1ycgE97HMbmheb_ZOjZwoK9z3zx8N-gpgH6euzY_NbQZVHgTwb0FCH3LRTiGddkLoFAsRH2uMNU02hpE3-4iyReDkFRLiNDvD7gZJBcjwzZpqKcwLndnP45sPA_CUQbBzZ_fTSw",
+      "link": "https://bit.ly/3pg7hPa",
+      "alt_data": "Network Analysis :- By M.E Van Valkenburg PHI Publication"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhwjxVOwqX34pam3vqfgi-31wgNFlvVFeriupoFgqCvYuTh7G_9ne4MecQ6rd5UFQ-rnZKC9kA28LIfQOXbNrzQaL1mrsrRD3Ojhk5snnAqivkuXLk8hFzF07gqS1SzpMAwqfAj0vR9vvVJuA3mP3p2f2lsu9ZRlXeqkYuGOQtXyyWqklCreczBsKhu9g",
+      "link": "https://bit.ly/3Fk2XUL",
+      "alt_data": "Network theory by alaxander and sadiku"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

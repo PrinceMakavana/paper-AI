@@ -1,0 +1,77 @@
+{
+  "subject_name": "Urban Transportation Planning",
+  "known_as": "UTP",
+  "subjecet_code": "3160608",
+  "syllabus": "https://bit.ly/2TWTCQ4",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160608.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160608.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160608.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160608.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160608.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3qDXqU2"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3I9fATw"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3FLZiy5"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3fF8XfA"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3AeD4E7"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3fD1xt7"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3FFditt"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3tFE4zy"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEi5Oi9mM-3hFGI3p3eLEE208JT9u7soT62gLOQdV0QfIXS8LWyFNlMlwBTjKRC4NwofVZuDemkwrvRuTYqs2EGgNH4lEFwDiLF7CfCG9jHgmgPG7GKEEDwYXdu08VfAxfpmUkuQqJtoR68wptLsxe85S64QHOuwtg0t5hEEKV2XhlyKIJHZE93SE7Os4g",
+      "download_link": "https://bit.ly/3rzQI0F",
+      "alt_data": "Transportation Engineering An Introduction"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiVoRXUWXgWhVyk6-d5OD7N25n6_FE_nq6_CLJG1vJTT_rC-fStB_9d0moT-OvGpr12hb44-8pePb0YIlJKvtjEnx6xbGyTAhfR49jVpzbCllqncdcP9JxkJXijVmgpD7xpmRx_A5EtK1QWkD5NASvQiXCXXsxR6AHipQHsyoxomNpj4DH3e3OuWSfNGQ",
+      "download_link": "https://bit.ly/3nEAQZw",
+      "alt_data": "Principles of Transportation Engineering"
+    }
+  ]
+}

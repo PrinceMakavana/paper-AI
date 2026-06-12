@@ -1,0 +1,49 @@
+{
+  "subject_name": "Computational Fluid Dynamics",
+  "known_as": "CFD",
+  "subjecet_code": "3161915",
+  "syllabus": "https://bit.ly/3xGVsDm",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161915.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161915.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161915.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161915.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161915.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3mhbfVB"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjzbLV_aJHiCfSSk74qYjuEby4p9hFXV2-NUkod34nYVp9e9MmSJdvnIiMacspRDXI5bgJRJFLnXjlZUVCAEoEmnsjfDrgIIHWFNSQiIStQWgWfSpkB94DO9XhmkkJB3KGZhjl82TcGTpyB8K6mm6D-TJYxutQFRHsR17LeGi4vg5Mj3yHFlbbC5F9Ulg",
+      "download_link": "https://bit.ly/3qFxtDu",
+      "alt_data": "Computational Fluid Dynamics: The Basics with Applications McGraw-Hill"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj029wuM9L-aWUWRGW7N1_xXXldTJrUuVNDtpTPn5kIb2dx-vo53UJdPyYANf5QU0OpewGO9tmQl5pCTJvuAbudV1niq7YJ67u3PNN6SqDIkAtyaWqVKk-pPwUPgMFtQAlgWYqwgDfCsmpVJj4dP7vB8yRVQ5KDBCvT5L0wnO_8R8qBv8YkdWgCbx2VEA",
+      "download_link": "https://bit.ly/3tBdvvD",
+      "alt_data": "Introduction to Computational Fluid Dynamics"
+    }
+  ]
+}

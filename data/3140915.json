@@ -1,0 +1,66 @@
+{
+  "subject_name": "Power Electronics",
+  "known_as": "PE",
+  "subjecet_code": "3140915",
+  "syllabus": "https://drive.google.com/file/d/18lvHMXsJkCWGJwR-KToDMRnHhk-hiU9B/view?usp=drivesdk",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140915.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140915.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140915.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140915.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140915.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140915.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140915.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140915.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3140915.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEh_HSVBCwLn0dcT-sfEyBdRkcXWIydYn_jlGMH076HqZTQSPWHCD7Jlg5-rLqZKmD8u5ruaAbYg2jNG02V0G-2rmYMS-xv5ayi0RjC3H19G0hTSoeux00tkhy_RTNUt8xfMg4zg7oSr-JXNoaR2f0r4vjeVVztb6p8w-1UkeJDuj1zFDrb3JY59UInCXA",
+      "download_link": "https://drive.google.com/file/d/1_Ba37aJmrRiDcU3CzUeDe6rMSuymk6BT/view?usp=drivesdk",
+      "alt_data": "RASHID_Power_Electronics_Handbook"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj954sGtYf6lpnEQ53T6T-GehVtqW7kVzJkXPe4BKd87S0xxUiCfPa2ojYm391Ulwcb5k074uIxItz-jDjkOjYY1Ce9ETih2gzuzehPNBb40nqW1MgD3QRTu6ytzXh4Nb67u5Zj-CKitnjv43LB8BHFgQf5Kbi3T2HFYH6YuRq73rDZgNhEPcGNZMy6Qg",
+      "download_link": "https://drive.google.com/file/d/18CowxbdyTpQnCU45WpBmKd0CymJKAuVZ/view?usp=drivesdk",
+      "alt_data": "Power_Electronics_Circuits_Devices_and_A"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhce07Kzu1NQfadxw0V4hj-oIj9ZwW2O7Xz3j972iPwJXZEXeDj9j2fqBdmWpQkcqtUXmxImW7P0x9A9IQ6ryqQeplOkuP6xv6KJz0EcQ6eOG2z4dD3IX23AlvlGO87kjzYgJendcVLpOlO9sZO9xRmsiGFN3GGyBj-JUWIEaUFCnmjUFoJr0E3O89Sfw",
+      "download_link": "https://drive.google.com/file/d/1oX-gdIDI1eMG5oEHm4ogA36zNKwsXYPX/view?usp=drivesdk",
+      "alt_data": "Fundamentals_of_Power_Electronics"
+    }
+  ]
+}

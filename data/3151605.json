@@ -1,0 +1,57 @@
+{
+  "subject_name": "Formal Language and Automata Theory",
+  "known_as": "FLAT",
+  "subjecet_code": "3151605",
+  "syllabus": "https://bit.ly/3xHnaQt",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3151605.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3151605.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3151605.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3151605.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3151605.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3151605.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3151605.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3jIxiT4"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhePP7FyPDJJb5Pit3YTlCG4-2csz6PVLJZYGsUQo2_ycYa6dShVHjq7Kf6a80aZiQv-Ek7jEyU5YxW2E9GvPVENFRzEJ3wuiQm674jjdGgVkIUNpy0NqEW0XditG1VbTh6EmqR9BH1suop0NKK7y1ZoYGUBPbxSyk-2WbWdWQBsAyHCrWNpAKRKMejaQ",
+      "download_link": "https://bit.ly/3qIjNaI",
+      "alt_data": "Introduction to automata theory, languages, and computation - "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgC7cuhwKoLaIE6kiRLb43TY9lkTVre_zVD_tanLJZwD2g50Jp5a6eP-MisQ-KvV_aHr1216Wafr_TUUheotVOykAeSl4Cy3Y-VLZ5eNJ2ZceL_DTclfWdchnoiP2J9yD2m2ND6YPr7-0DD4wVx0oFjbdVOXO4AUFvEcK1xeq23dR5AioIRJxuAWjp-qw",
+      "download_link": "https://bit.ly/3rw6J7z",
+      "alt_data": "Elements of the Theory of Computation - "
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "subject_name": "Advanced Web Programming",
+  "subjecet_code": "3161611",
+  "known_as": "AWP",
+  "syllabus": "https://bit.ly/3rX7y9m",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161611.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161611.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161611.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161611.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161611.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3lNTii5"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/37tiS3t"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3jFWERF"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3jF3x5H"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/2VyfS3N"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3lNUhPf"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgboeU5odTZlUOww18QuUQ898Jmw_X5H8fJARlHm96hOifG0wp7bImj9joW1TeHTPr9DejwJvB485b1KXu9glztq_SPbUxvfqhWxR5BKxMYZyUpj5PYmOzeURHIGjBqgKo-OA6lDFG0RE8wXhv_YACag9tuwyimWEhAUctjxIU4shf-B07Qun1jawVJmA",
+      "download_link": "https://bit.ly/3INg02d",
+      "alt_data": "Willy"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiu-CvvW6AoZWJnEHUEeODx-oq175SwqvWNJwv4jJlnzMX_XaR318N7aCwopnp4o78TxVHoqPdIW5NDm1C_4jHjjhg7c784mmbgSfdP4eCdteoCmn1RNzoiM2OO6OWxJtswDq14cViEUZjlTVwjB5pd4m1wYOdg2rZbnqpqYeZTZMKZlHyrKGcdh0ZOGw",
+      "download_link": "https://bit.ly/3KRL6rb",
+      "alt_data": "Manning"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiYhPevX20MKkrF04zxTQn3SxVZB9fUqH5zgRW9cKoK1BfqvT390zSJ6wOsHR0V0Dq0EGdbpBMQRW6lWV8OcLBlNDhZnGnfcj9Njyn8rbP0j9vZLqnVZZd4WqjG17Kdop7NOP7dAHQkNUr0_qPCzBIizt3ZK39CTZpyjkbyzgHhtiHquSkYBDDJIfwzxw",
+      "download_link": "https://bit.ly/3o8Zt0N",
+      "alt_data": "Apress"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

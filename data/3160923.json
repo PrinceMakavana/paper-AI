@@ -1,0 +1,49 @@
+{
+  "subject_name": "Electrical Materials",
+  "subjecet_code": "3160923",
+  "known_as": "EM",
+  "syllabus": "https://bit.ly/3B0cJte",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160923.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160923.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160923.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160923.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160923.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3rhEU30"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhMaxtB-CGVnyJyFBuOtRD-ajlyYvVv4PJ-uu2JpYSMLeKD6VxMfFn6ScfKa5_qbjOUTFHM_9IkTyFNkrF8Y8ujaOnX4w9a87_CrHT9Ar-jO8VcW4N-Q0TFs5w5sGC6Aljc9w8LICrup_36G-roS0em4_dZKPO5btI8zjUIqpSzXlE3DqCgtlY7mJYn-g/s355/Screenshot%20from%202022-12-18%2016-52-39.png",
+      "download_link": "https://drive.google.com/file/d/1EGf4PYsXOv9MS2WRXUZIYK7jxd5FOzuw/view?usp=share_link",
+      "alt_data": "Electrical Materials 3160923 GTU Atul "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiy7p1QcerBuadNDNFb3CwqukMn05Sj_Zrje4xIW93cO7t9LD9kF9K35pJIHuljfXB0wbDJKkEECM1NoL0pKuYyvh6z6QXEBFT7nI1CWJpfZbElrGzjsTsMXQrfMb02iDf4ztI90mWsRj_rrq0WiPScX7iGykzxiX2P3KiTFkn_gq_aOffT2zK6WcM2_A/s343/Screenshot%20from%202022-12-18%2016-53-55.png",
+      "download_link": "https://drive.google.com/file/d/14kXuB8jWgxDyRMRhdJOLrwOZWaoR2UcL/view?usp=share_link",
+      "alt_data": "Electrical Materials 3160923 GTU Technical"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": null,
+  "imp_material": null,
+  "viva_questions": null,
+  "prectical": null
+}

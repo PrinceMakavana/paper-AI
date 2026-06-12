@@ -1,0 +1,101 @@
+{
+  "subject_name": "Software Engineering",
+  "known_as": "SE",
+  "subjecet_code": "3150711",
+  "syllabus": "https://bit.ly/3AeZ00k",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150711.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150711.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150711.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150711.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150711.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3150711.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3150711.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3150711.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3s7NGAA"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3Crg2Kz"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3jBvFqr"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/2VwsyYN"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3fGKEy6"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3fFUlg2"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://www.gtuapymaterials.com/2021/12/software-engineering-3150711-main-20.html",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-kYwaSsMDdIU/YMHwRiziwUI/AAAAAAAAAik/5gv9WjrhD1kZeIkfl6kbnhOUGbtP4BUkgCNcBGAsYHQ/s320/Screenshot_40.png",
+      "download_link": "https://bit.ly/3eHzmsI",
+      "alt_data": "Technical Software Engineering"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-znLD8SP0sFU/YKSm0XxN1tI/AAAAAAAAAhY/jVgP3CC736kjB5JU9zl0gnBYc_HdgiXPQCNcBGAsYHQ/s320/Screenshot_14.png",
+      "download_link": "https://bit.ly/3mNENuz",
+      "alt_data": "Springer Software Engineering"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-J5Kch_t76ps/YKSmzx5hLMI/AAAAAAAAAhU/jQRJ4u3HQQUzcRIBvBJBG5QwDmpb-Y2pwCNcBGAsYHQ/s320/Screenshot_13.png",
+      "download_link": "https://bit.ly/3HvQRbQ",
+      "alt_data": "Person Software Engineering"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-_9sc_w9QVAQ/YKSmzqYJ8BI/AAAAAAAAAhQ/gFIAfz4cBO40pi2DWTzE0yqaM4_RV-_qQCNcBGAsYHQ/s320/Screenshot_11.png",
+      "download_link": "https://bit.ly/32S0C55",
+      "alt_data": "Roger Software Engineering"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-14tRtLu1x8U/YKSmzTZ3WhI/AAAAAAAAAhM/1OJA-qn2QBQjxgtPdPbgtaIOKMVoLBtfwCNcBGAsYHQ/s320/Screenshot_12.png",
+      "download_link": "https://bit.ly/32HuiSr",
+      "alt_data": "McGrewHill Software Engineering"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://bit.ly/3HpQzDd",
+      "alt_data": "Darshan Software Engineering"
+    }
+  ]
+}

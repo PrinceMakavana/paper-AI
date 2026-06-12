@@ -1,0 +1,65 @@
+{
+  "subject_name": "Design of Reinforced Concrete Structures",
+  "known_as": "DRCS",
+  "subjecet_code": "3160612",
+  "syllabus": "https://bit.ly/3jxxCnx",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160612.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160612.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160612.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160612.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160612.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/33I0jKp"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3GXD8L3"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3tFWgJl"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3ryxCHV"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3FB51XC"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhMh43jw_v4QogbDcvr1oocu7bEm_Yw3JlHExXcMz42fXUcWQzYmn2OTMsYRViqVyjKAIULFdNsbos521IcMLihDCul4dDK8wty_mmSOZkk6Veav0LYPQh7mlRSKmsWX_fo3Yv24YHcGSbShlODryaYzDyavdUgqr3MUAxgtYeWMCyQqVBPkkSuiVEMnQ",
+      "download_link": "https://bit.ly/3nGJLtl",
+      "alt_data": "Advanced Reinforced Concrete"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg1iG1Wco4g1fAweYrfwvpoM_4Rl1SEGe9PEDmG8xyrbcJUTgwhmS03C_6ZSFk86pYz5Vynq5y3dVErzAZmQY3uSNW-TeuJOOFjB76sdE27VCpY-7HnR7ivT5Ct7Z2Blal39qpKSKqd3vETGB_z2lcnD9ErGTW0jDkAPG9_aa0bEi47Y-ZPwiF4A0hqvQ",
+      "download_link": "https://bit.ly/3tD8F0G",
+      "alt_data": "Reinforced Concrete Design McGrawHill"
+    }
+  ]
+}

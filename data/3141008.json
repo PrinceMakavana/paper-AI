@@ -1,0 +1,76 @@
+{
+  "subject_name": "Microprocessor & Microcontroller",
+  "subjecet_code": "3141008",
+  "known_as": "MAM",
+  "syllabus": "https://bit.ly/3AZhYcL",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3141008.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3141008.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3141008.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3141008.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3141008.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3141008.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3141008.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3141008.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3qkCdgm"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3mmiZ8P"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3EkqN15"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/30OxWck"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3FmEBtt"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3JcXFMU"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEieDtl1RbrHhMzjcupeB4ZXn7gjR_4kDa9p50mlPRni_WEXODN9yX73qDL5WfJ_hdyFG2sOaPOxF1rPuRIt7f3xyvfesjjkhQL-EcxJMV--onmV1YSh2N18QBCTaLlI_VZHzABAk4cIczu10Jha5ILxYEHLnX3UUXRTwU5uS-maOK-JalkUMoI1HjDdUA",
+      "link": "https://bit.ly/3mlhsQD",
+      "alt_data": "Muhammad Ali Mazidi, Sarmad Naimi and Sepehr Naimi,The AVR Microcontroller and Embedded Systems, Using Assembly and C, Pearson Education, 1st Edition, 2012"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

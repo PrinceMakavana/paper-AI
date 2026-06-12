@@ -1,0 +1,29 @@
+{
+    "subject_name": "Rock Mechanics and Tunneling",
+    "known_as": "RMT",
+    "subjecet_code": "3160613",
+    "syllabus": "https://bit.ly/3xnTarO",
+    "old_paper": [],
+    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+    "prectical": "",
+    "viva_questions": "",
+    "imp_material": "",
+    "assignments": "",
+    "Books": [
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjVzqRBT-PGbR-ravM_7sFn9ugNe70kisjwZ14Bt2W3_TqQT7Te3KwZ4E2G-vfbTEdNudV0gWFFzWnLRriPcUKFW1qKQg5pMMf4ARBMjVjM3SPKnPLlebHFMYBpJNIzXTlj7N3QHDCQrwnh-j_1xkn-wtC4ZfvCJR1nEQhbmhmW7UqdCl9b2Jywn8KU1Q",
+            "download_link": "https://bit.ly/3fCNqnD",
+            "alt_data": "Fundamentals and Applications of Rock Mechanics"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiFZh739FmWluYuKxrggryyDPSESJjG5dgF5tnnElv9kDGtaOcPmURudmUD5wFkNFKdEbsHkRSDJcFg0hcjlCac_5-cjEGx0mxGgIn8ctoIceDRUXG2n5a3m_hSqRrvd4oAShblDgHXkfz-9-9kj26jIpEOojaGAseLWZfm2rgXrkucdKVigPHsuqAttw",
+            "download_link": "https://bit.ly/3nAqXw0",
+            "alt_data": "Fundamentals of Rock Mechanics"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjCCbgAGEfT_iQ99Am6ryi2tKZmEf4HHQIwks16c9iD52eKKLWMu_F9nByFIjLJBkw3lSOviaDH6aslDiw3gfbwQpRAXIxL2Q0mg_a2DAcmqr64W-tGTYoktS_Rq_AWPLn30eaeyQHoqWh9Hk5obbGK387BCWECqEQbJnC9OefC1QfNzPwx89tjNAaNiQ",
+            "download_link": "https://bit.ly/3qBZYlr",
+            "alt_data": "Engineering rock mechanics: an introduction to the principles"
+        }
+    ]
+}

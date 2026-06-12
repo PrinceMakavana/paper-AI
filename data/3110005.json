@@ -1,0 +1,60 @@
+{
+  "subject_name": "Basic Electrical Engineering",
+  "known_as": "BEE",
+  "subjecet_code": "3110005",
+  "syllabus": "https://bit.ly/3ATO0aa",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110005.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110005.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110005.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110005.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3110005.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3110005.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3kpJD0I"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3epzkWu"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3fVOPpW"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3wKXAJ5"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-R8f91friPL0/YDSHzbmanpI/AAAAAAAAANc/CmDU0hLnTJ0ATpw630jokTGkCt1LADDDQCNcBGAsYHQ/s330/Screenshot_436.png",
+      "download_link": "https://bit.ly/2U8f5G3",
+      "alt_data": "Technical "
+    }
+  ]
+}

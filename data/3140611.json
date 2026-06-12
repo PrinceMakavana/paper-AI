@@ -1,0 +1,61 @@
+{
+  "subject_name": "Fluid Mechanics & Hydraulics",
+  "known_as": "FMH",
+  "subjecet_code": "3140611",
+  "syllabus": "https://bit.ly/2VppP3s",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140611.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140611.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140611.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140611.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140611.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140611.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3140611.pdf"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140611.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140611.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiHAzyKuXV6O2SD2ijFEBDgNZEHFV5tnbF4xy0eboR39h6xX6ElkbeEXec-78ksT1Xc9L_8f914dSKyDJsUpXhf9Fj98SqvkfF9v-gfc3kWYub2MmrBgFg7v7O5MQXRNk6OEITW7NMOddA4vhJouPLV7JWpMS7MRvgdX_q-nOPh5ESx5Pmf09iMANr7cw",
+      "download_link": "https://bit.ly/3eGjo1E",
+      "alt_data": "HYDRAULICS-AND-FLUID-MECHANICS-Dr.-P.N.-MODI"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgk96By3brEJKaRbHqn6UH0d9V-RChgl-pJnwoxqaxpQE1PshHiapyNnzfh5RvdLgt-_Q8HlBR0c4dTWSTNJiU8co24thMzrVj8lMhjbjSIPU5GX79SZI7I7vJfwGgAdSsVDbDrvqvCPEobjpxzxsGXd3ItTB9VL3ztvNIslCVKs8XEU0G8GwUk1UAKRg",
+      "download_link": "https://bit.ly/3mMCwiY",
+      "alt_data": "Fluid-Mechanics-for-Civil-Engineers"
+    }
+  ]
+}

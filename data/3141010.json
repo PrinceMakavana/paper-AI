@@ -1,0 +1,34 @@
+{
+  "subject_name": "Electronic Measurement Laboratory",
+  "subjecet_code": "3141010",
+  "known_as": "EML",
+  "syllabus": "https://bit.ly/2Ucma8h",
+  "old_paper": [
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3GZ1Rhi"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3Jbjs7J"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3em9rpX"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3JewrWu"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3H2BqYf"
+    }
+  ],
+  "Books": [],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

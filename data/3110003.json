@@ -1,0 +1,60 @@
+{
+  "subject_name": "Programming For Problem Solving ",
+  "known_as": "PPS",
+  "subjecet_code": "3110003",
+  "syllabus": "https://bit.ly/3xmlbAR",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110003.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110003.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110003.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110003.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3110003.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/2WUTYI4"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3wttUQt"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3AQplDp"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3jQydks"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/2UAG5gX"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-IlkJv87CPrM/YDSJp5w_1xI/AAAAAAAAAOE/K4O-hIakBuIk5oh1CBKAjkEsxxmH4Z4SQCNcBGAsYHQ/s520/Screenshot_440.png",
+      "download_link": "https://bit.ly/3AFO2lM",
+      "alt_data": "C Notes For Professional"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "subject_name": "Python for Data Science",
+  "known_as": "PDS",
+  "subjecet_code": "3150713",
+  "syllabus": "https://bit.ly/3CqTZnh",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150713.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150713.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150713.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150713.pdf"
+    },
+    {
+      "year": "Summer-22",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150713.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://www.gtu.ac.in/uploads/W2021/BE/3150713.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3rWTwEM"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://www.gtuapymaterials.com/2021/08/basic-python-programs-python.html",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgf6ZUE8xZWdBx27uop-OUnduVmFsTFaRi6R3djnAmkUa1I1p7sElnwXu2IwCwyIQQCCYoiM7DFBq-GLN_sAXqQhICXG6UCyLVMXiDfLRvdcNhGF7kgwhssJ-YWnIBQoVqtRLWOlDkR3o67-TGghDb0wB8kt1mpqnFsJJwDwzoeM_F3sN813QsPRsV7Sw=s320",
+      "download_link": "https://bit.ly/3CUn75V",
+      "alt_data": "Technical Python for Data Science"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-TBlfSUKkzM0/YKShoA-8R7I/AAAAAAAAAgs/lvQusuZfy7QuEUEaO0EXIWxV55ViJurNwCNcBGAsYHQ/w252-h320/Screenshot_10.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1hgb8lfrp6RcPvPFq29ghftrHrJH411a6",
+      "alt_data": "Dummies Python for Data Science"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-etoCkU2zeZY/YKShoClvVkI/AAAAAAAAAgo/kLoJIoXoPgAC66e7nohaYEP6_FlzW_5KQCNcBGAsYHQ/w284-h320/Screenshot_8.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1QamgMBF7IZEekgfzSTv2svkhF5QGsaM_",
+      "alt_data": "Rough Python for Data Science"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://drive.google.com/file/d/1ObGkwd1Q4sgtv3Ss0UwyKBVGluEF5FpO/view?usp=sharing",
+      "alt_data": "Darshan Python for Data Science"
+    }
+  ]
+}

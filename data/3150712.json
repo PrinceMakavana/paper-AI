@@ -1,0 +1,74 @@
+{
+  "subject_name": "Computer Graphics",
+  "known_as": "CG",
+  "subjecet_code": "3150712",
+  "syllabus": "https://bit.ly/3xutXfp",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150712.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150712.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150712.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150712.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3150712.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3150712.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/2VCaUCO"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3fFmmod"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3yw80Op"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3rZUC2m"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3jApGlw"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-GoD4sdULmog/YKSdH7Cc3VI/AAAAAAAAAf0/HJ1MrUFwGUAOZ4c-SAGA-Hn150rtDDqqQCNcBGAsYHQ/s320/Screenshot_4.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1ch_ltgt1qOcs55up3ntuTNtq0NIsVh-m",
+      "alt_data": "Jhon 3rd Edition Computer Graphics"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-3XIfPxnUONc/YKSdIG6xpII/AAAAAAAAAf4/qmO2CVx9fDkIlyPST5Hn0Ryz3xq7FWZwQCNcBGAsYHQ/s320/Screenshot_5.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1XVZDD86woM3Xmf4kW9frj1pvMPALips1",
+      "alt_data": "Donald heran Computer Graphics"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://drive.google.com/uc?export=download&id=1yWljd1UkmcQkI_v0uvnyyIanWygkbmpc",
+      "alt_data": "Darshan Computer Graphics"
+    }
+  ]
+}

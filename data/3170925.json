@@ -1,0 +1,77 @@
+{
+  "subject_name": "Industrial Automation",
+  "subjecet_code": "3170925",
+  "known_as": "IA",
+  "syllabus": "https://bit.ly/3icUN6b",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3170925.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3170925.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3170925.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3170925.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170925.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3170925.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3o49agS"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3r5FDVU"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3g1ZhvD"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3GcNyVW"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3IHg5nX"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3o41TgR"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3rY3xlo"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEilrK-6YuUcBuK0D6j3z6Io5LHdGOUmpXbMqKoPdDRgU56vjGROn3MiCsXSGOl2z33kjDyYViFUtVgGC54hY_1DchOl5wjIh0_L-ZM-L1QHjs0uZ7oiYxHcbVqZOx-XSgMONpGL0TiXoec73htpFRkOdVHMKnDB8DV06bi5RTs_pCR9Y-CQ8B2y9ehzbw",
+      "link": "https://bit.ly/3nM1vDD",
+      "alt_data": "Darshan"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj5tup0-AcZqpK2g1kFiocIAxsv-HVKlnqYml_EwZ2uITwxbg30louacNA2soZm8Cnjq2R4Dvu_nOeWUKq9hhgwSai_XX1M5aYR3BMjdOas-mxdAGPMTbS46zeZ-54e9NsjPZwqva8dx76aZU8pXyTKlDBgjZ5lVq8YCQFKLt56-LK3pHh2MkhYml-Xjw",
+      "link": "https://bit.ly/3ArMCM4",
+      "alt_data": "Technical"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

@@ -1,0 +1,71 @@
+{
+  "subject_name": "Professional Ethics",
+  "subjecet_code": "3141007",
+  "known_as": "PE",
+  "syllabus": "https://bit.ly/3ySSI64",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3141007.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3141007.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3141007.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3141007.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3141007.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3141007.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3141007.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3JdRwQw"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3yTo4KX"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEifoNBFPODRwO1YWzSXfutaZVPxhTE5txJ3e64n6HLviZzgWt_UkcsAksE9M9zAgpSIMyQdzLMJiCmRPRZBDaYGhzGWTPfPCwZt_oNJ4HFIF1Kylz0BwlHtKkAH9mLKqFrmwViYEkzsE6fHi8R6sk0fJYom4Eohoi1dNmn7nuSMPzK3oMkIdvu3TSC9Cg",
+      "link": "https://bit.ly/3Ja9VxE",
+      "alt_data": "PE Darshan"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhZDuxgdaz0X1h2OWmZw5a0zUPtibBnXgt3aoasgDDA1Nc2jMCORZq_I_h9BtYSOnAlH6UT_VsZ1TtZsETOKu9szaAkV7FZOqr_k9YlzNuFve2UMuD38xnQqJ6ltG6A3sBxhAQbVgIXEZiAbt1kE_kvg5J6wllUU4_PzGJIUd9zrBifBMsaDkgqYb7xRA",
+      "link": "https://bit.ly/3sshREO",
+      "alt_data": "Values _ Ethics book (Manna-Chakraborti) (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiZKTo8AlxqQ-BLsqtgfcMCpuIKgl_oBEzR0SnALq1AtPts19METn2qJjqvKXAC3j2nDge5cNqVr1QkI9n5elZ6vA8_8hF1Pcj4VP4bXA2LGHgz5ubD3O-jPUYyw1rkn9kDM4c1D9J-Uvso-0QcciKvjOlPh827iwGZUAc9cv2_l2UmXCz0yL6gZEYpuA",
+      "link": "https://bit.ly/32brH3e",
+      "alt_data": "Professional Ethics and Human Values by R.S NAAGARAZAN (APY Material)"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhovtb_xV94ihbK_gsIsxkTIlKCc-thsAk2E3oEFBFaj6ZLgBAJ-nNB93WKr5e3iz5Iwx_BYhPGU47tl9U8o2QCItx6Q-R9_qNkQqjZrFKO9gqYiIHDG-UPgTXISXjSKZy3j0DkWPf8vrfyzhx1FCw2pYgizkIrImBgUFgOLXSz9SEx-FKNHMRs4N415g",
+      "link": "https://bit.ly/3Em5Xyi",
+      "alt_data": "PE Technical"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

@@ -1,0 +1,54 @@
+{
+  "subject_name": "Antennas and Propagation",
+  "subjecet_code": "3161009",
+  "known_as": "ES",
+  "syllabus": "https://bit.ly/3r9gnwq",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161009.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161009.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161009.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161009.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161009.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3niQGsE"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjkRAYgVtRBswu1uE6nBRzzMjqn49BmW0L3tupKmYYGuoBp2Phe2uQk3BXsvjM2f6rDErZ5q-ET5Y6mcBabTGWClXEDpmhL43L9fDWFbrjVkh1FEfGIpCX262w2sYR4dkz8t7lf77-DFrsgPJImmcpaPBxDv7ILPnqu_8WnBIJcZpuQ3ySO-GmmR7DPdA",
+      "link": "https://bit.ly/353L7Ii",
+      "alt_data": "An Embedded Software Primer"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhiPOHGhKeoO5Jj8WljqVb-QKEc-35khi3vCnvhupD2vhjSgt-zIB6r6gLiygsMOAr2nPX8v31rXEYke1LEIZ69cfKTNHaIphaoqDypFTrp3OsaqkBEWOf285WFrw86c19LjT_0oGqmPcmWNaH94w-UfmXzLFZncSzMHX3STsifFahJ4M-beQ0kdkaUrA",
+      "link": "https://bit.ly/3IyQ4r9",
+      "alt_data": "Real Times Systems Theory and Practice"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEizeKnWhoVC4Gn9tMm8lH5hDsojAB7UdHHkel9Ul8y6RR9_t7JOKrlXJ-y3587Pbo3BCYxNf7f3ZqmwROLxNWx5bzLk7Mr_ku5MXq-2AdAAuMNnzBtLQFZ1rv2cSooBIjB3ozm-ecF71SkAR72oWArW94NTeIXiCmriL0HVqNuyKbIw1M17KTc-_9SPSw",
+      "link": "https://bit.ly/3IgcfSD",
+      "alt_data": "Computers as Components Principles of Embedded Computing System Design"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

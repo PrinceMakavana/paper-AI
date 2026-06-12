@@ -1,0 +1,48 @@
+{
+  "subject_name": "Basics of Automobile Systems",
+  "known_as": "BAS",
+  "subjecet_code": "3140203",
+  "syllabus": "https://bit.ly/3hvxR2U",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140203.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140203.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140203.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140203.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140203.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140203.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140203.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgwg3-y2OMrcy4re8OO-LNsFTMww1i-7M7iK_sAdtuDE8QQ1qQxQJGTtxGvio9TcrkRA1P4VK6y992_oSWs4Mc7oolP179YJsbKXvAhbLumQG1J3RUks1vpZVQ6aDdzdW6UbNSLoHxuUPIIlPNqiw0KVen1KQLs9e52Ql3za17lpxhUKmct1RrcW3rqlQ",
+      "download_link": "https://bit.ly/31V65ba",
+      "alt_data": "Light and heavy vehicle technology"
+    }
+  ]
+}

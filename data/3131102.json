@@ -1,0 +1,63 @@
+{
+  "subject_name": "Digital System Design",
+  "known_as": "DSD",
+  "subjecet_code": "3131102",
+  "syllabus": "https://bit.ly/36Awbik",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3131102.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3131102.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3131102.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3131102.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3131102.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3131102.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3Jdj7kQ"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjGb_fLZe-Q_otdR5tnC3Ydd8aqLnCGn102Vkwho0VvQ47ZYjxyJZnVympz7NYl-WUwGC3cduc_FT-vSu-hy6FHGep0dKfTfm3mnguDn3PwsXlUc5HT1uVQK4G2Drw38bK6y2kIGTKvYo2eKtfg7I-6lJReMyTHD3MnWH1dHdcg0GQV6s3AkOQ51IEZpw",
+      "download_link": "https://bit.ly/3Fno0Wh",
+      "alt_data": "Digital Design by Morris Mano and Micheal Oletti"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgSkfvFkJUvzjaCq63GejRtj-HxkUAz4XkoF3Y4VU_8E5fjdT-U9A_IPuRi7QIv3sLm8-Wssc6bmoZgWK58Sb9z29fgac9R2G9Gy3DqjF-pVVznfYCPJd0dP0zAmaQgKf26X-Tcra1c0Q-4ctKc52SWw4k55aP4p-dGpTFm_EDvnYGqzI0gOE6czRiSlQ",
+      "download_link": "https://bit.ly/32gIT7i",
+      "alt_data": "Digital Electronics by Anil K Maini"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEggFyFHZDw9uy9cGToV_qsx695QDcBkPd7gFCpUYjl9P0AqveSrEfRYioOy45cVFsf856r9rJoDPx5QZmHzFUsub8Lmb5UvkP3JmlILMk6mOXqBSzshc4zGF1ae7sZwaVvG0jCM8A2JCO0kAgpUIVO_uCFq-aMynmD-aZoJBEGSzDcXDp6URjOGKfXZTA",
+      "download_link": "https://bit.ly/3H5kss6",
+      "alt_data": "Digital systems by Ronald Tocci,Widmer and Moss"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgbrlPDWctAh_0y1MoyFp7QoAH_QgYnhjfnsPlBndqYp2wZC_iMQyM9rfFF5gaxOGVJHyv_WCQO_zXOI3MuuCMAEgJsT2KUKvGBumANvcTzkRLJN0kauVo2w3MmtKAViBsdMzJXVDJiVcv2aT9IUjG9yVXrXhsA42ZGXlTQLA8IjBBvpfOVwktXa5eqgg",
+      "download_link": "https://drive.google.com/file/d/1_0mgBIKLAAYv-TeFIlO_zBuZQpssbjwR/view?usp=sharing",
+      "alt_data": "Technical Book"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+    "subject_name": "Artificial Intelligence",
+    "subjecet_code": "3161608",
+    "known_as": "AI",
+    "syllabus": "https://bit.ly/3xqcGDV",
+    "old_paper": [],
+    "Books": [
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj_JiRrsmvzz2jIWVlR4-AFDwXJusKzC1LqbT8aNXgsmyliYUkhZcD-ZbzBbIIar-TooXeqEtE-7mjsFQ17ZMCwQMmwjk5yoA1szJXeaYmxGPVC4kS7O6p79Q2aOmsuUAN8BnaiWiaxu3COGQYrb85D_jp0xyJNcoQNjYF4EE9qSblx2VBQvzj3LIBRng",
+            "download_link": "https://bit.ly/3r7aNfE",
+            "alt_data": "McGrawHill"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhLX5CS-UVLZwikFO7YaoARXhsBL3j3F__8aITgRg2JSfOOpmXCFfx9OBU9jfIFrnd3GaT-wBfVCmnxjE91VSQ-K0OCgb8Hqk39gmnLE2asBhWKWi04ZQYIwZ57rwdBviCOC6GicWsEHkDfjLiuxwnrZlVobAw18p_2V2hNwVnuQKzGYmzq-Jert0J5aA",
+            "download_link": "https://bit.ly/3AFOil0",
+            "alt_data": "Pearson"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgMhREUg7f59iAuRJjb3hh-kxv7nr6uHt7nNl8M3fdMrMLaGq8DE5bNraZvbY31tGr4koarM5mEEoTfooeF3mUhRf__lV9eWl3Mgix0spA6GcSZbjKZpRdhSZ2heYEd0ffNDUQKwt39Gd2o_jGTHfqixKkaMeQXGtRp69ShODIVqh7xZ0gjoAlbs5QpaQ",
+            "download_link": "https://bit.ly/3GaPZIy",
+            "alt_data": "Morgan Kaufmann"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEi369TIPIlSu8J_T-lKKFVcWBDQ-Defq2HHKa8AfUbWvySHcwWFo8bV4ouRmsxO-yJws0_lG9Y9TMfR-2aFIEOobPkLyavRJhjuOSMwqXdRkjW8b7y_d-1M85uaZMlQR43gZqijHD0dabsr81C_mcJ0PBz-GQKhRG2m5h-Fmr8GTp72gNrm28IravH3lw",
+            "download_link": "https://bit.ly/3r7bhlY",
+            "alt_data": "Addison Wesley"
+        }
+    ],
+    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+    "assignments": "",
+    "imp_material": "",
+    "viva_questions": "",
+    "prectical": ""
+}

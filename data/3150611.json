@@ -1,0 +1,69 @@
+{
+  "subject_name": "Transportation Engineering",
+  "known_as": "TE",
+  "subjecet_code": "3150611",
+  "syllabus": "https://bit.ly/3xo5uIJ",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3150611.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3150611.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3150611.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3150611.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3150611.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3nAxbMb"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3twxtrl"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/34ZlnNd"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3rmBnAs"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3rqVZYg"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/32648Zv"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg4wg-ElNL-BRemC-z_5M8xt8hdBzUJSeTsnZYTAnpR9G11RKgVIsDRtZXmzvr1Qj8f2FYnGEd0Srz2nCeV6Xo5ard_wspb5rO7-BMQLZRyaZXW0L-KJYQJwu2X4fIkeT-DTroOHk87IX2h87cL_f_kfAekhsnBGH5SWZFm4t0XTxYqJUwM7HEQaDey5A",
+      "download_link": "https://bit.ly/3EPuAnk",
+      "alt_data": "Principles of Transportation Engineering"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg0Ngck-oEdKYsPmezm5w7ErmNrBquhq3-FQFaWHmDZ-8pu6zoeaMdC-Z7_22A3fonRb0fdSH_ZHEczDKwK2Q0LlNrUx0lo97ct3AzgquwfKQTVe1OAs_GjfQ_PI30MKFvCZSd8__ZblAefDSHzfLHA7qDQjYodjoc3UyX_IrZWQ-lezLg1WbFIVK2wVA",
+      "download_link": "https://bit.ly/3sNnlKr",
+      "alt_data": "Railway Engineeringby Chandra, Satish, Agarwal"
+    }
+  ]
+}

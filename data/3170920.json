@@ -1,0 +1,77 @@
+{
+  "subject_name": "Industrial Electrical Systems",
+  "subjecet_code": "3170920",
+  "known_as": "IES",
+  "syllabus": "https://bit.ly/3ehcbFG",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3170920.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3170920.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3170920.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3170920.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170920.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3170920.pdf"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3o5DY0O"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3H8H6R0 "
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3H5NUPm"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3IIXHLq"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3ACmEVZ"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3rSeWDf"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3KNVEHJ"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj3_QsM_C384iivFmhJCmH2WVF_sGY_v5_vyKWcXS07_I3ZSvnfgENTXdB1NnQ40tFwb4y-wZbBResGHVX-j9l60PVg4uQPJwZyVqgTjNR7LLcF6vRDZ8RnNUzTffHUqJrPKpiYqLOSild_w35LNzNTgkE4AYOeIun_W9GVU0HSRExvwZX4q_ayLFV99w",
+      "link": "https://bit.ly/3KszM4L",
+      "alt_data": "darshan"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhJu-5cAUYYk_GVqLpsN6JGwGaaKRTQJ0iMh7vC_netlE21BV14gnCZlhm_coIIpR3_dA30hO71OQ09rnNH3vxFS8mKc4qgZ1jXCvKntNpKsr_c1zuD3pcdcwhIWL4_xLyexI4fzjp95v3X8aK9Vs2j6b-zf9WFTGrHkmEgBszN8yT8yvO0ZcvQ7HKMUQ",
+      "link": "https://bit.ly/3rINRCG",
+      "alt_data": "IES KHANNA"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

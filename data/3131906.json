@@ -1,0 +1,66 @@
+{
+  "subject_name": "Kinematics and Theory of Machine",
+  "known_as": "KTM",
+  "subjecet_code": "3131906",
+  "syllabus": "https://bit.ly/3rZuiFV",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3131906.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3131906.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3131906.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3131906.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3131906.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3131906.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3131906.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3131906.pdf"
+    },
+    {
+      "year": "Summer-2019",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3131906.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjT2jb-Y9nApcCwqXlVQPmcynJLYk3r8KaE-Isji1xpnuBr9Bp8DkXhaxj-BScORJQ7nvfnQCdl4rbPXOQDQrAcLAFqImA7iHrMrL2W3mOhT7qjf_qKnldpIk_RhYZoH3dJZi_JIMV4wV7USsJdNu2cHNcxyYBGMUyjO6ZwQGVLOpG5HxJ7tfC9yJl8cA=s417",
+      "download_link": "https://bit.ly/3G46uH9",
+      "alt_data": "Jones & Bartlett Publishers"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgwTEfWWbVc2ihDxPnOJDssvw1tELipWXth-TOEEtUVYsWpGcMxec14rgyGewu0H1CZIrZYQ31I-6M4Hh1dg08FV4mb07pfqpi1rD2pVn160NBFxUd1YzNhgAhOOhZ-Zy2CuQEZf518g1gOowbHmZ-hCuNf2WrSFUg8npv0gVfYzFHVmGFGOUaHhmZCgA=s320",
+      "download_link": "https://bit.ly/3zxquiG",
+      "alt_data": "Pearson"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj74c6Qn0Eb7_kAgYcRTT3CB5OiH9fQFBlMkZ_-oaGHJ_-ZY1MZ6_HgDA4_l_z3taPfWChFmlm_figvRDgW8s9UhJgYe0EYXOpFXvkL_i2eVFQf1Ha4z0UalWIIRKy_YyMlGOztBmnErzVXnVB9YqaGBSNaaHPY7-7VBW4Vn0XqcFaL3WoVCsZTMQPT1A=s320",
+      "download_link": "https://bit.ly/3q24oBS",
+      "alt_data": "Contents"
+    }
+  ]
+}

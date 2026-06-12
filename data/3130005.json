@@ -1,0 +1,66 @@
+{
+  "subject_name": "Complex Variables and Partial Differential Equations",
+  "known_as": "CVPDE",
+  "subjecet_code": "3130005",
+  "syllabus": "https://bit.ly/3rW3wOu",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3130005.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3130005.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3130005.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3130005.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3130005.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3130005.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3130005.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3130005.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3130005.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjPF0AFst7Fkb_gX50wvKKYlZzwxduSmMrZJrkT8xZAjbr7KzXJx8ujA3xtjtY_wrLw_P0fRGtvGiiiv9s82WfBMkDHlWOE35uaUFyl6-mySpKbEh55ROwqdyV2F78n9_Tq-cWjvLUT2FQ4i71xh6X0TQCyEJ9f08HOB4iMzIPh_jd-zlGzrkT767Fp_w=s320",
+      "download_link": "https://bit.ly/3eN5BGA",
+      "alt_data": "James Ward Brown"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgaBNtYSahXYo4oqnrBf0N4L1hd7pRfjbiPx_HspMvxK55HiWtGbQ11TUwlOrbKPULKKWmStS9H1jZE7_EBmyo4rYXnewwRzlKNz6M0bHFTCOK1SG0vZ1-bbv3ooW_gdBI5JU1YgWot5-A5jQOUoWgBT3yDPpN-pZsB25bRGhf6Yxd4UdsSlpjobJV21Q=s320",
+      "download_link": "https://bit.ly/348pxSh",
+      "alt_data": "Jones & Bartlett Publishers"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhFjfJD_lO5RGRnEeyKEoJV0SIWM9VwHsWYxalUl4b6O1xNPgx4dnSABYeRtPC4Eipc8_sEs8EDnYp9WxOJ398KXZLbuoxnGHb-McXjpVJUKvEzuwV0Ew3IUBBHO-C1q1xGjgsMd1cBAy7G2ZA9sAL14_1u85Ueb36CPqvyNTIkOfAPmgP9GnIXMvAzYw",
+      "download_link": "https://bit.ly/3pNxTHi",
+      "alt_data": "Erwin Kreyszig, Advanced Engineering Mathematics, 10th Edition, John Wiley and Sons"
+    }
+  ]
+}

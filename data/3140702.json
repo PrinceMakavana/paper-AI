@@ -1,0 +1,71 @@
+{
+  "subject_name": "Operating System",
+  "known_as": "OS",
+  "subjecet_code": "3140702",
+  "syllabus": "https://bit.ly/2VoOOE1",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140702.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140702.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140702.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140702.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140702.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140702.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140702.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140702.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3140702.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "https://www.gtuapymaterials.com/2021/04/os-prectical.html",
+  "viva_questions": "",
+  "imp_material": "https://bit.ly/3aEFYci",
+  "assignments": "https://www.gtuapymaterials.com/p/assignment-1.html",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-0CGOGlbxcR0/YE7eZ3T8wEI/AAAAAAAAAQ0/2K1wyF2v5F8ZWTtJn-yvDuxb5t8-KLztACNcBGAsYHQ/s320/Screenshot_459.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1o9FWzh5-Ml2aiIyxaY9r7ZC7xGFelbLm",
+      "alt_data": "Pearson Operating System 3140702"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-k71FZBAIwT8/YE7fCivURwI/AAAAAAAAARM/uhFXOVI2Trslb_AZOssKgY9xHSez9ThIACNcBGAsYHQ/s320/Screenshot_460.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1QlI3cTjTT0DhvXMBsolshIkk57v6rRt6",
+      "alt_data": "william Stallings Operating System 3140702"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-9it1zeJZ7No/YE7feooSKjI/AAAAAAAAARU/wLrAnQqM6PQrXvAgaUJkTGOU1OgrCtyjACNcBGAsYHQ/s320/Screenshot_461.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1vJI29c8Njp9Bmds_Q-riXdTFDWQeDrzz",
+      "alt_data": "Wiley Stallings Operating System 3140702"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://drive.google.com/uc?export=download&id=11FnhlknJiMJPn-hSPMtHTh4WnFoZo5F4",
+      "alt_data": "Darshan Operating System 3140702"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "subject_name": "Oil Hydraulics And Pneumatics",
+  "known_as": "OHP",
+  "subjecet_code": "3151913",
+  "syllabus": "https://bit.ly/3r5q8fe",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3151913.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3151913.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3151913.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3151913.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3151913.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3151913.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3151913.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3f06z2F"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3n2MNYH"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3ntGi1p"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/32UkLI7"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3n7qjFO"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgzsSBz77hTVEp37nm76VNwaWxjqAIm_kWK76txc26D7sdkzc0UKk6F4z9zz-2k67PMDNwp53bo6KyOZSEo-R8pEZIT12oLa_lStomS_Ch5m4U78PVumkziC8IJ-r7OJ3pFNuvZZhUdpEAidsbcjXGEA3TV4jf1yf2bCJNl_jsp7ZSypz00fmF3M53p1w",
+      "download_link": "https://bit.ly/3FjN6oe",
+      "alt_data": "Oil Hydraulic systems - Principles and maintenance"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgEOBtQT6bEyKB6RKDm0LnueVvn-dIDNLJC3utx5hDpUHCXa6SkKwtfsBMKg86DRMDyMG0_oGtiIZ42gNB32IlgFMy9augAlWPgTDp_FTG13uJdRIocD40xmhPPgtT862XAiIb-QrMaGktn2QU7WaMsZF-w_8VPBOjsNIBzd4cxf4G4aLbP5-ZJvLvD3w",
+      "download_link": "https://bit.ly/3fx7yHX",
+      "alt_data": "Fluid Power with Applications"
+    }
+  ]
+}

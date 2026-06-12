@@ -1,0 +1,59 @@
+{
+  "subject_name": "Environmental Science ",
+  "known_as": "ES",
+  "subjecet_code": "3110007",
+  "syllabus": "https://bit.ly/3xAlS9E",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110007.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110007.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110007.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110007.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/37q0p85"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3hKfbN6"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3yV2xAu"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3xAt1WJ"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-B1jqGEKMzAs/YDSI-3COfXI/AAAAAAAAAN0/m-aGwBSQ6wcnN4jFU57uxPdYjZoPAi_fwCNcBGAsYHQ/s500/5115b1HHdML._SX405_BO1%252C204%252C203%252C200_.jpg",
+      "download_link": "https://bit.ly/3reMrPr",
+      "alt_data": "Environmental Science Atul Part - 1 ",
+      "buy_link": "https://amzn.to/3G1R0oF"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-B1jqGEKMzAs/YDSI-3COfXI/AAAAAAAAAN0/m-aGwBSQ6wcnN4jFU57uxPdYjZoPAi_fwCNcBGAsYHQ/s500/5115b1HHdML._SX405_BO1%252C204%252C203%252C200_.jpg",
+      "download_link": "https://bit.ly/3nJ4HAN",
+      "alt_data": "Environmental Science Atul Part - 2",
+      "buy_link": "https://amzn.to/3G1R0oF"
+    }
+  ]
+}

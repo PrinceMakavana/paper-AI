@@ -1,0 +1,77 @@
+{
+  "subject_name": "Vehicle Maintenance and Garage Practice",
+  "known_as": "VMGP",
+  "subjecet_code": "3160210",
+  "syllabus": "https://bit.ly/3AP1zaC",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160210.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160210.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160210.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160210.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160210.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/30KkxSB"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3FbZ17u"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3fcB4SO"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3GiLhcD"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/339YvtJ"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/33aIP9F"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3r7hNYz"
+    },
+    {
+      "year": "Winter-17",
+      "link": "https://bit.ly/3ngzNPl"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEic71j4U6mFoJDxzOPs2TtxECEpo7CLN_5X2FRrvLvQH8lw8PcnFFn0ENZEU4QNrj4GhVWbDurwU6JSH0VjXbby3GaWSJkLnR4io7727s_7E_68RcRMTVFPYKHtgFGf2DumBmBjVtAa0BjYR0RCttftUqMm3EXdvqDncI2uBBDBNtTwPKMGdx0CT10GIA",
+      "download_link": "https://bit.ly/34RBagP",
+      "alt_data": "Automotive Mechanics McGrawHill"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEibIBrbsaKG0xucPiy-JPcuVW0Fj118KWjm5ev0S1LXWjVi58y46NAWBFvyME8oSM9q_pIJjhu5YNIfnECECsMQitakGHKY4ihph0MGdv5hx9kwXxagO47j_mLMYl8o2dtaOnwMEYwPv-GAJH6Pu5mH5S8-gEWsMIUtCKSmc8798qwrl6wl_4xd2XiW6Q",
+      "download_link": "https://bit.ly/3tCY1XM",
+      "alt_data": "Automotive-Mechanics- By by Joseph Heitner"
+    }
+  ]
+}

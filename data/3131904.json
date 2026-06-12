@@ -1,0 +1,71 @@
+{
+  "subject_name": "Material Science and Metallurgy",
+  "known_as": "MSM",
+  "subjecet_code": "3131904",
+  "syllabus": "https://bit.ly/3rWet2s",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3131904.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3131904.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3131904.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3131904.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3131904.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3131904.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3131904.pdf"
+    },
+    {
+      "year": "Summer-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3131904.pdf"
+    },
+    {
+      "year": "Summer-2019",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3131904.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjJ-gh8apy9L_19J2pII2rUqojNZZSVWhXkFuTvLBcDrtmC72PbA1ErjoFVdlX_EzCMdkXgt3EN9LhNnOxGLSi2kYjJxwujby7c-3QW8WsD7l-skvW8t80ljN7-1G1-CpnqV0Fty4c4PWYxMLRSokc7xaHv2yCjT2Y00ouNzvOXaMtdSQ1WCjg7VBFnoQ=s320",
+      "download_link": "https://bit.ly/3zMYFTX",
+      "alt_data": "Pearson"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhqVCsxWa6nO3eFLps5FDg8QH8_czfBTrdonVmovx76_iE3qBa-W594Gxg8Ih53rXKvdaMMRwCUombvugp2TYcF4hoAgEurGCFu5ex_LWYm2rQh0rVWqmGSfKrU9RjLJiYb1rLJlSyLtHzxaOIjDJeG6HiCCHmUyBHtBT8L8YViPpsLsj1Wzvh3PPBsSg=s320",
+      "download_link": "https://bit.ly/3zBJOv7",
+      "alt_data": "Wiley"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiDGT3qz7f-nwcbof2W-Ekk3q-tu4ava3hUaFzB-AMU-vliNhWgi7HkRlgWfJ0s8gPmKJDKs4OEs7ygeho_DgSXavYopl9NX53bEystQquB2oCcbnzy3Aq34UAp2Na3K6xlut0uTzcERbnOK39mrfLv1KBbByEm6yyeOWyFcKUaI50-p4dCsHmrTzxKpw=s320",
+      "download_link": "https://bit.ly/3zMYOXv",
+      "alt_data": "Donald R. Askelend | Wendelin J. Wright"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjl6emNyBoEwwvkX3uuchiiQERDGDZUFqDVeOGed4ajVbIPEc_CdGA-jbQE6dqsA8oEdG0IIZGpfnvhIOGrka28D2Uvs85ZcYyETvyVkm_brfVgvZAJfWiJ_0AWPlinMk1CFfYwBc8tZuOufcThG2uXyht7MooloW9mGSVynIbl4-4NHbY-tv51DSyfBQ=s320",
+      "download_link": "https://bit.ly/3qOP8Yg",
+      "alt_data": "Pearson"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "subject_name": "Systems Engineering",
+  "subjecet_code": "3161013",
+  "known_as": "SE",
+  "syllabus": "https://bit.ly/2UG0HVg",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161013.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161013.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161013.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161013.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161013.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3GlrwBd"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiyRtYiGoQ_Bw_RiH6hS5IXVo9kWI6fUqWuqVeC1T7lMrpgLo3emq82QaD0pw58T1u2trSEpfULErRhVNKrv8OZKT-YoYBq8L3N7vhE5efyt0DghPEPjPqarnpkSWzTNg83VNGtsI9ApKbMAmxzKpTT-ZooKf_VuwjQGpir7e4y2tHczmA1MCdeqeoNvQ",
+      "link": "https://bit.ly/3nEO20u",
+      "alt_data": "NASA Systems Engineering Handbook"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg2jrznxvqNG4uJcCIiteV5mFW568ajKHE3wgwRDP2IJk-VcIaRDCEInj76EZiNcpB988N3Sm-LQL8VRbj0Vzk22KFokdbtvL2KloxzS1IjppWmP89FwWB3oxEl9dic0gZJhZS9McwNdZ9JpU18V_HIUmo3ZB_25RrZWzWvQCyQgyP-dG7eOJ7R3Uy3mg",
+      "link": "https://bit.ly/3qFJskr",
+      "alt_data": "INCOSE Systems Engineering Handbook: A Guide for System Life Cycle Processes and Activities"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

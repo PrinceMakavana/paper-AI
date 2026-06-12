@@ -1,0 +1,53 @@
+{
+  "subject_name": "Computer Networks",
+  "subjecet_code": "3161007",
+  "known_as": "CN",
+  "syllabus": "https://bit.ly/3r5CKCY",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161007.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161007.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161007.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161007.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161007.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3HSokwY"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3HVTweW"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgQekE-Ebu4V1DKxlobPEiqZTnx9xvV8enoFZYF0fwaliw2QW6uGG23aM106ddDEfyuvzaRAsjsi40xjdanDJynIp7qgZWr2et-k8Z0ADExLD717tyMB9LwiBHR7BMJ3N37f4uQqTZ7MkBcRMSoc1zPreOoj9QgBMVJi3Lt0bmFMxfPPj_V4vKdos7LMQ",
+      "link": "https://bit.ly/3Krc2xZ",
+      "alt_data": "Computer Networks by Andrew S. Tanenbaum"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhcLfAahckjK12OkcHR2e-k39w775LEKZnA5quPRLIXO6fpnUodDbiKT0BbZGyIxHdX5Vk36jw1p1jD7oiS6RIg1BWRKgj0HvmpX9U3Zjet8AZIGgWaRNa6emAhDkpz6ZLr1XGh057_r-On_1OxlD5zZTRDEY88c7s6qTXjEpEsXEEvXpyjVJFdyKxdCA",
+      "link": "https://bit.ly/3GJYj2L ",
+      "alt_data": "Computer networking: A top-down approach"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

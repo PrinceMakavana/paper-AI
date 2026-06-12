@@ -1,0 +1,61 @@
+{
+  "subject_name": "Building Construction Technology",
+  "known_as": "BCT",
+  "subjecet_code": "3130607",
+  "syllabus": "https://bit.ly/3zWD9Ld",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3130607.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3130607.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3130607.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3130607.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3130607.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3130607.pdf"
+    },
+    {
+      "year": "Winter-2020",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3130607.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3130607.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://gtu.ac.in/uploads/W2019/BE/3130607.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgOUVvnUG_opTABk-Yhyp1s_wAQr82_gGjglxfmWmR2B0VXHPgpWj1DOFtZ4XN93l-CUq3faq7czINzmdfjC2b55STbzf-ogha3J-V2cvGZ_7eDYmrDmCg0WjqE6LUT3H48eWUEPk3e_xCGL0YmxRJTnERuMSPiNR6SXp4ahcvKmxp-VrurE2PuoAyLMw",
+      "download_link": "https://bit.ly/32cUnJ8",
+      "alt_data": "Building construction & Materials with reference to B. C. punmia & S.C. Rangwala"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiNTtUYH8GcYiSAK0lubwXWZtutQ8spx0FdG_W7-uTPixc9I6NiYoMjXgydhXKkqMwcsPbVmzlt9amNSCn570hrX8cpAhgMWzVfZ0S0SrP1BFAV1jhqvZEursaJUks1xf1hMatrIE0VnOMGtuWeRKxeJOFFz7t9f7eMm3rHYsb5dnTr3CFn21BK1T2_UA",
+      "download_link": "https://bit.ly/3qlrG4N",
+      "alt_data": "eNotes on Building Material Construction & Planning"
+    }
+  ]
+}

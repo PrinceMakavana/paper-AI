@@ -1,0 +1,44 @@
+{
+  "subject_name": "Introduction of Machine learning",
+  "subjecet_code": "3171114",
+  "known_as": "AML",
+  "syllabus": "https://bit.ly/2UMTmU0",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3171114.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3171114.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3171114.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3171114.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3171114.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3fmKVWi"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF2xlhMYpL0j9I4EaNNEwTbIF67Imq2qfC14ZElnPkIpye2pafoLq4NfQ4DorIxJLEKA22zc7aOH-dvxS8nPjyVUuSpl-HZ9FvZG8enJ08hBcWxggyJnSYDRrzWVTcQKoL7JOioG3uP5ENq6RuqoDiehoi7wAcHHDKmwm5Rgo8oZzZLtAbR-lNAlM6FQ/s320/Screenshot_112.png",
+      "download_link": "https://drive.google.com/drive/folders/1AeDs-YOlgrig5KZqsZgWbSmvPOEZpxVn?usp=sharing",
+      "alt_data": "3171114 Introduction of Machine learning - Techknowledge publications sem 7"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

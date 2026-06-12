@@ -1,0 +1,34 @@
+{
+  "subject_name": "Biomedical Electronics",
+  "subjecet_code": "2171102",
+  "known_as": "BE",
+  "syllabus": "https://bit.ly/2U03fh7",
+  "old_paper": [
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3I4mWYb"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3qpLk0o"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3I26Yhu"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3njrmT5"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3tpPwiO "
+    }
+  ],
+  "Books": [],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

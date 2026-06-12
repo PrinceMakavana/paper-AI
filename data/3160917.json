@@ -1,0 +1,44 @@
+{
+  "subject_name": "Wind and Solar Energy",
+  "subjecet_code": "3160917",
+  "known_as": "WSE",
+  "syllabus": "https://bit.ly/36xdEmY",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160917.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160917.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160917.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160917.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160917.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3tl5bA0"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkI9FF2ex28MPPIETokvDFLCtQnNw6Z1HHl_pSOVVQnIT_8n9YVgoNjLcEmfNY6_i_9sLlCpYbjrw5_BKq0j_piBlfI0-L8vBtG6Yn2YmWpYNjwhUqIbD9cWK72UsRep3JHkmjnkTEwcuthbOH8_jso7SytwRcLBqtHMrxJOjzLMsOsKztBEkvP7OUNA/s361/Screenshot%20from%202022-12-18%2017-19-52.png",
+      "download_link": "https://drive.google.com/file/d/1eDljHp8SLsCtkTQohcjqoH5iXsqI056O/view?usp=share_link",
+      "alt_data": "Wind and Solar Energy 3160917 GTU Technical "
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": null,
+  "imp_material": null,
+  "viva_questions": null,
+  "prectical": null
+}

@@ -1,0 +1,52 @@
+{
+  "subject_name": "Structural Analysis-I",
+  "known_as": "SAI",
+  "subjecet_code": "3140603",
+  "syllabus": "https://bit.ly/3xtkK74",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140603.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140603.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140603.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140603.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140603.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140603.pdf"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140603.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140603.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKgXybQNOh32pZ7mGO0hR5ayiWvA8PFuAtZ03fQdw4_fwLK-Q9tLYIXza0u_xOYKPaKf34Q-oXmnzYBrdkSBsQ4EZbf1IT5tNyuCgQ6QfwcEqmIXA9gF2eabSpqcuchDhoEDDTc16vJi8Qfu9GvZo4HV7dR5Btnp6bozfGdb2rlkNBks7EnkjKf-p38g",
+      "download_link": "https://bit.ly/3HsCrcl",
+      "alt_data": "Structural Analysis e-Book"
+    }
+  ]
+}

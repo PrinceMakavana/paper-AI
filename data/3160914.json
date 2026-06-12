@@ -1,0 +1,66 @@
+{
+  "subject_name": "Microprocessors and Microcontrollers",
+  "subjecet_code": "3160914",
+  "known_as": "MM",
+  "syllabus": "https://bit.ly/3wE0XkW",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160914.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160914.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160914.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160914.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160914.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/33wxUag"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3tknK7e"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/31NXhDI"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3zPGEnK"
+    }
+  ],
+  "Books": [
+    {
+      "img": "",
+      "download_link": "https://drive.google.com/file/d/1O8IFjQlpaN8Ay0wlqghQR6K3RY0cdCNv/view?usp=sharing",
+      "alt_data": "Microprocessors and Microcontrollers 3160914 GTU APY Microprocessor_Architecture_Programming_and_Applications "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYf_5WYjqXkyGYC0eYmg1m1s82k1qIKipVGTzcyK9LvXpv5K84la4zYzNHxqsTqytIDDTpgPGsm24PsfjB659AJ4STrDyDEAV2alC-HxdImjjMSt6Xw_fCGZl7pnW5vtAUfsLWm3LSn2EXCl0limtR5QtqiDlyYIjSiTWyxd_xut1OtRGtBUr3w4uisg/s350/Screenshot%20from%202022-12-18%2017-14-32.png",
+      "download_link": "https://drive.google.com/file/d/1SQyOs9v3rO_S1hJk7VifRGcgMBgN02gx/view?usp=sharing",
+      "alt_data": "Microprocessors and Microcontrollers 3160914 GTU Technical "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyXKDH4bJ5zKlxzw4c8V58AgM9JGd4zTcvRLIBc4_ydDS2SvsbMo2TU0M9FLilpkQ_CRymSuutk4EoJik28cuhvNyXU3SsrbXtZelHZ6_5EdvRlwCT3RIowFmeg3Rq7PI69PVVhMVuCfwPlzHyMBoKWgw8HPKV-FdseScD7NKuuuoThQ9QC3_P-b8Hzw/s351/Screenshot%20from%202022-12-18%2017-15-57.png",
+      "download_link": "https://drive.google.com/file/d/1enURGKPuyMV4VqsFjkoiKGfLhXxuC29A/view?usp=sharing",
+      "alt_data": "Microprocessors and Microcontrollers 3160914 GTU Atul "
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": null,
+  "imp_material": null,
+  "viva_questions": null,
+  "prectical": null
+}

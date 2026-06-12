@@ -1,0 +1,83 @@
+{
+  "subject_name": "Renewable Energy Engineering",
+  "known_as": "REE",
+  "subjecet_code": "3161914",
+  "syllabus": "https://bit.ly/3yU9CB5",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161914.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161914.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161914.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161914.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161914.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3GWfuhm"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3FDveWo"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3pypdom"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3z8Xaic"
+    },
+    {
+      "year": "Winter-17",
+      "link": "https://bit.ly/3qPRVAD"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3mEIC5a"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3euSc64"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3sEmETF"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3FJsOpm"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjxkqG69MRS2KuPaodSf8DbJ5nwsyFbL4rxMsDtR6CSmxsRHlSjJiRKMcA2UJ23t317s0BIxI7XvszONgdOuOzRIfDsZOvJnqCWj-e3K9V9XlLjV_JG8IjNjmRvGvcuZcDuRiJcMMyKpXuYCVxQwE_-7aNlCfXfBxNmrPHRiV7evSuM3vw823n0-n2iyA",
+      "download_link": "https://bit.ly/33JzAgy",
+      "alt_data": "Solar Engineering Of Thermal Processes: Photovoltaics And Wind",
+      "buy_link": "#"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhiH-dD4UzXTe2irZuklwKfhyIHwW2_BE4vQ3DYOwyhlNF_8z4w3NmLMs8FEUcJ7ctbIC8BBj52NjkYdMkmeNiwshU64ewfwsy-Gm_e1jr0oDzrEU8Nffzw2U867ut20-TA9FxXEkuRAHaQFtlPt1MZEaEwMRGZsQwbRkTFC9qR5HhmU4UBZ6SSAKLvrQ",
+      "download_link": "https://bit.ly/34TxkDW",
+      "alt_data": "Non-conventional Energy Resources McGrawHill",
+      "buy_link": "#"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "subject_name": "Heat Transfer",
+  "known_as": "HT",
+  "subjecet_code": "3151909",
+  "syllabus": "https://bit.ly/3xBiRGa",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3151909.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3151909.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3151909.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3151909.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3151909.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3151909.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3151909.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3DypBYS"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3t885pI"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/38v8lFF"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/38thWgf"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/2YavxXH"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgFejBvYdnOYlX7BnnaUAJ4uau49nVClBkUQybPJUoIyePej6FACe0UTmrQ7yjfqyEQ-5noYi65tafmSPOMS39LAhQeJKvmNX55n8IrLiRSq1F8TTUVFrvWv0Nz-mK50AYsrE2JL0bzrxDwbx2V95xSyQ1VsNFEJsthQFgsbswhS2TkOJLqIuc6bWi2bw",
+      "download_link": "https://bit.ly/3G7IS4c",
+      "alt_data": "Yunus A. Çengel, Afshin J. Ghajar Publisher: McGraw-Hill Education, Year: 2015"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgI-NZ0E9pAN9fvo0AW6mYcIdxSmnXu0eX3j8KtRI7OKJzrq5puVHiWfXfmB0_c58aoAkr-PvnsFAFl_AWu3Wdzzn9iEOYdivwGqIM0s4ziCi3RGM3g37FFA7LCkSSxuV73v8sgkVU88TEOxTbS9WI0K0AhIA2pWQdVjC1CtITZTm0ct3fEeSaVOOGs8w",
+      "download_link": "https://bit.ly/33fghLE",
+      "alt_data": "Bergman T.L., Lavine A.S., Incropera F.P., DeWitt D.P. Publisher: Wiley, Year: 2011"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhCSKAhBWzZpcMBc0ZYzHN_pPCv2435_dfAEJh3LK9UsSeKFUvRiDueuTLJMmM9tSBPcYj1CgFFIhSf4B6F2tCK7qDd3l4O4rhSNystIRW500-gM_vvs4PV1RBsPD1U2EJkK6BYlRCmnrg9Jw8c--T_ThCFAzGI7nYZcIb14P0Kf_cqLz0j6i35imWUww",
+      "download_link": "https://bit.ly/3t9Yq3W",
+      "alt_data": "Heat and Mass Transfer: A Textbook for the Students Preparing for B.E., B.Tech., B.Sc. Engg, AMIE, UPSC (Engg. Services) and GATE Examinations"
+    }
+  ]
+}

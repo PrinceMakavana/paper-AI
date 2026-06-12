@@ -1,0 +1,98 @@
+{
+  "subject_name": "Web Programming",
+  "known_as": "WP",
+  "subjecet_code": "3160713",
+  "syllabus": "https://bit.ly/3jyRxTm",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160713.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160713.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160713.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160713.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160713.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3160713.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3s0CWUu"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3yzGMGz"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/37ou3dQ"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3jvdti1"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/2VvRjnz"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/37oFCSr"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://bit.ly/3tgsVEn",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi93d9eaatMWObarz_L8priPHRwNpUUJnHM0dbWVkXR7_g3dxG-9qJPK3iHaM1FSzJM06EmeAfLx4L9M4xH-HuEuXS4cJyJ-LcVw_CGpXH8Ha8LaiXDUXJcXtJo-aXkoz120ktVQSTgVysOtRrv0hpOvDEhJ0yun2NKYOaRCQx8ByZT12pd98v3loOu2A/s320/Screenshot_25.png",
+      "download_link": "https://bit.ly/3tgsVEn",
+      "alt_data": "3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://bit.ly/WPDarshan",
+      "alt_data": "Darshan Web Programming 3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj34zjDzSbni5fVxnhmem99l-kpjher2XY8RkzQdO8W9y8g7FhEKTUWFxZjifrvu-C-9lYst1eT4tWquq77wiza92sGVReVU-wJytXyYa1Y8_EOlmdQ2eL7vdwKESQuUjoih_collvtI4f8c7ni2YU-JLurZGwYcSOM1UWiZlOnvEcp_K0uvlsc2rQNOQ",
+      "download_link": "https://drive.google.com/file/d/1_mgFwMBhtRD6AVPz6NQ9uhcXKXgq2Vz1/view?usp=sharing",
+      "alt_data": "FUNDAMENTALS OF WEB PROGRAMMING by LUP Web Programming 3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgQ_TI6tTLOc89-Vtucv6mmaBonpYXDRwZZprDrNQiegOoX-CJd03tPBu7vDpMFUlC-cGE61hh-XIKGz17Lbtws65gnBTCc9UaPKN6ex_bodbAs3sWba1rzqukZl7FpdZVANOXI-uLe2V1vt6cPEIwpIrc_e3ifvjHDHJvUsxFJWkdqlREBhOWzrNAV4g",
+      "download_link": "https://drive.google.com/file/d/11_ODxlfhvnjm4GgewsBti_aZTFtRZarc/view?usp=sharing",
+      "alt_data": "Internet and web programming by GJUST Web Programming 3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEigAY5YdnznVZ8SpFlJwOYw26_TqDpxi8La0elKAn6EEvgoAeBXB_aB-PLtra0AiUf9JB3K8YjRpFJ0RsKh-ovaqS54N8Rvo5n-IIVQz7Li8OacoaGYHSnGBwkXeUYhX-yJbXR7fWhEXmx8B6ekqx38IBcE3k_8Qu8ZzrqgH0QpWAcXJ5jwOm8PUiK_cg",
+      "download_link": "https://drive.google.com/file/d/1sZWzuu9G13eSAMbDEmpBAhmCcF50EENO/view?usp=sharing",
+      "alt_data": "Principles of Web Design by Joel Sklar cengagebrain_compressed Web Programming 3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEioKIUCCgEhZ36uAqqDmq8-e475Ar8IEV8kUn8HbkZE_MfIjXbi0NsZRkBYjSKFTwNWX9G4g4PzOrYXsaD2648oi1VJk4nnexm3lZZtAzM0reuFc2Du8RX4X4oXPxZKHdzuCV-tJE9mlvZGb0o6if0fCJeIYCs1Oups8YSDSlrC_Hj5KZozViUmrkEZAw",
+      "download_link": "https://drive.google.com/file/d/1Jo7y27DLy5PtrbfpkraKuLJJkvAnhLq1/view?usp=sharing",
+      "alt_data": "Web Programming by MIT Web Programming 3160713"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTKnFtWxrZzxJDBDXd2RHdw9isteU9wXK03bVvCXF40cHgy-pEAf3m_ntesTPk3K3Q0WQACgp21fcfgKX8o1DGuEi1fFiUafDM87MWmVzP4zVUpVHxZrAyloFJagAja_6aTmsgtNuBZ0-BIaAiQgQAsg_U69rQAA8dHo1LxqF1_G8ienoCdEfsdc6OoQ/s320/71+DbQTN+YS.jpg",
+      "download_link": "https://drive.google.com/file/d/1TGnZpw16wPa6viUBugHsSIcJ-Wsr-HQH/view?usp=sharing",
+      "alt_data": "web development gtu technical Web Programming by Technical Web Programming 3160713"
+    }
+  ]
+}

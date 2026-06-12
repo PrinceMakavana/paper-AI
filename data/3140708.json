@@ -1,0 +1,76 @@
+{
+  "subject_name": "Discrete Mathematics",
+  "known_as": "DM",
+  "subjecet_code": "3140708",
+  "syllabus": "https://bit.ly/3yxyWx4",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3140708.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3140708.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3140708.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3140708.pdf"
+    },
+    {
+      "year": "Winter-2021",
+      "link": "https://gtu.ac.in/uploads/S2021/BE/3140708.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3140708.pdf"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/39bBuJS"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3MVirS9"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://gtu.ac.in/uploads/W2020/BE/3140708.pdf"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://gtu.ac.in/uploads/S2020/BE/3140708.pdf"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJPH3IWr4KTemmNcBQE0kJIIAtvttKwWQnfiDXaSkgv9irTO1zlxhJGU560PKh2CVx4_OMnssAd5fMTC4U7RfVvHTCtVg46iB-JtLqXzeNWkF9i3F1qkIxpIV-_IT9Eq0SKpE3YQiXPKzAvPd-LHM1BdiFhOJxWWDCHykawff-iygIZRCAB4NiKZus4A/s320/Screenshot_90.png",
+      "download_link": "https://bit.ly/3O2RtIU",
+      "alt_data": "Discrete Mathematics 3140708",
+      "buy_link": "https://amzn.to/47EQQ2j"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-aqkjDdJCyc8/YE7kRxgin7I/AAAAAAAAASI/Jt-hKdXkWkMpm-gPmdp_JSB2AeDOGg-SwCNcBGAsYHQ/s320/Screenshot_466.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1okCF4GoQHxkxDrPlRIGHRJ9F4xYARJ3C",
+      "alt_data": "Publication: McGrewHill Discrete Mathematics 3140708"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-s-i0TMiZzrw/YE7kjTvs75I/AAAAAAAAASQ/k2Ci5gt54RI_37_VXEDJ8rH_5LvYVUFnACNcBGAsYHQ/s320/Screenshot_465.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1-2eSgKclpMVFbR58Mi2XTl2TuoLt0LHV",
+      "alt_data": "Collage Notes of Discrete Mathematics 3140708"
+    },
+    {
+      "img": "https://1.bp.blogspot.com/-5XjotNRIceo/YE7k5lMPYxI/AAAAAAAAASY/iDfYsfz9Vw0jGMXUzpudt_UMo19khJlAACNcBGAsYHQ/s320/Screenshot_467.png",
+      "download_link": "https://drive.google.com/uc?export=download&id=1vkRh922N-qUZNl6puaZQZ3SiNMYmEL1A",
+      "alt_data": "Publication: McGrewHill Discrete Mathematics 3140708"
+    }
+  ]
+}

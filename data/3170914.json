@@ -1,0 +1,38 @@
+{
+  "subject_name": "Advanced Microcontrollers",
+  "subjecet_code": "3170914",
+  "known_as": "AM",
+  "syllabus": "https://bit.ly/3kfydMG",
+  "old_paper": [
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3170914.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3KNxPjv"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3o4VKkF"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/34cxAxo"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/35tWTfe"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3G4VW9N"
+    }
+  ],
+  "Books": [],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

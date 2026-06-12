@@ -1,0 +1,69 @@
+{
+  "subject_name": "Computer Aided Manufacturing",
+  "known_as": "CAM",
+  "subjecet_code": "3161917",
+  "syllabus": "https://bit.ly/3hCAM9O",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161917.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161917.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161917.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161917.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161917.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3EbXQV5"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/336ZQkU"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3Fn3nbP"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3FjJzq2"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3K1Ckqh"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3qjFk9q"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjcAvOxVDUifTOVl7cZ6q4LWdIrU3l9s7jsZgJeKLbgBUA3NJ445xqD1dLDbaezUQiN5NmG_VV__mtCm1ashhuGt5gTpVCXNp4uzhKuExlAZmGgiyes3T7wqsLwzbxtIDNUlhY0nw8xVN6Fx_ptgpgix9Q-CwZjTm9vfVf8WVv4f5s_0L69YRp_Hne7HQ",
+      "download_link": "https://bit.ly/3rzKFct",
+      "alt_data": "CAD/CAM: computer-aided design and manufacturing"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhfk1tVfwbBMvzMn5fJe961zQDw_HrV6K_jA7s-H0f9WIQ9ihxKqvq9LAQ8P10gCk6Km5-d8zXtX3cW6InTSwEoUamHJWZDcOI2AKDpgWoO41EaBIhJy7tm1UiGExmOqYEWrNcVrMeAagre6jOFwATmXfaqZcDaAm-CzrrWlASs6a8bcg9earru__zCoA",
+      "download_link": "https://bit.ly/3rOHjm3",
+      "alt_data": "Automation, production systems, and computer-integrated manufacturing"
+    }
+  ]
+}

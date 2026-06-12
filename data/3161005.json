@@ -1,0 +1,82 @@
+{
+  "subject_name": "Fiber Optic Communication",
+  "subjecet_code": "3161005",
+  "known_as": "FOC",
+  "syllabus": "https://bit.ly/3einQnx",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161005.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161005.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3161005.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161005.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3161005.pdf"
+    },
+    {
+      "year": "Winter-21",
+      "link": "https://bit.ly/3K4mHOY"
+    },
+    {
+      "year": "Winter-20",
+      "link": "https://bit.ly/3r4NhOY"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3r9IQCz"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/34JdrQ2"
+    },
+    {
+      "year": "Summer-21",
+      "link": "https://bit.ly/3ng8MeU"
+    },
+    {
+      "year": "Summer-20",
+      "link": "https://bit.ly/3GkGAPp"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3th8SGV"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3HSo3Ks"
+    }
+  ],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhICdg_p8RkGQrTqNw4n34yxD_1F3MBI_4hdmTK39h4kccD7aNTI25xglw589g8I0WkjTJdWhgXfOvA-OcrwsTHphaMeRS73F8yh_AzQp8ZpG5bkIfACDCGaFpGKkODw5VZ7JW7Pb7w9kshe4FAQ-AedL882yjw4iZ-pNvwc_3QcHXv70jX9a3bf9hSkA",
+      "link": "https://bit.ly/3nCMgNg",
+      "alt_data": "Optical Fiber Communications by Gerd Keiser"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhfoLwK6JtKD3VZMuuQKoMzsvHL9eEKkHgj2kTzgVZz58TvbfVGxa1Q-KxAKnbRUuSrHpsMYcfdIIQuwi4k9UVxaQsliesnCMTIdqQC15OaPCFUioEf6JZo2Dty7qO0FADLJYtbirW90RzhhfDVoBF_2oCUHT8P51AhaPNyPymNRKPMDw9OUeAigsN0iQ",
+      "link": "https://bit.ly/3IhZQxz",
+      "alt_data": "Optical Fiber Communications by John M. Senior"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjsfGBbMcelx68U3KJFzJ23_YuJa8OeYAdLS8RelfIR4X9-v2aFV4YU-tYZ6LOa_TdVZpEOMRcI7uUP-tC7CCt2sgEjPUdtu_Jt_57D-tZ_MQwT6V8VhMFPb2wcSFNvA0XBUQEzj5ibW4YwOGmf6-oz7oF-E1nept6IlRZrn7OfbRJ6UdeXQLdy3M0oCA",
+      "link": "https://bit.ly/32fvzA8",
+      "alt_data": "Fiber optic Communication Systems by G. Agrawal"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
+}

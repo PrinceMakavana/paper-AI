@@ -1,0 +1,75 @@
+{
+  "subject_name": "IOT and applications",
+  "known_as": "IOT",
+  "subjecet_code": "3160716",
+  "syllabus": "https://bit.ly/3AjGXWT",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3160716.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3160716.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3160716.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3160716.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3160716.pdf"
+    },
+    {
+      "year": "Summer-2021",
+      "link": "https://gtu.ac.in/uploads/W2021/BE/3160716.pdf"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3CxV8t5"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3wgviaR"
+    },
+    {
+      "year": "Summer-17",
+      "link": "https://bit.ly/3mwper8"
+    },
+    {
+      "year": "Winter-17",
+      "link": "https://bit.ly/3EzrnZC"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "https://drive.google.com/file/d/1c6vsXpLLdzWReKxR3AAUErySNv3Gz5U8/view?usp=sharing",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7BoNopmRo8b-sjk1soSqtGaTqD0UJKZM2MTXQPeQFst3Xg8iAAo9Sh9kZLjz0_GBzWxWes-CtJ4DSTGUJGxGtrhhCZxFjV7vCw_48wXbpfeedxRttbhJgdHPUiJCwgCSmOf2Ii-G1j_StWNSW3dl3Rf9MNtNCuONy3TM29Wq8xsjJ6W3Il9SKmgPlGQ/s320/Screenshot_83.png",
+      "download_link": "https://drive.google.com/file/d/1c6vsXpLLdzWReKxR3AAUErySNv3Gz5U8/view?usp=sharing",
+      "alt_data": "IMP Question ansewer IOT and applications 3160714"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgKPHEnndgYRWUQcu18nsq5az7RUUgi8BT9zrOYu2M3yxJVkxwM-C4mUXYMStZCQcjyJlPMhHfIeUP5bajzYNHjRiHcwEuwhrw5oO14WhC36DbWBoaVf6xPqjDC-SKYabA3LBLjcgSlxbwENgpSULJf1V09NWeN5uc3wA75Iw1tvuWd-x41xVqaMMLjIw",
+      "download_link": "https://bit.ly/IOTDarshan",
+      "alt_data": "Darshan IOT and applications 3160714"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhPcOKJH_cxiAmCbYJFbVr0EfytSKVBDP1Ym6tDHFReSY-FOxuHL_Fb3FdkiiCCUzjaFeujW2BAz-9haMcwJPYFAjxfI-jVJuYfW4UjQ7FTNKO6cTT_UdT_7mufpTAXoI4CASuiWvFqJjyEDp-xRHFBBcMUIOqfAXSyH7AN_8hGx9Fb0fIuuhgEF1Xigg",
+      "download_link": "https://drive.google.com/file/d/1Xnv4ltUY6Ce91yx0fELx_BG1ZaspSMzE/view?usp=sharing",
+      "alt_data": "Building Blocks For IOT by River Publishers IOT and applications 3160714"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjkKsmvcy8D4kAxVL4pz25dVp7CnfT-LNS2GQnT9BelSQDcNv4iOrgeoYSHzvESS-yffRiLMqSsyPa0N2aGNlj3I6Ow7rwPx_bcLj3fRQLaZXo3aMILGHiuNd9M6P5YnVcQ-ySzQ5OXtmRhwtfswwddun_Gluozi6Lh9yrFpycXArzodFljkqA33ZnB2Q",
+      "download_link": "https://drive.google.com/file/d/1ymHT-a656SdlaKZ9yPI4kQGvuAwb4dR4/view?usp=sharing",
+      "alt_data": "IOT & Apps Technical Book (3160716) IOT and applications 3160714"
+    }
+  ]
+}

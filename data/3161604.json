@@ -1,0 +1,53 @@
+{
+  "subject_name": "Image Processing",
+  "known_as": "IP",
+  "subjecet_code": "3161604",
+  "syllabus": "https://bit.ly/3AhmAtG",
+  "old_paper": [
+    {
+      "year": "Winter-2024",
+      "link": "https://gtu.ac.in/uploads/S2024/BE/3161604.pdf"
+    },
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3161604.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3161604.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3jErBpo"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3xy9y9m"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/3Cr5YRU"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/3CykbfP"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjjqZDecRNsU2KNBpvfqlKZQ8rEeHG8ww_tkvcuB7aH5v4wTnef9Kov8NYpr9OCQaPuR2NaLUK2nhlk5tisck5dloVxDDlsTzuYTXDJ8ZYglR1zAAn_YnWgtVmP5C7QZRlix419mB9XZPsVA2JoEzwazP8ixs2PCXXiglANll8LW4ev5VbqvkCPxfUycw=s320",
+      "download_link": "https://bit.ly/3IKkoio",
+      "alt_data": "Pearson : "
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiB-agTzjlzMimJzl7ryEzqSw1zegkMM_SV5hk_CYYsEStXunBviZRkcQDlJqyv2ZQi3ojhH53TwcUZegGs9YKo63De_5bCZ2kqvUo3O7CEsBxm1WQ71iFRl13hWdgVqEj7DWi69wP4wKhvD838O_xP-jNPs_uia3zkvzoeTXGk_rLRbISkTKoqS5YLSQ=s320",
+      "download_link": "https://bit.ly/3g6eWKi",
+      "alt_data": "McGrawHill : "
+    }
+  ]
+}

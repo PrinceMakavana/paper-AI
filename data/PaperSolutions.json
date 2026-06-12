@@ -1,0 +1,664 @@
+{
+    "paper_list": [
+        {
+            "Subject_name": "IOT and applications",
+            "Subject_code": "3160716",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Winter",
+            "Url": "https://drive.google.com/file/d/1jKFsWVFOQQ7jQZO73ZxSw33Pea1OzeaA/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Signals and Systems",
+            "Subject_code": "3150912",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Summer",
+            "Url": "https://drive.google.com/file/d/1C4U7srdaCWj62KZBOVUb1_PFRQIlXaDZ/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Signals and Systems",
+            "Subject_code": "3150912",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Summer",
+            "Url": "https://drive.google.com/file/d/1h2Dzvf4mWicaBRdWYi3UH9MDjXop1cJu/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Signals and Systems",
+            "Subject_code": "3150912",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1SGzJhe5cb6AWQ2s-ChjfcuS4-oWRf0W8/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Computer Networks",
+            "Subject_code": "3150710",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1vNqYm77R27orjsZ1KIXbRG7dvLfZoJm4/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Computer Networks",
+            "Subject_code": "3150710",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1yz9cth_D8SJbtROLvmxMfp093zcuWV9r/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Machine Learning",
+            "Subject_code": "3170724",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1vAGAdeie9er_oR1Cunip2UjpzVhS1yTq/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Machine Learning",
+            "Subject_code": "3170724",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1Th-_CeRnEEwj4J5vYGpkTfANenKNLYlp/view?usp=share_link"
+        },
+        {
+            "Subject_name": "MCWC",
+            "Subject_code": "3170710",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1h3f_7ouAOUOC3aK1mblIp2zUAfZcZthu/view?usp=sharing"
+        },
+        {
+            "Subject_name": "MCWC",
+            "Subject_code": "3170710",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2018-Summer",
+            "Url": "https://drive.google.com/file/d/1MvU7VN202ESoLa_YYjxE4fqOgP7KW6TP/view?usp=sharing"
+        },
+        {
+            "Subject_name": "MCWC",
+            "Subject_code": "3170710",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/10iiUdEtQbhXKxkl9hXcKBV9OazFzn4Cz/view?usp=sharing"
+        },
+        {
+            "Subject_name": "MAD  - Mobile Application Development",
+            "Subject_code": "3170726",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1lLby6Tck5CXiJsUHOrXoPuZGtA4fkEN5/view?usp=sharing"
+        },
+        {
+            "Subject_name": "MAD  - Mobile Application Development",
+            "Subject_code": "3170726",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/10WysNRXcFLWZkjV_DlB_ZDKLpSI3A2Hc/view?usp=sharing"
+        },
+        {
+            "Subject_name": "IS - Information Security",
+            "Subject_code": "3170720",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021 - Winter ",
+            "Url": "https://drive.google.com/file/d/15H4k0kjXZZCAAZd7xQtT40m9QjR8-gfJ/view?usp=sharing"
+        },
+        {
+            "Subject_name": "IS - Information Security",
+            "Subject_code": "3170720",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022 - Summer ",
+            "Url": "https://drive.google.com/file/d/14ZCh_pdIKm4CZanzVf1h64vzs0rXDc5a/view?usp=sharing"
+        },
+        {
+            "Subject_name": "DS - Distributed System",
+            "Subject_code": "3170719",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1fojGUPD8KibYpSNu-Vx-MgZcGOW200yl/view?usp=sharing"
+        },
+        {
+            "Subject_name": "DS - Distributed System",
+            "Subject_code": "3170719",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1HmTp-piWBUE6uqCueSEmRaFtM7baAB_W/view?usp=share_link"
+        },
+        
+        {
+            "Subject_name": "CD - Complier Design",
+            "Subject_code": "3170701",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1zk2tKp3P10gDLLo-nCBxmxm54Kov8pKn/view?usp=sharing"
+        },
+        {
+            "Subject_name": "CD - Complier Design",
+            "Subject_code": "3170701",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2020-Winter",
+            "Url": "https://drive.google.com/file/d/1LiFlSAWP5PcRN23n3PGNaToDHaYeeyBV/view?usp=sharing"
+        },
+        {
+            "Subject_name": "CD - Complier Design",
+            "Subject_code": "3170701",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/12-kSsUAXzgnkg9M86DWb4j4El_n0E7-8/view?usp=sharing"
+        },
+        {
+            "Subject_name": "CD - Complier Design",
+            "Subject_code": "3170701",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1oz15CygyNQ0fJiu_rtAAczucVamH4psi/view?usp=sharing"
+        },
+        {
+            "Subject_name": "CD - Complier Design",
+            "Subject_code": "3170701",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1fiUNp-nU9PsjhmMmxwFNS8tVgvEa6cRp/view?usp=sharing"
+        },
+        
+        {
+            "Subject_name": "CC- CLOUD COMPUTING",
+            "Subject_code": "3170717",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1X-yvz7IvMuOh3BeCI2vRqo9updlEqiEH/view?usp=sharing"
+        },
+        {
+            "Subject_name": "CC- CLOUD COMPUTING",
+            "Subject_code": "3170717",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1wZe87hra0rWEU6LLfRIPKVc1stK8KDEQ/view?usp=share_link"
+        },
+        {
+            "Subject_name": "BDA - BIG DATA ANALYTICS",
+            "Subject_code": "3170722",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1HByd2pOGPJYEK0gXBHYjfqOtilvIdHr0/view?usp=sharing"
+        },
+        {
+            "Subject_name": "BDA - BIG DATA ANALYTICS",
+            "Subject_code": "3170722",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/15pHirxjsnMZrklmbjAj12SWjKQJaIr2A/view?usp=sharing"
+        },
+        {
+            "Subject_name": "BDA",
+            "Subject_code": "3170722",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/15pHirxjsnMZrklmbjAj12SWjKQJaIr2A/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Artificial Intelligence",
+            "Subject_code": "3170716",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://drive.google.com/file/d/1Zp04oyF-48sF0yI9qU2LzOftOxJ5e6Z2/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Artificial Intelligence",
+            "Subject_code": "3170716",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1SFNAHHHN5PFVbidWagF3dyOjIvt6J9eL/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Digital Forensics",
+            "Subject_code": "3170725",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2021-Winter",
+            "Url": "https://drive.google.com/file/d/1jFHaPJbbdLzIiWEY_Yre8R29axh6udqp/view?usp=share_link"
+        },
+        {
+            "Subject_name": "CPDP",
+            "Subject_code": "3150004",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2016-Summer",
+            "Url": "https://www.gtuapymaterials.com/2021/12/contributor-personality-development.html"
+        },
+        {
+            "Subject_name": "CPDP",
+            "Subject_code": "3150004",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2017-Summer",
+            "Url": "https://www.gtuapymaterials.com/2021/12/contributor-personality-development.html"
+        },
+        {
+            "Subject_name": "CPDP",
+            "Subject_code": "3150004",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2018-Summer",
+            "Url": "https://www.gtuapymaterials.com/2021/12/contributor-personality-development.html"
+        },
+        {
+            "Subject_name": "CPDP",
+            "Subject_code": "3150004",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2019-Summer",
+            "Url": "https://www.gtuapymaterials.com/2021/12/contributor-personality-development.html"
+        },
+        {
+            "Subject_name": "Basic Engineering Drawing and Graphics",
+            "Subject_code": "3110013",
+            "branch" : "CE/IT/EC/EE",
+            "Year": "2022-Summer",
+            "Url": "https://www.youtube.com/watch?v=_hJ-u9RwH8Y"
+        },
+        {
+            "Subject_name": "Probability and Statistics",
+            "Subject_code": "3130006",
+            "branch" : "CE/IT",
+            "Year": "2020-Summer",
+            "Url": "https://drive.google.com/file/d/1_udGcfklXAPZiSrZglE8EfHVERFCCfLV/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Probability and Statistics",
+            "Subject_code": "3130006",
+            "branch" : "CE/IT",
+            "Year": "2020-Winter",
+            "Url": "https://drive.google.com/file/d/18-W897hbixbLMnTYaCx94S4w2aicxXuS/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Operation Research",
+            "Subject_code": "3151910",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1yr09lB7YMyBRKiPEfbmzhhFX255LL2Dm/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Operation Research",
+            "Subject_code": "3151910",
+            "branch" : "CE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/15Uqb-EmDGXu2UJEF5r3FqFC-wCVwKS-5/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Structure",
+            "Subject_code": "3130704",
+            "branch" : "CE/IT",
+            "Year": "2020-Summer",
+            "Url": "https://drive.google.com/file/d/1B78qh5mf3kBwh_SCbw-s_ofdiAm7JxAM/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Building Constructiuon Technology",
+            "Subject_code": "3130607",
+            "branch" : "CE",
+            "Year": "2021-Summer",
+            "Url": "https://drive.google.com/file/d/1hlpPPOLXM9NanVX_BmHlmGzZoSyxuXPt/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Geotechnical Engineering",
+            "Subject_code": "3130606",
+            "branch" : "CE",
+            "Year": "2021-Summer",
+            "Url": "https://drive.google.com/file/d/1fqfkfFlYkekX_iVoTI8v1NCYskI90oxU/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Advanced Java Programming",
+            "Subject_code": "3160707",
+            "branch" : "CE/IT",
+            "Year": "2018-Summer",
+            "Url": "https://drive.google.com/file/d/1BEyoFkFBOGi9LPC10wMJR0EVPnTUl5v4/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Advanced Java Programming",
+            "Subject_code": "3160707",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/17ZgZYINKTfFHOfTtTdLhZE77Ta5M-d94/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Applied Mathematics for Electrical Engineering ",
+            "Subject_code": "3130908",
+            "branch" : "CE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1iZc-zLYuLGF5kVoFujAH9_bUN0PnCHgM/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Basic Civil Engineering",
+            "Subject_code": "3110004",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1WEvSLcTHsUm-SFQwtakGQhiidd1EhV7V/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Basic Electronics ",
+            "Subject_code": "3110016",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1vPQNTi4Z5tipMz_vIcFKlIcp0ZflM0I0/view?usp=share_link"
+        },
+        {
+            "Subject_name": "Basic Electrical Engineering  ",
+            "Subject_code": "3110005",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1gO2E9h2hjU_yrFSbtbfgKHdnu4gYWdw9/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Basic Mechanical Engineering",
+            "Subject_code": "3110006",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2020-Summer",
+            "Url": "https://drive.google.com/file/d/1qKotUBIBt4BacaThvpx3tJHg9mq8WYeh/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Basic Mechanical Engineering",
+            "Subject_code": "3110006",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Summer",
+            "Url": "https://drive.google.com/file/d/1ICCuqwq16nE94ldF93fuHcNMyAMfo1Ec/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Basic Mechanical Engineering",
+            "Subject_code": "3110006",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1N-dMYZf13-77rhojy-wITz76INvwKwtI/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Compiler Design",
+            "Subject_code": "2170701",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1zk2tKp3P10gDLLo-nCBxmxm54Kov8pKn/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Complex Variables and Partial Dierential Equations",
+            "Subject_code": "3130005",
+            "branch" : "CE/IT",
+            "Year": "2020-Summer",
+            "Url": "https://drive.google.com/file/d/17wVsVL5Xl9YiO4s2bDBeWl6k7GUACzBb/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Complex Variables and Partial Dierential Equations",
+            "Subject_code": "3130005",
+            "branch" : "CE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1rF-Cz7Ly86bsdoTLDrwzHKUUdUNl6h7q/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Mining",
+            "Subject_code": "2170715",
+            "branch" : "CE/IT",
+            "Year": "2017-Winter",
+            "Url": "https://drive.google.com/file/d/1CgQ3hZ6Fkc1loLyMmb4qkBYnUbWXmfSu/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Mining",
+            "Subject_code": "2170715",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1vZu3f1ZoAi9VNUQF7f-DtjhBNNk7M-ds/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Database Management Systems",
+            "Subject_code": "2130703",
+            "branch" : "CE/IT",
+            "Year": "2018-Summer",
+            "Url": "https://drive.google.com/file/d/1nKONNN3QErBqtzMLD-F1-6XzSAqt92Td/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2016-Winter",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2017-Summer",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2017-Winter",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2018-Summer",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2018-Winter",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Communication & Networking",
+            "Subject_code": "2171008",
+            "branch" : "EC",
+            "Year": "2019-Summer",
+            "Url": "https://bit.ly/3RBA9gj"
+        },
+        {
+            "Subject_name": "Data Structure",
+            "Subject_code": "2130702",
+            "branch" : "CE/IT",
+            "Year": "2018-Summer",
+            "Url": "https://drive.google.com/file/d/1CxW80jFlArXoclGyyiqfCcrPwutIev7r/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Structure",
+            "Subject_code": "2130702",
+            "branch" : "CE/IT",
+            "Year": "2019-Summer",
+            "Url": "https://drive.google.com/file/d/1WbyaXR-TEpAwDNc96klRnCgVEl10m3F2/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Data Structure",
+            "Subject_code": "2130702",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1YKxgvmwZSYrEbcYWHPhdDP4rtqAgrApu/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Digital Singal Processing",
+            "Subject_code": "3171003",
+            "branch" : "EC/EE/IT",
+            "Year": "2016-Winter",
+            "Url": "https://bit.ly/3d2KzXl"
+        },
+        {
+            "Subject_name": "Digital Singal Processing",
+            "Subject_code": "3171003",
+            "branch" : "EC/EE/IT",
+            "Year": "2017-Summer",
+            "Url": "https://bit.ly/3d2KzXl"
+        },
+        {
+            "Subject_name": "Digital Singal Processing",
+            "Subject_code": "3171003",
+            "branch" : "EC/EE/IT",
+            "Year": "2017-Winter",
+            "Url": "https://bit.ly/3d2KzXl"
+        },
+        {
+            "Subject_name": "Digital Singal Processing",
+            "Subject_code": "3171003",
+            "branch" : "EC/EE/IT",
+            "Year": "2018-Summer",
+            "Url": "https://bit.ly/3d2KzXl"
+        },
+        {
+            "Subject_name": "Environmental Science",
+            "Subject_code": "3110007",
+            "branch" : "EC/EE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/10wef77hqS9PQ_biu7gUbjd1ihutFn4aO/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Engineering Graphics and Design",
+            "Subject_code": "3110013",
+            "branch" : "CE/EC/EE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1vp5rlDXoGNaiKZEfDWr1kfnoB1yxVR5C/view?usp=sharing"
+        },
+        {
+            "Subject_name": "English",
+            "Subject_code": "3110002",
+            "branch" : "CE/EC/EE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1QlCAkcdz-bHDrQg-wsfV2ptqyUESVMv9/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Information And Network Security",
+            "Subject_code": "2170709",
+            "branch" : "CE/EC/EE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1Qbyyof3Gi4VZx_pBRLplyAGRtpYdUWlY/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Mathematics-I",
+            "Subject_code": "3110014",
+            "branch" : "CE/EC/EE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1qeyLe5m3aoGDxASJ-HDNqHB16SoKyP7B/view?usp=sharing"
+        },
+        {
+            "Subject_name": "MCWC",
+            "Subject_code": "2170710",
+            "branch" : "CE",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1ySrfxP-xTr3dvirLMftWbRKhn0fobENM/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Microwave Engineering",
+            "Subject_code": "2171001",
+            "branch" : "CE",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1pxSnczoy-8IIVCRq8jtW2yckIvaOLE2D/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Microwave Engineering",
+            "Subject_code": "2171001",
+            "branch" : "CE",
+            "Year": "2017-Summer",
+            "Url": "https://drive.google.com/file/d/1pxSnczoy-8IIVCRq8jtW2yckIvaOLE2D/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Microwave Engineering",
+            "Subject_code": "2171001",
+            "branch" : "CE",
+            "Year": "2017-Winter",
+            "Url": "https://drive.google.com/file/d/1pxSnczoy-8IIVCRq8jtW2yckIvaOLE2D/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Microwave Engineering",
+            "Subject_code": "2171001",
+            "branch" : "CE",
+            "Year": "2016-Winter",
+            "Url": "https://drive.google.com/file/d/1pxSnczoy-8IIVCRq8jtW2yckIvaOLE2D/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Operating System",
+            "Subject_code": "2140702",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1PKmW_5WNrqov2IIlXqMwPoghyf85TN5t/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Physics Group - II",
+            "Subject_code": "3110018",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1lNSBaRWCeo1w5ONT8KoLFEa-FJbBtl9Y/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Programming for Problem Solving",
+            "Subject_code": "3110003",
+            "branch" : "CE/IT/EE/EC",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1LIc6hidW4PCNy1x5MvR70maQDMddM8nR/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Satellite Communication",
+            "Subject_code": "2171007",
+            "branch" : "EC",
+            "Year": "2016-18",
+            "Url": "https://drive.google.com/file/d/13sk3jA-W8BqD5EAB78v7uNRUDXhOeoBd/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Software Engineering",
+            "Subject_code": "2160701",
+            "branch" : "CE/IT",
+            "Year": "2018-Summer",
+            "Url": "https://drive.google.com/file/d/1rolV3JY7YO6RI1QrHxaKlKXsQ0bUd9OB/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Software Engineering",
+            "Subject_code": "2160701",
+            "branch" : "CE/IT",
+            "Year": "2019-Summer",
+            "Url": "https://drive.google.com/file/d/1iUKMVW4sdbmB5SNOGBcFGZHubaDTYtBJ/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Software Engineering",
+            "Subject_code": "2160701",
+            "branch" : "CE/IT",
+            "Year": "2019-Winter",
+            "Url": "https://drive.google.com/file/d/1IBb6H6Nr4WRJWY-4KECn04bN7oegzDQl/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Software Engineering",
+            "Subject_code": "2160701",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1FUeJjBF5aa9BqM6iywmKGVK3La2AFCne/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Theory of Computation",
+            "Subject_code": "2160704",
+            "branch" : "CE/IT",
+            "Year": "2018-Winter",
+            "Url": "https://drive.google.com/file/d/1ChB_sP_6bvM_7CqmVlRk0G_njcU4KjAv/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Web Technology and Programming",
+            "Subject_code": "",
+            "branch" : "CE/IT",
+            "Year": "",
+            "Url": "https://drive.google.com/file/d/1PuUr2DecaV8ydkW667lobuIA9Wy0c2S9/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Wireless Communication",
+            "Subject_code": "3070710",
+            "branch" : "CE/IT",
+            "Year": "2016-Winter",
+            "Url": "https://drive.google.com/file/d/1Fz8u0eDq0mVJA06p8LSABXCuTYLWAeLf/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Wireless Communication",
+            "Subject_code": "3070710",
+            "branch" : "CE/IT",
+            "Year": "2017-Summer",
+            "Url": "https://drive.google.com/file/d/1Fz8u0eDq0mVJA06p8LSABXCuTYLWAeLf/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Wireless Communication",
+            "Subject_code": "3070710",
+            "branch" : "CE/IT",
+            "Year": "2017-Winter",
+            "Url": "https://drive.google.com/file/d/1Fz8u0eDq0mVJA06p8LSABXCuTYLWAeLf/view?usp=sharing"
+        },
+        {
+            "Subject_name": "Wireless Communication",
+            "Subject_code": "3070710",
+            "branch" : "CE/IT",
+            "Year": "2017-Summer",
+            "Url": "https://drive.google.com/file/d/1Fz8u0eDq0mVJA06p8LSABXCuTYLWAeLf/view?usp=sharing"
+        }
+    ]
+}

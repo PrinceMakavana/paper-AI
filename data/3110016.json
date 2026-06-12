@@ -1,0 +1,52 @@
+{
+  "subject_name": "Basic Electronics ",
+  "known_as": "BE",
+  "subjecet_code": "3110016",
+  "syllabus": "https://bit.ly/3k59IBL",
+  "old_paper": [
+    {
+      "year": "Winter-2023",
+      "link": "https://gtu.ac.in/uploads/S2023/BE/3110016.pdf"
+    },
+    {
+      "year": "Summer-2023",
+      "link": "https://gtu.ac.in/uploads/W2023/BE/3110016.pdf"
+    },
+    {
+      "year": "Winter-2022",
+      "link": "https://gtu.ac.in/uploads/S2022/BE/3110016.pdf"
+    },
+    {
+      "year": "Summer-2022",
+      "link": "https://gtu.ac.in/uploads/W2022/BE/3110016.pdf"
+    },
+    {
+      "year": "Winter-19",
+      "link": "https://bit.ly/3hFIqAm"
+    },
+    {
+      "year": "Summer-19",
+      "link": "https://bit.ly/2VDtgDn"
+    },
+    {
+      "year": "Winter-18",
+      "link": "https://bit.ly/3fYyvoe"
+    },
+    {
+      "year": "Summer-18",
+      "link": "https://bit.ly/36GhSJa"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "prectical": "",
+  "viva_questions": "",
+  "imp_material": "",
+  "assignments": "",
+  "Books": [
+    {
+      "img": "https://1.bp.blogspot.com/-Hck_9MPBOyE/YDSIFUwoUrI/AAAAAAAAANk/H9C6GavG12QWxUTRXxxp9XstPSV_LdHhgCNcBGAsYHQ/s340/Screenshot_437.png",
+      "download_link": "https://bit.ly/3wJNzvx",
+      "alt_data": "Basic Electronics Pearson "
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "subject_name": "Data Analysis and Visualization",
+    "subjecet_code": "3161613",
+    "known_as": "DAV",
+    "syllabus": "https://bit.ly/3lDvvRN",
+    "old_paper": [],
+    "Books": [
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEi3z8tAe50zxKCj_0HAJ-k2bmLWx2X7AK8iznLqlZjP8oZYwCUj9s6nK9Mzhms6hDbxQjfxZVKH8T7kK5zLELuzvZ3HF0tSDM8gb_n50gh_maTRWLzHpKv95tww_Di_Hubi31qBP20vV5nJQdmePmyF8nrG1m28v5tpc_3loDQY412W_-pdI6_iaz8Psg",
+            "download_link": "https://bit.ly/3ryBtox",
+            "alt_data": "Data Science For Dummies"
+        },
+        {
+            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiiVWM2z7PEjaoFlxGjVFT6Ikf-ZG1UFM6DLgxn6P3v-DLmjFtnKTGIu7hu9FGWTY7ZSKqVBFyIsypuP_Oubvs_GR5AIHKFX-E1S0eEUv4Z4j7IYZiN53pcPM9t_M-GZMvfqRbsUMqUDXDt-1DuIUv7vrgqn128eSkHjwZGDhE7vv_i4JygG-Lt5991WQ",
+            "download_link": "https://bit.ly/3He2Jzr",
+            "alt_data": "O'Reilly Media"
+        }
+    ],
+    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+    "assignments": "",
+    "imp_material": "",
+    "viva_questions": "",
+    "prectical": ""
+}
