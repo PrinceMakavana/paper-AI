@@ -92,6 +92,7 @@ export default function ChatPage() {
   const [subjectsLoading, setSubjectsLoading] = useState(false);
   const [currentSubject, setCurrentSubject] = useState<SubjectDetail | undefined>(undefined);
   const [catalogFindMode, setCatalogFindMode] = useState(false);
+  const [chatSelectionReady, setChatSelectionReady] = useState(false);
   const documentsRef = useRef<DocumentMetaData[]>([]);
   const { isUserLoggedIn, user, refreshUser } = useAuth();
   const { showAlert } = useAlert();
@@ -118,6 +119,13 @@ export default function ChatPage() {
     notation: availablePageCount >= 1000 ? "compact" : "standard",
     maximumFractionDigits: availablePageCount >= 1000 ? 1 : 0,
   }).format(Math.max(availablePageCount, 0));
+
+  const showFindMaterialsHeader =
+    !currentSubject && !currentDocument && (catalogFindMode || !chatSelectionReady);
+  const isFindMaterialsActive =
+    !currentSubject && !currentDocument && (catalogFindMode || !chatSelectionReady);
+  const effectiveCatalogFindMode =
+    catalogFindMode || (!chatSelectionReady && !currentSubject && !currentDocument);
 
   const handleLogoutClick = () => {
     setIsLogoutConfirmOpen(true);
@@ -180,6 +188,7 @@ export default function ChatPage() {
           setCurrentDocument(match);
           setSummary(match.summary ?? "");
         }
+        setChatSelectionReady(true);
       }
       return fetched;
     } catch (error) {
@@ -224,6 +233,7 @@ export default function ChatPage() {
     );
 
     if (savedDocumentId) {
+      setCatalogFindMode(false);
       return;
     }
 
@@ -235,18 +245,20 @@ export default function ChatPage() {
             setCatalogFindMode(false);
             setCurrentSubject(subject);
             setCurrentDocument(undefined);
+            setChatSelectionReady(true);
           }
         })
         .catch(() => {
           localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
+          setCatalogFindMode(true);
+          setChatSelectionReady(true);
         });
 
       return () => { ignore = true; };
     }
 
-    if (localStorage.getItem(CATALOG_FIND_MODE_STORAGE_KEY) === "1") {
-      setCatalogFindMode(true);
-    }
+    setCatalogFindMode(true);
+    setChatSelectionReady(true);
   }, []);
 
   useEffect(() => {
@@ -726,7 +738,7 @@ export default function ChatPage() {
           {/* Left column */}
           <div className="flex flex-col gap-4 min-h-0 h-full lg:overflow-hidden">
 
-            {catalogFindMode && !currentSubject && !currentDocument ? (
+            {showFindMaterialsHeader ? (
               <div
                 className="animate-fade-up ed-panel shrink-0"
                 style={{
@@ -875,7 +887,7 @@ export default function ChatPage() {
               <ChatInterFace
                 currentDocument={currentDocument}
                 currentSubject={currentSubject}
-                catalogFindMode={catalogFindMode}
+                catalogFindMode={effectiveCatalogFindMode}
                 selectedModel={selectedModel}
                 availableTokenCount={availableTokenCount}
                 onTokenBalanceChange={setAvailableTokenCount}
@@ -897,9 +909,9 @@ export default function ChatPage() {
               className="ed-panel w-full text-left transition-colors"
               style={{
                 padding: "0.75rem 1rem",
-                backgroundColor: catalogFindMode && !currentSubject && !currentDocument ? "var(--ed-accent)" : "var(--ed-surface)",
-                color: catalogFindMode && !currentSubject && !currentDocument ? "#ffffff" : "var(--ed-ink)",
-                border: catalogFindMode && !currentSubject && !currentDocument ? "none" : "1px solid var(--ed-rule)",
+                backgroundColor: isFindMaterialsActive ? "var(--ed-accent)" : "var(--ed-surface)",
+                color: isFindMaterialsActive ? "#ffffff" : "var(--ed-ink)",
+                border: isFindMaterialsActive ? "none" : "1px solid var(--ed-rule)",
               }}
             >
               <span className="font-fraunces" style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.05rem" }}>
@@ -909,7 +921,7 @@ export default function ChatPage() {
                 style={{
                   fontSize: "0.75rem",
                   marginTop: "0.2rem",
-                  color: catalogFindMode && !currentSubject && !currentDocument ? "rgba(255,255,255,0.85)" : "var(--ed-muted)",
+                  color: isFindMaterialsActive ? "rgba(255,255,255,0.85)" : "var(--ed-muted)",
                 }}
               >
                 Books, papers &amp; syllabus across all subjects

@@ -28,12 +28,12 @@ const userSchema = new mongoose.Schema(
         available_token_count: {
             type: Number,
             required: true,
-            default: 50000,
+            default: 5000,
         },
         available_page_count: {
             type: Number,
             required: true,
-            default: 300,
+            default: 30,
         },
         isEmailVerified: {
             type: Boolean,
