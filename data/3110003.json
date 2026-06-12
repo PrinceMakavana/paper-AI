@@ -2,7 +2,7 @@
   "subject_name": "Programming For Problem Solving ",
   "known_as": "PPS",
   "subjecet_code": "3110003",
-  "syllabus": "https://bit.ly/3xmlbAR",
+  "syllabus": "https://drive.usercontent.google.com/download?id=1mkaaMsuuXJimE4PImQmBuJLTPnW0QO7z&export=download",
   "old_paper": [
     {
       "year": "Winter-2023",
@@ -26,23 +26,23 @@
     },
     {
       "year": "Summer-20",
-      "link": "https://bit.ly/2WUTYI4"
+      "link": "https://drive.google.com/uc?export=download&id=1ylC1mEf6w_2LjP8ybkxkQMVruBLoM6Db"
     },
     {
       "year": "Winter-19",
-      "link": "https://bit.ly/3wttUQt"
+      "link": "https://drive.usercontent.google.com/download?id=1A5Z7-3BfTbhjehz_FMlb9MTCa20W4x_s&export=download"
     },
     {
       "year": "Summer-19",
-      "link": "https://bit.ly/3AQplDp"
+      "link": "https://drive.usercontent.google.com/download?id=1hwc51iR0lGRB9DLxM2SgySaDeD90ecY1&export=download"
     },
     {
       "year": "Summer-18",
-      "link": "https://bit.ly/3jQydks"
+      "link": "https://drive.google.com/uc?export=download&id=1bWIC2np5YFojklwBN0zKkieN54kSFfM7"
     },
     {
       "year": "Winter-18",
-      "link": "https://bit.ly/2UAG5gX"
+      "link": "https://drive.usercontent.google.com/download?id=1FtNtpdVUeOLJNqRtaBUTTtmOZTI0jV0b&export=download"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -53,8 +53,19 @@
   "Books": [
     {
       "img": "https://1.bp.blogspot.com/-IlkJv87CPrM/YDSJp5w_1xI/AAAAAAAAAOE/K4O-hIakBuIk5oh1CBKAjkEsxxmH4Z4SQCNcBGAsYHQ/s520/Screenshot_440.png",
-      "download_link": "https://bit.ly/3AFO2lM",
-      "alt_data": "C Notes For Professional"
+      "download_link": "https://drive.usercontent.google.com/download?id=1seT1zAktRcjatP9lqzH-JWVIPYkI5_K-&export=download",
+      "alt_data": "C Notes For Professional",
+      "book_id": "3110003-0",
+      "title": "C Notes For Professional",
+      "pageindex_status": "ready",
+      "pageindex_s3_uri": "s3://pageindex-json-store/pageindex/books/3110003/3110003-0-page_index.json",
+      "pageindex_size_bytes": 1420523,
+      "indexed_at": "2026-06-12",
+      "index_version": 1
     }
-  ]
+  ],
+  "chat_mode": "subject",
+  "primary_book_id": "3110003-0",
+  "indexed_book_count": 1,
+  "pageindex_status": "ready"
 }

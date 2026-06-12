@@ -59,6 +59,7 @@ async function userHasRunningJob(userId) {
 async function createHostedJob({
     user_id,
     source_email,
+    mailtm_password_enc,
     has_file,
     original_filename,
     mime_type,
@@ -88,6 +89,7 @@ async function createHostedJob({
             mime_type: mime_type ?? null,
             file_size: file_size ?? null,
         },
+        mailtm_password_enc: mailtm_password_enc ?? null,
         file_staging_path: file_staging_path ?? null,
         index_status: has_file ? HOSTED_INDEX_STATUS.PROCESSING : HOSTED_INDEX_STATUS.SKIPPED,
         page_credits_charged: page_credits_charged ?? 0,

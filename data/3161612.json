@@ -1,24 +1,24 @@
 {
-    "subject_name": "Mobile Application Development",
-    "subjecet_code": "3161612",
-    "known_as": "MAD",
-    "syllabus": "https://bit.ly/3yGDHop",
-    "old_paper": [],
-    "Books": [
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhz0R11RFMN_4dZfiMvGDzg1GBNlnZA1jRToOxXCvJN-0M1Z4h17hiidBwisc0gv9FeFKfItCXV8ZpfV6ChsnAOR5siyTENlM2iYM4vgW9Gpx3gZo-Y-ld7w2t9IOlF7RImQKoHPqLY9wdgHQVZ4HBhpYS3HOg75cXfiiEkyv2uOXrP90kl9YPlbGgPdQ",
-            "download_link": "https://bit.ly/3rYwlKJ",
-            "alt_data": "Wrox"
-        },
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhM2vOFYG_t0fADh891036rT_E9VrzN927v-iWHQtBg8mzfqZRoNxH_V7oFwpEATanhcz4HCX1KH1KJX7gscy1Eoo0uRPXbfnUD8_5uuRC3QpyANIY6jWcPyRXEp5g-0p6gXqlYfGsw6OTGmZjL-o5i_Tn-qRyMUCu-KxsCCUXsDmEG-iFxeQl9gSNIbg",
-            "download_link": "https://bit.ly/3G9oLln",
-            "alt_data": "Pearson"
-        }
-    ],
-    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
-    "assignments": "",
-    "imp_material": "",
-    "viva_questions": "",
-    "prectical": ""
+  "subject_name": "Mobile Application Development",
+  "subjecet_code": "3161612",
+  "known_as": "MAD",
+  "syllabus": "https://drive.google.com/uc?export=download&id=1-dJS-uolyfj663xnHWL6V5agBcKedSFD",
+  "old_paper": [],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhz0R11RFMN_4dZfiMvGDzg1GBNlnZA1jRToOxXCvJN-0M1Z4h17hiidBwisc0gv9FeFKfItCXV8ZpfV6ChsnAOR5siyTENlM2iYM4vgW9Gpx3gZo-Y-ld7w2t9IOlF7RImQKoHPqLY9wdgHQVZ4HBhpYS3HOg75cXfiiEkyv2uOXrP90kl9YPlbGgPdQ",
+      "download_link": "http://library.lol/main/B1972EBA49E3DC76C610AA1AB55D9F7C",
+      "alt_data": "Wrox"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhM2vOFYG_t0fADh891036rT_E9VrzN927v-iWHQtBg8mzfqZRoNxH_V7oFwpEATanhcz4HCX1KH1KJX7gscy1Eoo0uRPXbfnUD8_5uuRC3QpyANIY6jWcPyRXEp5g-0p6gXqlYfGsw6OTGmZjL-o5i_Tn-qRyMUCu-KxsCCUXsDmEG-iFxeQl9gSNIbg",
+      "download_link": "http://library.lol/main/19CFB6714ABE00DB01F1C84C33588466",
+      "alt_data": "Pearson"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
 }

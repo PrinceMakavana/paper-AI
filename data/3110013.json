@@ -2,7 +2,7 @@
   "subject_name": "Engineering Graphics & Design ",
   "known_as": "EGD",
   "subjecet_code": "3110013",
-  "syllabus": "https://bit.ly/2T1MYaO",
+  "syllabus": "https://drive.usercontent.google.com/download?id=1579Vuoc9D5FAPccGkKrY356dtm1zJk4Y&export=download",
   "old_paper": [
     {
       "year": "Winter-2023",
@@ -30,19 +30,19 @@
     },
     {
       "year": "Winter-19",
-      "link": "https://bit.ly/3z0zGe0"
+      "link": "https://drive.google.com/uc?export=download&id=1AH45d-asG6zJLh5BN9nidaO6oylljW41"
     },
     {
       "year": "Summer-19",
-      "link": "https://bit.ly/3wNLpLj"
+      "link": "https://drive.google.com/uc?export=download&id=1jNULvg2H5H8LEA4_5c-N2KnsAZOM_Pxp"
     },
     {
       "year": "Winter-18",
-      "link": "https://bit.ly/3raMhss"
+      "link": "https://drive.google.com/uc?export=download&id=1l3-4bqkkv_sCesJRgrhwCRzMH7ZviUKy"
     },
     {
       "year": "Summer-18",
-      "link": "https://bit.ly/3fXXSql"
+      "link": "https://drive.google.com/uc?export=download&id=1TYB70GhWBYEqyf89gL9bSX1nIj2aZY7_"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -53,8 +53,19 @@
   "Books": [
     {
       "img": "https://1.bp.blogspot.com/-bE2BD2IOoBE/YDSIi4XnZHI/AAAAAAAAANs/N5XW5Q871qsClrtNFHPizqFAVYYEMxSywCNcBGAsYHQ/s765/Screenshot_438.png",
-      "download_link": "https://bit.ly/3z1opKu",
-      "alt_data": "Engineering Graphics & Design Notes"
+      "download_link": "https://drive.google.com/uc?export=download&id=1rofzbwaEaDhqh2Fh_VsfE3yo0ul0MV2s",
+      "alt_data": "Engineering Graphics & Design Notes",
+      "book_id": "3110013-0",
+      "title": "Engineering Graphics & Design Notes",
+      "pageindex_status": "ready",
+      "pageindex_s3_uri": "s3://pageindex-json-store/pageindex/books/3110013/3110013-0-page_index.json",
+      "pageindex_size_bytes": 246010,
+      "indexed_at": "2026-06-12",
+      "index_version": 1
     }
-  ]
+  ],
+  "chat_mode": "subject",
+  "primary_book_id": "3110013-0",
+  "indexed_book_count": 1,
+  "pageindex_status": "ready"
 }

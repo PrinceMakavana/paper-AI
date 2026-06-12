@@ -66,6 +66,10 @@ const pageIndexHostedJobSchema = new mongoose.Schema(
             default: null,
             trim: true,
         },
+        mailtm_password_enc: {
+            type: String,
+            default: null,
+        },
         pageindex_password_enc: {
             type: String,
             default: null,

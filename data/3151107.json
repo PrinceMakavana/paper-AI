@@ -2,7 +2,7 @@
   "subject_name": "Advance Microcontroller",
   "subjecet_code": "3151107",
   "known_as": "AM",
-  "syllabus": "https://bit.ly/2ULKSfA",
+  "syllabus": "https://drive.google.com/file/d/1ACUDgJdQ0lKAmywzVho1L8eLThp27LUr/view?usp=sharing",
   "old_paper": [
     {
       "year": "Winter-2024",
@@ -34,23 +34,23 @@
     },
     {
       "year": "Winter-20",
-      "link": "https://bit.ly/3mMbatF"
+      "link": "https://drive.google.com/uc?export=download&id=1JyRXGS7n4zzIGMa7OCfC1sRChR1Bn63R"
     }
   ],
   "Books": [
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjC_srQSCmQxXseJ1r8x-mLPA04NkN18-3Xee0QkKkZxL-xFdDRquRaa6wvOHzT2nS29ugplqk9cVOdTMsE0LjHf5UJeUbRhQg0HZp6LBWYaOT1yVXOqO3f7bSwPNAdf89Fr-0OrYUQyvfkA_F5UAsGi5iQo_fliN0hDqKwom090Gp_R97DHaX8raz0hg",
-      "link": "https://bit.ly/3Ecrzxd",
+      "link": "https://drive.google.com/uc?export=download&id=1SoZa93ABRfYxklHbhbgd3MAI2LEQmBKJ",
       "alt_data": "Programming and Architecture by Mazidi"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiuzCF1f0W5QB4-72WPh_n6-D451tQGdEAOiTFFL39Fpi_zaS6cUwiIj0rtdv_JWcX-RX-ChYHJT4i_tKr3tr-yClloXR-fm3Hbewatw_bTcZSzJZFJ7nHYVMXZ3fJnnSarztxwrMjfo2eWOrLt37vsxrFPkc8415a9x17_P1uLdLh_4qBGGvQ7uJ967w",
-      "link": "https://bit.ly/3EcLMmB",
+      "link": "https://drive.google.com/uc?export=download&id=1rsi4Fojo0xCHg-WAZKt-QzImRKEGpBjF",
       "alt_data": "ARM Architecture by Steve Furber"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjz5ukiYGvQua5Pin_VthX8rl-wQ5GdtpQWJX2N4LqC0kBTXce5gx9lsD4OrHDbFwd_cUCMLknCN7U27OeHFAnkEwdwxGD9WSQ4Wd_VV8GSCykvAXTaiWJFpDRx9Qdt0sLlhfL0g_uQpdH7HN5-oHGN2R0mtC3AVlIIbT58DK29YyigHzJMKS6t3LmAxw",
-      "link": "https://bit.ly/3H1Co6S",
+      "link": "https://drive.google.com/uc?export=download&id=12eIz4HjiA4yqoMUiLcCTS56PUiJ-RU-w",
       "alt_data": "Assembly Language by Christopher Hindi"
     }
   ],

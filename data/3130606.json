@@ -2,7 +2,7 @@
   "subject_name": "Geotechnical Engineering",
   "known_as": "GE",
   "subjecet_code": "3130606",
-  "syllabus": "https://bit.ly/3fkzcIu",
+  "syllabus": "https://drive.google.com/uc?export=download&id=1siPhVDgQGsTDi18D6v6M5-A4i5AFQLKq",
   "old_paper": [
     {
       "year": "Winter-2023",
@@ -48,19 +48,30 @@
   "assignments": "",
   "Books": [
     {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhFiga4QNiGR89ZwS4Ug_dFEFtdHCuL1yCUkU8e2PSb9yyofCggYhxLyJ_IQarmVYoB-BJqK8wUwaZZrDlqQHp1wiLzWyLN7FMWX3D_FwkwiadgDPCmmPBEUp9izNzeCc-kHOnaUDdjWvsW049A3lgC65LBZcd7RIv-MpD-jftaLJlVxE3BKRWsXPhYSQ",
+      "download_link": "https://drive.google.com/uc?export=download&id=1iAAG-KbkLfPF_aGXx7gp5ukwGjzuPOMp",
+      "alt_data": "Venkatramaiah, C - Geotechnical engineering-New Age International (P) Ltd., Publishers (2006)",
+      "book_id": "3130606-0",
+      "title": "Venkatramaiah, C - Geotechnical engineering-New Age International (P) Ltd., Publishers (2006)",
+      "pageindex_status": "ready",
+      "pageindex_s3_uri": "s3://pageindex-json-store/pageindex/books/3130606/3130606-0-page_index.json",
+      "pageindex_size_bytes": 3164308,
+      "indexed_at": "2026-06-12",
+      "index_version": 1
+    },
+    {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg_oFGfuJIKKPSkx93oDz5FYKuDAHxXJOwptJJ7eGxt_W-0Lvnjr0EwvAxVx3cQcZZ7eIBaBcobNSoF5lc7dwxHT56MfXOqTC-uVYSefgvjO1XWHSFzAR3Y9Nonk6aHBoIsaza7DyrX4CikL6YH1HZjLpN8sBKf3CChqQeWQwKsASQV1I_wNgnuG-EwUw",
-      "download_link": "https://bit.ly/3J7SUUR",
+      "download_link": "https://drive.google.com/uc?export=download&id=15FrT1B9OlPlaub7xuJMDJfnW6ETousq_",
       "alt_data": "Braja M. Das, Khaled Sobhan - Principles of Geotechnical Engineering, SI edition-Cengage Learning (2013)"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgO0plJcS0zCVrLNlGA1DW3pRxRd8hGMFpaEM4JeneI37aDUzPuaXEyuChFUQqnx9P4sS1mmFcEAI_cIwm5aijjXHmJxILS3I2EvFediopXlCjGtCoIe-oZoeoW8V9arkWPKCaDEbwI5MaWRQ6WLKCh3DGq90PDRU2NoK2EFjdr22VXdokWlVpg2zE8YA",
-      "download_link": "https://bit.ly/3piIQAH",
+      "download_link": "https://drive.google.com/uc?export=download&id=1rfuajMtLJH8um93Yc911PYMcxHELUa2u",
       "alt_data": "V.N.S. Murthy - Geotechnical Engineering_ Principles and Practices of Soil Mechanics and Foundation Engineering (Civil and Environmental Engineering)-CRC Press (2002)"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhFiga4QNiGR89ZwS4Ug_dFEFtdHCuL1yCUkU8e2PSb9yyofCggYhxLyJ_IQarmVYoB-BJqK8wUwaZZrDlqQHp1wiLzWyLN7FMWX3D_FwkwiadgDPCmmPBEUp9izNzeCc-kHOnaUDdjWvsW049A3lgC65LBZcd7RIv-MpD-jftaLJlVxE3BKRWsXPhYSQ",
-      "download_link": "https://bit.ly/3yN4kc5",
-      "alt_data": "Venkatramaiah, C - Geotechnical engineering-New Age International (P) Ltd., Publishers (2006)"
     }
-  ]
+  ],
+  "chat_mode": "subject",
+  "primary_book_id": "3130606-0",
+  "indexed_book_count": 1,
+  "pageindex_status": "partial"
 }

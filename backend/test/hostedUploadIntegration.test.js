@@ -1,14 +1,14 @@
 import { test } from 'tap';
-import { generateDummySourceEmail } from '../utils/generateDummyEmail.js';
 import { mapHostedJobToIndexStatus } from '../services/pageindexHosted/jobHelpers.js';
 import { JOB_STEPS, JOB_STATUS } from '../utils/pageindexHostedJobConstants.js';
 import IndexStatus from '../utils/enums.js';
+import { deriveLocalPart } from '../utils/provisionMailTmInbox.js';
 
-test('generateDummySourceEmail returns unique local-part emails', (t) => {
-    const emailA = generateDummySourceEmail();
-    const emailB = generateDummySourceEmail();
-    t.match(emailA, /^[a-f0-9]+-[a-f0-9]+@yopmail\.com$/);
-    t.not(emailA, emailB);
+test('deriveLocalPart returns unique local parts', (t) => {
+    const localPartA = deriveLocalPart();
+    const localPartB = deriveLocalPart();
+    t.match(localPartA, /^paperai-[a-f0-9]{8}$/);
+    t.not(localPartA, localPartB);
     t.end();
 });
 

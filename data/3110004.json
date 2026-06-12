@@ -2,7 +2,7 @@
   "subject_name": "Basic Civil Engineering ",
   "known_as": "BCE",
   "subjecet_code": "3110004",
-  "syllabus": "https://bit.ly/3qYMfUs",
+  "syllabus": "https://drive.usercontent.google.com/download?id=11W5mKN1_Sx6J91E0g9HrfE7LMJgTyDCc&export=download",
   "old_paper": [
     {
       "year": "Winter-2023",
@@ -34,19 +34,19 @@
     },
     {
       "year": "Winter-18",
-      "link": "https://bit.ly/3xMugTH"
+      "link": "https://drive.google.com/uc?export=download&id=1xeCtL91aoj0NaivZEB8n78d3X8P2mC_F"
     },
     {
       "year": "Winter-19",
-      "link": "https://bit.ly/2UgZhkb"
+      "link": "https://drive.google.com/uc?export=download&id=10wdHHYwUxMyIJOTvLA5rjmyuiXlB6z1K"
     },
     {
       "year": "Summer-19",
-      "link": "https://bit.ly/3z4NUKQ"
+      "link": "https://drive.google.com/uc?export=download&id=19PHEGYRMvyE9dl3x2S00MP1I8iizTTGA"
     },
     {
       "year": "Summer-18",
-      "link": "https://bit.ly/3AOCBrl"
+      "link": "https://drive.google.com/uc?export=download&id=1sYukNfSUMhgBgUQps2faGoRVmpxX5rcR"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -57,8 +57,19 @@
   "Books": [
     {
       "img": "https://1.bp.blogspot.com/-_7125Zu3LkM/YDSHijvglQI/AAAAAAAAANU/l9LhJO49LL0q43XFutiaSY1ILsaW7fkeQCNcBGAsYHQ/s367/Screenshot_435.png",
-      "download_link": "https://bit.ly/3rlydwo",
-      "alt_data": "Basic Civil Engineering Book New Age Pub"
+      "download_link": "https://drive.google.com/file/d/1IDS3qlEZTVT59KOseFLIzegh4KEiDUBr/view?usp=sharing",
+      "alt_data": "Basic Civil Engineering Book New Age Pub",
+      "book_id": "3110004-0",
+      "title": "Basic Civil Engineering Book New Age Pub",
+      "pageindex_status": "ready",
+      "pageindex_s3_uri": "s3://pageindex-json-store/pageindex/books/3110004/3110004-0-page_index.json",
+      "pageindex_size_bytes": 909469,
+      "indexed_at": "2026-06-12",
+      "index_version": 1
     }
-  ]
+  ],
+  "chat_mode": "subject",
+  "primary_book_id": "3110004-0",
+  "indexed_book_count": 1,
+  "pageindex_status": "ready"
 }

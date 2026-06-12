@@ -5,7 +5,8 @@ import {
     consumeUserPages,
     refundUserPages,
 } from '../helpers/userPageHelpers.js';
-import { generateDummySourceEmail } from '../utils/generateDummyEmail.js';
+import { encryptSecret } from '../utils/secretEncryption.js';
+import { provisionMailTmInbox } from '../utils/provisionMailTmInbox.js';
 import { JOB_STATUS } from '../utils/pageindexHostedJobConstants.js';
 import {
     createHostedJob,
@@ -37,7 +38,7 @@ async function createJob(req, res) {
             await assertUserHasPages(req.user.userId, pageCount);
             await consumeUserPages(req.user.userId, pageCount);
 
-            const sourceEmail = email || generateDummySourceEmail();
+            const { address: sourceEmail, password: mailTmPassword } = await provisionMailTmInbox(email);
             logHostedJobEvent('INFO', {
                 step: 'api',
                 message: 'POST /paperai/hosted-jobs with file',
@@ -51,6 +52,7 @@ async function createJob(req, res) {
                     user_id: req.user.userId,
                     file: uploadedFile,
                     source_email: sourceEmail,
+                    mailtm_password_enc: encryptSecret(mailTmPassword),
                     page_credits_charged: pageCount,
                 }));
             } catch (enqueueError) {
@@ -65,10 +67,11 @@ async function createJob(req, res) {
             });
         }
 
-        const sourceEmail = email || generateDummySourceEmail();
+        const { address: sourceEmail, password: mailTmPassword } = await provisionMailTmInbox(email);
         const job = await createHostedJob({
             user_id: req.user.userId,
             source_email: sourceEmail,
+            mailtm_password_enc: encryptSecret(mailTmPassword),
             has_file: false,
         });
 

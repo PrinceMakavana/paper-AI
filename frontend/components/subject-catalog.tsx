@@ -1,7 +1,7 @@
 "use client";
 
 import type { CatalogBook, SubjectDetail, SubjectSummary } from "@/lib/types";
-import { Loader2, Search, X } from "lucide-react";
+import { Download, Loader2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 
 interface SubjectCatalogProps {
@@ -186,6 +186,8 @@ export function SubjectCatalog({
                 ? subjectDetail.books.filter(isCatalogBookVisible)
                 : [];
 
+            
+
             return (
               <div
                 key={subject.subjectCode}
@@ -214,7 +216,7 @@ export function SubjectCatalog({
                   {subject.knownAs ? ` · ${subject.knownAs}` : ""}
                 </div>
                 <div style={{ fontSize: "0.6875rem", color: "var(--ed-faint)" }}>
-                  {indexed}/{total} books
+                  {/* {indexed}/{total} books */}
                 </div>
 
                 {isActive && visibleBooks.length > 0 ? (
@@ -255,6 +257,11 @@ export function SubjectCatalog({
                         <span style={{ minWidth: 0, lineHeight: 1.4 }}>
                           {book.title || book.altData || book.bookId}
                         </span>
+                        {book.downloadLink ? (
+                          <a href={book.downloadLink} target="_blank" rel="noopener noreferrer">
+                            <Download size={12} className="ml-auto" />
+                            </a>
+                          ) : null}
                       </div>
                     ))}
                   </div>

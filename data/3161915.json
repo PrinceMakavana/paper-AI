@@ -2,7 +2,7 @@
   "subject_name": "Computational Fluid Dynamics",
   "known_as": "CFD",
   "subjecet_code": "3161915",
-  "syllabus": "https://bit.ly/3xGVsDm",
+  "syllabus": "https://drive.usercontent.google.com/download?id=1cEMWrOHqwpzrw82Fv0wglb6yFERoTh1Y&export=download",
   "old_paper": [
     {
       "year": "Winter-2024",
@@ -26,7 +26,7 @@
     },
     {
       "year": "Winter-21",
-      "link": "https://bit.ly/3mhbfVB"
+      "link": "https://drive.google.com/uc?export=download&id=1b16kgMDW3ZIrSL4eRlp1h3IfP0mJ10IX"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -37,12 +37,12 @@
   "Books": [
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjzbLV_aJHiCfSSk74qYjuEby4p9hFXV2-NUkod34nYVp9e9MmSJdvnIiMacspRDXI5bgJRJFLnXjlZUVCAEoEmnsjfDrgIIHWFNSQiIStQWgWfSpkB94DO9XhmkkJB3KGZhjl82TcGTpyB8K6mm6D-TJYxutQFRHsR17LeGi4vg5Mj3yHFlbbC5F9Ulg",
-      "download_link": "https://bit.ly/3qFxtDu",
+      "download_link": "http://library.lol/main/D14FB97EA06627A418CF197C65DEB88E",
       "alt_data": "Computational Fluid Dynamics: The Basics with Applications McGraw-Hill"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj029wuM9L-aWUWRGW7N1_xXXldTJrUuVNDtpTPn5kIb2dx-vo53UJdPyYANf5QU0OpewGO9tmQl5pCTJvuAbudV1niq7YJ67u3PNN6SqDIkAtyaWqVKk-pPwUPgMFtQAlgWYqwgDfCsmpVJj4dP7vB8yRVQ5KDBCvT5L0wnO_8R8qBv8YkdWgCbx2VEA",
-      "download_link": "https://bit.ly/3tBdvvD",
+      "download_link": "http://library.lol/main/468576FC6983F481CCC1D9EEDDDE9254",
       "alt_data": "Introduction to Computational Fluid Dynamics"
     }
   ]

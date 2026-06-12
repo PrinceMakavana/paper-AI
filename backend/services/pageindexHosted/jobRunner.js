@@ -24,6 +24,7 @@ import {
 import { refundPageCreditsForJob } from '../../helpers/userPageHelpers.js';
 import {
     obtainChatSession,
+    resolveMailTmCredentials,
     runStep1Account,
     runStep2Upload,
     runStep3Password,
@@ -168,11 +169,12 @@ async function ensureChatSessionForJob(job, runContext, logger) {
         return runContext.sessionCookies;
     }
 
-    logger.warn('step2_upload', 'Chat session cookies missing — re-authenticating via YOPmail', {
+    logger.warn('step2_upload', 'Chat session cookies missing — re-authenticating via Mail.tm', {
         pageindexEmail: job.pageindex_email,
     });
 
-    const { sessionCookies } = await obtainChatSession(job.pageindex_email, logger);
+    const mailTmCredentials = resolveMailTmCredentials(job);
+    const { sessionCookies } = await obtainChatSession(mailTmCredentials, logger);
     runContext.sessionCookies = sessionCookies;
     return sessionCookies;
 }

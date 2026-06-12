@@ -2,7 +2,7 @@
   "subject_name": "Digital System Design",
   "known_as": "DSD",
   "subjecet_code": "3131102",
-  "syllabus": "https://bit.ly/36Awbik",
+  "syllabus": "https://drive.google.com/file/d/1rLQGNG80lyGwfdrXPKIVZSAnvLALhRJ2/view?usp=sharing",
   "old_paper": [
     {
       "year": "Winter-2023",
@@ -30,7 +30,7 @@
     },
     {
       "year": "Winter-20",
-      "link": "https://bit.ly/3Jdj7kQ"
+      "link": "https://drive.google.com/uc?export=download&id=1Q84hTQFdAXgLX3UEouxximdJNa-y0wat"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -41,17 +41,24 @@
   "Books": [
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjGb_fLZe-Q_otdR5tnC3Ydd8aqLnCGn102Vkwho0VvQ47ZYjxyJZnVympz7NYl-WUwGC3cduc_FT-vSu-hy6FHGep0dKfTfm3mnguDn3PwsXlUc5HT1uVQK4G2Drw38bK6y2kIGTKvYo2eKtfg7I-6lJReMyTHD3MnWH1dHdcg0GQV6s3AkOQ51IEZpw",
-      "download_link": "https://bit.ly/3Fno0Wh",
-      "alt_data": "Digital Design by Morris Mano and Micheal Oletti"
+      "download_link": "https://drive.google.com/uc?export=download&id=1bRFigHUKxiEwLsL7XmYAJyd6gmUq7dln",
+      "alt_data": "Digital Design by Morris Mano and Micheal Oletti",
+      "book_id": "3131102-0",
+      "title": "Digital Design by Morris Mano and Micheal Oletti",
+      "pageindex_status": "ready",
+      "pageindex_s3_uri": "s3://pageindex-json-store/pageindex/books/3131102/3131102-0-page_index.json",
+      "pageindex_size_bytes": 1713719,
+      "indexed_at": "2026-06-12",
+      "index_version": 1
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgSkfvFkJUvzjaCq63GejRtj-HxkUAz4XkoF3Y4VU_8E5fjdT-U9A_IPuRi7QIv3sLm8-Wssc6bmoZgWK58Sb9z29fgac9R2G9Gy3DqjF-pVVznfYCPJd0dP0zAmaQgKf26X-Tcra1c0Q-4ctKc52SWw4k55aP4p-dGpTFm_EDvnYGqzI0gOE6czRiSlQ",
-      "download_link": "https://bit.ly/32gIT7i",
+      "download_link": "https://drive.google.com/uc?export=download&id=1hc6fMz43dtzbqXd9C_J-c6JtDqXH2OJD",
       "alt_data": "Digital Electronics by Anil K Maini"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEggFyFHZDw9uy9cGToV_qsx695QDcBkPd7gFCpUYjl9P0AqveSrEfRYioOy45cVFsf856r9rJoDPx5QZmHzFUsub8Lmb5UvkP3JmlILMk6mOXqBSzshc4zGF1ae7sZwaVvG0jCM8A2JCO0kAgpUIVO_uCFq-aMynmD-aZoJBEGSzDcXDp6URjOGKfXZTA",
-      "download_link": "https://bit.ly/3H5kss6",
+      "download_link": "https://drive.google.com/uc?export=download&id=1GLZPDLpk9uDu-0rrWDlQ2kVF6La5UMCE",
       "alt_data": "Digital systems by Ronald Tocci,Widmer and Moss"
     },
     {
@@ -59,5 +66,9 @@
       "download_link": "https://drive.google.com/file/d/1_0mgBIKLAAYv-TeFIlO_zBuZQpssbjwR/view?usp=sharing",
       "alt_data": "Technical Book"
     }
-  ]
+  ],
+  "chat_mode": "subject",
+  "primary_book_id": "3131102-0",
+  "indexed_book_count": 1,
+  "pageindex_status": "partial"
 }

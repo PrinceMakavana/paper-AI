@@ -35,6 +35,8 @@ import {
 import { getHostedJobByLinkedDocument } from '../helpers/pageIndexHostedJobHelpers.js';
 import { mapHostedJobToIndexStatus } from '../services/pageindexHosted/jobHelpers.js';
 import { createHostedUploadJob } from '../services/pageindexHosted/createUploadJob.js';
+import { provisionMailTmInbox } from '../utils/provisionMailTmInbox.js';
+import { encryptSecret } from '../utils/secretEncryption.js';
 import { loadHostedTreeJson } from '../utils/hostedTreeStorage.js';
 import { deleteObjectsByLocation } from '../utils/s3Storage.js';
 import { logHostedJobEvent } from '../utils/hostedJobLogger.js';
@@ -397,7 +399,7 @@ async function validatePdfFile(file) {
         return { success: false, message: `File size has be less than ${maxFileSize} MB` };
     }
 
-    const pdfDoc = await PDFDocument.load(file.buffer);
+    const pdfDoc = await PDFDocument.load(file.buffer, { ignoreEncryption: true });
     const pageCount = pdfDoc.getPageCount();
     if (pageCount > Number(maxFilePageCount)) {
         return { success: false, message: `File page count has be less than ${maxFilePageCount} pages` };
@@ -430,13 +432,17 @@ async function uploadDocument(req, res) {
             },
         });
 
+        const optionalEmail = req.body?.email;
+        const { address: sourceEmail, password: mailTmPassword } = await provisionMailTmInbox(optionalEmail);
+
         let documentId;
-        let dummyEmail;
         let job;
         try {
-            ({ documentId, dummyEmail, job } = await createHostedUploadJob({
+            ({ documentId, job } = await createHostedUploadJob({
                 user_id: req.user.userId,
                 file: req.file,
+                source_email: sourceEmail,
+                mailtm_password_enc: encryptSecret(mailTmPassword),
                 page_credits_charged: pageCount,
             }));
         } catch (enqueueError) {
@@ -448,7 +454,7 @@ async function uploadDocument(req, res) {
             jobId: job._id.toString(),
             step: 'api',
             message: 'POST /pageindex/upload accepted — job enqueued',
-            meta: { documentId, dummyEmail, userId: req.user.userId, pageCount },
+            meta: { documentId, sourceEmail, userId: req.user.userId, pageCount },
         });
 
         return res.json({

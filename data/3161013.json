@@ -2,7 +2,7 @@
   "subject_name": "Systems Engineering",
   "subjecet_code": "3161013",
   "known_as": "SE",
-  "syllabus": "https://bit.ly/2UG0HVg",
+  "syllabus": "https://drive.google.com/file/d/134yh5zZvBOwzJ8RHu0cfMxT0HN7i7l2a/view?usp=sharing",
   "old_paper": [
     {
       "year": "Winter-2024",
@@ -26,18 +26,18 @@
     },
     {
       "year": "Winter-21",
-      "link": "https://bit.ly/3GlrwBd"
+      "link": "https://drive.google.com/uc?export=download&id=1ATy3qwhdSY9osDnq116GhKRt_N8GTiwC"
     }
   ],
   "Books": [
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiyRtYiGoQ_Bw_RiH6hS5IXVo9kWI6fUqWuqVeC1T7lMrpgLo3emq82QaD0pw58T1u2trSEpfULErRhVNKrv8OZKT-YoYBq8L3N7vhE5efyt0DghPEPjPqarnpkSWzTNg83VNGtsI9ApKbMAmxzKpTT-ZooKf_VuwjQGpir7e4y2tHczmA1MCdeqeoNvQ",
-      "link": "https://bit.ly/3nEO20u",
+      "link": "http://library.lol/main/CCBD52BEBC2D58D9080B2AAD644C4DDE",
       "alt_data": "NASA Systems Engineering Handbook"
     },
     {
       "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg2jrznxvqNG4uJcCIiteV5mFW568ajKHE3wgwRDP2IJk-VcIaRDCEInj76EZiNcpB988N3Sm-LQL8VRbj0Vzk22KFokdbtvL2KloxzS1IjppWmP89FwWB3oxEl9dic0gZJhZS9McwNdZ9JpU18V_HIUmo3ZB_25RrZWzWvQCyQgyP-dG7eOJ7R3Uy3mg",
-      "link": "https://bit.ly/3qFJskr",
+      "link": "http://library.lol/main/7ABAEC6F192C51103CAC13B5484B22C5",
       "alt_data": "INCOSE Systems Engineering Handbook: A Guide for System Life Cycle Processes and Activities"
     }
   ],

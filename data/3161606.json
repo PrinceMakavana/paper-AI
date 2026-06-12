@@ -1,29 +1,29 @@
 {
-    "subject_name": "Cryptography and Network Security",
-    "subjecet_code": "3161606",
-    "known_as": "CNS",
-    "syllabus": "https://bit.ly/3rUgE6Q",
-    "old_paper": [],
-    "Books": [
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjks1qGnjivgsQO_NDnjJA9zgCS5T_MG5wUHLMCtwgWCzMlepKltYt3au0tZ1gPJDxvEXdOjcNfkgFniegmvU1FTb98wy8Q9C03vJEkwHuVvtcM0cxqHb0Tn7PoClLqhdzpQCPVEdEmiMySIY2MsCpoUiQNG9PmHt-K8a5O61DFJvopmnpNfdHy-cJt6A",
-            "download_link": "https://bit.ly/3KU3nV2",
-            "alt_data": "Pearson"
-        },
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjtEtOJJWoEjzOuRHdv6et7KZDiQLcJcrCUGL_zSvq_cHa_4CZg0QY_cLVmGE88z_n3malIZfdd7_ck3MhuOqgF7TpZKWTa2GAGsZQLfi6XwutEGwUlpBz48bI2_y6SeLsBGnnw70rNO-QgrYX6FFHqyI3CZuFGoNMJz0FYT6ITrsheR7uvxX2yF9enag",
-            "download_link": "https://bit.ly/3rb6jVp",
-            "alt_data": "Willy India"
-        },
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEihTPH2aJL9QplG9-xlOvCSzLmOEVyzDZ6CwUccrOYmnOKjiTl1REROqGrNeKVwUxdD79q3af0-nm46XMB4D-yOGjmS0Ead3i62rC7Yxj4AOFHuzKCasSYdHP7nqt-95PrE4Y2n0_0eqJYF7eNaqQdkG6AhTmn5zdvVaINNJFqXz57R9IUE18YkaMcv0g",
-            "download_link": "https://bit.ly/3HeweRE",
-            "alt_data": "McGrawHill"
-        }
-    ],
-    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
-    "assignments": "",
-    "imp_material": "",
-    "viva_questions": "",
-    "prectical": ""
+  "subject_name": "Cryptography and Network Security",
+  "subjecet_code": "3161606",
+  "known_as": "CNS",
+  "syllabus": "https://drive.google.com/uc?export=download&id=17JzeuhfIZtR3qNtCor0flbosVgvl-95z",
+  "old_paper": [],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjks1qGnjivgsQO_NDnjJA9zgCS5T_MG5wUHLMCtwgWCzMlepKltYt3au0tZ1gPJDxvEXdOjcNfkgFniegmvU1FTb98wy8Q9C03vJEkwHuVvtcM0cxqHb0Tn7PoClLqhdzpQCPVEdEmiMySIY2MsCpoUiQNG9PmHt-K8a5O61DFJvopmnpNfdHy-cJt6A",
+      "download_link": "http://library.lol/main/1189F6EA222AB78023135ECD42A5C56A",
+      "alt_data": "Pearson"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjtEtOJJWoEjzOuRHdv6et7KZDiQLcJcrCUGL_zSvq_cHa_4CZg0QY_cLVmGE88z_n3malIZfdd7_ck3MhuOqgF7TpZKWTa2GAGsZQLfi6XwutEGwUlpBz48bI2_y6SeLsBGnnw70rNO-QgrYX6FFHqyI3CZuFGoNMJz0FYT6ITrsheR7uvxX2yF9enag",
+      "download_link": "http://library.lol/main/30C51EBF9300DCFE849DAD7DC33B4B51",
+      "alt_data": "Willy India"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEihTPH2aJL9QplG9-xlOvCSzLmOEVyzDZ6CwUccrOYmnOKjiTl1REROqGrNeKVwUxdD79q3af0-nm46XMB4D-yOGjmS0Ead3i62rC7Yxj4AOFHuzKCasSYdHP7nqt-95PrE4Y2n0_0eqJYF7eNaqQdkG6AhTmn5zdvVaINNJFqXz57R9IUE18YkaMcv0g",
+      "download_link": "http://library.lol/main/84765388BC134B61ED99657C20F99044",
+      "alt_data": "McGrawHill"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
 }

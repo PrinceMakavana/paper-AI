@@ -1,5 +1,4 @@
 import { stageJobFile } from '../../utils/fileStaging.js';
-import { generateDummySourceEmail } from '../../utils/generateDummyEmail.js';
 import { logHostedJobEvent } from '../../utils/hostedJobLogger.js';
 import { createHostedJob } from '../../helpers/pageIndexHostedJobHelpers.js';
 import { createHostedUploadPlaceholderDocument } from '../../helpers/pageIndexDBHelpers.js';
@@ -10,9 +9,12 @@ async function createHostedUploadJob({
     user_id,
     file,
     source_email,
+    mailtm_password_enc,
     page_credits_charged = 0,
 }) {
-    const dummyEmail = source_email || generateDummySourceEmail();
+    if (!source_email || !mailtm_password_enc) {
+        throw new Error('Mail.tm inbox must be provisioned before creating a hosted upload job.');
+    }
 
     logHostedJobEvent('INFO', {
         jobId: 'pending',
@@ -22,13 +24,14 @@ async function createHostedUploadJob({
             userId: user_id,
             fileName: file.originalname,
             fileSize: file.size,
-            sourceEmail: dummyEmail,
+            sourceEmail: source_email,
         },
     });
 
     const job = await createHostedJob({
         user_id,
-        source_email: dummyEmail,
+        source_email,
+        mailtm_password_enc,
         has_file: true,
         original_filename: file.originalname,
         mime_type: file.mimetype,
@@ -42,7 +45,7 @@ async function createHostedUploadJob({
         jobId,
         step: 'create',
         message: 'Hosted job document created in database',
-        meta: { userId: user_id, sourceEmail: dummyEmail },
+        meta: { userId: user_id, sourceEmail: source_email },
     });
 
     const stagingPath = await stageJobFile(jobId, file.buffer);
@@ -94,13 +97,13 @@ async function createHostedUploadJob({
         jobId,
         step: 'create',
         message: 'Hosted upload job setup complete — processing enqueued',
-        meta: { documentId: jobId, dummyEmail },
+        meta: { documentId: jobId, sourceEmail: source_email },
     });
 
     return {
         job,
         documentId: jobId,
-        dummyEmail,
+        sourceEmail: source_email,
     };
 }
 

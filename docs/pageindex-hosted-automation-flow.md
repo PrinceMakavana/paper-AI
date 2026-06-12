@@ -19,18 +19,20 @@
 
 **Host:** `PAGEINDEX_API_URL`
 
-1. Take user email from request; generate YOPmail address  
-   - Format: `{local-part}@yopmail.com` (local-part = part before `@` in input email)
+1. Provision a [mail.tm](https://mail.tm) disposable inbox at job creation (`provisionMailTmInbox`)  
+   - No email provided: `paperai-{hex}@{mail.tm-domain}`  
+   - Email provided: `{local-part}-{hex}@{mail.tm-domain}` (local-part from request body)
 2. `GET /api/auth/csrf` → obtain CSRF token + session cookies
-3. `POST /api/auth/signin/email` with YOPmail address → trigger verification email
+3. `POST /api/auth/signin/email` with mail.tm address → trigger verification email
 4. Wait **5 seconds** for email delivery
-5. Poll YOPmail inbox via `easy-yopmail` (up to **5 attempts**, 5s between retries)  
+5. Poll mail.tm inbox via REST API (up to **5 attempts**, 5s between retries)  
    - Filter: from `PageIndex`, subject contains verification code
 6. Read email body → extract 6-digit OTP
 7. `POST /api/auth/callback/otp` with OTP → authenticated session cookies
 
 **Store in database:**
-- `pageindex_email` (YOPmail address)
+- `pageindex_email` (mail.tm address)
+- `mailtm_password_enc` (encrypted mail.tm account password)
 - Link to Paper-AI `user_id` (when auth is added to this route)
 - `index_status` or account status: `verified`
 
@@ -65,9 +67,9 @@
 
 **Host:** `PAGEINDEX_API_DASHBOARD_URL`
 
-1. `POST /api/rpc/user/sendResetPassword` with YOPmail email
+1. `POST /api/rpc/user/sendResetPassword` with mail.tm email
 2. Wait **5 seconds** for email delivery
-3. Poll YOPmail inbox (up to **5 attempts**, 5s between retries)  
+3. Poll mail.tm inbox (up to **5 attempts**, 5s between retries)  
    - Filter: from `PageIndex`, subject contains password reset
 4. Read email → extract reset-password link → extract `token` from URL
 5. Generate a random password
@@ -89,7 +91,7 @@
 **Host:** `PAGEINDEX_API_DASHBOARD_URL`
 
 1. `GET /api/auth/csrf` (dashboard) → CSRF token + cookies
-2. `POST /api/auth/callback/password` with YOPmail email + password from Step 3
+2. `POST /api/auth/callback/password` with mail.tm email + password from Step 3
 3. Capture dashboard session cookies
 
 **Store in database:**
@@ -197,7 +199,7 @@ Legacy `POST /paperai/register` (alias: `/pageindex/register`) returns `410 Gone
 
 `POST /paperai/upload` (existing chat UI route) now:
 
-1. Generates a random dummy source email (`paperai-{hex}@upload.local` → YOPmail)
+1. Provisions a mail.tm inbox (`paperai-{hex}@…` or `{local-part}-{hex}@…` when email is provided)
 2. Creates a hosted job + placeholder `pageindex_documents` row (`document_id` = job id)
 3. Returns `documentId` immediately for frontend status polling
 4. On upload accept, stores `source.pdf` in S3 at `pageindex/{userId}/{documentId}/source.pdf` (`pdf_s3_uri` on document)
@@ -212,3 +214,7 @@ Hosted job events are written to:
 - **File** — `backend/logs/hosted-jobs/job_{jobId}_{timestamp}.json` (full event history per job)
 
 Log levels: `INFO`, `SUCCESS`, `WARN`, `ERROR`. Each step logs start, sub-actions, success, failures, and retry scheduling.
+
+### Disposable inbox (mail.tm)
+
+Hosted job OTP and password-reset emails are received via the [mail.tm](https://mail.tm) API (`MAILTM_API_BASE_URL`, default `https://api.mail.tm`). Each job provisions its own mail.tm account; credentials are stored as `mailtm_password_enc` on the job document.

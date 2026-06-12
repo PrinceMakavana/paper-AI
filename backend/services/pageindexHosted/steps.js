@@ -1,8 +1,9 @@
 import axios from 'axios';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
-import easyYopmail from 'easy-yopmail';
 import { PageIndexClient } from '@pageindex/sdk';
+import { getToken, pollForMessage } from '../../utils/mailTmClient.js';
+import { decryptSecret } from '../../utils/secretEncryption.js';
 
 function noopLogger() {
     return {
@@ -82,54 +83,21 @@ function generateRandomApiKeyName() {
     return `api-${crypto.randomBytes(8).toString('hex')}`;
 }
 
-function buildYopmailEmail(sourceEmail) {
-    return `${sourceEmail.split('@')[0]}@yopmail.com`;
-}
-
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function pollForYopmailEmail(yopmailEmail, { from, subject }, logger, attempt = 0) {
-    const log = getLogger(logger);
-
-    return easyYopmail.getInbox(
-        yopmailEmail,
-        { from, subject },
-        { LIMIT_MAIL: 5 },
-    ).then((inboxResult) => {
-        const emails = inboxResult.inbox || [];
-        const matchedEmail = emails.find((item) => item.from === from);
-
-        if (matchedEmail) {
-            log.success('yopmail', 'Verification email found in YOPmail inbox', {
-                subject,
-                attempt: attempt + 1,
-                emailId: matchedEmail.id,
-            });
-            return matchedEmail;
-        }
-
-        if (attempt >= 5) {
-            throw new Error(`PageIndex email not found in YOPmail inbox (subject: ${subject}).`);
-        }
-
-        log.info('yopmail', 'Email not found yet, retrying YOPmail poll', {
-            subject,
-            attempt: attempt + 1,
-            nextRetryInSec: 5,
-        });
-
-        return sleep(5000).then(() => pollForYopmailEmail(
-            yopmailEmail,
-            { from, subject },
-            logger,
-            attempt + 1,
-        ));
-    });
+function resolveMailTmCredentials(job) {
+    const address = job.pageindex_email || job.input?.source_email;
+    const password = decryptSecret(job.mailtm_password_enc);
+    if (!address || !password) {
+        throw new Error('Mail.tm credentials missing on job.');
+    }
+    return { address, password };
 }
 
-async function obtainChatSession(pageindexEmail, logger) {
+async function obtainChatSession(mailTmCredentials, logger) {
+    const { address: pageindexEmail } = mailTmCredentials;
     const log = getLogger(logger);
     const pageIndexBase = getPageIndexBase();
 
@@ -188,12 +156,11 @@ async function obtainChatSession(pageindexEmail, logger) {
     log.info('step1_account', 'Waiting 5s for verification email delivery');
     await sleep(5000);
 
-    const pageIndexEmail = await pollForYopmailEmail(pageindexEmail, {
+    const token = await getToken(mailTmCredentials.address, mailTmCredentials.password);
+    const message = await pollForMessage(token, {
         from: 'PageIndex',
         subject: '%Verification code%',
-    }, logger);
-
-    const message = await easyYopmail.readMessage(pageindexEmail, pageIndexEmail.id);
+    }, getLogger(logger));
     const otp = extractOtp(message.content);
     if (!otp) {
         throw new Error('OTP not found in PageIndex verification email.');
@@ -240,14 +207,15 @@ async function obtainChatSession(pageindexEmail, logger) {
 
 async function runStep1Account(job, logger) {
     const log = getLogger(logger);
-    const pageindexEmail = buildYopmailEmail(job.input.source_email);
+    const mailTmCredentials = resolveMailTmCredentials(job);
+    const pageindexEmail = mailTmCredentials.address;
 
     log.info('step1_account', 'Starting account creation', {
         sourceEmail: job.input.source_email,
         pageindexEmail,
     });
 
-    const { sessionCookies, verifyData } = await obtainChatSession(pageindexEmail, logger);
+    const { sessionCookies, verifyData } = await obtainChatSession(mailTmCredentials, logger);
 
     log.success('step1_account', 'Account creation step completed', {
         pageindexEmail,
@@ -374,12 +342,12 @@ async function runStep3Password(job, logger) {
     log.info('step3_password', 'Waiting 5s for reset email delivery');
     await sleep(5000);
 
-    const resetEmail = await pollForYopmailEmail(pageindexEmail, {
+    const mailTmCredentials = resolveMailTmCredentials(job);
+    const token = await getToken(mailTmCredentials.address, mailTmCredentials.password);
+    const message = await pollForMessage(token, {
         from: 'PageIndex',
         subject: '%Password Reset%',
-    }, logger);
-
-    const message = await easyYopmail.readMessage(pageindexEmail, resetEmail.id);
+    }, getLogger(logger));
     const resetPasswordLink = extractResetPasswordLink(message.content);
     if (!resetPasswordLink) {
         throw new Error('Reset password link not found in PageIndex email.');
@@ -583,7 +551,7 @@ async function runStep4_3Tree(job, apiKey, logger) {
 }
 
 export {
-    buildYopmailEmail,
+    resolveMailTmCredentials,
     obtainChatSession,
     runStep1Account,
     runStep2Upload,

@@ -705,8 +705,8 @@ export default function ChatPage() {
                 <p style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", marginBottom: "0.5rem" }}>
                   {currentSubject.subjectCode}
                   {currentSubject.knownAs ? ` · ${currentSubject.knownAs}` : ""}
-                  {" · "}
-                  {currentSubject.indexedBookCount ?? 0}/{currentSubject.bookCount ?? 0} books indexed
+                  {/* {" · "} */}
+                  {/* {currentSubject.indexedBookCount ?? 0}/{currentSubject.bookCount ?? 0} books indexed */}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem 0.75rem" }}>
                   {currentSubject.syllabus ? (
@@ -729,7 +729,9 @@ export default function ChatPage() {
                       Paper solutions
                     </a>
                   ) : null}
-                  {(currentSubject.oldPaper ?? []).slice(0, 3).map((paper) => (
+                  <div className="flex flex-wrap gap-3 items-center">
+                    <span className="text-xs text-muted-foreground mr-1">Old Papers:</span>
+                  {(currentSubject.oldPaper ?? []).map((paper) => (
                     <a
                       key={`${paper.year}-${paper.link}`}
                       href={paper.link}
@@ -737,9 +739,10 @@ export default function ChatPage() {
                       rel="noopener noreferrer"
                       style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", textDecoration: "underline" }}
                     >
-                      {paper.year}
-                    </a>
-                  ))}
+                        {paper.year}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (

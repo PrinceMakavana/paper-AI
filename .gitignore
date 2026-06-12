@@ -124,3 +124,4 @@ client_secret*.json
 scripts/drive_credentials.json
 scripts/drive_token.json
 scripts/link_fix_log.json
+batch_index_report.json

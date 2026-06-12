@@ -1,29 +1,29 @@
 {
-    "subject_name": "Data Warehousing and Mining",
-    "subjecet_code": "3161610",
-    "known_as": "DWM",
-    "syllabus": "https://bit.ly/2VxuZu1",
-    "old_paper": [],
-    "Books": [
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhlxfFmF1Qr1UJrIhdmrBygrtWogS9lHWiMBnR-gR6CL3MR6sVhEtpRxdP-eIby_tRKINukD9dNDc4tvGL3azZn0jamrqu_EvLnYHO42m2gB5yAmMeEdJjrLrbWtRfvTO6mfqLQTGI8JVFaZW8aFWEKkdgOQTr6uApVizq9b52gnW6MfOsDlMvsE1OJQA",
-            "download_link": "https://bit.ly/3HbFoOQ",
-            "alt_data": "Kaufmann"
-        },
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjTxhMkiX2O3_u5AUY9sU2_7y6N0rdZtjtwkLEa0-6SgDYcAUF2oxhRpHTn1sZD-v6JGVNRLKMEkoK0sWwPv5vEP9YIw8N4HOkkvNKY8qKat_eUVq6CCIeQBl1O9neQevg4ptdoiG7tKn1HL62Qlxeou3c0rtPL0A8cUXydq-ZfSnEZIDMQ8KHQ1JNbdw",
-            "download_link": "https://bit.ly/3ueV4gr",
-            "alt_data": "Willy"
-        },
-        {
-            "img": "https://blogger.googleusercontent.com/img/a/AVvXsEixkCKSBgfW8OXCiKQETaKXKC-btJWCcnvpuxD8Z0i3vHKr9YGdtFunuS02ATQkq1ULGhKcaWnycP-pJ0eXBxlhsOGLIoUvZ_IjQGN-cEeGZaywWUJOlzZ3kwKRMxcAQr45o3SVFSLmNFvpb2BR-Ti2h9f7gi5RMVdceK6_fDWbGVl66D1NvmGrpZXe1g",
-            "download_link": "https://bit.ly/3G9xWlR",
-            "alt_data": "Pearson"
-        }
-    ],
-    "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
-    "assignments": "",
-    "imp_material": "",
-    "viva_questions": "",
-    "prectical": ""
+  "subject_name": "Data Warehousing and Mining",
+  "subjecet_code": "3161610",
+  "known_as": "DWM",
+  "syllabus": "https://drive.google.com/uc?export=download&id=1H2dh-IbYjW6ZD9dzkV0u5D0Ehd-oEfYB",
+  "old_paper": [],
+  "Books": [
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhlxfFmF1Qr1UJrIhdmrBygrtWogS9lHWiMBnR-gR6CL3MR6sVhEtpRxdP-eIby_tRKINukD9dNDc4tvGL3azZn0jamrqu_EvLnYHO42m2gB5yAmMeEdJjrLrbWtRfvTO6mfqLQTGI8JVFaZW8aFWEKkdgOQTr6uApVizq9b52gnW6MfOsDlMvsE1OJQA",
+      "download_link": "http://library.lol/main/D62BCD0F33A976303B1415FBA99C9BC6",
+      "alt_data": "Kaufmann"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjTxhMkiX2O3_u5AUY9sU2_7y6N0rdZtjtwkLEa0-6SgDYcAUF2oxhRpHTn1sZD-v6JGVNRLKMEkoK0sWwPv5vEP9YIw8N4HOkkvNKY8qKat_eUVq6CCIeQBl1O9neQevg4ptdoiG7tKn1HL62Qlxeou3c0rtPL0A8cUXydq-ZfSnEZIDMQ8KHQ1JNbdw",
+      "download_link": "http://library.lol/main/18DDA884CC12CD12B4B53878A7275C1B",
+      "alt_data": "Willy"
+    },
+    {
+      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEixkCKSBgfW8OXCiKQETaKXKC-btJWCcnvpuxD8Z0i3vHKr9YGdtFunuS02ATQkq1ULGhKcaWnycP-pJ0eXBxlhsOGLIoUvZ_IjQGN-cEeGZaywWUJOlzZ3kwKRMxcAQr45o3SVFSLmNFvpb2BR-Ti2h9f7gi5RMVdceK6_fDWbGVl66D1NvmGrpZXe1g",
+      "download_link": "http://library.lol/main/B788FEED50F9EFF2465969526343364F",
+      "alt_data": "Pearson"
+    }
+  ],
+  "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
+  "assignments": "",
+  "imp_material": "",
+  "viva_questions": "",
+  "prectical": ""
 }
