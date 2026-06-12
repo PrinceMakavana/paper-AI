@@ -16,6 +16,21 @@ registerRoutes(router, 'get', '/chat-messages/:documentId', authMiddleware, page
 registerRoutes(router, 'delete', '/chat-messages/:documentId', authMiddleware, pageIndexController.deleteChatMessages);
 registerRoutes(router, 'post', '/question-vectorless-rag', authMiddleware, pageIndexController.questionVectorlessRag);
 registerRoutes(router, 'post', '/subject-question-rag', authMiddleware, pageIndexController.subjectQuestionVectorlessRag);
+registerRoutes(router, 'post', '/catalog-find', authMiddleware, pageIndexController.catalogFindQuestion);
+registerRoutes(
+    router,
+    'get',
+    '/chat-messages/catalog/global',
+    authMiddleware,
+    pageIndexController.getCatalogChatMessages,
+);
+registerRoutes(
+    router,
+    'delete',
+    '/chat-messages/catalog/global',
+    authMiddleware,
+    pageIndexController.deleteCatalogChatMessages,
+);
 registerRoutes(
     router,
     'get',

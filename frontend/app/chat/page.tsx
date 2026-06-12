@@ -28,6 +28,7 @@ import { useRouter } from "next/navigation";
 
 const CURRENT_DOCUMENT_ID_STORAGE_KEY = "paperai-current-document-id";
 const CURRENT_SUBJECT_CODE_STORAGE_KEY = "paperai-current-subject-code";
+const CATALOG_FIND_MODE_STORAGE_KEY = "paperai-catalog-find-mode";
 const LEGACY_DOCUMENT_ID_STORAGE_KEY = "pageindex-current-document-id";
 const LEGACY_SUBJECT_CODE_STORAGE_KEY = "pageindex-current-subject-code";
 
@@ -90,6 +91,7 @@ export default function ChatPage() {
   const [subjects, setSubjects] = useState<SubjectSummary[]>([]);
   const [subjectsLoading, setSubjectsLoading] = useState(false);
   const [currentSubject, setCurrentSubject] = useState<SubjectDetail | undefined>(undefined);
+  const [catalogFindMode, setCatalogFindMode] = useState(false);
   const documentsRef = useRef<DocumentMetaData[]>([]);
   const { isUserLoggedIn, user, refreshUser } = useAuth();
   const { showAlert } = useAlert();
@@ -172,6 +174,8 @@ export default function ChatPage() {
       if (savedId) {
         const match = fetched.find((d) => d.id === savedId);
         if (match) {
+          localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
+          setCatalogFindMode(false);
           setCurrentSubject(undefined);
           setCurrentDocument(match);
           setSummary(match.summary ?? "");
@@ -218,22 +222,32 @@ export default function ChatPage() {
       CURRENT_DOCUMENT_ID_STORAGE_KEY,
       LEGACY_DOCUMENT_ID_STORAGE_KEY,
     );
-    if (!savedSubjectCode || currentSubject || currentDocument || savedDocumentId) return;
 
-    let ignore = false;
-    fetchSubject(savedSubjectCode)
-      .then((subject) => {
-        if (!ignore) {
-          setCurrentSubject(subject);
-          setCurrentDocument(undefined);
-        }
-      })
-      .catch(() => {
-        localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-      });
+    if (savedDocumentId) {
+      return;
+    }
 
-    return () => { ignore = true; };
-  }, [currentSubject, currentDocument]);
+    if (savedSubjectCode) {
+      let ignore = false;
+      fetchSubject(savedSubjectCode)
+        .then((subject) => {
+          if (!ignore) {
+            setCatalogFindMode(false);
+            setCurrentSubject(subject);
+            setCurrentDocument(undefined);
+          }
+        })
+        .catch(() => {
+          localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
+        });
+
+      return () => { ignore = true; };
+    }
+
+    if (localStorage.getItem(CATALOG_FIND_MODE_STORAGE_KEY) === "1") {
+      setCatalogFindMode(true);
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -254,6 +268,16 @@ export default function ChatPage() {
       }
     } catch { /* ignore storage failures */ }
   }, [currentSubject]);
+
+  useEffect(() => {
+    try {
+      if (catalogFindMode) {
+        localStorage.setItem(CATALOG_FIND_MODE_STORAGE_KEY, "1");
+      } else {
+        localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
+      }
+    } catch { /* ignore storage failures */ }
+  }, [catalogFindMode]);
 
   useEffect(() => {
     if (!isUserLoggedIn || !pendingDocumentsKey) return;
@@ -382,7 +406,9 @@ export default function ChatPage() {
         const uploaded = fetchedDocuments.find((d) => d.id === data.documentId);
         if (uploaded) {
           localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
+          localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
           localStorage.setItem(CURRENT_DOCUMENT_ID_STORAGE_KEY, uploaded.id);
+          setCatalogFindMode(false);
           setCurrentSubject(undefined);
           setCurrentDocument(uploaded);
         }
@@ -400,10 +426,21 @@ export default function ChatPage() {
     onDrop,
   });
 
+  const handleCatalogFindSelect = () => {
+    localStorage.removeItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
+    localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
+    setCatalogFindMode(true);
+    setCurrentSubject(undefined);
+    setCurrentDocument(undefined);
+    setSummary("");
+  };
+
   const handleSubjectSelect = async (subjectCode: string) => {
     try {
+      localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
       localStorage.removeItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
       localStorage.setItem(CURRENT_SUBJECT_CODE_STORAGE_KEY, subjectCode);
+      setCatalogFindMode(false);
       const subject = await fetchSubject(subjectCode);
       setCurrentSubject(subject);
       setCurrentDocument(undefined);
@@ -416,8 +453,10 @@ export default function ChatPage() {
   const handleDocumentSelect = (documentId: string) => {
     const doc = documents.find((item) => item.id === documentId);
     if (doc) {
+      localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
       localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
       localStorage.setItem(CURRENT_DOCUMENT_ID_STORAGE_KEY, doc.id);
+      setCatalogFindMode(false);
       setCurrentSubject(undefined);
       setCurrentDocument(doc);
       setSummary(doc.summary ?? "");
@@ -687,7 +726,27 @@ export default function ChatPage() {
           {/* Left column */}
           <div className="flex flex-col gap-4 min-h-0 h-full lg:overflow-hidden">
 
-            {currentSubject ? (
+            {catalogFindMode && !currentSubject && !currentDocument ? (
+              <div
+                className="animate-fade-up ed-panel shrink-0"
+                style={{
+                  animationDelay: "0ms",
+                  padding: "0.875rem 1.25rem",
+                  backgroundColor: "var(--ed-surface)",
+                }}
+              >
+                <h2
+                  className="font-fraunces"
+                  style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.125rem", marginBottom: "0.25rem" }}
+                >
+                  Find materials
+                </h2>
+                <p style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", lineHeight: 1.6 }}>
+                  Search books, syllabus, and exam papers across all GTU subjects.
+                  For textbook explanations, pick a subject from the sidebar.
+                </p>
+              </div>
+            ) : currentSubject ? (
               <div
                 className="animate-fade-up ed-panel shrink-0"
                 style={{
@@ -816,11 +875,13 @@ export default function ChatPage() {
               <ChatInterFace
                 currentDocument={currentDocument}
                 currentSubject={currentSubject}
+                catalogFindMode={catalogFindMode}
                 selectedModel={selectedModel}
                 availableTokenCount={availableTokenCount}
                 onTokenBalanceChange={setAvailableTokenCount}
                 onRefreshUser={refreshUser}
                 onViewPdf={handleViewPdf}
+                onSelectSubject={handleSubjectSelect}
               />
             </div>
           </div>
@@ -830,6 +891,30 @@ export default function ChatPage() {
             className="animate-fade-up flex flex-col gap-3 h-full min-h-0 w-full"
             style={{ animationDelay: "100ms" }}
           >
+            <button
+              type="button"
+              onClick={handleCatalogFindSelect}
+              className="ed-panel w-full text-left transition-colors"
+              style={{
+                padding: "0.75rem 1rem",
+                backgroundColor: catalogFindMode && !currentSubject && !currentDocument ? "var(--ed-accent)" : "var(--ed-surface)",
+                color: catalogFindMode && !currentSubject && !currentDocument ? "#ffffff" : "var(--ed-ink)",
+                border: catalogFindMode && !currentSubject && !currentDocument ? "none" : "1px solid var(--ed-rule)",
+              }}
+            >
+              <span className="font-fraunces" style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.05rem" }}>
+                Find materials
+              </span>
+              <p
+                style={{
+                  fontSize: "0.75rem",
+                  marginTop: "0.2rem",
+                  color: catalogFindMode && !currentSubject && !currentDocument ? "rgba(255,255,255,0.85)" : "var(--ed-muted)",
+                }}
+              >
+                Books, papers &amp; syllabus across all subjects
+              </p>
+            </button>
             <SubjectCatalog
               subjects={subjects}
               loading={subjectsLoading}

@@ -17,6 +17,9 @@ import {
     getSubjectChatSessionId,
     loadSubjectByCode,
 } from '../helpers/catalogDataHelpers.js';
+import { getCatalogGlobalSessionId } from '../helpers/catalogIndexHelpers.js';
+import { runCatalogFindWithAi } from '../helpers/catalogFindAi.js';
+import { getCatalogContributeFormUrl } from '../helpers/catalogQueryHelpers.js';
 import {
     deletePageIndexChatMessageById,
     deletePageIndexChatMessages,
@@ -827,6 +830,119 @@ async function deleteSubjectChatMessages(req, res) {
     }
 }
 
+async function catalogFindQuestion(req, res) {
+    let savedUserMessage = null;
+    const { question, chatModel } = req.body || {};
+    const sessionId = getCatalogGlobalSessionId();
+
+    try {
+        if (!question?.trim()) {
+            return res.status(400).send('Missing question');
+        }
+
+        await assertUserHasTokens(req.user.userId);
+
+        const { model } = getModelConfig(chatModel);
+        const result = await runCatalogFindWithAi({ question: question.trim(), model });
+
+        savedUserMessage = await savePageIndexChatMessage({
+            user_id: req.user.userId,
+            document_id: sessionId,
+            role: 'user',
+            content: question.trim(),
+            chat_model: chatModel,
+            token_count: 0,
+        });
+
+        const availableTokenCount = await consumeUserTokens(req.user.userId, result.aiTokenCount);
+
+        const savedAssistantMessage = await savePageIndexChatMessage({
+            user_id: req.user.userId,
+            document_id: sessionId,
+            previous_message_id: savedUserMessage._id.toString(),
+            role: 'assistant',
+            content: result.answer,
+            chat_model: chatModel,
+            token_count: result.aiTokenCount,
+            input_token_count: result.aiInputTokenCount,
+            output_token_count: result.aiOutputTokenCount,
+        });
+
+        return res.json({
+            answer: result.answer,
+            intent: result.intent,
+            availability: result.availability,
+            matches: result.matches,
+            suggestedSubjectCodes: result.suggestedSubjectCodes,
+            contribute_form_url: getCatalogContributeFormUrl() || null,
+            answer_source: 'catalog',
+            message: mapChatMessageForClient(savedAssistantMessage),
+            status: 200,
+            available_token_count: availableTokenCount,
+        });
+    } catch (error) {
+        if (savedUserMessage?._id) {
+            try {
+                await deletePageIndexChatMessageById({
+                    user_id: req.user.userId,
+                    message_id: savedUserMessage._id,
+                });
+            } catch (deleteError) {
+                console.error('Failed to remove unsent catalog find message:', deleteError);
+            }
+        }
+
+        console.error('Error processing catalog find question:', error);
+        return res.status(error.statusCode || 500).json({
+            answer: error instanceof Error ? error.message : 'Failed to find materials',
+            message: isTokenBalanceError(error) ? error.message : undefined,
+            status: error.statusCode || 500,
+        });
+    }
+}
+
+async function getCatalogChatMessages(req, res) {
+    try {
+        const sessionId = getCatalogGlobalSessionId();
+        const messages = await getPageIndexChatMessages({
+            user_id: req.user.userId,
+            document_id: sessionId,
+        });
+
+        return res.json({
+            status: 200,
+            messages: messages.map((message) => mapChatMessageForClient(message)),
+        });
+    } catch (error) {
+        console.error('Error loading catalog chat messages:', error);
+        return res.status(error.statusCode || 500).json({
+            message: error instanceof Error ? error.message : 'Failed to load chat messages',
+            status: error.statusCode || 500,
+        });
+    }
+}
+
+async function deleteCatalogChatMessages(req, res) {
+    try {
+        const sessionId = getCatalogGlobalSessionId();
+        const result = await deletePageIndexChatMessages({
+            user_id: req.user.userId,
+            document_id: sessionId,
+        });
+
+        return res.json({
+            status: 200,
+            deletedCount: result.deletedCount,
+        });
+    } catch (error) {
+        console.error('Error deleting catalog chat messages:', error);
+        return res.status(error.statusCode || 500).json({
+            message: error instanceof Error ? error.message : 'Failed to delete chat messages',
+            status: error.statusCode || 500,
+        });
+    }
+}
+
 async function getChatMessages(req, res) {
     try {
         const { documentId } = req.params;
@@ -1087,9 +1203,12 @@ async function getDocumentIndexStatus(req, res) {
 
 export {
     buildSignedPdfUrl,
+    catalogFindQuestion,
+    deleteCatalogChatMessages,
     deleteChatMessages,
     deleteDocument,
     deleteSubjectChatMessages,
+    getCatalogChatMessages,
     getDocumentPdfUrl,
     getChatMessages,
     getDocumentIndexStatus,

@@ -116,14 +116,30 @@ function markdownComponents(role: "user" | "assistant"): Components {
   };
 }
 
+interface CatalogMatchItem {
+  type: string;
+  label: string;
+  url: string;
+}
+
+interface CatalogMatchGroup {
+  subjectCode: string;
+  subjectName: string;
+  knownAs?: string;
+  chatReady?: boolean;
+  items: CatalogMatchItem[];
+}
+
 interface ChatInterFaceProps {
   currentDocument?: DocumentMetaData;
   currentSubject?: SubjectDetail;
+  catalogFindMode?: boolean;
   selectedModel: AIModel;
   availableTokenCount: number;
   onTokenBalanceChange?: (availableTokenCount: number) => void;
   onRefreshUser?: () => Promise<void>;
   onViewPdf?: (document: DocumentMetaData) => void;
+  onSelectSubject?: (subjectCode: string) => void;
 }
 
 interface ChatMessagesResponse {
@@ -135,7 +151,10 @@ interface ChatMessagesResponse {
 interface QuestionResponse {
   status: number;
   answer?: string;
-  answer_source?: "book" | "not_in_book";
+  answer_source?: "book" | "not_in_book" | "catalog";
+  intent?: "find_material" | "study_question";
+  matches?: CatalogMatchGroup[];
+  suggestedSubjectCodes?: string[];
   paper_solution_url?: string | null;
   message?: ChatMessage | string;
   available_token_count?: number;
@@ -150,11 +169,13 @@ const getAuthHeaders = () => ({
 export function ChatInterFace({
   currentDocument,
   currentSubject,
+  catalogFindMode = false,
   selectedModel,
   availableTokenCount,
   onTokenBalanceChange,
   onRefreshUser,
   onViewPdf,
+  onSelectSubject,
 }: ChatInterFaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState<string>("");
@@ -164,7 +185,11 @@ export function ChatInterFace({
 
   const chatContextKey = currentSubject
     ? `subject:${currentSubject.subjectCode}`
-    : currentDocument?.id;
+    : currentDocument?.id
+      ? currentDocument.id
+      : catalogFindMode
+        ? "catalog:global"
+        : undefined;
 
   useEffect(() => {
     if (!chatContextKey) {
@@ -178,7 +203,15 @@ export function ChatInterFace({
         setHistoryLoading(true);
         const historyUrl = currentSubject
           ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-          : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
+          : currentDocument
+            ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument.id)}`
+            : catalogFindMode
+              ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/catalog/global`
+              : null;
+        if (!historyUrl) {
+          setMessages([]);
+          return;
+        }
         const response = await fetch(historyUrl, { headers: getAuthHeaders() });
         const data: ChatMessagesResponse = await response.json();
         if (ignore) return;
@@ -199,29 +232,32 @@ export function ChatInterFace({
 
     loadChatHistory();
     return () => { ignore = true; };
-  }, [chatContextKey, currentDocument, currentSubject, showAlert]);
+  }, [chatContextKey, catalogFindMode, currentDocument, currentSubject, showAlert]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
   const handleSend = async () => {
-    const isDocumentMode = !!currentDocument && !currentSubject;
-    const isSubjectMode = !!currentSubject && !currentDocument;
+    const isCatalogMode = catalogFindMode && !currentSubject && !currentDocument;
+    const isDocumentMode = !!currentDocument && !currentSubject && !catalogFindMode;
+    const isSubjectMode = !!currentSubject && !currentDocument && !catalogFindMode;
 
     if (
       !input.trim() ||
       loading ||
       availableTokenCount <= 0 ||
-      (!isDocumentMode && !isSubjectMode)
+      (!isDocumentMode && !isSubjectMode && !isCatalogMode)
     ) return;
 
     if (isDocumentMode && currentDocument.indexStatus !== "complete") return;
     if (isSubjectMode && !isSubjectChatReady(currentSubject)) return;
 
     const question = input.trim();
-    const contextId = isSubjectMode
-      ? `subject:${currentSubject!.subjectCode}`
-      : currentDocument!.id;
+    const contextId = isCatalogMode
+      ? "catalog:global"
+      : isSubjectMode
+        ? `subject:${currentSubject!.subjectCode}`
+        : currentDocument!.id;
 
     const userMessage: ChatMessage = {
       id: crypto.randomUUID(),
@@ -236,12 +272,16 @@ export function ChatInterFace({
 
     try {
       setLoading(true);
-      const endpoint = isSubjectMode
-        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/subject-question-rag`
-        : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/question-vectorless-rag`;
-      const body = isSubjectMode
-        ? { question, subjectCode: currentSubject!.subjectCode, chatModel: selectedModel }
-        : { question, documentId: currentDocument!.id, chatModel: selectedModel };
+      const endpoint = isCatalogMode
+        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/catalog-find`
+        : isSubjectMode
+          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/subject-question-rag`
+          : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/question-vectorless-rag`;
+      const body = isCatalogMode
+        ? { question, chatModel: selectedModel }
+        : isSubjectMode
+          ? { question, subjectCode: currentSubject!.subjectCode, chatModel: selectedModel }
+          : { question, documentId: currentDocument!.id, chatModel: selectedModel };
 
       const response = await fetch(endpoint, {
         method: "POST",
@@ -286,7 +326,12 @@ export function ChatInterFace({
       setHistoryLoading(true);
       const deleteUrl = currentSubject
         ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-        : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument!.id)}`;
+        : currentDocument
+          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument.id)}`
+          : catalogFindMode
+            ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/catalog/global`
+            : null;
+      if (!deleteUrl) return;
       const response = await fetch(deleteUrl, { method: "DELETE", headers: getAuthHeaders() });
       const data = await response.json();
       if (!response.ok || data.status !== 200) {
@@ -301,12 +346,13 @@ export function ChatInterFace({
     }
   };
 
-  const isDocumentMode = !!currentDocument && !currentSubject;
-  const isSubjectMode = !!currentSubject && !currentDocument;
-  const hasChatContext = isDocumentMode || isSubjectMode;
+  const isCatalogMode = catalogFindMode && !currentSubject && !currentDocument;
+  const isDocumentMode = !!currentDocument && !currentSubject && !catalogFindMode;
+  const isSubjectMode = !!currentSubject && !currentDocument && !catalogFindMode;
+  const hasChatContext = isDocumentMode || isSubjectMode || isCatalogMode;
   const isDocumentReady = currentDocument?.indexStatus === "complete";
   const isSubjectReady = isSubjectChatReady(currentSubject);
-  const isContextReady = isDocumentMode ? isDocumentReady : isSubjectReady;
+  const isContextReady = isCatalogMode ? true : isDocumentMode ? isDocumentReady : isSubjectReady;
   const hasTokens = availableTokenCount > 0;
   const canSend =
     !loading &&
@@ -315,18 +361,22 @@ export function ChatInterFace({
     isContextReady &&
     hasTokens &&
     !!input.trim();
-  const contextLabel = isSubjectMode
-    ? `${currentSubject!.subjectName} (${currentSubject!.subjectCode})`
-    : currentDocument?.filename;
+  const contextLabel = isCatalogMode
+    ? "Find materials"
+    : isSubjectMode
+      ? `${currentSubject!.subjectName} (${currentSubject!.subjectCode})`
+      : currentDocument?.filename;
   const inputPlaceholder = !hasChatContext
-    ? "Select a subject or upload a PDF to begin"
+    ? "Select Find materials, a subject, or upload a PDF"
     : !hasTokens
       ? "Token balance exhausted"
-      : isContextReady
-        ? "Ask a question…"
-        : isSubjectMode
-          ? "Subject books are still being indexed…"
-          : "Document is still indexing…";
+      : isCatalogMode
+        ? "e.g. maths summer 2023 paper, PPS books, 3110003 syllabus"
+        : isContextReady
+          ? "Ask a question…"
+          : isSubjectMode
+            ? "Subject books are still being indexed…"
+            : "Document is still indexing…";
 
   return (
     <div
@@ -422,7 +472,7 @@ export function ChatInterFace({
           </>
         ) : (
           <span style={{ fontSize: "0.875rem", color: "var(--ed-muted)" }}>
-            Select a subject or upload a PDF to begin
+            Select Find materials, a subject, or upload a PDF
           </span>
         )}
       </div>
@@ -446,7 +496,15 @@ export function ChatInterFace({
           ) : messages.length === 0 && hasChatContext ? (
             <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
               <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "var(--ed-muted)" }}>
-                {isContextReady ? (
+                {isCatalogMode ? (
+                  <>
+                    Ask for books, syllabus, or exam papers across all GTU subjects.
+                    <br />
+                    <span style={{ fontSize: "0.875rem", color: "var(--ed-faint)" }}>
+                      For explanations, select a subject from the sidebar.
+                    </span>
+                  </>
+                ) : isContextReady ? (
                   <>
                     Ask anything about{" "}
                     <em className="font-fraunces" style={{ fontStyle: "italic", fontWeight: 300, color: "var(--ed-muted)" }}>
