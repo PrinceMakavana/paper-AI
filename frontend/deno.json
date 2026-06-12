@@ -10,7 +10,7 @@
   "deploy": {
     "framework": "nextjs",
     "prepare" : "node --version && deno clean",
-    "install": "deno clean && deno rm -rf node_modules && npm install --ignore-scripts",
+    "install": "deno clean && npm install --ignore-scripts",
     "build": "node --version && rm -rf .next && npm run build"
   }
 }
