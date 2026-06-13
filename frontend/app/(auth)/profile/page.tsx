@@ -16,7 +16,6 @@ import {
     UserCircle2,
     AlertCircle,
     Coins,
-    FileText
 } from "lucide-react";
 
 export default function ProfilePage() {
@@ -127,19 +126,21 @@ export default function ProfilePage() {
                             <p className="text-sm text-muted-foreground">Manage your identity and preferences</p>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-3">
                             <div className="flex items-center justify-center gap-2 rounded-2xl border border-border/50 bg-zinc-500/5 p-4">
                                 <Coins className="h-4 w-4 text-foreground" />
                                 <span className="text-sm font-medium text-foreground">
                                     {new Intl.NumberFormat().format(user.availableTokenCount)} tokens
                                 </span>
                             </div>
+                            {/* Page count hidden — not shown to users
                             <div className="flex items-center justify-center gap-2 rounded-2xl border border-border/50 bg-zinc-500/5 p-4">
                                 <FileText className="h-4 w-4 text-foreground" />
                                 <span className="text-sm font-medium text-foreground">
                                     {new Intl.NumberFormat().format(user.availablePageCount)} pages
                                 </span>
                             </div>
+                            */}
                         </div>
 
                         <div className="space-y-6">

@@ -12,10 +12,6 @@ function tokensForInr(inr: number) {
   return inr * TOKENS_PER_RUPEE;
 }
 
-function pagesForInr(inr: number) {
-  return inr;
-}
-
 interface BuyTokenDialogProps {
   open: boolean;
   buying: boolean;
@@ -29,7 +25,6 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
   if (!open) return null;
 
   const selectedTokenCount = tokensForInr(selectedInr);
-  const selectedPageCount = pagesForInr(selectedInr);
   const canBuySelectedTokens =
     Number.isInteger(selectedInr) && selectedInr >= MIN_INR_PURCHASE;
 
@@ -72,7 +67,7 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
               Buy tokens
             </h2>
             <p style={{ color: "var(--ed-muted)", fontSize: "0.8rem", marginTop: 2 }}>
-              ₹1 = {TOKENS_PER_RUPEE.toLocaleString()} tokens + 1 page · min ₹{MIN_INR_PURCHASE.toLocaleString("en-IN")}
+              ₹1 = {TOKENS_PER_RUPEE.toLocaleString()} tokens · min ₹{MIN_INR_PURCHASE.toLocaleString("en-IN")}
             </p>
           </div>
           <button
@@ -91,7 +86,6 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
           <div className="grid grid-cols-2 gap-2">
             {INR_PRESETS.map((inr) => {
               const tokenCount = tokensForInr(inr);
-              const pageCount = pagesForInr(inr);
               const isSelected = selectedInr === inr;
 
               return (
@@ -111,9 +105,6 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
                   </span>
                   <span style={{ display: "block", fontSize: "0.72rem", color: "var(--ed-muted)", marginTop: 4 }}>
                     Token: {tokenCount.toLocaleString("en-IN")}
-                  </span>
-                  <span style={{ display: "block", fontSize: "0.72rem", color: "var(--ed-muted)", marginTop: 2 }}>
-                    Pages: {pageCount.toLocaleString("en-IN")}
                   </span>
                 </button>
               );
@@ -176,12 +167,8 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
                 ₹ {selectedInr.toLocaleString("en-IN")}
               </span>
             </div>
-            <div
-              className="flex items-center justify-between"
-              style={{ marginTop: 8, fontSize: "0.78rem", color: "var(--ed-muted)" }}
-            >
+            <div style={{ marginTop: 8, fontSize: "0.78rem", color: "var(--ed-muted)" }}>
               <span>Token: {selectedTokenCount.toLocaleString("en-IN")}</span>
-              <span>Pages: {selectedPageCount.toLocaleString("en-IN")}</span>
             </div>
           </div>
         </div>

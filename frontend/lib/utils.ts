@@ -22,7 +22,7 @@ export async function validateFile(file: File) {
     const pdfDoc = await PDFDocument.load(await file.arrayBuffer());
     const pageCount = pdfDoc.getPageCount();
     if (pageCount > Number(maxFilePageCount)) {
-        return { success: false, message: `File page count has be less than ${maxFilePageCount} pages` };
+        return { success: false, message: `PDF exceeds the maximum allowed length (${maxFilePageCount})` };
     }
     if (file.size > Number(maxFileSize) * 1024 * 1024) { //convert mb to bytes
         return { success: false, message: `File size has be less than ${maxFileSize} MB` };

@@ -69,17 +69,17 @@ function getIndexStatus(status?: string | null): IndexStatus {
   return "unknown";
 }
 
-function formatPageCount(pageCount?: number): string {
-  const value = Number(pageCount ?? 0);
-  if (!Number.isFinite(value) || value <= 0) {
-    return "0 pages";
-  }
-
-  return `${new Intl.NumberFormat(undefined, {
-    notation: value >= 1000 ? "compact" : "standard",
-    maximumFractionDigits: value >= 1000 ? 1 : 0,
-  }).format(value)} pages`;
-}
+// function formatPageCount(pageCount?: number): string {
+//   const value = Number(pageCount ?? 0);
+//   if (!Number.isFinite(value) || value <= 0) {
+//     return "0 pages";
+//   }
+//
+//   return `${new Intl.NumberFormat(undefined, {
+//     notation: value >= 1000 ? "compact" : "standard",
+//     maximumFractionDigits: value >= 1000 ? 1 : 0,
+//   }).format(value)} pages`;
+// }
 
 export function DocumentHistory({
   documents,
@@ -146,7 +146,7 @@ export function DocumentHistory({
             onUpload && (
               <button
                 type="button"
-                title={uploadDisabled ? "Add page credits to upload PDFs" : "Upload PDF"}
+                title={uploadDisabled ? "Add tokens to upload PDFs" : "Upload PDF"}
                 aria-label="Upload PDF"
                 disabled={uploadDisabled}
                 onClick={onUpload}
@@ -207,7 +207,7 @@ export function DocumentHistory({
             const status = getIndexStatus(doc.indexStatus);
             const statusView = statusConfig[status];
             const StatusIcon = statusView.icon;
-            const pageLabel = formatPageCount(doc.pageCount);
+            // const pageLabel = formatPageCount(doc.pageCount);
             return (
               <div
                 key={doc.id}
@@ -267,6 +267,7 @@ export function DocumentHistory({
                         <StatusIcon size={10} className={status === "running" ? "animate-spin" : undefined} />
                         {statusView.label}
                       </span>
+                      {/* Page count hidden — not shown to users
                       <span
                         title={`Pages used: ${doc.pageCount ?? 0}`}
                         style={{
@@ -277,6 +278,7 @@ export function DocumentHistory({
                       >
                         {pageLabel}
                       </span>
+                      */}
                     </div>
                   </div>
                   {onViewPdf && (

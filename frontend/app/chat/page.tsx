@@ -8,7 +8,7 @@ import { PdfViewerDialog } from "@/components/pdf-viewer-dialog";
 import { SubjectCatalog } from "@/components/subject-catalog";
 import { fetchSubject, fetchSubjects } from "@/lib/catalog-api";
 import { DocumentMetaData, SubjectDetail, SubjectSummary } from "@/lib/types";
-import { Coins, FileText, Loader2, LogOut, UserCircle } from "lucide-react";
+import { Coins, Loader2, LogOut, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 // import {
@@ -116,10 +116,10 @@ export default function ChatPage() {
     notation: availableTokenCount >= 1000 ? "compact" : "standard",
     maximumFractionDigits: availableTokenCount >= 1000 ? 1 : 0,
   }).format(Math.max(availableTokenCount, 0));
-  const pageLabel = new Intl.NumberFormat(undefined, {
-    notation: availablePageCount >= 1000 ? "compact" : "standard",
-    maximumFractionDigits: availablePageCount >= 1000 ? 1 : 0,
-  }).format(Math.max(availablePageCount, 0));
+  // const pageLabel = new Intl.NumberFormat(undefined, {
+  //   notation: availablePageCount >= 1000 ? "compact" : "standard",
+  //   maximumFractionDigits: availablePageCount >= 1000 ? 1 : 0,
+  // }).format(Math.max(availablePageCount, 0));
 
   const showFindMaterialsHeader =
     !currentSubject && !currentDocument && (catalogFindMode || !chatSelectionReady);
@@ -379,7 +379,7 @@ export default function ChatPage() {
         return;
       }
       if (!hasPages) {
-        showAlert("Page credits exhausted.", "error");
+        showAlert("Insufficient balance.", "error");
         return;
       }
       setUploadProgress(true);
@@ -391,10 +391,7 @@ export default function ChatPage() {
         }
         const filePageCount = validation.pageCount ?? 0;
         if (filePageCount > availablePageCount) {
-          showAlert(
-            `Not enough page credits (need ${filePageCount}, have ${availablePageCount}).`,
-            "error"
-          );
+          showAlert("Insufficient balance for this file.", "error");
           return;
         }
         const formData = new FormData();
@@ -683,6 +680,7 @@ export default function ChatPage() {
               <Coins size={14} />
               <span>{tokenLabel}</span>
             </div>
+            {/* Page credits hidden — not shown to users
             <div
               title="Available page credits"
               className={`flex items-center gap-1.5 px-2 py-1 text-xs rounded-md border border-[var(--ed-rule)] ${hasPages ? "text-[var(--ed-accent)]" : "text-[#b42318]"  }`}
@@ -690,6 +688,7 @@ export default function ChatPage() {
               <FileText size={14} />
               <span>{pageLabel} pages</span>
             </div>
+            */}
 
 
             {/* <Select value={selectedModel} onValueChange={(v) => setSelectedModel(v as AIModel)}>
@@ -869,10 +868,10 @@ export default function ChatPage() {
                 ) : !canUpload ? (
                   <div>
                     <p style={{ fontSize: "0.875rem", color: "#b42318", marginBottom: "0.2rem" }}>
-                      {!hasTokens ? "Token balance exhausted" : "Page credits exhausted"}
+                      Token balance exhausted
                     </p>
                     <p style={{ fontSize: "0.75rem", color: "var(--ed-faint)" }}>
-                      {!hasTokens ? "Add tokens to upload more PDFs" : "Buy more credits to upload PDFs"}
+                      Add tokens to upload PDFs
                     </p>
                   </div>
                 ) : (
