@@ -180,14 +180,53 @@ function getCatalogIndex({ forceRefresh = false } = {}) {
     return cachedIndex;
 }
 
+function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function haystackContainsToken(haystack, token) {
+    if (!token) return false;
+    const pattern = new RegExp(`\\b${escapeRegExp(token)}\\b`, 'i');
+    if (pattern.test(haystack)) {
+        return true;
+    }
+
+    if (token === 'maths' && /\bmathematics\b/i.test(haystack)) {
+        return true;
+    }
+
+    return false;
+}
+
+function rowMatchesSubjectQuery(row, tokens, normalizedQuery) {
+    const haystack = row.searchableText;
+
+    if (tokens.some((token) => haystackContainsToken(haystack, token))) {
+        return true;
+    }
+
+    const subjectCode = row.subjectCode.toLowerCase();
+    if (normalizedQuery.includes(subjectCode)) {
+        return true;
+    }
+
+    const knownAs = row.knownAs?.trim().toLowerCase();
+    if (knownAs && haystackContainsToken(normalizedQuery, knownAs)) {
+        return true;
+    }
+
+    return false;
+}
+
 function scoreRow(row, tokens, normalizedQuery) {
     if (!tokens.length) return 0;
 
     let score = 0;
     const haystack = row.searchableText;
+    const hasSubjectMatch = rowMatchesSubjectQuery(row, tokens, normalizedQuery);
 
     for (const token of tokens) {
-        if (haystack.includes(token)) score += 3;
+        if (haystackContainsToken(haystack, token)) score += 3;
     }
 
     if (row.subjectCode.toLowerCase() === normalizedQuery.replace(/\s+/g, '')) {
@@ -198,22 +237,22 @@ function scoreRow(row, tokens, normalizedQuery) {
         score += 12;
     }
 
-    if (/\bbook|notes|material\b/.test(normalizedQuery) && row.materialType === 'book') {
+    if (hasSubjectMatch && /\bbook|notes|material\b/.test(normalizedQuery) && row.materialType === 'book') {
         score += 4;
     }
-    if (/\bsyllabus\b/.test(normalizedQuery) && row.materialType === 'syllabus') {
+    if (hasSubjectMatch && /\bsyllabus\b/.test(normalizedQuery) && row.materialType === 'syllabus') {
         score += 6;
     }
-    if (/\bpaper|exam\b/.test(normalizedQuery) && row.materialType === 'old_paper') {
+    if (hasSubjectMatch && /\bpaper|exam\b/.test(normalizedQuery) && row.materialType === 'old_paper') {
         score += 5;
     }
-    if (/\bsolution\b/.test(normalizedQuery) && row.materialType === 'paper_solution') {
+    if (hasSubjectMatch && /\bsolution\b/.test(normalizedQuery) && row.materialType === 'paper_solution') {
         score += 5;
     }
 
     const seasonMatch = normalizedQuery.match(/\b(winter|summer)\b/);
     const yearMatch = normalizedQuery.match(/\b(20\d{2}|'\d{2}|\d{2})\b/);
-    if (row.materialType === 'old_paper') {
+    if (hasSubjectMatch && row.materialType === 'old_paper') {
         const label = row.label.toLowerCase();
         if (seasonMatch && label.includes(seasonMatch[1])) score += 8;
         if (yearMatch) {
@@ -222,7 +261,7 @@ function scoreRow(row, tokens, normalizedQuery) {
         }
     }
 
-    if (normalizedQuery.includes(haystack) && haystack.length > 8) {
+    if (hasSubjectMatch && normalizedQuery.includes(haystack) && haystack.length > 8) {
         score += 10;
     }
 
@@ -244,7 +283,10 @@ function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
             .map((row) => ({
                 row,
                 score: tokens.reduce(
-                    (sum, token) => sum + (row.searchableText.split(token).length - 1),
+                    (sum, token) =>
+                        sum
+                        + (row.searchableText.match(new RegExp(`\\b${escapeRegExp(token)}\\b`, 'gi')) || [])
+                            .length,
                     0
                 ),
             }))
@@ -303,5 +345,6 @@ export {
     getCatalogIndex,
     getCatalogRowsByIds,
     groupMatchesBySubject,
+    rowMatchesSubjectQuery,
     tokenize,
 };

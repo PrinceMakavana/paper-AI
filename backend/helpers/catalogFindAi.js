@@ -2,15 +2,36 @@ import {
     broadSearchCatalogIndex,
     getCatalogRowsByIds,
     groupMatchesBySubject,
+    rowMatchesSubjectQuery,
+    tokenize,
 } from './catalogIndexHelpers.js';
 import {
     buildDataNotAvailableAnswer,
     parseFindMaterialConstraints,
     validateSelectedRowsForQuestion,
 } from './catalogQueryHelpers.js';
+import {
+    LOCAL_CATALOG_FIND_TOKEN_COST,
+    assertUserHasMinTokens,
+    assertUserHasTokens,
+} from './userTokenHelpers.js';
 
 const STUDY_QUESTION_PATTERN =
     /\b(explain|define|what is|what are|how does|how do|why does|describe|difference between|marks?|viva|assignment answer|solve this|help me understand)\b/i;
+
+const AI_CANDIDATE_LIMIT = 15;
+const LOCAL_CANDIDATE_LIMIT = 8;
+
+function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function queryContainsTerm(query, term) {
+    const normalizedTerm = String(term || '').trim().toLowerCase();
+    if (!normalizedTerm) return false;
+    const pattern = new RegExp(`\\b${escapeRegExp(normalizedTerm)}\\b`, 'i');
+    return pattern.test(String(query || '').toLowerCase());
+}
 
 function contentToString(content) {
     if (typeof content === 'string') return content;
@@ -45,7 +66,7 @@ function looksLikeStudyQuestion(question) {
     return STUDY_QUESTION_PATTERN.test(String(question || ''));
 }
 
-function compactCandidates(candidates) {
+function compactCandidatesForPrompt(candidates) {
     return candidates.map((row) => ({
         id: row.id,
         subjectCode: row.subjectCode,
@@ -53,13 +74,12 @@ function compactCandidates(candidates) {
         knownAs: row.knownAs,
         materialType: row.materialType,
         label: row.label,
-        url: row.url,
         chatReady: row.chatReady,
     }));
 }
 
 function buildCatalogFindPrompt(question, candidates) {
-    const candidateJson = JSON.stringify(compactCandidates(candidates), null, 2);
+    const candidateJson = JSON.stringify(compactCandidatesForPrompt(candidates));
 
     return `You are the GTU Material Finder for paperAI. Your job is to help students FIND links (books, syllabus, old exam papers, solutions) across GTU subjects.
 
@@ -68,7 +88,7 @@ You are NOT a tutor. Never explain academic topics.
 USER QUESTION:
 ${question.trim()}
 
-CANDIDATE CATALOG ROWS (you may ONLY use these ids and urls — never invent links):
+CANDIDATE CATALOG ROWS (you may ONLY use these ids — never invent links):
 ${candidateJson}
 
 Return ONLY valid JSON with this shape:
@@ -83,7 +103,7 @@ Rules:
 1. If the user wants links/resources (books, syllabus, papers, downloads, "give me", subject codes): intent = "find_material".
 2. If the user wants explanations/definitions/exam answers ("explain", "what is", "define", marks): intent = "study_question".
 3. For find_material: pick the best matching candidate ids. Match subject aliases (e.g. maths -> Mathematics, PPS -> Programming For Problem Solving). Match paper seasons/years exactly (e.g. "summer 2023" -> label "Summer-2023").
-4. For find_material answer: include markdown links using ONLY selected candidates' url fields. Mention subject code and name.
+4. For find_material answer: mention subject code and name. Use markdown link labels only; selected ids are resolved to urls server-side.
 5. For study_question: selectedIds must be []. answer must tell the user to select a subject for textbook answers. suggestedSubjectCodes = up to 5 relevant subject codes from candidates where chatReady is true; if none, use closest subject matches anyway.
 6. If the user asks for a specific exam season/year (e.g. "summer 2010 paper") and NO candidate has that exact season+year label, return selectedIds = [] and answer = "DATA_NOT_AVAILABLE".
 7. Never return a different year/season as a substitute (e.g. do not return Summer-2023 when the user asked for Summer-2010).
@@ -160,6 +180,102 @@ function buildStudyRedirectAnswer(suggestedSubjectCodes, candidates) {
     return lines.join('\n');
 }
 
+function tryLocalCatalogAnswer(question, candidates) {
+    const trimmed = String(question || '').trim();
+    const constraints = parseFindMaterialConstraints(trimmed);
+
+    if (looksLikeStudyQuestion(trimmed)) {
+        return {
+            intent: 'study_question',
+            selectedRows: [],
+            answer: buildStudyRedirectAnswer([], candidates),
+            suggestedSubjectCodes: [],
+            availability: 'redirect',
+        };
+    }
+
+    const { answer, selectedRows } = resolveFindMaterialAnswer({
+        question: trimmed,
+        constraints,
+        selectedRows: candidates.slice(0, LOCAL_CANDIDATE_LIMIT),
+        parsedAnswer: '',
+    });
+
+    return {
+        intent: 'find_material',
+        selectedRows,
+        answer,
+        suggestedSubjectCodes: [],
+        availability: selectedRows.length ? 'found' : 'not_available',
+    };
+}
+
+function countMatchingSubjectCodes(candidates, question) {
+    const normalizedQuery = String(question || '').toLowerCase().trim();
+    const constraints = parseFindMaterialConstraints(question);
+    const tokens = tokenize(normalizedQuery).filter((token) => {
+        if (constraints.season && token === constraints.season) return false;
+        if (constraints.year) {
+            const shortYear = constraints.year.slice(-2);
+            if (token === constraints.year || token === shortYear) return false;
+        }
+        return true;
+    });
+    const subjectCodes = new Set();
+
+    for (const row of candidates) {
+        if (rowMatchesSubjectQuery(row, tokens, normalizedQuery)) {
+            subjectCodes.add(row.subjectCode);
+        }
+    }
+
+    return subjectCodes.size;
+}
+
+function isConfidentLocalMatch(question, candidates, selectedRows) {
+    if (looksLikeStudyQuestion(question)) {
+        return false;
+    }
+
+    if (countMatchingSubjectCodes(candidates, question) > 1) {
+        return false;
+    }
+
+    if (!selectedRows.length) {
+        const constraints = parseFindMaterialConstraints(question);
+        return constraints.hasSpecificPaperRequest;
+    }
+
+    const subjectCodes = new Set(selectedRows.map((row) => row.subjectCode));
+    if (subjectCodes.size === 1) {
+        return true;
+    }
+
+    const top = candidates[0];
+    if (top?.knownAs && queryContainsTerm(question, top.knownAs)) {
+        return true;
+    }
+
+    return false;
+}
+
+function getLocalCatalogTokenCost(selectedRows) {
+    return selectedRows.length > 0 ? LOCAL_CATALOG_FIND_TOKEN_COST : 0;
+}
+
+function buildLocalCatalogResult(localResult) {
+    const tokenCost = getLocalCatalogTokenCost(localResult.selectedRows);
+
+    return {
+        ...localResult,
+        matches: groupMatchesBySubject(localResult.selectedRows),
+        answerSource: 'local',
+        aiTokenCount: tokenCost,
+        aiInputTokenCount: 0,
+        aiOutputTokenCount: 0,
+    };
+}
+
 function normalizeAiCatalogResult(parsed, candidates, question) {
     const candidateIds = new Set(candidates.map((row) => row.id));
     const constraints = parseFindMaterialConstraints(question);
@@ -201,7 +317,7 @@ function normalizeAiCatalogResult(parsed, candidates, question) {
     };
 }
 
-async function runCatalogFindWithAi({ question, model }) {
+async function runCatalogFindWithAi({ question, model, userId }) {
     const trimmed = String(question || '').trim();
     if (!trimmed) {
         const error = new Error('Missing question');
@@ -209,55 +325,27 @@ async function runCatalogFindWithAi({ question, model }) {
         throw error;
     }
 
-    const candidates = broadSearchCatalogIndex(trimmed, { limit: 55 });
+    const candidates = broadSearchCatalogIndex(trimmed, { limit: AI_CANDIDATE_LIMIT });
+    const localResult = tryLocalCatalogAnswer(trimmed, candidates);
 
-    if (looksLikeStudyQuestion(trimmed) && candidates.length === 0) {
-        return {
-            intent: 'study_question',
-            selectedRows: [],
-            answer: buildStudyRedirectAnswer([], []),
-            suggestedSubjectCodes: [],
-            matches: [],
-            aiTokenCount: 0,
-            aiInputTokenCount: 0,
-            aiOutputTokenCount: 0,
-        };
+    if (isConfidentLocalMatch(trimmed, candidates, localResult.selectedRows)) {
+        const tokenCost = getLocalCatalogTokenCost(localResult.selectedRows);
+        if (userId && tokenCost > 0) {
+            await assertUserHasMinTokens(userId, tokenCost);
+        }
+        return buildLocalCatalogResult(localResult);
     }
 
     if (!model) {
-        const constraints = parseFindMaterialConstraints(trimmed);
-        if (looksLikeStudyQuestion(trimmed)) {
-            return {
-                intent: 'study_question',
-                selectedRows: [],
-                answer: buildStudyRedirectAnswer([], candidates),
-                suggestedSubjectCodes: [],
-                availability: 'redirect',
-                matches: [],
-                aiTokenCount: 0,
-                aiInputTokenCount: 0,
-                aiOutputTokenCount: 0,
-            };
+        const tokenCost = getLocalCatalogTokenCost(localResult.selectedRows);
+        if (userId && tokenCost > 0) {
+            await assertUserHasMinTokens(userId, tokenCost);
         }
+        return buildLocalCatalogResult(localResult);
+    }
 
-        const { answer, selectedRows } = resolveFindMaterialAnswer({
-            question: trimmed,
-            constraints,
-            selectedRows: candidates.slice(0, 8),
-            parsedAnswer: '',
-        });
-
-        return {
-            intent: 'find_material',
-            selectedRows,
-            answer,
-            suggestedSubjectCodes: [],
-            availability: selectedRows.length ? 'found' : 'not_available',
-            matches: groupMatchesBySubject(selectedRows),
-            aiTokenCount: 0,
-            aiInputTokenCount: 0,
-            aiOutputTokenCount: 0,
-        };
+    if (userId) {
+        await assertUserHasTokens(userId);
     }
 
     const prompt = buildCatalogFindPrompt(trimmed, candidates);
@@ -279,7 +367,7 @@ async function runCatalogFindWithAi({ question, model }) {
               const resolved = resolveFindMaterialAnswer({
                   question: trimmed,
                   constraints,
-                  selectedRows: candidates.slice(0, 8),
+                  selectedRows: candidates.slice(0, LOCAL_CANDIDATE_LIMIT),
                   parsedAnswer: '',
               });
               return {
@@ -294,6 +382,7 @@ async function runCatalogFindWithAi({ question, model }) {
     return {
         ...normalized,
         matches: groupMatchesBySubject(normalized.selectedRows),
+        answerSource: 'ai',
         aiTokenCount: response.usage_metadata?.total_tokens ?? 0,
         aiInputTokenCount: response.usage_metadata?.input_tokens ?? 0,
         aiOutputTokenCount: response.usage_metadata?.output_tokens ?? 0,
@@ -303,8 +392,10 @@ async function runCatalogFindWithAi({ question, model }) {
 export {
     buildCatalogFindPrompt,
     formatFallbackFindAnswer,
+    isConfidentLocalMatch,
     looksLikeStudyQuestion,
     parseJsonFromModelText,
     resolveFindMaterialAnswer,
     runCatalogFindWithAi,
+    tryLocalCatalogAnswer,
 };

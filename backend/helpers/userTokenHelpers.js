@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/userModel.js';
 
 const TOKEN_EXHAUSTED_MESSAGE = 'Token balance exhausted.';
+const LOCAL_CATALOG_FIND_TOKEN_COST = Number(process.env.LOCAL_CATALOG_FIND_TOKEN_COST ?? 600);
 
 class TokenBalanceError extends Error {
     constructor(message = TOKEN_EXHAUSTED_MESSAGE) {
@@ -30,6 +31,16 @@ async function getUserTokenBalance(userId) {
 async function assertUserHasTokens(userId) {
     const availableTokenCount = await getUserTokenBalance(userId);
     if (availableTokenCount <= 0) {
+        throw new TokenBalanceError();
+    }
+
+    return availableTokenCount;
+}
+
+async function assertUserHasMinTokens(userId, minTokens) {
+    const required = normalizeTokenCount(minTokens);
+    const availableTokenCount = await getUserTokenBalance(userId);
+    if (required > 0 && availableTokenCount < required) {
         throw new TokenBalanceError();
     }
 
@@ -75,8 +86,10 @@ function isTokenBalanceError(error) {
 }
 
 export {
+    LOCAL_CATALOG_FIND_TOKEN_COST,
     TOKEN_EXHAUSTED_MESSAGE,
     TokenBalanceError,
+    assertUserHasMinTokens,
     assertUserHasTokens,
     consumeUserTokens,
     getUserTokenBalance,

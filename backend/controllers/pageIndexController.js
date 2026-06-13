@@ -840,10 +840,12 @@ async function catalogFindQuestion(req, res) {
             return res.status(400).send('Missing question');
         }
 
-        await assertUserHasTokens(req.user.userId);
-
         const { model } = getModelConfig(chatModel);
-        const result = await runCatalogFindWithAi({ question: question.trim(), model });
+        const result = await runCatalogFindWithAi({
+            question: question.trim(),
+            model,
+            userId: req.user.userId,
+        });
 
         savedUserMessage = await savePageIndexChatMessage({
             user_id: req.user.userId,
@@ -875,7 +877,8 @@ async function catalogFindQuestion(req, res) {
             matches: result.matches,
             suggestedSubjectCodes: result.suggestedSubjectCodes,
             contribute_form_url: getCatalogContributeFormUrl() || null,
-            answer_source: 'catalog',
+            answer_source: result.answerSource,
+            token_count: result.aiTokenCount,
             message: mapChatMessageForClient(savedAssistantMessage),
             status: 200,
             available_token_count: availableTokenCount,

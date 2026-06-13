@@ -151,7 +151,7 @@ interface ChatMessagesResponse {
 interface QuestionResponse {
   status: number;
   answer?: string;
-  answer_source?: "book" | "not_in_book" | "catalog";
+  answer_source?: "book" | "not_in_book" | "catalog" | "local" | "ai";
   intent?: "find_material" | "study_question";
   matches?: CatalogMatchGroup[];
   suggestedSubjectCodes?: string[];

@@ -33,6 +33,21 @@ tap.test('broadSearchCatalogIndex finds maths summer 2023 paper', async (t) => {
     t.end();
 });
 
+tap.test('broadSearchCatalogIndex limits PPS Books to PPS subject rows', async (t) => {
+    const results = broadSearchCatalogIndex('PPS Books', { limit: 55 });
+
+    t.ok(results.length > 0, 'expected PPS search results');
+    t.ok(
+        results.every((row) => row.subjectCode === '3110003'),
+        'expected only Programming For Problem Solving rows'
+    );
+    t.ok(
+        results.some((row) => row.materialType === 'book'),
+        'expected at least one PPS book row'
+    );
+    t.end();
+});
+
 tap.test('getCatalogRowsByIds returns only known ids', async (t) => {
     const index = buildCatalogIndex();
     const sample = index[0];
