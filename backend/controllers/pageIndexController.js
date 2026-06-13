@@ -847,6 +847,13 @@ async function catalogFindQuestion(req, res) {
             userId: req.user.userId,
         });
 
+        console.log('[CatalogFind] billed', JSON.stringify({
+            question: question.trim(),
+            answerSource: result.answerSource,
+            tokenCost: result.aiTokenCount,
+            availability: result.availability,
+        }, null, 2));
+
         savedUserMessage = await savePageIndexChatMessage({
             user_id: req.user.userId,
             document_id: sessionId,

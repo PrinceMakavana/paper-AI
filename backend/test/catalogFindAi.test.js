@@ -101,6 +101,47 @@ tap.test('runCatalogFindWithAi uses AI path for ambiguous maths books', async (t
     t.end();
 });
 
+tap.test('runCatalogFindWithAi uses local path for explicit subject code query', async (t) => {
+    const invoked = { count: 0 };
+    const model = {
+        async invoke() {
+            invoked.count += 1;
+            return {
+                content: JSON.stringify({
+                    intent: 'find_material',
+                    selectedIds: ['2170715:subject:2170715'],
+                    answer: 'wrong subject',
+                    suggestedSubjectCodes: [],
+                }),
+                usage_metadata: {
+                    total_tokens: 1500,
+                    input_tokens: 1300,
+                    output_tokens: 200,
+                },
+            };
+        },
+    };
+
+    const result = await runCatalogFindWithAi({ question: '3110002 data', model });
+
+    t.equal(invoked.count, 0, 'expected local path without AI for explicit subject code');
+    t.equal(result.answerSource, 'local');
+    t.equal(result.aiTokenCount, LOCAL_CATALOG_FIND_TOKEN_COST);
+    t.ok(result.selectedRows.every((row) => row.subjectCode === '3110002'));
+    t.end();
+});
+
+tap.test('isConfidentLocalMatch accepts explicit subject code with generic token', async (t) => {
+    const candidates = broadSearchCatalogIndex('3110002 data', { limit: 15 });
+    const localResult = tryLocalCatalogAnswer('3110002 data', candidates);
+
+    t.ok(
+        isConfidentLocalMatch('3110002 data', candidates, localResult.selectedRows),
+        'expected confident local match when subject code is explicit'
+    );
+    t.end();
+});
+
 tap.teardown(() => {
     process.exit(0);
 });

@@ -48,6 +48,17 @@ tap.test('broadSearchCatalogIndex limits PPS Books to PPS subject rows', async (
     t.end();
 });
 
+tap.test('broadSearchCatalogIndex anchors explicit subject code queries', async (t) => {
+    const results = broadSearchCatalogIndex('3110002 data', { limit: 15 });
+
+    t.ok(results.length > 0, 'expected English subject search results');
+    t.ok(
+        results.every((row) => row.subjectCode === '3110002'),
+        'expected only 3110002 rows when subject code is explicit'
+    );
+    t.end();
+});
+
 tap.test('getCatalogRowsByIds returns only known ids', async (t) => {
     const index = buildCatalogIndex();
     const sample = index[0];

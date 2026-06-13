@@ -1,5 +1,6 @@
 import {
     broadSearchCatalogIndex,
+    extractSubjectCodeFromQuery,
     getCatalogRowsByIds,
     groupMatchesBySubject,
     rowMatchesSubjectQuery,
@@ -21,6 +22,32 @@ const STUDY_QUESTION_PATTERN =
 
 const AI_CANDIDATE_LIMIT = 15;
 const LOCAL_CANDIDATE_LIMIT = 8;
+
+function logCatalogFind(step, data = {}) {
+    console.log('[CatalogFind]', step, JSON.stringify(data, null, 2));
+}
+
+function summarizeCandidates(candidates = []) {
+    const subjectCodes = [...new Set(candidates.map((row) => row.subjectCode))];
+    return {
+        count: candidates.length,
+        subjectCodes,
+        rows: candidates.map((row) => ({
+            id: row.id,
+            subjectCode: row.subjectCode,
+            materialType: row.materialType,
+            label: row.label,
+        })),
+    };
+}
+
+function summarizeSelectedRows(rows = []) {
+    return {
+        count: rows.length,
+        subjectCodes: [...new Set(rows.map((row) => row.subjectCode))],
+        materialTypes: [...new Set(rows.map((row) => row.materialType))],
+    };
+}
 
 function escapeRegExp(value) {
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -211,6 +238,11 @@ function tryLocalCatalogAnswer(question, candidates) {
 }
 
 function countMatchingSubjectCodes(candidates, question) {
+    const explicitSubjectCode = extractSubjectCodeFromQuery(question);
+    if (explicitSubjectCode) {
+        return candidates.some((row) => row.subjectCode === explicitSubjectCode) ? 1 : 0;
+    }
+
     const normalizedQuery = String(question || '').toLowerCase().trim();
     const constraints = parseFindMaterialConstraints(question);
     const tokens = tokenize(normalizedQuery).filter((token) => {
@@ -235,6 +267,19 @@ function countMatchingSubjectCodes(candidates, question) {
 function isConfidentLocalMatch(question, candidates, selectedRows) {
     if (looksLikeStudyQuestion(question)) {
         return false;
+    }
+
+    const explicitSubjectCode = extractSubjectCodeFromQuery(question);
+    if (explicitSubjectCode) {
+        if (selectedRows.some((row) => row.subjectCode === explicitSubjectCode)) {
+            return true;
+        }
+
+        if (!selectedRows.length) {
+            const constraints = parseFindMaterialConstraints(question);
+            return constraints.hasSpecificPaperRequest
+                && candidates.some((row) => row.subjectCode === explicitSubjectCode);
+        }
     }
 
     if (countMatchingSubjectCodes(candidates, question) > 1) {
@@ -326,14 +371,35 @@ async function runCatalogFindWithAi({ question, model, userId }) {
     }
 
     const candidates = broadSearchCatalogIndex(trimmed, { limit: AI_CANDIDATE_LIMIT });
+    const explicitSubjectCode = extractSubjectCodeFromQuery(trimmed);
     const localResult = tryLocalCatalogAnswer(trimmed, candidates);
+    const confidentLocal = isConfidentLocalMatch(trimmed, candidates, localResult.selectedRows);
 
-    if (isConfidentLocalMatch(trimmed, candidates, localResult.selectedRows)) {
+    logCatalogFind('search', {
+        question: trimmed,
+        explicitSubjectCode,
+        candidates: summarizeCandidates(candidates),
+    });
+    logCatalogFind('local_attempt', {
+        intent: localResult.intent,
+        availability: localResult.availability,
+        confidentLocal,
+        matchingSubjectCount: countMatchingSubjectCodes(candidates, trimmed),
+        selectedRows: summarizeSelectedRows(localResult.selectedRows),
+    });
+
+    if (confidentLocal) {
         const tokenCost = getLocalCatalogTokenCost(localResult.selectedRows);
         if (userId && tokenCost > 0) {
             await assertUserHasMinTokens(userId, tokenCost);
         }
-        return buildLocalCatalogResult(localResult);
+        const result = buildLocalCatalogResult(localResult);
+        logCatalogFind('local_result', {
+            answerSource: result.answerSource,
+            tokenCost: result.aiTokenCount,
+            availability: result.availability,
+        });
+        return result;
     }
 
     if (!model) {
@@ -341,16 +407,38 @@ async function runCatalogFindWithAi({ question, model, userId }) {
         if (userId && tokenCost > 0) {
             await assertUserHasMinTokens(userId, tokenCost);
         }
-        return buildLocalCatalogResult(localResult);
+        const result = buildLocalCatalogResult(localResult);
+        logCatalogFind('local_fallback_no_model', {
+            answerSource: result.answerSource,
+            tokenCost: result.aiTokenCount,
+        });
+        return result;
     }
 
     if (userId) {
         await assertUserHasTokens(userId);
     }
 
+    logCatalogFind('ai_invoke', {
+        reason: 'not_confident_local',
+        candidateCount: candidates.length,
+    });
+
     const prompt = buildCatalogFindPrompt(trimmed, candidates);
     const response = await model.invoke(prompt);
     const parsed = parseJsonFromModelText(contentToString(response.content));
+
+    logCatalogFind('ai_response', {
+        parsedIntent: parsed?.intent ?? null,
+        selectedIds: parsed?.selectedIds ?? [],
+        tokenUsage: {
+            total: response.usage_metadata?.total_tokens ?? 0,
+            input: response.usage_metadata?.input_tokens ?? 0,
+            output: response.usage_metadata?.output_tokens ?? 0,
+        },
+        promptChars: prompt.length,
+    });
+
     const normalized = parsed
         ? normalizeAiCatalogResult(parsed, candidates, trimmed)
         : (() => {
@@ -379,7 +467,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
               };
           })();
 
-    return {
+    const result = {
         ...normalized,
         matches: groupMatchesBySubject(normalized.selectedRows),
         answerSource: 'ai',
@@ -387,6 +475,16 @@ async function runCatalogFindWithAi({ question, model, userId }) {
         aiInputTokenCount: response.usage_metadata?.input_tokens ?? 0,
         aiOutputTokenCount: response.usage_metadata?.output_tokens ?? 0,
     };
+
+    logCatalogFind('ai_result', {
+        answerSource: result.answerSource,
+        intent: result.intent,
+        availability: result.availability,
+        tokenCost: result.aiTokenCount,
+        selectedRows: summarizeSelectedRows(result.selectedRows),
+    });
+
+    return result;
 }
 
 export {

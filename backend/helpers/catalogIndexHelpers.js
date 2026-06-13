@@ -180,6 +180,19 @@ function getCatalogIndex({ forceRefresh = false } = {}) {
     return cachedIndex;
 }
 
+function extractSubjectCodeFromQuery(question) {
+    const match = String(question || '').match(/\b(\d{7})\b/);
+    return match ? match[1] : null;
+}
+
+function sliceAnchoredSubjectResults(scored, subjectCode, limit) {
+    const anchored = scored.filter((item) => item.row.subjectCode === subjectCode);
+    if (!anchored.length) {
+        return null;
+    }
+    return anchored.slice(0, limit).map((item) => item.row);
+}
+
 function escapeRegExp(value) {
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -272,11 +285,24 @@ function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
     const index = getCatalogIndex();
     const normalizedQuery = String(question || '').toLowerCase().trim();
     const tokens = tokenize(normalizedQuery);
+    const explicitSubjectCode = extractSubjectCodeFromQuery(question);
 
     const scored = index
         .map((row) => ({ row, score: scoreRow(row, tokens, normalizedQuery) }))
         .filter((item) => item.score > 0)
         .sort((a, b) => b.score - a.score);
+
+    if (explicitSubjectCode) {
+        const anchored = sliceAnchoredSubjectResults(scored, explicitSubjectCode, limit);
+        if (anchored) {
+            return anchored;
+        }
+
+        const subjectRows = index.filter((row) => row.subjectCode === explicitSubjectCode);
+        if (subjectRows.length) {
+            return subjectRows.slice(0, limit);
+        }
+    }
 
     if (scored.length === 0 && tokens.length > 0) {
         const fallback = index
@@ -292,6 +318,14 @@ function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
             }))
             .filter((item) => item.score > 0)
             .sort((a, b) => b.score - a.score);
+
+        if (explicitSubjectCode) {
+            const anchored = sliceAnchoredSubjectResults(fallback, explicitSubjectCode, limit);
+            if (anchored) {
+                return anchored;
+            }
+        }
+
         return fallback.slice(0, limit).map((item) => item.row);
     }
 
@@ -341,6 +375,7 @@ export {
     broadSearchCatalogIndex,
     buildCatalogIndex,
     clearCatalogIndexCache,
+    extractSubjectCodeFromQuery,
     getCatalogGlobalSessionId,
     getCatalogIndex,
     getCatalogRowsByIds,
