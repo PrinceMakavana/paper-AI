@@ -2,8 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 import { fileURLToPath } from 'node:url';
-import logger from './middleware/loggerMiddleware.js';
+import logger, { isProbeRequest } from './middleware/loggerMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import pageIndexRoutes from './routes/pageIndexRoutes.js';
 import catalogRoutes from './routes/catalogRoutes.js';
@@ -33,9 +35,17 @@ app.use(cors({
     },
     credentials: true
 }));
+app.use(helmet());
+app.use((req, res, next) => {
+    if (isProbeRequest(req.url)) {
+        return res.status(404).end();
+    }
+    next();
+});
 app.use(express.json());
-app.use(logger);
 app.use(express.urlencoded({ extended: true }));
+app.use(mongoSanitize());
+app.use(logger);
 
 app.use(userRoutes);
 app.use(pageIndexRoutes);

@@ -4,6 +4,7 @@ import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf';
 import { PineconeStore } from '@langchain/pinecone';
 import { Pinecone } from '@pinecone-database/pinecone';
 import { RecursiveCharacterTextSplitter } from '@langchain/classic/text_splitter';
+import { requirePlainString } from '../utils/validateInput.js';
 
 let pinecone;
 
@@ -38,7 +39,8 @@ function getPineconeIndex() {
 }
 
 async function chatWithDocument(req, res) {
-    const { question, documentId, chatModel = 'gemini' } = req.body || {};
+    const { question, documentId: rawDocumentId, chatModel = 'gemini' } = req.body || {};
+    const documentId = requirePlainString(rawDocumentId);
 
     try {
         if (!question?.trim() || !documentId) {

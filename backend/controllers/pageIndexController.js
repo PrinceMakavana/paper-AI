@@ -20,6 +20,7 @@ import {
 import { getCatalogGlobalSessionId } from '../helpers/catalogIndexHelpers.js';
 import { runCatalogFindWithAi } from '../helpers/catalogFindAi.js';
 import { getCatalogContributeFormUrl } from '../helpers/catalogQueryHelpers.js';
+import { requirePlainString } from '../utils/validateInput.js';
 import {
     deletePageIndexChatMessageById,
     deletePageIndexChatMessages,
@@ -484,7 +485,8 @@ async function uploadDocument(req, res) {
 
 async function questionVectorlessRag(req, res) {
     let savedUserMessage = null;
-    const { question, documentId, chatModel } = req.body || {};
+    const { question, documentId: rawDocumentId, chatModel } = req.body || {};
+    const documentId = requirePlainString(rawDocumentId);
 
     try {
         const base = getPageIndexBaseUrl();
@@ -657,13 +659,15 @@ function catalogTreeToRoots(tree) {
 
 async function subjectQuestionVectorlessRag(req, res) {
     let savedUserMessage = null;
-    const { question, subjectCode, chatModel } = req.body || {};
-    const sessionId = getSubjectChatSessionId(subjectCode);
+    const { question, subjectCode: rawSubjectCode, chatModel } = req.body || {};
+    const subjectCode = requirePlainString(rawSubjectCode);
 
     try {
         if (!question?.trim() || !subjectCode) {
             return res.status(400).send('Missing question or subjectCode');
         }
+
+        const sessionId = getSubjectChatSessionId(subjectCode);
 
         await assertUserHasTokens(req.user.userId);
 
