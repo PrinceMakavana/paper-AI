@@ -1,5 +1,5 @@
-import { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } from '@langchain/google-genai';
 import { ChatOllama, OllamaEmbeddings } from '@langchain/ollama';
+import { createGeminiChatModel, createGeminiEmbeddings } from './geminiClient.js';
 
 function getModelConfig(chatModel = 'gemini') {
     switch (chatModel) {
@@ -18,16 +18,8 @@ function getModelConfig(chatModel = 'gemini') {
         case 'gemini':
         default:
             return {
-                model: new ChatGoogleGenerativeAI({
-                    model: process.env.GEMINI_MODEL_NAME || 'gemini-3.1-flash-lite-preview',
-                    apiKey: process.env.GEMINI_API_KEY,
-                    temperature: 0.28,
-                    maxOutputTokens: 1000,
-                }),
-                embeddings: new GoogleGenerativeAIEmbeddings({
-                    apiKey: process.env.GEMINI_API_KEY,
-                    model: process.env.EMBEDDING_MODEL_NAME || 'text-embedding-004',
-                }),
+                model: createGeminiChatModel(),
+                embeddings: createGeminiEmbeddings(),
             };
     }
 }
