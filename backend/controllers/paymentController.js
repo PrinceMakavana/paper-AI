@@ -2,11 +2,10 @@ import rzpInstance from '../utils/rezorpay.js';
 import PaymentModel from '../models/payment.js';
 import User from '../models/userModel.js';
 import dotenv from 'dotenv';
-import { pagesForTokenPurchase } from '../utils/billingConstants.js';
+import { pagesForTokenPurchase, TOKENS_PER_RUPEE } from '../utils/billingConstants.js';
 import { validateWebhookSignature } from 'razorpay/dist/utils/razorpay-utils.js';
 dotenv.config();
-const MIN_TOKEN_PURCHASE = 5000;
-const PAISE_PER_TOKEN = 2; // 1000 tokens = INR 20 = 2000 paise
+const MIN_TOKEN_PURCHASE = 50000; // ₹100 at 500 tokens per rupee
 const razorpayWebhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
 
 async function createOrder(req, res) {
@@ -19,7 +18,7 @@ async function createOrder(req, res) {
             });
         }
 
-        const amount = tokenCount * PAISE_PER_TOKEN;
+        const amount = Math.round((tokenCount / TOKENS_PER_RUPEE) * 100);
         const pageCount = pagesForTokenPurchase(tokenCount);
         const receipt = `tokens_${tokenCount}`;
 

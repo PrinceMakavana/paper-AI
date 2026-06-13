@@ -1,4 +1,4 @@
-const TOKENS_PER_RUPEE = 50;
+const TOKENS_PER_RUPEE = 500;
 const PAGES_PER_RUPEE = 1;
 const SIGNUP_PAGE_BONUS = 300;
 

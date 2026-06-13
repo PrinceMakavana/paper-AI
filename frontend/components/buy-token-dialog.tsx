@@ -3,14 +3,17 @@
 import { Loader2, Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 
-const MIN_TOKEN_PURCHASE = 5000;
-const TOKEN_STEP = 1000;
-const TOKEN_PRICE_PREVIEW_INR_PER_1000 = 20;
-const PAGES_PER_1000_TOKENS = 20;
-const TOKEN_PRESETS = [5000, 10000, 25000, 50000];
+const TOKENS_PER_RUPEE = 500;
+const MIN_INR_PURCHASE = 100;
+const INR_STEP = 100;
+const INR_PRESETS = [100, 200, 500, 1000];
 
-function pagesForTokenCount(tokenCount: number) {
-  return (tokenCount / TOKEN_STEP) * PAGES_PER_1000_TOKENS;
+function tokensForInr(inr: number) {
+  return inr * TOKENS_PER_RUPEE;
+}
+
+function pagesForInr(inr: number) {
+  return inr;
 }
 
 interface BuyTokenDialogProps {
@@ -21,21 +24,21 @@ interface BuyTokenDialogProps {
 }
 
 export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogProps) {
-  const [selectedTokenCount, setSelectedTokenCount] = useState(MIN_TOKEN_PURCHASE);
+  const [selectedInr, setSelectedInr] = useState(MIN_INR_PURCHASE);
 
   if (!open) return null;
 
-  const selectedTokenAmountPreview =
-    (selectedTokenCount / TOKEN_STEP) * TOKEN_PRICE_PREVIEW_INR_PER_1000;
+  const selectedTokenCount = tokensForInr(selectedInr);
+  const selectedPageCount = pagesForInr(selectedInr);
   const canBuySelectedTokens =
-    Number.isInteger(selectedTokenCount) && selectedTokenCount >= MIN_TOKEN_PURCHASE;
+    Number.isInteger(selectedInr) && selectedInr >= MIN_INR_PURCHASE;
 
-  const updateSelectedTokenCount = (value: number) => {
+  const updateSelectedInr = (value: number) => {
     if (!Number.isFinite(value)) {
-      setSelectedTokenCount(MIN_TOKEN_PURCHASE);
+      setSelectedInr(MIN_INR_PURCHASE);
       return;
     }
-    setSelectedTokenCount(Math.max(0, Math.floor(value)));
+    setSelectedInr(Math.max(0, Math.floor(value)));
   };
 
   return (
@@ -69,7 +72,7 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
               Buy tokens
             </h2>
             <p style={{ color: "var(--ed-muted)", fontSize: "0.8rem", marginTop: 2 }}>
-              ₹1 = 50 tokens + 1 page · min {MIN_TOKEN_PURCHASE.toLocaleString()} tokens
+              ₹1 = {TOKENS_PER_RUPEE.toLocaleString()} tokens + 1 page · min ₹{MIN_INR_PURCHASE.toLocaleString("en-IN")}
             </p>
           </div>
           <button
@@ -86,62 +89,69 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
 
         <div className="px-5 py-5">
           <div className="grid grid-cols-2 gap-2">
-            {TOKEN_PRESETS.map((tokenCount) => (
-              <button
-                key={tokenCount}
-                type="button"
-                onClick={() => setSelectedTokenCount(tokenCount)}
-                className="px-3 py-3 text-left transition-colors"
-                style={{
-                  border: `1px solid ${
-                    selectedTokenCount === tokenCount ? "var(--ed-accent)" : "var(--ed-rule)"
-                  }`,
-                  borderRadius: 6,
-                  backgroundColor: selectedTokenCount === tokenCount ? "#eef3ff" : "var(--ed-surface)",
-                }}
-              >
-                <span style={{ display: "block", fontSize: "0.95rem", color: "var(--ed-ink)" }}>
-                  {tokenCount.toLocaleString()}
-                </span>
-                <span style={{ display: "block", fontSize: "0.72rem", color: "var(--ed-muted)" }}>
-                  tokens + {pagesForTokenCount(tokenCount).toLocaleString()} pages
-                </span>
-              </button>
-            ))}
+            {INR_PRESETS.map((inr) => {
+              const tokenCount = tokensForInr(inr);
+              const pageCount = pagesForInr(inr);
+              const isSelected = selectedInr === inr;
+
+              return (
+                <button
+                  key={inr}
+                  type="button"
+                  onClick={() => setSelectedInr(inr)}
+                  className="px-3 py-3 text-left transition-colors"
+                  style={{
+                    border: `1px solid ${isSelected ? "var(--ed-accent)" : "var(--ed-rule)"}`,
+                    borderRadius: 6,
+                    backgroundColor: isSelected ? "#eef3ff" : "var(--ed-surface)",
+                  }}
+                >
+                  <span style={{ display: "block", fontSize: "1.05rem", color: "var(--ed-ink)", fontWeight: 600 }}>
+                    ₹ {inr.toLocaleString("en-IN")}
+                  </span>
+                  <span style={{ display: "block", fontSize: "0.72rem", color: "var(--ed-muted)", marginTop: 4 }}>
+                    Token: {tokenCount.toLocaleString("en-IN")}
+                  </span>
+                  <span style={{ display: "block", fontSize: "0.72rem", color: "var(--ed-muted)", marginTop: 2 }}>
+                    Pages: {pageCount.toLocaleString("en-IN")}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="mt-5">
             <label
-              htmlFor="token-count"
+              htmlFor="purchase-amount"
               style={{ display: "block", fontSize: "0.78rem", color: "var(--ed-muted)", marginBottom: 8 }}
             >
-              Custom token count
+              Custom amount (₹)
             </label>
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                title="Decrease tokens"
-                onClick={() => updateSelectedTokenCount(selectedTokenCount - TOKEN_STEP)}
-                disabled={buying || selectedTokenCount <= MIN_TOKEN_PURCHASE}
+                title="Decrease amount"
+                onClick={() => updateSelectedInr(selectedInr - INR_STEP)}
+                disabled={buying || selectedInr <= MIN_INR_PURCHASE}
                 className="flex h-10 w-10 items-center justify-center rounded-md border transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-45"
                 style={{ borderColor: "var(--ed-rule)", color: "var(--ed-muted)" }}
               >
                 <Minus size={16} />
               </button>
               <input
-                id="token-count"
+                id="purchase-amount"
                 type="number"
-                min={MIN_TOKEN_PURCHASE}
-                step={TOKEN_STEP}
-                value={selectedTokenCount}
-                onChange={(event) => updateSelectedTokenCount(Number(event.target.value))}
+                min={MIN_INR_PURCHASE}
+                step={INR_STEP}
+                value={selectedInr}
+                onChange={(event) => updateSelectedInr(Number(event.target.value))}
                 className="h-10 min-w-0 flex-1 rounded-md border bg-transparent px-3 text-sm outline-none focus:ring-2 focus:ring-blue-100"
                 style={{ borderColor: "var(--ed-rule)", color: "var(--ed-ink)" }}
               />
               <button
                 type="button"
-                title="Increase tokens"
-                onClick={() => updateSelectedTokenCount(selectedTokenCount + TOKEN_STEP)}
+                title="Increase amount"
+                onClick={() => updateSelectedInr(selectedInr + INR_STEP)}
                 disabled={buying}
                 className="flex h-10 w-10 items-center justify-center rounded-md border transition-colors hover:bg-gray-100 disabled:opacity-45"
                 style={{ borderColor: "var(--ed-rule)", color: "var(--ed-muted)" }}
@@ -151,19 +161,28 @@ export function BuyTokenDialog({ open, buying, onClose, onBuy }: BuyTokenDialogP
             </div>
             {!canBuySelectedTokens && (
               <p style={{ color: "#b42318", fontSize: "0.76rem", marginTop: 8 }}>
-                Please select at least {MIN_TOKEN_PURCHASE.toLocaleString()} tokens.
+                Please select at least ₹{MIN_INR_PURCHASE.toLocaleString("en-IN")}.
               </p>
             )}
           </div>
 
           <div
-            className="mt-5 flex items-center justify-between px-3 py-3"
+            className="mt-5 px-3 py-3"
             style={{ backgroundColor: "var(--ed-surface)", border: "1px solid var(--ed-rule)", borderRadius: 6 }}
           >
-            <span style={{ fontSize: "0.82rem", color: "var(--ed-muted)" }}>Estimated amount</span>
-            <span style={{ fontSize: "1rem", color: "var(--ed-ink)", fontWeight: 600 }}>
-              ₹{selectedTokenAmountPreview.toLocaleString("en-IN", { maximumFractionDigits: 2 })}
-            </span>
+            <div className="flex items-center justify-between">
+              <span style={{ fontSize: "0.82rem", color: "var(--ed-muted)" }}>Amount</span>
+              <span style={{ fontSize: "1rem", color: "var(--ed-ink)", fontWeight: 600 }}>
+                ₹ {selectedInr.toLocaleString("en-IN")}
+              </span>
+            </div>
+            <div
+              className="flex items-center justify-between"
+              style={{ marginTop: 8, fontSize: "0.78rem", color: "var(--ed-muted)" }}
+            >
+              <span>Token: {selectedTokenCount.toLocaleString("en-IN")}</span>
+              <span>Pages: {selectedPageCount.toLocaleString("en-IN")}</span>
+            </div>
           </div>
         </div>
 

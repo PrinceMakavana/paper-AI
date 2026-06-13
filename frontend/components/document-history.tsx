@@ -10,6 +10,7 @@ interface DocumentHistoryProps {
   onUpload?: () => void;
   uploading?: boolean;
   uploadDisabled?: boolean;
+  uploadComingSoon?: boolean;
   currentId?: string;
   deletingId?: string;
 }
@@ -89,6 +90,7 @@ export function DocumentHistory({
   onUpload,
   uploading,
   uploadDisabled,
+  uploadComingSoon = false,
   currentId,
   deletingId,
 }: DocumentHistoryProps) {
@@ -118,34 +120,58 @@ export function DocumentHistory({
               {documents.length} {documents.length === 1 ? "document" : "documents"}
             </span>
           )}
-          {onUpload && (
-            <button
-              type="button"
-              title={uploadDisabled ? "Add page credits to upload PDFs" : "Upload PDF"}
-              aria-label="Upload PDF"
-              disabled={uploadDisabled}
-              onClick={onUpload}
+          {uploadComingSoon ? (
+            <span
+              title="PDF upload coming soon"
               style={{
-                width: 28,
-                height: 28,
-                flexShrink: 0,
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
-                justifyContent: "center",
-                color: uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)",
-                cursor: uploadDisabled ? "default" : "pointer",
-                opacity: uploadDisabled ? 0.5 : 1,
-                transition: "color 0.15s, background-color 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                if (!uploadDisabled) e.currentTarget.style.color = "var(--ed-accent)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)";
+                minHeight: 20,
+                padding: "0 0.4rem",
+                border: "1px solid #c9d8ff",
+                borderRadius: 2,
+                backgroundColor: "#eef3ff",
+                color: "#1a56db",
+                fontSize: "0.625rem",
+                lineHeight: 1.4,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.02em",
+                whiteSpace: "nowrap",
               }}
             >
-              {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
-            </button>
+              Coming soon
+            </span>
+          ) : (
+            onUpload && (
+              <button
+                type="button"
+                title={uploadDisabled ? "Add page credits to upload PDFs" : "Upload PDF"}
+                aria-label="Upload PDF"
+                disabled={uploadDisabled}
+                onClick={onUpload}
+                style={{
+                  width: 28,
+                  height: 28,
+                  flexShrink: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)",
+                  cursor: uploadDisabled ? "default" : "pointer",
+                  opacity: uploadDisabled ? 0.5 : 1,
+                  transition: "color 0.15s, background-color 0.15s",
+                }}
+                onMouseEnter={(e) => {
+                  if (!uploadDisabled) e.currentTarget.style.color = "var(--ed-accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)";
+                }}
+              >
+                {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
+              </button>
+            )
           )}
         </div>
       </div>
@@ -169,7 +195,9 @@ export function DocumentHistory({
           className="ed-sidebar-panel__body ed-panel-scroll"
           style={{ fontSize: "0.8125rem", color: "var(--ed-faint)", padding: "1rem", lineHeight: 1.6 }}
         >
-          No documents yet. Upload a PDF to get started.
+          {uploadComingSoon
+            ? "PDF upload is coming soon. Use Find materials to browse GTU papers and books."
+            : "No documents yet. Upload a PDF to get started."}
         </p>
       ) : (
         <div className="ed-sidebar-panel__body ed-panel-scroll">

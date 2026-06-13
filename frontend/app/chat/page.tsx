@@ -46,6 +46,7 @@ function migrateStorageKey(newKey: string, legacyKey: string): string | null {
 const BACKEND_API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 const INDEX_STATUS_POLL_INTERVAL_MS = 10000;
+const UPLOAD_COMING_SOON = true;
 const PENDING_INDEX_STATUSES = new Set(["queued", "running", "unknown"]);
 
 const getAuthHeaders = () => ({
@@ -110,7 +111,7 @@ export default function ChatPage() {
 
   const hasTokens = availableTokenCount > 0;
   const hasPages = availablePageCount > 0;
-  const canUpload = hasTokens && hasPages;
+  const canUpload = !UPLOAD_COMING_SOON && hasTokens && hasPages;
   const tokenLabel = new Intl.NumberFormat(undefined, {
     notation: availableTokenCount >= 1000 ? "compact" : "standard",
     maximumFractionDigits: availableTokenCount >= 1000 ? 1 : 0,
@@ -820,19 +821,47 @@ export default function ChatPage() {
             /* Upload zone */
             <div className="animate-fade-up shrink-0" style={{ animationDelay: "0ms" }}>
               <div
-                {...getRootProps()}
+                {...(UPLOAD_COMING_SOON ? {} : getRootProps())}
                 style={{
-                  border: `1px dashed ${isDragActive ? "var(--ed-accent)" : "var(--ed-rule)"}`,
-                  backgroundColor: isDragActive ? "#eef3ff" : "var(--ed-surface)",
+                  border: `1px dashed ${!UPLOAD_COMING_SOON && isDragActive ? "var(--ed-accent)" : "var(--ed-rule)"}`,
+                  backgroundColor: !UPLOAD_COMING_SOON && isDragActive ? "#eef3ff" : "var(--ed-surface)",
                   borderRadius: 2,
                   padding: "2.25rem 1.5rem",
                   textAlign: "center",
                   cursor: uploadProgress || !canUpload ? "default" : "pointer",
-                  opacity: canUpload ? 1 : 0.6,
+                  opacity: UPLOAD_COMING_SOON ? 1 : canUpload ? 1 : 0.6,
                   transition: "border-color 0.2s, background-color 0.2s",
                 }}
               >
-                {uploadProgress ? (
+                {UPLOAD_COMING_SOON ? (
+                  <div>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        minHeight: 22,
+                        padding: "0 0.5rem",
+                        marginBottom: "0.65rem",
+                        border: "1px solid #c9d8ff",
+                        borderRadius: 2,
+                        backgroundColor: "#eef3ff",
+                        color: "#1a56db",
+                        fontSize: "0.6875rem",
+                        fontWeight: 600,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      Coming soon
+                    </span>
+                    <p style={{ fontSize: "0.875rem", color: "var(--ed-muted)", marginBottom: "0.2rem" }}>
+                      PDF upload is not available yet
+                    </p>
+                    <p style={{ fontSize: "0.75rem", color: "var(--ed-faint)" }}>
+                      Use Find materials to browse GTU papers, books, and syllabus
+                    </p>
+                  </div>
+                ) : uploadProgress ? (
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "var(--ed-muted)" }}>
                     <Loader2 size={15} className="animate-spin" />
                     <span style={{ fontSize: "0.875rem" }}>Processing document…</span>
@@ -939,9 +968,10 @@ export default function ChatPage() {
               onSelect={handleDocumentSelect}
               onDelete={handleDocumentDelete}
               onViewPdf={handleViewPdf}
-              onUpload={open}
+              onUpload={UPLOAD_COMING_SOON ? undefined : open}
               uploading={uploadProgress}
               uploadDisabled={uploadProgress || !canUpload}
+              uploadComingSoon={UPLOAD_COMING_SOON}
               currentId={currentDocument?.id}
               deletingId={deletingDocumentId}
               loading={documentsLoading}
