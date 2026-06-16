@@ -6,108 +6,93 @@ import { LogoutConfirmDialog } from "@/components/logout-confirm-dialog";
 import { DocumentHistory } from "@/components/document-history";
 import { PdfViewerDialog } from "@/components/pdf-viewer-dialog";
 import { SubjectCatalog } from "@/components/subject-catalog";
-import { fetchSubject, fetchSubjects } from "@/lib/catalog-api";
-import { DocumentMetaData, SubjectDetail, SubjectSummary } from "@/lib/types";
+import { DocumentMetaData } from "@/lib/types";
 import { Coins, Loader2, LogOut, UserCircle } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
 import { useAlert } from "@/components/context/alert/alert-context";
 import { useAuth } from "@/components/context/auth/auth-context";
-// import type { AIModel } from "@/lib/ai-model";
-import { PAPERAI_API_PREFIX } from "@/lib/constant";
-import { loadRazorpayScript } from "@/lib/razorpay";
-import { getToken, validateFile } from "@/lib/utils";
+import { validateFile } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useGetSubjectsQuery } from "@/storage/services/catalogApi";
+import {
+  useDeleteDocumentMutation,
+  useGetDocumentsQuery,
+  useLazyGetDocumentPdfUrlQuery,
+  useUploadDocumentMutation,
+} from "@/storage/services/paperaiApi";
+import { useChatSelection } from "@/hooks/useChatSelection";
+import { useDocumentStatusPolling } from "@/hooks/useDocumentStatusPolling";
+import { useRazorpayCheckout } from "@/hooks/useRazorpayCheckout";
 
-const CURRENT_DOCUMENT_ID_STORAGE_KEY = "paperai-current-document-id";
-const CURRENT_SUBJECT_CODE_STORAGE_KEY = "paperai-current-subject-code";
-const CATALOG_FIND_MODE_STORAGE_KEY = "paperai-catalog-find-mode";
-const LEGACY_DOCUMENT_ID_STORAGE_KEY = "pageindex-current-document-id";
-const LEGACY_SUBJECT_CODE_STORAGE_KEY = "pageindex-current-subject-code";
-
-function migrateStorageKey(newKey: string, legacyKey: string): string | null {
-  try {
-    const value = localStorage.getItem(newKey) ?? localStorage.getItem(legacyKey);
-    if (value === null) return null;
-    localStorage.setItem(newKey, value);
-    localStorage.removeItem(legacyKey);
-    return value;
-  } catch {
-    return null;
-  }
-}
-const BACKEND_API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-const INDEX_STATUS_POLL_INTERVAL_MS = 10000;
 const UPLOAD_COMING_SOON = true;
-const PENDING_INDEX_STATUSES = new Set(["queued", "running", "unknown"]);
 
-const getAuthHeaders = () => ({
-  Authorization: `Bearer ${getToken()}`,
-  "Access-Control-Allow-Origin": "*",
-  'ngrok-skip-browser-warning': 'true',
-});
-
-async function readErrorMessage(response: Response, fallback: string) {
-  try {
-    const data = await response.json();
-    return data.message || data.error || fallback;
-  } catch {
-    return response.text().then((message) => message || fallback);
+function getApiErrorMessage(error: unknown, fallback: string) {
+  if (error && typeof error === "object" && "data" in error) {
+    const data = (error as { data?: { message?: string; error?: string } }).data;
+    return data?.message || data?.error || fallback;
   }
-}
-
-interface DocumentStatusResponse {
-  status: number;
-  message?: string;
-  documentId?: string;
-  indexStatus?: string;
-  document?: DocumentMetaData;
-}
-
-interface PdfUrlResponse {
-  status: number;
-  url?: string;
-  expiresIn?: number;
-  message?: string;
+  if (error instanceof Error) return error.message;
+  return fallback;
 }
 
 export default function ChatPage() {
   const router = useRouter();
   const [uploadProgress, setUploadProgress] = useState(false);
-  const [summary, setSummary] = useState<string>("");
-  const [documents, setDocuments] = useState<DocumentMetaData[]>([]);
-  const [documentsLoading, setDocumentsLoading] = useState(false);
-  const [deletingDocumentId, setDeletingDocumentId] = useState<string | undefined>(undefined);
-  // const [selectedModel, setSelectedModel] = useState<AIModel>("gemini");
+  const [deletingDocumentId, setDeletingDocumentId] = useState<string | undefined>();
   const selectedModel = "gemini";
-  const [currentDocument, setCurrentDocument] = useState<DocumentMetaData | undefined>(undefined);
-  const [subjects, setSubjects] = useState<SubjectSummary[]>([]);
-  const [subjectsLoading, setSubjectsLoading] = useState(false);
-  const [currentSubject, setCurrentSubject] = useState<SubjectDetail | undefined>(undefined);
-  const [catalogFindMode, setCatalogFindMode] = useState(false);
-  const [chatSelectionReady, setChatSelectionReady] = useState(false);
-  const documentsRef = useRef<DocumentMetaData[]>([]);
-  const { isUserLoggedIn, user, refreshUser } = useAuth();
+  const { isUserLoggedIn, user, refreshUser, logout } = useAuth();
   const { showAlert } = useAlert();
-  const { logout } = useAuth();
   const [availableTokenCount, setAvailableTokenCount] = useState(0);
   const [availablePageCount, setAvailablePageCount] = useState(0);
   const [isBuyTokenOpen, setIsBuyTokenOpen] = useState(false);
-  const [buyingTokens, setBuyingTokens] = useState(false);
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
-  const [pdfViewerDocument, setPdfViewerDocument] = useState<DocumentMetaData | undefined>(undefined);
-  const [pdfViewerUrl, setPdfViewerUrl] = useState<string | undefined>(undefined);
+  const [pdfViewerDocument, setPdfViewerDocument] = useState<DocumentMetaData | undefined>();
+  const [pdfViewerUrl, setPdfViewerUrl] = useState<string | undefined>();
   const [pdfViewerLoading, setPdfViewerLoading] = useState(false);
-  const [pdfViewerError, setPdfViewerError] = useState<string | undefined>(undefined);
+  const [pdfViewerError, setPdfViewerError] = useState<string | undefined>();
+
+  const {
+    data: documents = [],
+    isLoading: documentsLoading,
+    isError: documentsError,
+    error: documentsQueryError,
+    refetch: refetchDocuments,
+  } = useGetDocumentsQuery(undefined, { skip: !isUserLoggedIn });
+
+  const {
+    data: subjects = [],
+    isLoading: subjectsLoading,
+    isError: subjectsError,
+    error: subjectsQueryError,
+  } = useGetSubjectsQuery(undefined, { skip: !isUserLoggedIn });
+
+  const [uploadDocument] = useUploadDocumentMutation();
+  const [deleteDocument] = useDeleteDocumentMutation();
+  const [fetchPdfUrl] = useLazyGetDocumentPdfUrlQuery();
+  const { checkout, isCheckingOut: buyingTokens } = useRazorpayCheckout(user, refreshUser);
+
+  const {
+    currentDocument,
+    currentSubject,
+    summary,
+    setSummary,
+    setCurrentDocument,
+    handleCatalogFindSelect,
+    handleSubjectSelect,
+    handleDocumentSelect,
+    showFindMaterialsHeader,
+    isFindMaterialsActive,
+    effectiveCatalogFindMode,
+  } = useChatSelection(documents, !documentsLoading && !documentsError);
+
+  useDocumentStatusPolling(
+    documents,
+    isUserLoggedIn,
+    refreshUser,
+    setCurrentDocument,
+  );
 
   const hasTokens = availableTokenCount > 0;
   const hasPages = availablePageCount > 0;
@@ -116,17 +101,24 @@ export default function ChatPage() {
     notation: availableTokenCount >= 1000 ? "compact" : "standard",
     maximumFractionDigits: availableTokenCount >= 1000 ? 1 : 0,
   }).format(Math.max(availableTokenCount, 0));
-  // const pageLabel = new Intl.NumberFormat(undefined, {
-  //   notation: availablePageCount >= 1000 ? "compact" : "standard",
-  //   maximumFractionDigits: availablePageCount >= 1000 ? 1 : 0,
-  // }).format(Math.max(availablePageCount, 0));
 
-  const showFindMaterialsHeader =
-    !currentSubject && !currentDocument && (catalogFindMode || !chatSelectionReady);
-  const isFindMaterialsActive =
-    !currentSubject && !currentDocument && (catalogFindMode || !chatSelectionReady);
-  const effectiveCatalogFindMode =
-    catalogFindMode || (!chatSelectionReady && !currentSubject && !currentDocument);
+  useEffect(() => {
+    if (!isUserLoggedIn) {
+      router.push("/login");
+    }
+  }, [isUserLoggedIn, router]);
+
+  useEffect(() => {
+    if (documentsError) {
+      showAlert(getApiErrorMessage(documentsQueryError, "Failed to load documents"), "error");
+    }
+  }, [documentsError, documentsQueryError, showAlert]);
+
+  useEffect(() => {
+    if (subjectsError) {
+      showAlert(getApiErrorMessage(subjectsQueryError, "Failed to load subjects"), "error");
+    }
+  }, [subjectsError, subjectsQueryError, showAlert]);
 
   const handleLogoutClick = () => {
     setIsLogoutConfirmOpen(true);
@@ -141,236 +133,15 @@ export default function ChatPage() {
       setIsLogoutConfirmOpen(false);
     }
   };
-  const userProfile = () => { router.push("/profile"); };
+
+  const userProfile = () => {
+    router.push("/profile");
+  };
 
   useEffect(() => {
     setAvailableTokenCount(Number(user?.available_token_count ?? 0));
     setAvailablePageCount(Number(user?.available_page_count ?? 0));
   }, [user?.available_token_count, user?.available_page_count]);
-
-  const fetchSubjectsList = useCallback(async () => {
-    try {
-      setSubjectsLoading(true);
-      const fetched = await fetchSubjects();
-      setSubjects(fetched);
-      return fetched;
-    } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to load subjects", "error");
-      return [];
-    } finally {
-      setSubjectsLoading(false);
-    }
-  }, [showAlert]);
-
-  const fetchDocuments = useCallback(async () => {
-    try {
-      setDocumentsLoading(true);
-      const response = await fetch(`${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents`, {
-        headers: getAuthHeaders(),
-      });
-      if (!response.ok) {
-        const data = await response.json();
-        showAlert(data.message ?? "Failed to load documents", "error");
-        return [];
-      }
-      const data = await response.json();
-      const fetched: DocumentMetaData[] = data.documents ?? [];
-      setDocuments(fetched);
-      const savedId = migrateStorageKey(
-        CURRENT_DOCUMENT_ID_STORAGE_KEY,
-        LEGACY_DOCUMENT_ID_STORAGE_KEY,
-      );
-      if (savedId) {
-        const match = fetched.find((d) => d.id === savedId);
-        if (match) {
-          localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
-          setCatalogFindMode(false);
-          setCurrentSubject(undefined);
-          setCurrentDocument(match);
-          setSummary(match.summary ?? "");
-        }
-        setChatSelectionReady(true);
-      }
-      return fetched;
-    } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to load documents", "error");
-      return [];
-    } finally {
-      setDocumentsLoading(false);
-    }
-  }, [showAlert]);
-
-  const pendingDocumentsKey = useMemo(
-    () =>
-      documents
-        .filter((doc) => PENDING_INDEX_STATUSES.has(doc.indexStatus ?? "unknown"))
-        .map((doc) => `${doc.id}:${doc.indexStatus ?? "unknown"}`)
-        .sort()
-        .join("|"),
-    [documents],
-  );
-
-  useEffect(() => {
-    documentsRef.current = documents;
-  }, [documents]);
-
-  useEffect(() => {
-    if (isUserLoggedIn) {
-      fetchDocuments();
-      fetchSubjectsList();
-    } else {
-      router.push("/login");
-    }
-  }, [fetchDocuments, fetchSubjectsList, isUserLoggedIn, router]);
-
-  useEffect(() => {
-    const savedSubjectCode = migrateStorageKey(
-      CURRENT_SUBJECT_CODE_STORAGE_KEY,
-      LEGACY_SUBJECT_CODE_STORAGE_KEY,
-    );
-    const savedDocumentId = migrateStorageKey(
-      CURRENT_DOCUMENT_ID_STORAGE_KEY,
-      LEGACY_DOCUMENT_ID_STORAGE_KEY,
-    );
-
-    if (savedDocumentId) {
-      setCatalogFindMode(false);
-      return;
-    }
-
-    if (savedSubjectCode) {
-      let ignore = false;
-      fetchSubject(savedSubjectCode)
-        .then((subject) => {
-          if (!ignore) {
-            setCatalogFindMode(false);
-            setCurrentSubject(subject);
-            setCurrentDocument(undefined);
-            setChatSelectionReady(true);
-          }
-        })
-        .catch(() => {
-          localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-          setCatalogFindMode(true);
-          setChatSelectionReady(true);
-        });
-
-      return () => { ignore = true; };
-    }
-
-    setCatalogFindMode(true);
-    setChatSelectionReady(true);
-  }, []);
-
-  useEffect(() => {
-    try {
-      if (currentDocument?.id) {
-        localStorage.setItem(CURRENT_DOCUMENT_ID_STORAGE_KEY, currentDocument.id);
-      } else {
-        localStorage.removeItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
-      }
-    } catch { /* ignore storage failures */ }
-  }, [currentDocument]);
-
-  useEffect(() => {
-    try {
-      if (currentSubject?.subjectCode) {
-        localStorage.setItem(CURRENT_SUBJECT_CODE_STORAGE_KEY, currentSubject.subjectCode);
-      } else {
-        localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-      }
-    } catch { /* ignore storage failures */ }
-  }, [currentSubject]);
-
-  useEffect(() => {
-    try {
-      if (catalogFindMode) {
-        localStorage.setItem(CATALOG_FIND_MODE_STORAGE_KEY, "1");
-      } else {
-        localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
-      }
-    } catch { /* ignore storage failures */ }
-  }, [catalogFindMode]);
-
-  useEffect(() => {
-    if (!isUserLoggedIn || !pendingDocumentsKey) return;
-
-    let ignore = false;
-    let inFlight = false;
-
-    const pollDocumentStatuses = async () => {
-      if (inFlight) return;
-      inFlight = true;
-
-      const pendingDocuments = documentsRef.current.filter((doc) =>
-        PENDING_INDEX_STATUSES.has(doc.indexStatus ?? "unknown"),
-      );
-
-      try {
-        const updates = await Promise.all(
-          pendingDocuments.map(async (doc) => {
-            try {
-              const response = await fetch(
-                `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(doc.id)}/status`,
-                { headers: getAuthHeaders() },
-              );
-              const data: DocumentStatusResponse = await response.json();
-              if (!response.ok || data.status !== 200) return null;
-              return data;
-            } catch {
-              return null;
-            }
-          }),
-        );
-
-        if (ignore) return;
-
-        const validUpdates = updates.filter(
-          (update): update is DocumentStatusResponse => !!update?.documentId,
-        );
-        if (validUpdates.length === 0) return;
-
-        await refreshUser();
-
-        setDocuments((prev) => {
-          let changed = false;
-          const nextDocuments = prev.map((doc) => {
-            const update = validUpdates.find((item) => item.documentId === doc.id);
-            if (!update) return doc;
-
-            const nextDocument = update.document ?? { ...doc, indexStatus: update.indexStatus ?? doc.indexStatus };
-            if (
-              nextDocument.indexStatus !== doc.indexStatus ||
-              nextDocument.tokenCount !== doc.tokenCount ||
-              nextDocument.summary !== doc.summary ||
-              nextDocument.pageCount !== doc.pageCount
-            ) {
-              changed = true;
-            }
-            return nextDocument;
-          });
-
-          if (!changed) return prev;
-
-          setCurrentDocument((current) => {
-            if (!current) return current;
-            return nextDocuments.find((doc) => doc.id === current.id) ?? current;
-          });
-
-          return nextDocuments;
-        });
-      } finally {
-        inFlight = false;
-      }
-    };
-
-    pollDocumentStatuses();
-    const intervalId = window.setInterval(pollDocumentStatuses, INDEX_STATUS_POLL_INTERVAL_MS);
-    return () => {
-      ignore = true;
-      window.clearInterval(intervalId);
-    };
-  }, [isUserLoggedIn, pendingDocumentsKey, refreshUser]);
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -394,84 +165,46 @@ export default function ChatPage() {
           showAlert("Insufficient balance for this file.", "error");
           return;
         }
-        const formData = new FormData();
-        formData.append("file", acceptedFiles[0]);
-        formData.append("model_provider", selectedModel);
-        const response = await fetch(`${BACKEND_API_URL}${PAPERAI_API_PREFIX}/upload`, {
-          method: "POST",
-          body: formData,
-          headers: getAuthHeaders(),
-        });
-        if (!response.ok) {
-          showAlert(await readErrorMessage(response, "Failed to upload document"), "error");
-          return;
-        }
-        const data = await response.json();
+
+        const data = await uploadDocument({
+          file: acceptedFiles[0],
+          modelProvider: selectedModel,
+        }).unwrap();
+
         setSummary(data.summary ?? "");
         if (typeof data.available_page_count === "number") {
           setAvailablePageCount(data.available_page_count);
         }
         await refreshUser();
-        const fetchedDocuments = await fetchDocuments();
-        const uploaded = fetchedDocuments.find((d) => d.id === data.documentId);
+        const { data: refreshedDocuments = [] } = await refetchDocuments();
+        const uploaded = refreshedDocuments.find((d) => d.id === data.documentId);
         if (uploaded) {
-          localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-          localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
-          localStorage.setItem(CURRENT_DOCUMENT_ID_STORAGE_KEY, uploaded.id);
-          setCatalogFindMode(false);
-          setCurrentSubject(undefined);
-          setCurrentDocument(uploaded);
+          handleDocumentSelect(uploaded.id);
         }
       } catch (error) {
-        showAlert(error instanceof Error ? error.message : "Failed to upload document", "error");
+        showAlert(getApiErrorMessage(error, "Failed to upload document"), "error");
       } finally {
         setUploadProgress(false);
       }
     },
-    [selectedModel, fetchDocuments, showAlert, hasTokens, hasPages, availablePageCount, refreshUser],
+    [
+      availablePageCount,
+      handleDocumentSelect,
+      hasPages,
+      hasTokens,
+      refetchDocuments,
+      refreshUser,
+      selectedModel,
+      setSummary,
+      showAlert,
+      uploadDocument,
+    ],
   );
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     disabled: uploadProgress || !canUpload,
     onDrop,
   });
-
-  const handleCatalogFindSelect = () => {
-    localStorage.removeItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
-    localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-    setCatalogFindMode(true);
-    setCurrentSubject(undefined);
-    setCurrentDocument(undefined);
-    setSummary("");
-  };
-
-  const handleSubjectSelect = async (subjectCode: string) => {
-    try {
-      localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
-      localStorage.removeItem(CURRENT_DOCUMENT_ID_STORAGE_KEY);
-      localStorage.setItem(CURRENT_SUBJECT_CODE_STORAGE_KEY, subjectCode);
-      setCatalogFindMode(false);
-      const subject = await fetchSubject(subjectCode);
-      setCurrentSubject(subject);
-      setCurrentDocument(undefined);
-      setSummary("");
-    } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to load subject", "error");
-    }
-  };
-
-  const handleDocumentSelect = (documentId: string) => {
-    const doc = documents.find((item) => item.id === documentId);
-    if (doc) {
-      localStorage.removeItem(CATALOG_FIND_MODE_STORAGE_KEY);
-      localStorage.removeItem(CURRENT_SUBJECT_CODE_STORAGE_KEY);
-      localStorage.setItem(CURRENT_DOCUMENT_ID_STORAGE_KEY, doc.id);
-      setCatalogFindMode(false);
-      setCurrentSubject(undefined);
-      setCurrentDocument(doc);
-      setSummary(doc.summary ?? "");
-    }
-  };
 
   const handleDocumentDelete = async (documentId: string) => {
     const documentToDelete = documents.find((item) => item.id === documentId);
@@ -484,26 +217,21 @@ export default function ChatPage() {
 
     try {
       setDeletingDocumentId(documentId);
-      const response = await fetch(
-        `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(documentId)}`,
-        { method: "DELETE", headers: getAuthHeaders() },
-      );
-      const data = await response.json();
-      if (!response.ok || data.status !== 200) {
+      const data = await deleteDocument(documentId).unwrap();
+      if (data.status !== 200) {
         showAlert(data.message || "Failed to delete document", "error");
         return;
       }
 
-      const remainingDocuments = documents.filter((item) => item.id !== documentId);
-      setDocuments(remainingDocuments);
       if (currentDocument?.id === documentId) {
+        const remainingDocuments = documents.filter((item) => item.id !== documentId);
         const nextDocument = remainingDocuments[0];
         setCurrentDocument(nextDocument);
         setSummary(nextDocument?.summary ?? "");
       }
       showAlert("Document deleted", "success");
     } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to delete document", "error");
+      showAlert(getApiErrorMessage(error, "Failed to delete document"), "error");
     } finally {
       setDeletingDocumentId(undefined);
     }
@@ -524,98 +252,32 @@ export default function ChatPage() {
       setPdfViewerLoading(true);
 
       try {
-        const response = await fetch(
-          `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/documents/${encodeURIComponent(document.id)}/pdf-url`,
-          { headers: getAuthHeaders() },
-        );
-        const data: PdfUrlResponse = await response.json();
-
-        if (!response.ok || data.status !== 200 || !data.url) {
+        const data = await fetchPdfUrl(document.id).unwrap();
+        if (data.status !== 200 || !data.url) {
           const message = data.message || "Failed to open PDF";
           setPdfViewerError(message);
           showAlert(message, "error");
           return;
         }
-
         setPdfViewerUrl(data.url);
       } catch (error) {
-        const message = error instanceof Error ? error.message : "Failed to open PDF";
+        const message = getApiErrorMessage(error, "Failed to open PDF");
         setPdfViewerError(message);
         showAlert(message, "error");
       } finally {
         setPdfViewerLoading(false);
       }
     },
-    [showAlert],
+    [fetchPdfUrl, showAlert],
   );
 
   const handleBuyTokens = async (tokenCount: number) => {
     try {
-      setBuyingTokens(true);
-      const response = await fetch(`${BACKEND_API_URL}/payment/create-order`, {
-        method: "POST",
-        headers: {
-          ...getAuthHeaders(),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token_count: tokenCount }),
-      });
-      if (!response.ok) {
-        showAlert(await readErrorMessage(response, "Failed to buy tokens"), "error");
-        return;
-      }
-      const data = await response.json();
-      const { amount, key_id , currency , notes , order_id  } = data;
-
-      await loadRazorpayScript();
-
-      const options = {
-        key: key_id,
-        amount,
-        currency,
-        name: "paperAI",
-        description: "Payment for tokens",
-        order_id,
-        notes,
-        prefill: {
-          name: user?.name,
-          email: user?.email,
-        },
-      };
-
-      await new Promise((resolve, reject) => {
-        const rzp = new window.Razorpay!({
-          ...options,
-          handler: function (response) {
-            resolve({
-              success: true,
-              response,
-            });
-          },
-          modal: {
-            ondismiss: function () {
-              reject(new Error("Payment cancelled"));
-            },
-          },
-        });
-
-        rzp.on("payment.failed", function (response) {
-          reject(new Error(response.error.description));
-        });
-
-        rzp.open();
-      });
-
-      
-    // wait till the rzp is closed
+      await checkout(tokenCount);
       setIsBuyTokenOpen(false);
-      // refresh the user
-      await refreshUser();
       showAlert("Token order created successfully", "success");
     } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to buy tokens", "error");
-    } finally {
-      setBuyingTokens(false);
+      showAlert(getApiErrorMessage(error, "Failed to buy tokens"), "error");
     }
   };
 
@@ -680,29 +342,6 @@ export default function ChatPage() {
               <Coins size={14} />
               <span>{tokenLabel}</span>
             </div>
-            {/* Page credits hidden — not shown to users
-            <div
-              title="Available page credits"
-              className={`flex items-center gap-1.5 px-2 py-1 text-xs rounded-md border border-[var(--ed-rule)] ${hasPages ? "text-[var(--ed-accent)]" : "text-[#b42318]"  }`}
-            >
-              <FileText size={14} />
-              <span>{pageLabel} pages</span>
-            </div>
-            */}
-
-
-            {/* <Select value={selectedModel} onValueChange={(v) => setSelectedModel(v as AIModel)}>
-              <SelectTrigger
-                className="h-8 border-0 shadow-none bg-transparent text-xs focus:ring-0 font-instrument w-[120px] sm:w-[130px]"
-                style={{ color: "var(--ed-muted)", borderBottom: "1px solid var(--ed-rule)", borderRadius: 0 }}
-              >
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="gemini">Gemini AI</SelectItem>
-                <SelectItem value="ollama">Ollama</SelectItem>
-              </SelectContent>
-            </Select> */}
 
             <div style={{ width: 1, height: 20, backgroundColor: "var(--ed-rule)", margin: "0 4px" }} />
 
@@ -776,8 +415,6 @@ export default function ChatPage() {
                 <p style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", marginBottom: "0.5rem" }}>
                   {currentSubject.subjectCode}
                   {currentSubject.knownAs ? ` · ${currentSubject.knownAs}` : ""}
-                  {/* {" · "} */}
-                  {/* {currentSubject.indexedBookCount ?? 0}/{currentSubject.bookCount ?? 0} books indexed */}
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem 0.75rem" }}>
                   {currentSubject.syllabus ? (

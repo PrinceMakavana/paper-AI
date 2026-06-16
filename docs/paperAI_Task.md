@@ -12,6 +12,7 @@
 (Done) => Add Forgot and Reset Passwrod Feature 
 => Follow up chat Context
 => Find Document using AI
+=> Create RAG Structure of Find Document using AI
 
 -- after Prod -- 
 => pageindex provide 1000 free pages per user , so if user upload file less than 1000 pages, then next file wlii be sent to same email

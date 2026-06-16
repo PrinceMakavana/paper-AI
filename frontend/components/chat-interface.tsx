@@ -1,17 +1,18 @@
-import { isSubjectChatReady } from "@/lib/catalog-api";
+import { isSubjectChatReady } from "@/lib/catalog-utils";
 import { ChatMessage, DocumentMetaData, SubjectDetail } from "@/lib/types";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import { Eye, FileText, Loader2, Send } from "lucide-react";
 import type { AIModel } from "@/lib/ai-model";
 import { useAlert } from "./context/alert/alert-context";
-import { PAPERAI_API_PREFIX } from "@/lib/constant";
-import { getToken } from "@/lib/utils";
-
-const BACKEND_API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+import {
+  useAskQuestionMutation,
+  useDeleteChatMessagesMutation,
+  useGetChatMessagesQuery,
+} from "@/storage/services/paperaiApi";
+import type { ChatContext } from "@/storage/types/paperai";
 
 const MESSAGE_FONT_SIZE = "1rem";
 const MESSAGE_LINE_HEIGHT = 1.75;
@@ -116,20 +117,6 @@ function markdownComponents(role: "user" | "assistant"): Components {
   };
 }
 
-interface CatalogMatchItem {
-  type: string;
-  label: string;
-  url: string;
-}
-
-interface CatalogMatchGroup {
-  subjectCode: string;
-  subjectName: string;
-  knownAs?: string;
-  chatReady?: boolean;
-  items: CatalogMatchItem[];
-}
-
 interface ChatInterFaceProps {
   currentDocument?: DocumentMetaData;
   currentSubject?: SubjectDetail;
@@ -142,29 +129,31 @@ interface ChatInterFaceProps {
   onSelectSubject?: (subjectCode: string) => void;
 }
 
-interface ChatMessagesResponse {
-  status: number;
-  message?: string;
-  messages?: ChatMessage[];
+function getApiErrorMessage(error: unknown, fallback: string) {
+  if (error && typeof error === "object" && "data" in error) {
+    const data = (error as { data?: { message?: string; error?: string } }).data;
+    return data?.message || data?.error || fallback;
+  }
+  if (error instanceof Error) return error.message;
+  return fallback;
 }
 
-interface QuestionResponse {
-  status: number;
-  answer?: string;
-  answer_source?: "book" | "not_in_book" | "catalog" | "local" | "ai";
-  intent?: "find_material" | "study_question";
-  matches?: CatalogMatchGroup[];
-  suggestedSubjectCodes?: string[];
-  paper_solution_url?: string | null;
-  message?: ChatMessage | string;
-  available_token_count?: number;
+function buildChatContext(
+  currentDocument?: DocumentMetaData,
+  currentSubject?: SubjectDetail,
+  catalogFindMode?: boolean,
+): ChatContext | undefined {
+  if (currentSubject) {
+    return { type: "subject", subjectCode: currentSubject.subjectCode };
+  }
+  if (currentDocument) {
+    return { type: "document", documentId: currentDocument.id };
+  }
+  if (catalogFindMode) {
+    return { type: "catalog" };
+  }
+  return undefined;
 }
-
-const getAuthHeaders = () => ({
-  Authorization: `Bearer ${getToken()}`,
-  'Access-Control-Allow-Origin': '*',
-  'ngrok-skip-browser-warning': 'true',
-});
 
 export function ChatInterFace({
   currentDocument,
@@ -180,59 +169,38 @@ export function ChatInterFace({
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState<string>("");
   const { showAlert } = useAlert();
-  const [loading, setLoading] = useState(false);
-  const [historyLoading, setHistoryLoading] = useState(false);
+  const [askQuestion, { isLoading: loading }] = useAskQuestionMutation();
+  const [deleteChatMessages, { isLoading: clearingHistory }] =
+    useDeleteChatMessagesMutation();
 
-  const chatContextKey = currentSubject
-    ? `subject:${currentSubject.subjectCode}`
-    : currentDocument?.id
-      ? currentDocument.id
-      : catalogFindMode
-        ? "catalog:global"
-        : undefined;
+  const chatContext = useMemo(
+    () => buildChatContext(currentDocument, currentSubject, catalogFindMode),
+    [catalogFindMode, currentDocument, currentSubject],
+  );
+
+  const {
+    data: historyMessages = [],
+    isLoading: historyLoading,
+    isError: historyError,
+    error: historyQueryError,
+  } = useGetChatMessagesQuery(chatContext!, { skip: !chatContext });
 
   useEffect(() => {
-    if (!chatContextKey) {
+    if (!chatContext) {
       setMessages([]);
       return;
     }
+    if (!historyLoading) {
+      setMessages(historyMessages);
+    }
+  }, [chatContext, historyLoading, historyMessages]);
 
-    let ignore = false;
-    const loadChatHistory = async () => {
-      try {
-        setHistoryLoading(true);
-        const historyUrl = currentSubject
-          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-          : currentDocument
-            ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument.id)}`
-            : catalogFindMode
-              ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/catalog/global`
-              : null;
-        if (!historyUrl) {
-          setMessages([]);
-          return;
-        }
-        const response = await fetch(historyUrl, { headers: getAuthHeaders() });
-        const data: ChatMessagesResponse = await response.json();
-        if (ignore) return;
-        if (!response.ok || data.status !== 200) {
-          showAlert(data.message || "Failed to load chat history", "error");
-          setMessages([]);
-          return;
-        }
-        setMessages(data.messages ?? []);
-      } catch (error) {
-        if (ignore) return;
-        showAlert(error instanceof Error ? error.message : "Failed to load chat history", "error");
-        setMessages([]);
-      } finally {
-        if (!ignore) setHistoryLoading(false);
-      }
-    };
-
-    loadChatHistory();
-    return () => { ignore = true; };
-  }, [chatContextKey, catalogFindMode, currentDocument, currentSubject, showAlert]);
+  useEffect(() => {
+    if (historyError) {
+      showAlert(getApiErrorMessage(historyQueryError, "Failed to load chat history"), "error");
+      setMessages([]);
+    }
+  }, [historyError, historyQueryError, showAlert]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
@@ -245,6 +213,7 @@ export function ChatInterFace({
     if (
       !input.trim() ||
       loading ||
+      !chatContext ||
       availableTokenCount <= 0 ||
       (!isDocumentMode && !isSubjectMode && !isCatalogMode)
     ) return;
@@ -271,78 +240,54 @@ export function ChatInterFace({
     setInput("");
 
     try {
-      setLoading(true);
-      const endpoint = isCatalogMode
-        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/catalog-find`
-        : isSubjectMode
-          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/subject-question-rag`
-          : `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/question-vectorless-rag`;
-      const body = isCatalogMode
-        ? { question, chatModel: selectedModel }
-        : isSubjectMode
-          ? { question, subjectCode: currentSubject!.subjectCode, chatModel: selectedModel }
-          : { question, documentId: currentDocument!.id, chatModel: selectedModel };
+      const data = await askQuestion({
+        context: chatContext,
+        question,
+        chatModel: selectedModel,
+      }).unwrap();
 
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
-        body: JSON.stringify(body),
-      });
-      const data: QuestionResponse = await response.json();
-      if (!response.ok || data.status !== 200) {
+      if (data.status !== 200) {
         showAlert(
           (typeof data.message === "string" && data.message) || data.answer || "An unknown error occurred",
           "error",
         );
         setMessages((prev) => prev.slice(0, -1));
-      } else {
-        if (typeof data.available_token_count === "number") {
-          onTokenBalanceChange?.(data.available_token_count);
-          void onRefreshUser?.();
-        } else {
-          await onRefreshUser?.();
-        }
-        const aiMessage: ChatMessage = {
-          id: typeof data.message === "object" ? data.message.id : crypto.randomUUID(),
-          role: "assistant",
-          content: typeof data.message === "object" ? data.message.content : (data.answer ?? ""),
-          timestamp: typeof data.message === "object" ? data.message.timestamp : new Date(),
-          documentId: typeof data.message === "object" ? data.message.documentId : contextId,
-          subjectCode: isSubjectMode ? currentSubject!.subjectCode : undefined,
-        };
-        setMessages((prev) => [...prev, aiMessage]);
+        return;
       }
+
+      if (typeof data.available_token_count === "number") {
+        onTokenBalanceChange?.(data.available_token_count);
+        void onRefreshUser?.();
+      } else {
+        await onRefreshUser?.();
+      }
+
+      const aiMessage: ChatMessage = {
+        id: typeof data.message === "object" ? data.message.id : crypto.randomUUID(),
+        role: "assistant",
+        content: typeof data.message === "object" ? data.message.content : (data.answer ?? ""),
+        timestamp: typeof data.message === "object" ? data.message.timestamp : new Date(),
+        documentId: typeof data.message === "object" ? data.message.documentId : contextId,
+        subjectCode: isSubjectMode ? currentSubject!.subjectCode : undefined,
+      };
+      setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
-      showAlert(error instanceof Error ? error.message : "An unknown error occurred", "error");
+      showAlert(getApiErrorMessage(error, "An unknown error occurred"), "error");
       setMessages((prev) => prev.slice(0, -1));
-    } finally {
-      setLoading(false);
     }
   };
 
   const clearHistory = async () => {
-    if (!chatContextKey) return;
+    if (!chatContext) return;
     try {
-      setHistoryLoading(true);
-      const deleteUrl = currentSubject
-        ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/subject/${encodeURIComponent(currentSubject.subjectCode)}`
-        : currentDocument
-          ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/${encodeURIComponent(currentDocument.id)}`
-          : catalogFindMode
-            ? `${BACKEND_API_URL}${PAPERAI_API_PREFIX}/chat-messages/catalog/global`
-            : null;
-      if (!deleteUrl) return;
-      const response = await fetch(deleteUrl, { method: "DELETE", headers: getAuthHeaders() });
-      const data = await response.json();
-      if (!response.ok || data.status !== 200) {
+      const data = await deleteChatMessages(chatContext).unwrap();
+      if (data.status !== 200) {
         showAlert(data.message || "Failed to clear chat history", "error");
         return;
       }
       setMessages([]);
     } catch (error) {
-      showAlert(error instanceof Error ? error.message : "Failed to clear chat history", "error");
-    } finally {
-      setHistoryLoading(false);
+      showAlert(getApiErrorMessage(error, "Failed to clear chat history"), "error");
     }
   };
 
@@ -454,7 +399,7 @@ export function ChatInterFace({
             {messages.length > 0 && (
               <button
                 onClick={clearHistory}
-                disabled={historyLoading || loading}
+                disabled={historyLoading || loading || clearingHistory}
                 style={{
                   fontSize: "0.8125rem",
                   color: "var(--ed-muted)",
@@ -612,7 +557,7 @@ export function ChatInterFace({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
           placeholder={inputPlaceholder}
-          disabled={loading || historyLoading || !hasChatContext || !isContextReady || !hasTokens}
+          disabled={loading || historyLoading || clearingHistory || !hasChatContext || !isContextReady || !hasTokens}
           className="font-instrument"
           style={{
             flex: 1,
