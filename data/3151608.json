@@ -42,11 +42,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiuGoz8DEY2tHkxAAvML3euIsw1OvI3RHsJFlHHzCfmoOWdjnbU67x4zMBopPviH8oxlGC7dyZTIV7W07GFyuYpEyFUjEx2qjbUqKjZ4zRQYASyJUmnexQO9kXDp3yF5Wof51BTsuvHuF16rN5-0BmARBJY7HZ94qVau7AbltXZxhUEIonuiYP1PbWNsw",
-      "download_link": "http://library.lol/main/4191177F3F942CDC60F7C6AB36FE03FA",
-      "alt_data": "Data Science For Dummies - "
-    }
-  ]
+  "Books": []
 }

@@ -4,23 +4,7 @@
   "known_as": "CPS",
   "syllabus": "https://drive.google.com/file/d/1hS9opPM0GbUPMbAk6Z0drfObMwD3G90M/view?usp=sharing",
   "old_paper": [],
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhx-4v6aHohnvGfkHNryVcmr3SM7QSnTVddcoUhTuKmTur_DoqU7qeB1rN2BT9kyRKp6pK9TESb9irh6fNQ9NBye1W66IctK9EUXBwBkYyKhlzYqVPL5dXR3482U3okgHSrrJm_BfSOPGdjIFwTjgGpLAaBfQgpO21JlFe9sLZTil1IkV6G0HJV8KAVxQ",
-      "link": "http://library.lol/main/CD1592CA5BCC6D21FCABB288DF57ABFD",
-      "alt_data": "Principles of Cyber-Physical Systems"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg1foX9G3-MelPVgFbgy4wi3j7BAY0m08gNTQxZC9m6Ca0yj_njFtFXkqnWtNOqs9CNBbcoJXCdcw9RWsZGQSVwpn8qGoV1s76hNUeTFmjW18OuafOa96L4zJeSAAfjI-T6jrIE6lgRw_B8dhOOcN2tnP9fJ-HjDrjl0fj7FSch3TZPHmUzdSerx38HZA",
-      "link": "http://library.lol/main/1A9058858A1997A35113C86C0C3F21CC",
-      "alt_data": "Introduction to embedded systems: a cyber-physical systems approach"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEimpzcEIlzjY45uURo1kkT8FigMXI1JvbC29-36QAKFsI7GoUOk4EDQmoNoas2o5ayUReJ0G_p1xSaSkWR2Cp0RvmojXFrhj0O2qC-dVrl30Jj1xpslOOlHxGB2eE6JQVqOgnRYgNTkoxKtSitX59s23uX8AE3eoenJR39tOPgxZ--CTM8dwOtK5EDVRA",
-      "link": "http://library.lol/main/E8161B08ECF0D3E7AB618D764E6A6E79",
-      "alt_data": "Verification and Control of Hybrid Systems: A Symbolic Approach"
-    }
-  ],
+  "Books": [],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
   "assignments": "",
   "imp_material": "",

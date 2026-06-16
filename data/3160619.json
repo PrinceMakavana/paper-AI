@@ -34,21 +34,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiWL8fuWmzxo0CIJZPatk98UWf2F-qOs8Iy2jelhQnucwwr2c7taE7o_eMvX8F10Pw852pchrCOJmfNw4GJWkhxFNIm-gUtLWH2GBgzrmxcGpU55OqSgEI-IG_N9EipJRI54gOMHGk5oTXrTucFpG2-7dvufr2Kdpfu3rgu2fB3xtoEbGSoTAKY8KpxBQ",
-      "download_link": "http://library.lol/main/BD27A39F29F5E7FFDB1582478F381DC1",
-      "alt_data": "Fuzzy Logic: A Practical approach"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgqVoCX2Io5yFQ-6odEbsdzAGlcjuV2YIeep8QUQ-HN0O4cXOD7s2fSnCjPYFmEOTGPnGpxYGygh9Xm5DmFxYXIQlDr5SEoGlJFXYowcO6xGgf8KR7pXfvT5BmHElWU5hJH9ewNQUSPoXN0K2qal2K0Xsm1uSGPQ_26hGMVw8EDzYZ1PVNdbR_gPor24A",
-      "download_link": "http://library.lol/main/628DA6A218E733BA97628623FA58B5C6",
-      "alt_data": "Soft Computing"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhPZ-21wvNMpoajq8N_5hASIvv3xITbrpELOxALOfY1s8aTBLq2tGMZh66TnhL0rFL7GtwlKj-iBv9ZNJKIh8gctSrFq9eiAlCrUpR63FGqHMl2-7xUjU-S1bSOOu09nuhJyptHYNclLdw6CkQqS7pUfQLrKoTwv85zGU7OfrWi-jzEEI4hULCcpkohIQ",
-      "download_link": "http://library.lol/main/DB5313E084A13F2F701CE838CF244C47",
-      "alt_data": "Foundations of Neural Networks, Fuzzy Systems, and Knowledge Engineering"
-    }
-  ]
+  "Books": []
 }

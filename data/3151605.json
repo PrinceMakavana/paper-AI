@@ -42,16 +42,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhePP7FyPDJJb5Pit3YTlCG4-2csz6PVLJZYGsUQo2_ycYa6dShVHjq7Kf6a80aZiQv-Ek7jEyU5YxW2E9GvPVENFRzEJ3wuiQm674jjdGgVkIUNpy0NqEW0XditG1VbTh6EmqR9BH1suop0NKK7y1ZoYGUBPbxSyk-2WbWdWQBsAyHCrWNpAKRKMejaQ",
-      "download_link": "http://library.lol/main/7521FBAF7DC8BD0E48AB2C1AA12A33DD",
-      "alt_data": "Introduction to automata theory, languages, and computation - "
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgC7cuhwKoLaIE6kiRLb43TY9lkTVre_zVD_tanLJZwD2g50Jp5a6eP-MisQ-KvV_aHr1216Wafr_TUUheotVOykAeSl4Cy3Y-VLZ5eNJ2ZceL_DTclfWdchnoiP2J9yD2m2ND6YPr7-0DD4wVx0oFjbdVOXO4AUFvEcK1xeq23dR5AioIRJxuAWjp-qw",
-      "download_link": "http://library.lol/main/FF6EA28C4BC01963EF32989FAE807384",
-      "alt_data": "Elements of the Theory of Computation - "
-    }
-  ]
+  "Books": []
 }

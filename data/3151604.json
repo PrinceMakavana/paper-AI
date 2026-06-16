@@ -34,21 +34,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjH0xlhE26lK7RxNU1Nn1qcD1823VPAT9Oi3OzFVJZIwAzgKPLmTcEXEO50E5uQBhgxdwqQDr9_SMkc9gq05m_wMGxZ5xabe4VY79qnhCR71neW_JBkquCHg7Wz7DzSfpAkvhfU1MfUP4eVmRM8ldEYPn3JvbE96yxKCMotr_oQ5jI94Le__O4zqZA0Ew",
-      "download_link": "http://library.lol/main/28B7DA5B989254E6739A24DC5316D827",
-      "alt_data": "Pearson - "
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhJWQ9uI0P_NTPjVvtDPgiRaGpwFYPV3Rr_-FsfBjP_i04TrXD5lD821OJ2zivambCZGekn7A2LRTE9KkoogKzjtA-6X7q6W0nYKrQJtvxLoHPTS4jgJmC3NRnLOtqFWYZdgDpsOc8DXhqAEhfFsttt8QO5w6DN5cqWS46agWKjkpGGwlGuhihF2oB5UQ",
-      "download_link": "http://library.lol/main/D003271E62485C35BE8D21E377B1ADE8",
-      "alt_data": "University Press - "
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiPnfB_fhhWvFQuoVjSu9IlkHspn-qZE3xbTxPQRmgXM_dVJMSzrzZiaUWuI-CwQ5v5JguhNv48XMyA0ugd6WIU--gsaZk_X_XFUAneLa8ms_UPbyttsOZKfAMBOKI-EvojJNDc6ZVRHJT2IMOS5CtYXHRv54xVQu3rH1Xlhe1m8WvvtxSw1eL_vZeHpw",
-      "download_link": "http://library.lol/main/D4BB105A0FFA46F349C2AF3BC41397E7",
-      "alt_data": "McGrawHill - "
-    }
-  ]
+  "Books": []
 }

@@ -23,42 +23,6 @@
     {
       "year": "Summer-2022",
       "link": "https://gtu.ac.in/uploads/W2022/BE/3161914.pdf"
-    },
-    {
-      "year": "Winter-21",
-      "link": "https://drive.google.com/uc?export=download&id=1RI6gEO1qhLXtUMKCV5wzqrHUjp0BdcBH"
-    },
-    {
-      "year": "Winter-20",
-      "link": "https://drive.google.com/uc?export=download&id=1DFR9DpDcImniZuSMhgdqkTG8zQXVNRvz"
-    },
-    {
-      "year": "Winter-19",
-      "link": "https://drive.google.com/uc?export=download&id=1z8-28-vKSgobAdBTlRNSjjKzNKC7oG0x"
-    },
-    {
-      "year": "Winter-18",
-      "link": "https://drive.google.com/uc?export=download&id=19Z5tmRBqILV-MlNnrkisjk5tnOwhSlaJ"
-    },
-    {
-      "year": "Winter-17",
-      "link": "https://drive.google.com/uc?export=download&id=1maXmiOUMgB8vOC7EnW4VKlf5g06Ibhle"
-    },
-    {
-      "year": "Summer-21",
-      "link": "https://drive.google.com/uc?export=download&id=1iaYNT1jDVdQfIoMkYQdLzv4YzpSQkHf-"
-    },
-    {
-      "year": "Summer-20",
-      "link": "https://drive.google.com/uc?export=download&id=1iHrQLYF07yphCJI0l-xrJMyNliGfgWms"
-    },
-    {
-      "year": "Summer-19",
-      "link": "https://drive.google.com/uc?export=download&id=18gSR0OvTLXQCjYN3Y1onLd9p_CfDEJ9t"
-    },
-    {
-      "year": "Summer-18",
-      "link": "https://drive.google.com/uc?export=download&id=1nn19pUixvvgLT1QoVm25Trpa_NGleYvh"
     }
   ],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
@@ -66,18 +30,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjxkqG69MRS2KuPaodSf8DbJ5nwsyFbL4rxMsDtR6CSmxsRHlSjJiRKMcA2UJ23t317s0BIxI7XvszONgdOuOzRIfDsZOvJnqCWj-e3K9V9XlLjV_JG8IjNjmRvGvcuZcDuRiJcMMyKpXuYCVxQwE_-7aNlCfXfBxNmrPHRiV7evSuM3vw823n0-n2iyA",
-      "download_link": "http://library.lol/main/DB9F7C23624B2CD00974D4DE63A219B0",
-      "alt_data": "Solar Engineering Of Thermal Processes: Photovoltaics And Wind",
-      "buy_link": "#"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhiH-dD4UzXTe2irZuklwKfhyIHwW2_BE4vQ3DYOwyhlNF_8z4w3NmLMs8FEUcJ7ctbIC8BBj52NjkYdMkmeNiwshU64ewfwsy-Gm_e1jr0oDzrEU8Nffzw2U867ut20-TA9FxXEkuRAHaQFtlPt1MZEaEwMRGZsQwbRkTFC9qR5HhmU4UBZ6SSAKLvrQ",
-      "download_link": "http://library.lol/main/E1C767E3950B754B4F3386E27294EEC7",
-      "alt_data": "Non-conventional Energy Resources McGrawHill",
-      "buy_link": "#"
-    }
-  ]
+  "Books": []
 }

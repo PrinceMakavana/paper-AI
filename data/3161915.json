@@ -34,16 +34,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjzbLV_aJHiCfSSk74qYjuEby4p9hFXV2-NUkod34nYVp9e9MmSJdvnIiMacspRDXI5bgJRJFLnXjlZUVCAEoEmnsjfDrgIIHWFNSQiIStQWgWfSpkB94DO9XhmkkJB3KGZhjl82TcGTpyB8K6mm6D-TJYxutQFRHsR17LeGi4vg5Mj3yHFlbbC5F9Ulg",
-      "download_link": "http://library.lol/main/D14FB97EA06627A418CF197C65DEB88E",
-      "alt_data": "Computational Fluid Dynamics: The Basics with Applications McGraw-Hill"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj029wuM9L-aWUWRGW7N1_xXXldTJrUuVNDtpTPn5kIb2dx-vo53UJdPyYANf5QU0OpewGO9tmQl5pCTJvuAbudV1niq7YJ67u3PNN6SqDIkAtyaWqVKk-pPwUPgMFtQAlgWYqwgDfCsmpVJj4dP7vB8yRVQ5KDBCvT5L0wnO_8R8qBv8YkdWgCbx2VEA",
-      "download_link": "http://library.lol/main/468576FC6983F481CCC1D9EEDDDE9254",
-      "alt_data": "Introduction to Computational Fluid Dynamics"
-    }
-  ]
+  "Books": []
 }

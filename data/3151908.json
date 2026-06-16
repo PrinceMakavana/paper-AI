@@ -58,11 +58,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEidXiFeEdghU-ILkyraA5w-LSQpYjKntc_23Y8VJ8W7BCAzmwu20UBRyZ9ddod7__9lh713yJWbGW7kbltqNq8SKBJYAevlua2zdHryvHrtvuqHoINz2KkqcEQz081Eufq7tpYtZLLc0ewPAU-qLNT1cG6AJJkMl-hJFC65P5_97XrwvWuhRhBIODSVYw=s394",
-      "download_link": "http://library.lol/main/9DE1AD8D8091C4570468B3AC6C86F782",
-      "alt_data": "Automatic Control Systems by Farid Golnaraghi"
-    }
-  ]
+  "Books": []
 }

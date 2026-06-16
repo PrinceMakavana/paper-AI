@@ -58,21 +58,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgFejBvYdnOYlX7BnnaUAJ4uau49nVClBkUQybPJUoIyePej6FACe0UTmrQ7yjfqyEQ-5noYi65tafmSPOMS39LAhQeJKvmNX55n8IrLiRSq1F8TTUVFrvWv0Nz-mK50AYsrE2JL0bzrxDwbx2V95xSyQ1VsNFEJsthQFgsbswhS2TkOJLqIuc6bWi2bw",
-      "download_link": "http://library.lol/main/7A3BBCA8CDCABC8678A568241A08DCF6",
-      "alt_data": "Yunus A. Çengel, Afshin J. Ghajar Publisher: McGraw-Hill Education, Year: 2015"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgI-NZ0E9pAN9fvo0AW6mYcIdxSmnXu0eX3j8KtRI7OKJzrq5puVHiWfXfmB0_c58aoAkr-PvnsFAFl_AWu3Wdzzn9iEOYdivwGqIM0s4ziCi3RGM3g37FFA7LCkSSxuV73v8sgkVU88TEOxTbS9WI0K0AhIA2pWQdVjC1CtITZTm0ct3fEeSaVOOGs8w",
-      "download_link": "http://library.lol/main/F48C5288B8010709F0750A9B63E69075",
-      "alt_data": "Bergman T.L., Lavine A.S., Incropera F.P., DeWitt D.P. Publisher: Wiley, Year: 2011"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhCSKAhBWzZpcMBc0ZYzHN_pPCv2435_dfAEJh3LK9UsSeKFUvRiDueuTLJMmM9tSBPcYj1CgFFIhSf4B6F2tCK7qDd3l4O4rhSNystIRW500-gM_vvs4PV1RBsPD1U2EJkK6BYlRCmnrg9Jw8c--T_ThCFAzGI7nYZcIb14P0Kf_cqLz0j6i35imWUww",
-      "download_link": "http://library.lol/main/739BE941BEAB8A05E50F8A99F37B1B5F",
-      "alt_data": "Heat and Mass Transfer: A Textbook for the Students Preparing for B.E., B.Tech., B.Sc. Engg, AMIE, UPSC (Engg. Services) and GATE Examinations"
-    }
-  ]
+  "Books": []
 }

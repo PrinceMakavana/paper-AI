@@ -46,16 +46,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgpIbAmaI6x2bSdg9AJnzBhbbWZBd8alRyh8JFC_Aup8EAGcK9aLMs-oj_uqns-i_zb-2H5u4hUvH-LgIM8kLM9RVMuiV5KEdD72Kco8_xA87GMTAXrdyS2_uUQKuTXfyRMzB4vjy4qgAq-ODxL3CE4NHd3jGzz854br16iW_moa95R5_38XYP6fD7S2A",
-      "download_link": "http://library.lol/main/80F62FC5888BB0BC53BCDBD280E2EF1B",
-      "alt_data": "Motorcycle Handling and Chassis Design"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEj6MT-OiL9nAh__a2YYBmbiB9ozN9HkKuvDlHw6npPUXDE_XL3JGkeulhmjSrY9gIy1bTXRqz3-cCCTpiyWqY70KTU5ngnVj1EpEE31x5hQdEYU9joFsL_cd8YteXZeEqkkAtzm0uNUGqSS2YpepVdvNp6xmHtu5EqTIBBHRFQ-ao6Q3VkAl0w14N1I0A",
-      "download_link": "http://library.lol/main/E5711FF5B2C1E8234DB88B8DEC69B906",
-      "alt_data": "Motorcycle mechanics"
-    }
-  ]
+  "Books": []
 }

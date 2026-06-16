@@ -33,18 +33,7 @@
       "link": "https://drive.google.com/uc?export=download&id=1rJHVN404VdeBfGRnBqewSDYCejqR1FaJ"
     }
   ],
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgQekE-Ebu4V1DKxlobPEiqZTnx9xvV8enoFZYF0fwaliw2QW6uGG23aM106ddDEfyuvzaRAsjsi40xjdanDJynIp7qgZWr2et-k8Z0ADExLD717tyMB9LwiBHR7BMJ3N37f4uQqTZ7MkBcRMSoc1zPreOoj9QgBMVJi3Lt0bmFMxfPPj_V4vKdos7LMQ",
-      "link": "http://library.lol/main/28F93AE092784B30A5ED2EE53D78D104",
-      "alt_data": "Computer Networks by Andrew S. Tanenbaum"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhcLfAahckjK12OkcHR2e-k39w775LEKZnA5quPRLIXO6fpnUodDbiKT0BbZGyIxHdX5Vk36jw1p1jD7oiS6RIg1BWRKgj0HvmpX9U3Zjet8AZIGgWaRNa6emAhDkpz6ZLr1XGh057_r-On_1OxlD5zZTRDEY88c7s6qTXjEpEsXEEvXpyjVJFdyKxdCA",
-      "link": "http://library.lol/main/0F34CB61E19317BC0CDE76F239AADB18",
-      "alt_data": "Computer networking: A top-down approach"
-    }
-  ],
+  "Books": [],
   "paper_solution": "https://www.gtuapymaterials.com/2022/11/gtu-all-subjects-paper-solution.html",
   "assignments": "",
   "imp_material": "",

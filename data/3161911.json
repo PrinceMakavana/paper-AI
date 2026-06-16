@@ -9,16 +9,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiEOSzTn6Q3wQQZJTRZdqzrzrzINL-P61fkkvi7GPSoHNTohw616bMrmgGht5KLTTbsEBVvDaj7K1Hl9cKDDez1Ql4Z8WtTVIe8mlBll_6LQ7iQ9PlC6fjVfy0QsVTHX69Mq5OfLXjFujVlVIUuQaVdK3SKW9xDx9JBeK0HFA0sTp7mAvi-cks_UuPnAw",
-      "download_link": "http://library.lol/main/0E0A47B3B96F0579B49BD7D69DADFD2B",
-      "alt_data": "Fundamentals of Heat Exchanger"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjUe_Gc2D2f1GxuX4PqhQmxJUhu8bC7EF_pxo0_Xoq08z0i7nuVZ0Z7Ls98TzzIF5x_vZ5IlGm6hlaHqnwpSoLL8IeD4BkjxpoqvT-S_MIV4J9L__SJ8WOpXCzDEvFyK6ToqSbcLrec0gbf6ZGkhHmEMxA-9YVXiK2Y-5l6N6Z05HRUbaLF4OTrPn5l4A",
-      "download_link": "http://library.lol/main/1EB2927C3F4341CA7A3729BD02706403",
-      "alt_data": "Compact Heat Exchangers McGrawHill"
-    }
-  ]
+  "Books": []
 }

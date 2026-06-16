@@ -50,16 +50,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhMh43jw_v4QogbDcvr1oocu7bEm_Yw3JlHExXcMz42fXUcWQzYmn2OTMsYRViqVyjKAIULFdNsbos521IcMLihDCul4dDK8wty_mmSOZkk6Veav0LYPQh7mlRSKmsWX_fo3Yv24YHcGSbShlODryaYzDyavdUgqr3MUAxgtYeWMCyQqVBPkkSuiVEMnQ",
-      "download_link": "http://library.lol/main/2294B45EDA50D2D255C5A8D2E69A8A24",
-      "alt_data": "Advanced Reinforced Concrete"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEg1iG1Wco4g1fAweYrfwvpoM_4Rl1SEGe9PEDmG8xyrbcJUTgwhmS03C_6ZSFk86pYz5Vynq5y3dVErzAZmQY3uSNW-TeuJOOFjB76sdE27VCpY-7HnR7ivT5Ct7Z2Blal39qpKSKqd3vETGB_z2lcnD9ErGTW0jDkAPG9_aa0bEi47Y-ZPwiF4A0hqvQ",
-      "download_link": "http://library.lol/main/7546FD41440873283D8A2DAD3265EC65",
-      "alt_data": "Reinforced Concrete Design McGrawHill"
-    }
-  ]
+  "Books": []
 }

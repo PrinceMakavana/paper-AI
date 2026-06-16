@@ -23,11 +23,7 @@
     {
       "year": "Winter-21",
       "link": "https://gtu.ac.in/uploads/W2021/BE/3140609.pdf"
-    },
-    {
-      "year": "Winter-20",
-      "link": "https://gtu.ac.in/uploads/2020/BE/3140609.pdf"
-    },
+    },   
     {
       "year": "Summer-21",
       "link": "https://gtu.ac.in/uploads/S2021/BE/3140609.pdf"
@@ -43,10 +39,5 @@
   "imp_material": "",
   "assignments": "",
   "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiwUx-3easVD_4MJz40TGJ8_QWUfLB3MRkVrmawXXBaRaM48ZnFBmPZCTLYVQu9hZ9494Nwvu2itKyFymXgrZGpnxGH3JoxMxrtzUL7xjBDrWtGfvUboJv3DD35XrwsA5HFZV3E8QoqoYiafpGocqzE3roQwcjtD9RFEljtgedBxQPi1MnznSO-fzSifA",
-      "download_link": "http://library.lol/main/56A6E0DF05B5DB8DED044AFFA9D06348",
-      "alt_data": "Cleansing the City by Michelle Allen"
-    }
   ]
 }

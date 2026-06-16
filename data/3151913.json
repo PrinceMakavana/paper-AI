@@ -58,16 +58,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgzsSBz77hTVEp37nm76VNwaWxjqAIm_kWK76txc26D7sdkzc0UKk6F4z9zz-2k67PMDNwp53bo6KyOZSEo-R8pEZIT12oLa_lStomS_Ch5m4U78PVumkziC8IJ-r7OJ3pFNuvZZhUdpEAidsbcjXGEA3TV4jf1yf2bCJNl_jsp7ZSypz00fmF3M53p1w",
-      "download_link": "http://library.lol/main/286FB14041886C6E48E090EBC389A4F5",
-      "alt_data": "Oil Hydraulic systems - Principles and maintenance"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgEOBtQT6bEyKB6RKDm0LnueVvn-dIDNLJC3utx5hDpUHCXa6SkKwtfsBMKg86DRMDyMG0_oGtiIZ42gNB32IlgFMy9augAlWPgTDp_FTG13uJdRIocD40xmhPPgtT862XAiIb-QrMaGktn2QU7WaMsZF-w_8VPBOjsNIBzd4cxf4G4aLbP5-ZJvLvD3w",
-      "download_link": "http://library.lol/main/EA630BD523C0F645D1DDF5B4197CC83A",
-      "alt_data": "Fluid Power with Applications"
-    }
-  ]
+  "Books": []
 }

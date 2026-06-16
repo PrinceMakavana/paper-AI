@@ -34,16 +34,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjKPBFdBgcjc_AvgLbp6cuR4iliF5hB4gIFu7JyBIRsvJ8uE_dqTfPvFUZ-aNA0kZJ9Nd3Cao0q4SHjq4rYmO5bkdDQkRJz_yAt5HS8XeEoYtvnE81BJi-DITW1OPmNjstxJxtSNjwLFrj5UUeXNLVRkvrALBqHJARpHDTE8dK-rdQm5yRc9Y__O-8SbA",
-      "download_link": "http://library.lol/main/8DADD2860739E9B03422523FB5DB8F14",
-      "alt_data": "Measurement and Instrumentation Principles, Third Edition"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhhYT0xje2B-kaazetvb9CXSsQgqSFm3Pq3aPSf0VPyWT67pukdVGwtG309nGITeOEm3rJqGDuKGw1MFZfsPcM0gKnuP3VTuFCJYbSgaO97OnZRyo3P4Rc51GYbcKpzWGXAY9dIfYILyWMWT8r1RPwaxvsK-Gd1rJ0U7kJa3OPtYGFcQQ3DAygvLJP2qg",
-      "download_link": "http://library.lol/main/D45BA8BB1347E73C8C1650E9BB78AD31",
-      "alt_data": "Electronic Instrumentation and Measurements"
-    }
-  ]
+  "Books": []
 }

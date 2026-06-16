@@ -62,16 +62,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEi5Oi9mM-3hFGI3p3eLEE208JT9u7soT62gLOQdV0QfIXS8LWyFNlMlwBTjKRC4NwofVZuDemkwrvRuTYqs2EGgNH4lEFwDiLF7CfCG9jHgmgPG7GKEEDwYXdu08VfAxfpmUkuQqJtoR68wptLsxe85S64QHOuwtg0t5hEEKV2XhlyKIJHZE93SE7Os4g",
-      "download_link": "http://library.lol/main/C986BD1ACE46D97CF9BBA4604600E62C",
-      "alt_data": "Transportation Engineering An Introduction"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEiVoRXUWXgWhVyk6-d5OD7N25n6_FE_nq6_CLJG1vJTT_rC-fStB_9d0moT-OvGpr12hb44-8pePb0YIlJKvtjEnx6xbGyTAhfR49jVpzbCllqncdcP9JxkJXijVmgpD7xpmRx_A5EtK1QWkD5NASvQiXCXXsxR6AHipQHsyoxomNpj4DH3e3OuWSfNGQ",
-      "download_link": "http://library.lol/main/91FD89BF4922C62CE51A500FACE4D451",
-      "alt_data": "Principles of Transportation Engineering"
-    }
-  ]
+  "Books": []
 }

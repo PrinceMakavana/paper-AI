@@ -54,16 +54,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEjcAvOxVDUifTOVl7cZ6q4LWdIrU3l9s7jsZgJeKLbgBUA3NJ445xqD1dLDbaezUQiN5NmG_VV__mtCm1ashhuGt5gTpVCXNp4uzhKuExlAZmGgiyes3T7wqsLwzbxtIDNUlhY0nw8xVN6Fx_ptgpgix9Q-CwZjTm9vfVf8WVv4f5s_0L69YRp_Hne7HQ",
-      "download_link": "http://library.lol/main/357763261443A30C75D2BAB6511ADE98",
-      "alt_data": "CAD/CAM: computer-aided design and manufacturing"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEhfk1tVfwbBMvzMn5fJe961zQDw_HrV6K_jA7s-H0f9WIQ9ihxKqvq9LAQ8P10gCk6Km5-d8zXtX3cW6InTSwEoUamHJWZDcOI2AKDpgWoO41EaBIhJy7tm1UiGExmOqYEWrNcVrMeAagre6jOFwATmXfaqZcDaAm-CzrrWlASs6a8bcg9earru__zCoA",
-      "download_link": "http://library.lol/main/4D435CDFA9B1B46FD83592B4FCF025C4",
-      "alt_data": "Automation, production systems, and computer-integrated manufacturing"
-    }
-  ]
+  "Books": []
 }

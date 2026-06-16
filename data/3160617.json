@@ -62,16 +62,5 @@
   "viva_questions": "",
   "imp_material": "",
   "assignments": "",
-  "Books": [
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgR3GBIhVfiaEJeayfvqw5q-Ujl_0-NZMtjAYcBcMaWHVhz9W02AymjkzpfkpbDQ_6Sr7Azik51VaUCnFP4dV4qEwW38DtUFDlsCsI-nysbe5uhHGfaQ5TP7x8vQbvho7rLEgC45fMw1NXTErYPeds7FhH1I1xzXn6ytvXfB9Pt2_Ja4WM1KRniJYA8iw",
-      "download_link": "http://library.lol/main/712B436DBE92847F5C1AB80AF15AF44D",
-      "alt_data": "Construction Planning, Equipment, and Methods"
-    },
-    {
-      "img": "https://blogger.googleusercontent.com/img/a/AVvXsEgR3GBIhVfiaEJeayfvqw5q-Ujl_0-NZMtjAYcBcMaWHVhz9W02AymjkzpfkpbDQ_6Sr7Azik51VaUCnFP4dV4qEwW38DtUFDlsCsI-nysbe5uhHGfaQ5TP7x8vQbvho7rLEgC45fMw1NXTErYPeds7FhH1I1xzXn6ytvXfB9Pt2_Ja4WM1KRniJYA8iw",
-      "download_link": "http://library.lol/main/48BEDF9F0B4FAF7ACDE665457489C90B",
-      "alt_data": "Construction Project Management: Theory and Practices"
-    }
-  ]
+  "Books": []
 }
