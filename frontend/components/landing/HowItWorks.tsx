@@ -3,9 +3,9 @@ import { Upload, Brain, Sparkles, MessageSquare } from "lucide-react";
 import { Reveal } from "@/components/layout/Reveal";
 
 const STEPS = [
-  { icon: Upload, title: "Select Subject", text: "Select the subject of the question paper." },
-  { icon: Brain, title: "Ask Questions to AI", text: "Each question is parsed and understood." },
-  { icon: Sparkles, title: "Solutions will Generate", text: "Structured answers with examples." },
+  { icon: Upload, title: "Find Materials", text: "Find the materials related to the subject. using AI." },
+  { icon: Brain, title: "Subject Level Assistant", text: "from Subjects Section you can ask questions related to the subject." },
+  { icon: Sparkles, title: "Document Level Assistant", text: "In Documents Section Upload your study material and ask questions related to the document." },
   { icon: MessageSquare, title: "Chat & Learn", text: "You can also ask follow-ups on any answer." },
 ];
 
@@ -19,7 +19,7 @@ export function HowItWorks() {
               How it works
             </div>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              From Question Paper to Complete Solution in Minutes
+              From Subject to Complete Solution in Minutes
             </h2>
           </div>
         </Reveal>
@@ -32,9 +32,9 @@ export function HowItWorks() {
                   <div className="grid size-14 place-items-center rounded-xl border border-border bg-card text-brand shadow-[var(--shadow-card)]">
                     <s.icon className="size-6" />
                   </div>
-                  <div className="mt-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {/* <div className="mt-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Step {i + 1}
-                  </div>
+                  </div> */}
                   <h3 className="mt-1.5 max-w-[220px] text-lg font-semibold">{s.title}</h3>
                   <p className="mt-2 max-w-[220px] text-sm text-muted-foreground">{s.text}</p>
                 </div>

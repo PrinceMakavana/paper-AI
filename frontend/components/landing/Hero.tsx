@@ -8,10 +8,10 @@ import { useAuth } from "@/components/context/auth/auth-context";
 import { signupHref, startChatHref } from "@/lib/landing-links";
 
 const TRUST = [
-  "10,000+ Papers Processed",
+  "10,00+ Study Material Processed",
   "GTU Focused",
   "Secure Workspace",
-  "Gemini + Ollama Support",
+  "Google Gemini Support",
 ];
 
 export function Hero() {
@@ -25,12 +25,12 @@ export function Hero() {
           <Reveal>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium text-muted-foreground">
               <Sparkles className="size-3.5 text-spark" />
-              AI-powered GTU paper solutions
+              AI-powered GTU Study Assistant
             </div>
           </Reveal>
           <Reveal delay={80}>
             <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              AI-Powered GTU Paper Solutions &{" "}
+              AI-Powered GTU Study Assistant &{" "}
               <span className="bg-gradient-to-r from-foreground to-brand bg-clip-text text-transparent">
                 Document Assistant
               </span>
@@ -38,15 +38,15 @@ export function Hero() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-              Upload question papers, generate accurate answers, chat with documents, summarize notes,
-              and prepare smarter for GTU exams using AI.
+              Upload study material, generate accurate answers, chat with documents, summarize notes,
+              and prepare smarter for GTU studies using AI.
             </p>
           </Reveal>
           <Reveal delay={240}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button size="lg" className="h-11 px-6" asChild>
                 <Link href={signupHref(isUserLoggedIn)}>
-                  Start Solving Papers
+                  Start Studying
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>

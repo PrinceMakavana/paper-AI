@@ -1,6 +1,7 @@
 "use client";
 
 import { ChatInterFace } from "@/components/chat-interface";
+import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import { BuyTokenDialog } from "@/components/buy-token-dialog";
 import { LogoutConfirmDialog } from "@/components/logout-confirm-dialog";
 import { DocumentHistory } from "@/components/document-history";
@@ -378,79 +379,51 @@ export default function ChatPage() {
           <div className="flex flex-col gap-4 min-h-0 h-full lg:overflow-hidden">
 
             {showFindMaterialsHeader ? (
-              <div
-                className="animate-fade-up ed-panel shrink-0"
-                style={{
-                  animationDelay: "0ms",
-                  padding: "0.875rem 1.25rem",
-                  backgroundColor: "var(--ed-surface)",
-                }}
-              >
-                <h2
-                  className="font-fraunces"
-                  style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.125rem", marginBottom: "0.25rem" }}
-                >
-                  Find materials
-                </h2>
-                <p style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", lineHeight: 1.6 }}>
+              <div className="animate-fade-up shrink-0 rounded-xl border border-border bg-card px-5 py-3.5 shadow-[var(--shadow-card)]">
+                <h2 className="text-sm font-medium text-foreground">Find materials</h2>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   Search books, syllabus, and exam papers across all GTU subjects.
                   For textbook explanations, pick a subject from the sidebar.
                 </p>
               </div>
             ) : currentSubject ? (
-              <div
-                className="animate-fade-up ed-panel shrink-0"
-                style={{
-                  animationDelay: "0ms",
-                  padding: "0.875rem 1.25rem",
-                  backgroundColor: "var(--ed-surface)",
-                }}
-              >
-                <h2
-                  className="font-fraunces"
-                  style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.125rem", marginBottom: "0.25rem" }}
-                >
-                  {currentSubject.subjectName}
-                </h2>
-                <p style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", marginBottom: "0.5rem" }}>
+              <div className="animate-fade-up shrink-0 rounded-xl border border-border bg-card px-5 py-3.5 shadow-[var(--shadow-card)]">
+                <h2 className="text-sm font-medium text-foreground">{currentSubject.subjectName}</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
                   {currentSubject.subjectCode}
                   {currentSubject.knownAs ? ` · ${currentSubject.knownAs}` : ""}
                 </p>
-                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem 0.75rem" }}>
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
                   {currentSubject.syllabus ? (
-                    <a
+                    <ExternalLinkAnchor
                       href={currentSubject.syllabus}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ fontSize: "0.8125rem", color: "var(--ed-accent)", textDecoration: "underline" }}
+                      className="text-sm text-brand"
                     >
                       Syllabus
-                    </a>
+                    </ExternalLinkAnchor>
                   ) : null}
                   {currentSubject.paperSolution ? (
-                    <a
+                    <ExternalLinkAnchor
                       href={currentSubject.paperSolution}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ fontSize: "0.8125rem", color: "var(--ed-accent)", textDecoration: "underline" }}
+                      className="text-sm text-brand"
                     >
                       Paper solutions
-                    </a>
+                    </ExternalLinkAnchor>
                   ) : null}
-                  <div className="flex flex-wrap gap-3 items-center">
-                    <span className="text-xs text-muted-foreground mr-1">Old Papers:</span>
-                  {(currentSubject.oldPaper ?? []).map((paper) => (
-                    <a
-                      key={`${paper.year}-${paper.link}`}
-                      href={paper.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ fontSize: "0.8125rem", color: "var(--ed-muted)", textDecoration: "underline" }}
-                    >
-                        {paper.year}
-                      </a>
-                    ))}
-                  </div>
+                  {(currentSubject.oldPaper ?? []).length > 0 ? (
+                    <div className="flex w-full flex-wrap items-center gap-2">
+                      <span className="text-xs text-muted-foreground">Old papers:</span>
+                      {(currentSubject.oldPaper ?? []).map((paper) => (
+                        <ExternalLinkAnchor
+                          key={`${paper.year}-${paper.link}`}
+                          href={paper.link}
+                          className="text-sm text-muted-foreground"
+                        >
+                          {paper.year}
+                        </ExternalLinkAnchor>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             ) : (
@@ -571,24 +544,15 @@ export default function ChatPage() {
             <button
               type="button"
               onClick={handleCatalogFindSelect}
-              className="ed-panel w-full text-left transition-colors"
-              style={{
-                padding: "0.75rem 1rem",
-                backgroundColor: isFindMaterialsActive ? "var(--ed-accent)" : "var(--ed-surface)",
-                color: isFindMaterialsActive ? "#ffffff" : "var(--ed-ink)",
-                border: isFindMaterialsActive ? "none" : "1px solid var(--ed-rule)",
-              }}
+              className={
+                "w-full rounded-xl border px-4 py-3 text-left shadow-[var(--shadow-card)] transition-colors " +
+                (isFindMaterialsActive
+                  ? "border-brand bg-[color-mix(in_oklab,var(--brand)_10%,transparent)]"
+                  : "border-border bg-card hover:bg-muted/30")
+              }
             >
-              <span className="font-fraunces" style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.05rem" }}>
-                Find materials
-              </span>
-              <p
-                style={{
-                  fontSize: "0.75rem",
-                  marginTop: "0.2rem",
-                  color: isFindMaterialsActive ? "rgba(255,255,255,0.85)" : "var(--ed-muted)",
-                }}
-              >
+              <span className="text-sm font-medium text-foreground">Find materials</span>
+              <p className="mt-0.5 text-xs text-muted-foreground">
                 Books, papers &amp; syllabus across all subjects
               </p>
             </button>

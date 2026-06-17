@@ -1,7 +1,9 @@
 "use client";
 
+import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import type { CatalogBook, SubjectDetail, SubjectSummary } from "@/lib/types";
-import { Download, Loader2, Search, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Loader2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 
 interface SubjectCatalogProps {
@@ -52,43 +54,15 @@ export function SubjectCatalog({
   }, [visibleSubjects, normalizedQuery]);
 
   return (
-    <div className="ed-panel ed-sidebar-panel">
-      <div
-        className="ed-sidebar-panel__header"
-        style={{
-          borderBottom: "1px solid var(--ed-rule)",
-          padding: "0.75rem 1rem 0.625rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          backgroundColor: "var(--ed-surface)",
-        }}
-      >
-        <h2
-          className="font-fraunces"
-          style={{
-            fontWeight: 300,
-            fontStyle: "italic",
-            fontSize: "1.125rem",
-            color: "var(--ed-ink)",
-            flexShrink: 0,
-          }}
-        >
-          Subjects
-        </h2>
+    <div className="flex min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] ed-sidebar-panel">
+      <div className="flex shrink-0 items-center gap-2 border-b border-border bg-muted/40 px-4 py-3">
+        <h2 className="shrink-0 text-sm font-medium text-foreground">Subjects</h2>
         {visibleSubjects.length > 0 && !loading && (
-          <div style={{ position: "relative", flex: 1, minWidth: 0 }}>
+          <div className="relative min-w-0 flex-1">
             <Search
               size={12}
               aria-hidden
-              style={{
-                position: "absolute",
-                left: "0.45rem",
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "var(--ed-faint)",
-                pointerEvents: "none",
-              }}
+              className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground"
             />
             <input
               type="search"
@@ -96,42 +70,14 @@ export function SubjectCatalog({
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search…"
               aria-label="Search subjects"
-              style={{
-                width: "100%",
-                height: 26,
-                padding: "0 1.5rem 0 1.5rem",
-                fontSize: "0.75rem",
-                color: "var(--ed-ink)",
-                backgroundColor: "var(--ed-bg)",
-                border: "1px solid var(--ed-rule)",
-                borderRadius: 2,
-                outline: "none",
-              }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = "var(--ed-accent)";
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = "var(--ed-rule)";
-              }}
+              className="h-7 w-full rounded-lg border border-border bg-background py-0 pl-7 pr-7 text-xs text-foreground outline-none focus:border-brand"
             />
             {searchQuery && (
               <button
                 type="button"
                 aria-label="Clear search"
                 onClick={() => setSearchQuery("")}
-                style={{
-                  position: "absolute",
-                  right: "0.25rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 18,
-                  height: 18,
-                  color: "var(--ed-faint)",
-                  cursor: "pointer",
-                }}
+                className="absolute right-1 top-1/2 flex size-[18px] -translate-y-1/2 items-center justify-center text-muted-foreground hover:text-foreground"
               >
                 <X size={12} />
               </button>
@@ -139,7 +85,7 @@ export function SubjectCatalog({
           </div>
         )}
         {visibleSubjects.length > 0 && !loading && (
-          <span style={{ fontSize: "0.6875rem", color: "var(--ed-faint)", flexShrink: 0, whiteSpace: "nowrap" }}>
+          <span className="shrink-0 whitespace-nowrap text-[0.6875rem] text-muted-foreground">
             {normalizedQuery
               ? `${filteredSubjects.length} of ${visibleSubjects.length}`
               : `${visibleSubjects.length} ${visibleSubjects.length === 1 ? "subject" : "subjects"}`}
@@ -148,120 +94,78 @@ export function SubjectCatalog({
       </div>
 
       {loading ? (
-        <div
-          className="ed-sidebar-panel__body ed-panel-scroll"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            color: "var(--ed-muted)",
-            padding: "1rem",
-          }}
-        >
+        <div className="ed-sidebar-panel__body ed-panel-scroll flex items-center gap-2 p-4 text-muted-foreground">
           <Loader2 size={14} className="animate-spin" />
-          <span style={{ fontSize: "0.8125rem" }}>Loading…</span>
+          <span className="text-sm">Loading…</span>
         </div>
       ) : visibleSubjects.length === 0 ? (
-        <p
-          className="ed-sidebar-panel__body ed-panel-scroll"
-          style={{ fontSize: "0.8125rem", color: "var(--ed-faint)", padding: "1rem", lineHeight: 1.6 }}
-        >
+        <p className="ed-sidebar-panel__body ed-panel-scroll p-4 text-sm leading-relaxed text-muted-foreground">
           No subjects available.
         </p>
       ) : filteredSubjects.length === 0 ? (
-        <p
-          className="ed-sidebar-panel__body ed-panel-scroll"
-          style={{ fontSize: "0.8125rem", color: "var(--ed-faint)", padding: "1rem", lineHeight: 1.6 }}
-        >
+        <p className="ed-sidebar-panel__body ed-panel-scroll p-4 text-sm leading-relaxed text-muted-foreground">
           No subjects match &ldquo;{searchQuery.trim()}&rdquo;.
         </p>
       ) : (
         <div className="ed-sidebar-panel__body ed-panel-scroll">
           {filteredSubjects.map((subject) => {
             const isActive = currentSubjectCode === subject.subjectCode;
-            const indexed = subject.indexedBookCount ?? 0;
-            const total = subject.bookCount ?? 0;
             const visibleBooks =
               isActive && subjectDetail?.books
                 ? subjectDetail.books.filter(isCatalogBookVisible)
                 : [];
 
-            
-
             return (
               <div
                 key={subject.subjectCode}
                 onClick={() => onSelect(subject.subjectCode)}
-                className={`ed-list-item${isActive ? " ed-list-item--active" : ""}`}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.backgroundColor = "var(--ed-surface)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
+                className={cn(
+                  "cursor-pointer border-b border-border px-4 py-3 transition-colors last:border-b-0",
+                  isActive
+                    ? "border-l-2 border-l-brand bg-[color-mix(in_oklab,var(--brand)_8%,transparent)]"
+                    : "border-l-2 border-l-transparent hover:bg-muted/40",
+                )}
               >
                 <div
-                  style={{
-                    fontSize: "0.8125rem",
-                    fontWeight: isActive ? 500 : 400,
-                    color: isActive ? "var(--ed-accent)" : "var(--ed-ink)",
-                    marginBottom: "0.2rem",
-                    lineHeight: 1.4,
-                  }}
+                  className={cn(
+                    "mb-0.5 text-sm leading-snug",
+                    isActive ? "font-medium text-brand" : "text-foreground",
+                  )}
                 >
                   {subject.subjectName}
                 </div>
-                <div style={{ fontSize: "0.6875rem", color: "var(--ed-faint)", marginBottom: "0.4rem", lineHeight: 1.4 }}>
+                <div className="text-[0.6875rem] leading-snug text-muted-foreground">
                   {subject.subjectCode}
                   {subject.knownAs ? ` · ${subject.knownAs}` : ""}
                 </div>
-                <div style={{ fontSize: "0.6875rem", color: "var(--ed-faint)" }}>
-                  {/* {indexed}/{total} books */}
-                </div>
 
                 {isActive && visibleBooks.length > 0 ? (
-                  <div
-                    style={{
-                      marginTop: "0.625rem",
-                      paddingTop: "0.625rem",
-                      borderTop: "1px solid var(--ed-rule)",
-                    }}
-                  >
+                  <div className="mt-2.5 border-t border-border pt-2.5">
                     {visibleBooks.map((book) => (
                       <div
                         key={book.bookId}
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "0.5rem",
-                          padding: "0.35rem 0",
-                          fontSize: "0.75rem",
-                          color: "var(--ed-muted)",
-                        }}
+                        className="flex items-start gap-2 py-1.5 text-xs text-muted-foreground"
                       >
                         {book.img ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={book.img}
                             alt={book.title || book.bookId}
-                            style={{
-                              width: 28,
-                              height: 36,
-                              objectFit: "cover",
-                              borderRadius: 2,
-                              border: "1px solid var(--ed-rule)",
-                              flexShrink: 0,
-                            }}
+                            className="size-9 shrink-0 rounded border border-border object-cover"
                           />
                         ) : null}
-                        <span style={{ minWidth: 0, lineHeight: 1.4 }}>
+                        <span className="min-w-0 flex-1 leading-snug">
                           {book.title || book.altData || book.bookId}
                         </span>
                         {book.downloadLink ? (
-                          <a href={book.downloadLink} target="_blank" rel="noopener noreferrer">
-                            <Download size={12} className="ml-auto" />
-                            </a>
-                          ) : null}
+                          <ExternalLinkAnchor
+                            href={book.downloadLink}
+                            className="ml-auto shrink-0 text-xs text-brand"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Download
+                          </ExternalLinkAnchor>
+                        ) : null}
                       </div>
                     ))}
                   </div>

@@ -1,4 +1,5 @@
 import { DocumentMetaData } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { CheckCircle2, CircleHelp, Clock3, Eye, Loader2, OctagonAlert, Trash2, Upload } from "lucide-react";
 
 interface DocumentHistoryProps {
@@ -69,18 +70,6 @@ function getIndexStatus(status?: string | null): IndexStatus {
   return "unknown";
 }
 
-// function formatPageCount(pageCount?: number): string {
-//   const value = Number(pageCount ?? 0);
-//   if (!Number.isFinite(value) || value <= 0) {
-//     return "0 pages";
-//   }
-//
-//   return `${new Intl.NumberFormat(undefined, {
-//     notation: value >= 1000 ? "compact" : "standard",
-//     maximumFractionDigits: value >= 1000 ? 1 : 0,
-//   }).format(value)} pages`;
-// }
-
 export function DocumentHistory({
   documents,
   loading,
@@ -95,50 +84,19 @@ export function DocumentHistory({
   deletingId,
 }: DocumentHistoryProps) {
   return (
-    <div className="ed-panel ed-sidebar-panel">
-      {/* Section heading */}
-      <div
-        className="ed-sidebar-panel__header"
-        style={{
-          borderBottom: "1px solid var(--ed-rule)",
-          padding: "0.75rem 1rem 0.625rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "var(--ed-surface)",
-        }}
-      >
-        <h2
-          className="font-fraunces"
-          style={{ fontWeight: 300, fontStyle: "italic", fontSize: "1.125rem", color: "var(--ed-ink)" }}
-        >
-          My uploads
-        </h2>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+    <div className="flex min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] ed-sidebar-panel">
+      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border bg-muted/40 px-4 py-3">
+        <h2 className="text-sm font-medium text-foreground">My uploads</h2>
+        <div className="flex items-center gap-2">
           {documents.length > 0 && !loading && (
-            <span style={{ fontSize: "0.6875rem", color: "var(--ed-faint)" }}>
+            <span className="text-[0.6875rem] text-muted-foreground">
               {documents.length} {documents.length === 1 ? "document" : "documents"}
             </span>
           )}
           {uploadComingSoon ? (
             <span
               title="PDF upload coming soon"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                minHeight: 20,
-                padding: "0 0.4rem",
-                border: "1px solid #c9d8ff",
-                borderRadius: 2,
-                backgroundColor: "#eef3ff",
-                color: "#1a56db",
-                fontSize: "0.625rem",
-                lineHeight: 1.4,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.02em",
-                whiteSpace: "nowrap",
-              }}
+              className="inline-flex min-h-5 items-center rounded-lg border border-[#c9d8ff] bg-[#eef3ff] px-1.5 text-[0.625rem] font-semibold uppercase tracking-wide text-[#1a56db] whitespace-nowrap"
             >
               Coming soon
             </span>
@@ -150,24 +108,10 @@ export function DocumentHistory({
                 aria-label="Upload PDF"
                 disabled={uploadDisabled}
                 onClick={onUpload}
-                style={{
-                  width: 28,
-                  height: 28,
-                  flexShrink: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)",
-                  cursor: uploadDisabled ? "default" : "pointer",
-                  opacity: uploadDisabled ? 0.5 : 1,
-                  transition: "color 0.15s, background-color 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  if (!uploadDisabled) e.currentTarget.style.color = "var(--ed-accent)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = uploadDisabled ? "var(--ed-faint)" : "var(--ed-muted)";
-                }}
+                className={cn(
+                  "flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-brand",
+                  uploadDisabled && "cursor-default opacity-50",
+                )}
               >
                 {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
               </button>
@@ -177,24 +121,12 @@ export function DocumentHistory({
       </div>
 
       {loading ? (
-        <div
-          className="ed-sidebar-panel__body ed-panel-scroll"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            color: "var(--ed-muted)",
-            padding: "1rem",
-          }}
-        >
+        <div className="ed-sidebar-panel__body ed-panel-scroll flex items-center gap-2 p-4 text-muted-foreground">
           <Loader2 size={14} className="animate-spin" />
-          <span style={{ fontSize: "0.8125rem" }}>Loading…</span>
+          <span className="text-sm">Loading…</span>
         </div>
       ) : documents.length === 0 ? (
-        <p
-          className="ed-sidebar-panel__body ed-panel-scroll"
-          style={{ fontSize: "0.8125rem", color: "var(--ed-faint)", padding: "1rem", lineHeight: 1.6 }}
-        >
+        <p className="ed-sidebar-panel__body ed-panel-scroll p-4 text-sm leading-relaxed text-muted-foreground">
           {uploadComingSoon
             ? "PDF upload is coming soon. Use Find materials to browse GTU papers and books."
             : "No documents yet. Upload a PDF to get started."}
@@ -207,38 +139,31 @@ export function DocumentHistory({
             const status = getIndexStatus(doc.indexStatus);
             const statusView = statusConfig[status];
             const StatusIcon = statusView.icon;
-            // const pageLabel = formatPageCount(doc.pageCount);
+
             return (
               <div
                 key={doc.id}
                 onClick={() => onSelect(doc.id)}
-                className={`ed-list-item${isActive ? " ed-list-item--active" : ""}`}
-                style={{ opacity: isDeleting ? 0.55 : 1 }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.backgroundColor = "var(--ed-surface)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                }}
+                className={cn(
+                  "cursor-pointer border-b border-border px-4 py-3 transition-colors last:border-b-0",
+                  isActive
+                    ? "border-l-2 border-l-brand bg-[color-mix(in_oklab,var(--brand)_8%,transparent)]"
+                    : "border-l-2 border-l-transparent hover:bg-muted/40",
+                  isDeleting && "opacity-55",
+                )}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <div style={{ minWidth: 0, flex: 1 }}>
+                <div className="flex items-center gap-2">
+                  <div className="min-w-0 flex-1">
                     <div
-                      style={{
-                        fontSize: "0.8125rem",
-                        fontWeight: isActive ? 500 : 400,
-                        color: isActive ? "var(--ed-accent)" : "var(--ed-ink)",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                        marginBottom: "0.2rem",
-                        transition: "color 0.15s",
-                      }}
+                      className={cn(
+                        "mb-0.5 truncate text-sm transition-colors",
+                        isActive ? "font-medium text-brand" : "text-foreground",
+                      )}
                     >
                       {doc.filename}
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", minWidth: 0, flexWrap: "wrap" }}>
-                      <span style={{ fontSize: "0.6875rem", color: "var(--ed-faint)" }}>
+                    <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                      <span className="text-[0.6875rem] text-muted-foreground">
                         {new Date(doc.uploadedAt).toLocaleDateString(undefined, {
                           year: "numeric",
                           month: "short",
@@ -247,38 +172,16 @@ export function DocumentHistory({
                       </span>
                       <span
                         title={`Index status: ${statusView.label}`}
+                        className="inline-flex min-h-[18px] items-center gap-0.5 rounded border px-1.5 text-[0.625rem] font-medium uppercase"
                         style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.22rem",
-                          minHeight: 18,
-                          padding: "0 0.35rem",
-                          border: `1px solid ${statusView.borderColor}`,
-                          borderRadius: 2,
+                          borderColor: statusView.borderColor,
                           backgroundColor: statusView.backgroundColor,
                           color: statusView.color,
-                          fontSize: "0.625rem",
-                          lineHeight: 1.4,
-                          fontWeight: 500,
-                          textTransform: "uppercase",
-                          letterSpacing: 0,
                         }}
                       >
                         <StatusIcon size={10} className={status === "running" ? "animate-spin" : undefined} />
                         {statusView.label}
                       </span>
-                      {/* Page count hidden — not shown to users
-                      <span
-                        title={`Pages used: ${doc.pageCount ?? 0}`}
-                        style={{
-                          fontSize: "0.6875rem",
-                          color: "var(--ed-muted)",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {pageLabel}
-                      </span>
-                      */}
                     </div>
                   </div>
                   {onViewPdf && (
@@ -291,23 +194,7 @@ export function DocumentHistory({
                         e.stopPropagation();
                         onViewPdf(doc);
                       }}
-                      style={{
-                        width: 28,
-                        height: 28,
-                        flexShrink: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "var(--ed-faint)",
-                        cursor: isDeleting ? "default" : "pointer",
-                        transition: "color 0.15s, background-color 0.15s",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isDeleting) e.currentTarget.style.color = "var(--ed-accent)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = "var(--ed-faint)";
-                      }}
+                      className="flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-brand disabled:cursor-default"
                     >
                       <Eye size={14} />
                     </button>
@@ -322,23 +209,7 @@ export function DocumentHistory({
                         e.stopPropagation();
                         onDelete(doc.id);
                       }}
-                      style={{
-                        width: 28,
-                        height: 28,
-                        flexShrink: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "var(--ed-faint)",
-                        cursor: isDeleting ? "default" : "pointer",
-                        transition: "color 0.15s, background-color 0.15s",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isDeleting) e.currentTarget.style.color = "#dc2626";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = "var(--ed-faint)";
-                      }}
+                      className="flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-destructive disabled:cursor-default"
                     >
                       {isDeleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
                     </button>

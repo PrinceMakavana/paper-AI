@@ -1,10 +1,11 @@
 import { isSubjectChatReady } from "@/lib/catalog-utils";
 import { ChatMessage, DocumentMetaData, SubjectDetail } from "@/lib/types";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
-import { Eye, FileText, Loader2, Send } from "lucide-react";
+import { Eye, FileText, Loader2, MessageSquare, Send, Sparkles } from "lucide-react";
+import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import type { AIModel } from "@/lib/ai-model";
 import { useAlert } from "./context/alert/alert-context";
 import {
@@ -14,14 +15,53 @@ import {
 } from "@/storage/services/paperaiApi";
 import type { ChatContext } from "@/storage/types/paperai";
 
-const MESSAGE_FONT_SIZE = "1rem";
-const MESSAGE_LINE_HEIGHT = 1.75;
+const MESSAGE_FONT_SIZE = "0.875rem";
+const MESSAGE_LINE_HEIGHT = 1.65;
+
+function isHighlightSection(label: string) {
+  return /exam|important|note/i.test(label);
+}
+
+function parseAssistantSections(content: string): { label?: string; body: string }[] {
+  const chunks = content.split(/(?=^#{2,3}\s)/m).filter((c) => c.trim());
+  if (chunks.length <= 1 && !/^#{2,3}\s/m.test(content)) {
+    return [{ body: content.trim() }];
+  }
+  return chunks.map((chunk) => {
+    const match = chunk.match(/^#{2,3}\s+(.+?)\n([\s\S]*)/);
+    if (match) return { label: match[1].trim(), body: match[2].trim() };
+    return { body: chunk.trim() };
+  });
+}
+
+function AnswerBlock({
+  label,
+  children,
+  highlight,
+}: {
+  label: string;
+  children: ReactNode;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={
+        "rounded-lg border p-3 " +
+        (highlight
+          ? "border-brand/40 bg-[color-mix(in_oklab,var(--brand)_8%,transparent)]"
+          : "border-border bg-muted/30")
+      }
+    >
+      <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </div>
+      <div className="text-sm leading-relaxed text-foreground">{children}</div>
+    </div>
+  );
+}
 
 function markdownComponents(role: "user" | "assistant"): Components {
-  const isUser = role === "user";
-  const codeBase = isUser
-    ? "bg-white/20 text-white"
-    : "bg-[#e8e6e1]/60 text-[#1a1917]";
+  const codeBase = "rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground";
 
   return {
     p: ({ children }) => (
@@ -31,7 +71,7 @@ function markdownComponents(role: "user" | "assistant"): Components {
           lineHeight: MESSAGE_LINE_HEIGHT,
           fontSize: MESSAGE_FONT_SIZE,
         }}
-        className="last:mb-0"
+        className="last:mb-0!"
       >
         {children}
       </p>
@@ -56,11 +96,12 @@ function markdownComponents(role: "user" | "assistant"): Components {
       <li style={{ lineHeight: MESSAGE_LINE_HEIGHT, fontSize: MESSAGE_FONT_SIZE }}>{children}</li>
     ),
     strong: ({ children }) => <strong style={{ fontWeight: 600 }}>{children}</strong>,
-    a: ({ href, children }) => (
-      <a href={href} style={{ textDecoration: "underline", textUnderlineOffset: 2, opacity: 0.85 }} target="_blank" rel="noopener noreferrer">
-        {children}
-      </a>
-    ),
+    a: ({ href, children }) =>
+      href ? (
+        <ExternalLinkAnchor href={href}>{children}</ExternalLinkAnchor>
+      ) : (
+        <span>{children}</span>
+      ),
     code: ({ className, children, ...props }) => {
       const inline = !className;
       return inline ? (
@@ -88,19 +129,12 @@ function markdownComponents(role: "user" | "assistant"): Components {
       </h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote
-        style={{
-          borderLeft: "3px solid currentColor",
-          paddingLeft: "0.875rem",
-          opacity: 0.9,
-          fontStyle: "italic",
-          marginBottom: "0.75rem",
-          lineHeight: MESSAGE_LINE_HEIGHT,
-        }}
-        className="last:mb-0"
-      >
-        {children}
-      </blockquote>
+      <div className="mb-3 last:mb-0 rounded-lg border border-brand/40 bg-[color-mix(in_oklab,var(--brand)_8%,transparent)] p-3">
+        <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+          Note
+        </div>
+        <div className="text-sm leading-relaxed not-italic">{children}</div>
+      </div>
     ),
     hr: () => <hr style={{ borderColor: "currentColor", opacity: 0.2, margin: "0.75rem 0" }} />,
     table: ({ children }) => (
@@ -115,6 +149,99 @@ function markdownComponents(role: "user" | "assistant"): Components {
       <td style={{ border: "1px solid rgba(0,0,0,0.12)", padding: "0.25rem 0.5rem", verticalAlign: "top" }}>{children}</td>
     ),
   };
+}
+
+function UserMessage({ content, timestamp }: { content: string; timestamp: Date | string }) {
+  return (
+    <div className="w-[85%] self-end">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-2 py-1">
+        <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-background text-muted-foreground">
+          <MessageSquare className="size-4" />
+        </div>
+        <div className="min-w-0 flex-1 ">
+          <div className="text-sm leading-relaxed text-foreground">
+            <ReactMarkdown  remarkPlugins={[remarkGfm]} components={markdownComponents("user")}>
+              {content}
+            </ReactMarkdown>
+          </div>
+          {/* <p className="mt-2 text-right text-[11px] text-muted-foreground">
+            {new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+          </p> */}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AssistantMessage({
+  content,
+  timestamp,
+  sourceLabel,
+}: {
+  content: string;
+  timestamp: Date | string;
+  sourceLabel?: string;
+}) {
+  const sections = parseAssistantSections(content);
+
+  return (
+    <div className="w-[85%] space-y-3">
+      <div className="rounded-xl border border-border bg-background p-4 shadow-[var(--shadow-card)]">
+        <div className="mb-3 flex items-center gap-2 text-xs font-medium text-brand">
+          <Sparkles className="size-3.5" />
+        </div>
+        <div className="space-y-3">
+          {sections.map((section, index) =>
+            section.label ? (
+              <AnswerBlock
+                key={index}
+                label={section.label}
+                highlight={isHighlightSection(section.label)}
+              >
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents("assistant")}>
+                  {section.body}
+                </ReactMarkdown>
+              </AnswerBlock>
+            ) : (
+              <div key={index} className="text-sm leading-relaxed text-foreground">
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents("assistant")}>
+                  {section.body}
+                </ReactMarkdown>
+              </div>
+            ),
+          )}
+        </div>
+      </div>
+      {/* {sourceLabel && (
+        <div className="flex items-center justify-between rounded-xl border border-dashed border-border px-4 py-2.5 text-xs text-muted-foreground">
+          <span className="flex min-w-0 items-center gap-2">
+            <FileText className="size-3.5 shrink-0" />
+            <span className="truncate">Generated from {sourceLabel}</span>
+          </span>
+          <span className="ml-3 shrink-0">
+            {new Date(timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+          </span>
+        </div>
+      )} */}
+    </div>
+  );
+}
+
+function LoadingMessage() {
+  return (
+    <div className="w-[85%]">
+      <div className="rounded-xl border border-border bg-background p-4 shadow-[var(--shadow-card)]">
+        <div className="mb-3 flex items-center gap-2 text-xs font-medium text-brand">
+          <Sparkles className="size-3.5" />
+          AI Generated Answer
+        </div>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2 size={14} className="animate-spin" />
+          <span>Generating answer…</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 interface ChatInterFaceProps {
@@ -324,46 +451,14 @@ export function ChatInterFace({
             : "Document is still indexing…";
 
   return (
-    <div
-      className="ed-panel"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        flex: 1,
-        minHeight: 0,
-        maxHeight: "100%",
-        height: "100%",
-        overflow: "hidden",
-        backgroundColor: "var(--ed-bg)",
-      }}
-    >
+    <div className="flex min-h-0 max-h-full flex-1 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)]">
       {/* Top bar */}
-      <div
-        style={{
-          borderBottom: "1px solid var(--ed-rule)",
-          padding: "0.5rem 1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: "var(--ed-surface)",
-          minHeight: "2.75rem",
-          flexShrink: 0,
-        }}
-      >
+      <div className="flex min-h-11 shrink-0 items-center justify-between border-b border-border bg-muted/40 px-4 py-2">
         {hasChatContext ? (
           <>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", minWidth: 0 }}>
-              <FileText size={13} style={{ color: "var(--ed-faint)", flexShrink: 0 }} />
-              <span
-                style={{
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  color: "var(--ed-ink)",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
+            <div className="flex min-w-0 items-center gap-2">
+              <FileText size={14} className="shrink-0 text-muted-foreground" />
+              <span className="truncate text-sm font-medium text-foreground">
                 {contextLabel}
               </span>
               {isDocumentMode && onViewPdf && currentDocument && (
@@ -372,25 +467,7 @@ export function ChatInterFace({
                   title="View PDF"
                   aria-label={`View ${currentDocument.filename}`}
                   onClick={() => onViewPdf(currentDocument)}
-                  style={{
-                    width: 28,
-                    height: 28,
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--ed-faint)",
-                    cursor: "pointer",
-                    transition: "color 0.15s, background-color 0.15s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "var(--ed-accent)";
-                    e.currentTarget.style.backgroundColor = "var(--ed-bg)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--ed-faint)";
-                    e.currentTarget.style.backgroundColor = "transparent";
-                  }}
+                  className="flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-background hover:text-brand"
                 >
                   <Eye size={14} />
                 </button>
@@ -400,193 +477,89 @@ export function ChatInterFace({
               <button
                 onClick={clearHistory}
                 disabled={historyLoading || loading || clearingHistory}
-                style={{
-                  fontSize: "0.8125rem",
-                  color: "var(--ed-muted)",
-                  flexShrink: 0,
-                  marginLeft: "0.75rem",
-                  transition: "color 0.15s",
-                  cursor: historyLoading || loading ? "default" : "pointer",
-                }}
-                onMouseEnter={(e) => { if (!historyLoading && !loading) e.currentTarget.style.color = "#dc2626"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--ed-muted)"; }}
+                className="ml-3 shrink-0 text-[13px] text-muted-foreground transition-colors hover:text-destructive disabled:cursor-default"
               >
                 Clear history
               </button>
             )}
           </>
         ) : (
-          <span style={{ fontSize: "0.875rem", color: "var(--ed-muted)" }}>
+          <span className="text-sm text-muted-foreground">
             Select Find materials, a subject, or upload a PDF
           </span>
         )}
       </div>
 
       {/* Messages */}
-      <div
-        className="ed-panel-scroll"
-        style={{
-          flex: 1,
-          minHeight: 0,
-          overflowY: "auto",
-          overflowX: "hidden",
-        }}
-      >
-        <div style={{ padding: "1rem 1.25rem", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+      <div className="ed-panel-scroll min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-background">
+        <div className="flex flex-col gap-4 p-4 sm:p-5">
           {historyLoading ? (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", color: "var(--ed-muted)", padding: "3rem 0" }}>
+            <div className="flex items-center justify-center gap-2 py-12 text-muted-foreground">
               <Loader2 size={15} className="animate-spin" />
-              <span style={{ fontSize: "0.9375rem" }}>Loading history…</span>
+              <span className="text-sm">Loading history…</span>
             </div>
           ) : messages.length === 0 && hasChatContext ? (
-            <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-              <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "var(--ed-muted)" }}>
+            <div className="px-4 py-12 text-center">
+              <p className="text-base leading-relaxed text-muted-foreground">
                 {isCatalogMode ? (
                   <>
                     Ask for books, syllabus, or exam papers across all GTU subjects.
                     <br />
-                    <span style={{ fontSize: "0.875rem", color: "var(--ed-faint)" }}>
+                    <span className="text-sm text-muted-foreground/80">
                       For explanations, select a subject from the sidebar.
                     </span>
                   </>
                 ) : isContextReady ? (
                   <>
                     Ask anything about{" "}
-                    <em className="font-fraunces" style={{ fontStyle: "italic", fontWeight: 300, color: "var(--ed-muted)" }}>
-                      {contextLabel}
-                    </em>
+                    <em className="font-medium not-italic text-foreground">{contextLabel}</em>
                   </>
                 ) : (
                   <>
                     Preparing{" "}
-                    <em className="font-fraunces" style={{ fontStyle: "italic", fontWeight: 300, color: "var(--ed-muted)" }}>
-                      {contextLabel}
-                    </em>
+                    <em className="font-medium not-italic text-foreground">{contextLabel}</em>
                   </>
                 )}
               </p>
             </div>
           ) : null}
 
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: message.role === "user" ? "flex-end" : "flex-start",
-              }}
-            >
-              <div
-                style={{
-                  width: "fit-content",
-                  maxWidth: "min(85%)",
-                  padding: "0.75rem 1rem",
-                  borderRadius: 4,
-                  backgroundColor: message.role === "user" ? "var(--ed-accent)" : "#ffffff",
-                  color: message.role === "user" ? "#ffffff" : "var(--ed-ink)",
-                  border: message.role === "assistant" ? "1px solid var(--ed-rule)" : "none",
-                  fontSize: MESSAGE_FONT_SIZE,
-                  lineHeight: MESSAGE_LINE_HEIGHT,
-                  letterSpacing: "0.01em",
-                  boxShadow: message.role === "assistant" ? "0 1px 2px rgba(26, 25, 23, 0.04)" : "none",
-                }}
-              >
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents(message.role)}>
-                  {message.content}
-                </ReactMarkdown>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    marginTop: "0.5rem",
-                    color: message.role === "user" ? "rgba(255, 255, 255, 0.82)" : "var(--ed-muted)",
-                    textAlign: message.role === "user" ? "right" : "left",
-                  }}
-                >
-                  {new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                </div>
-              </div>
-            </div>
-          ))}
-          {
-            loading && (
-               <div
-              key={"loading"}
-              style={{ display: "flex", width: "100%", justifyContent: "flex-start" }}
-            >
-              <div
-                style={{
-                  width: "fit-content",
-                  maxWidth: "min(85%)",
-                  padding: "0.75rem 1rem",
-                  borderRadius: 4,
-                  backgroundColor: "#ffffff",
-                  color: "var(--ed-ink)",
-                  border: "1px solid var(--ed-rule)",
-                  fontSize: MESSAGE_FONT_SIZE,
-                  lineHeight: MESSAGE_LINE_HEIGHT,
-                  boxShadow: "0 1px 2px rgba(26, 25, 23, 0.04)",
-                }}
-              >
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents("assistant")}>
-                  {"Typing..."}
-                </ReactMarkdown>
-                <div style={{ marginTop: "0.5rem" }} />
-              </div>
-            </div>
-            )
-          }
+          {messages.map((message, index) =>
+            message.role === "user" ? (
+              <UserMessage key={index} content={message.content} timestamp={message.timestamp} />
+            ) : (
+              <AssistantMessage
+                key={index}
+                content={message.content}
+                timestamp={message.timestamp}
+                sourceLabel={contextLabel}
+              />
+            ),
+          )}
+          {loading && <LoadingMessage />}
           <div ref={bottomRef} />
         </div>
       </div>
 
       {/* Input bar */}
-      <div
-        style={{
-          borderTop: "1px solid var(--ed-rule)",
-          padding: "0.625rem 1rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.625rem",
-          backgroundColor: "var(--ed-bg)",
-          flexShrink: 0,
-        }}
-      >
+      <div className="flex shrink-0 items-center gap-2.5 border-t border-border bg-muted/30 px-4 py-2.5">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
           placeholder={inputPlaceholder}
           disabled={loading || historyLoading || clearingHistory || !hasChatContext || !isContextReady || !hasTokens}
-          className="font-instrument"
-          style={{
-            flex: 1,
-            border: "none",
-            outline: "none",
-            fontSize: "1rem",
-            lineHeight: 1.5,
-            backgroundColor: "transparent",
-            color: "var(--ed-ink)",
-            minWidth: 0,
-          }}
+          className="min-w-0 flex-1 border-none bg-transparent text-base leading-normal text-foreground outline-none placeholder:text-muted-foreground"
         />
         <button
           onClick={handleSend}
           disabled={!canSend}
-          style={{
-            backgroundColor: canSend ? "var(--ed-accent)" : "var(--ed-rule)",
-            color: canSend ? "#ffffff" : "var(--ed-faint)",
-            border: "none",
-            borderRadius: 2,
-            width: 32,
-            height: 32,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: canSend ? "pointer" : "default",
-            transition: "background-color 0.15s",
-            flexShrink: 0,
-          }}
+          className={
+            "flex size-9 shrink-0 items-center justify-center rounded-lg transition-colors " +
+            (canSend
+              ? "bg-brand text-white hover:opacity-90"
+              : "cursor-default bg-muted text-muted-foreground")
+          }
         >
           {loading ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
         </button>

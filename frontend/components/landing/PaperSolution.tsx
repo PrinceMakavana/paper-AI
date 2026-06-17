@@ -4,23 +4,23 @@ import { Reveal } from "@/components/layout/Reveal";
 const ITEMS = [
   {
     icon: FileCheck2,
-    title: "Generate Solutions",
-    text: "AI creates answers for every question automatically.",
+    title: "Select Subject",
+    text: "Select the subject of the question paper.",
   },
   {
     icon: ListChecks,
-    title: "Step-by-Step Explanations",
-    text: "Understand concepts instead of memorizing answers.",
+    title: "Ask Questions",
+    text: "Ask questions related to the subject to AI and it will generate detailed solutions with explanations.",
   },
   {
     icon: GraduationCap,
-    title: "Exam-Focused Answers",
-    text: "Generated according to GTU exam expectations.",
+    title: "Chat with Solutions",
+    text: "Chat with the generated solutions to understand concepts better.",
   },
   {
     icon: MessagesSquare,
     title: "Ask Follow-up Questions",
-    text: "Chat with generated solutions to understand concepts better.",
+    text: "Ask follow-up questions to the generated solutions to understand concepts better.",
   },
 ];
 
@@ -34,10 +34,10 @@ export function PaperSolution() {
               Paper Solutions
             </div>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Solve GTU Question Papers Instantly
+              Solve GTU Question Instantly
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Upload previous year question papers and let AI generate detailed solutions with
+              select subject and ask question paper related questions to AI and it will generate detailed solutions with
               explanations.
             </p>
           </div>
