@@ -101,7 +101,7 @@ Key variables:
 | `PAGEINDEX_API_DASHBOARD_URL` | Hosted PageIndex dashboard URL (password reset, API keys) |
 | `PAGEINDEX_SECRETS_KEY` | Base64 32-byte key for encrypting stored PageIndex credentials |
 | `PAGEINDEX_JOB_TEMP_ROOT` | Temp directory for staged PDFs during hosted upload jobs |
-| `MONGODB_URI` | MongoDB connection string for users, documents, and chat |
+| `MONGODB_URI` | MongoDB connection string for users, documents, chat, and catalog (`catalog_subjects`) |
 | `JWT_SECRET` | Secret used to sign login and verification tokens |
 | `SMTP_HOST` | SMTP server host for verification and password-reset emails |
 | `SMTP_PORT` | SMTP port (default `587`) |
@@ -167,7 +167,7 @@ These are the endpoints used by the frontend:
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `GET` | `/catalog/subjects` | Lists GTU subject catalog entries from `data/*.json` |
+| `GET` | `/catalog/subjects` | Lists GTU subject catalog entries from MongoDB `catalog_subjects` |
 | `GET` | `/catalog/subjects/:subjectCode` | Returns subject metadata and indexed books |
 | `GET` | `/catalog/subjects/:subjectCode/books/:bookId/pdf-url` | Signed URL for a catalog book PDF (when uploaded to S3) |
 | `POST` | `/paperai/upload` | Accepts multipart `file` and optional `chatModel`; validates PDF and forwards it to FastAPI |
@@ -178,7 +178,7 @@ These are the endpoints used by the frontend:
 
 Legacy `/pageindex/*` paths remain as backward-compatible aliases.
 
-Set `CATALOG_DATA_DIR` in `backend/.env` to the folder containing subject JSON files (default: repo `data/`).
+Catalog subject metadata is stored in the MongoDB `catalog_subjects` collection (see `backend/models/catalogSubjectModel.js`).
 
 ### Python PageIndex Service
 

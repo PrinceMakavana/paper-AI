@@ -1,5 +1,7 @@
+import 'dotenv/config';
 import tap from 'tap';
-import { broadSearchCatalogIndex } from '../helpers/catalogIndexHelpers.js';
+import mongoose from 'mongoose';
+import { broadSearchCatalogIndex, clearCatalogIndexCache } from '../helpers/catalogIndexHelpers.js';
 import {
     isConfidentLocalMatch,
     runCatalogFindWithAi,
@@ -7,8 +9,25 @@ import {
 } from '../helpers/catalogFindAi.js';
 import { LOCAL_CATALOG_FIND_TOKEN_COST } from '../helpers/userTokenHelpers.js';
 
+async function waitForMongo() {
+    if (mongoose.connection.readyState === 1) {
+        return;
+    }
+    if (!process.env.MONGODB_URI) {
+        throw new Error('MONGODB_URI is required for catalog find AI tests');
+    }
+    await mongoose.connect(process.env.MONGODB_URI, {
+        dbName: process.env.MONGODB_DB_NAME || 'page-index-chatbot',
+    });
+}
+
+tap.before(async () => {
+    await waitForMongo();
+    clearCatalogIndexCache();
+});
+
 tap.test('tryLocalCatalogAnswer finds PPS book locally', async (t) => {
-    const candidates = broadSearchCatalogIndex('PPS Books', { limit: 15 });
+    const candidates = await broadSearchCatalogIndex('PPS Books', { limit: 15 });
     const localResult = tryLocalCatalogAnswer('PPS Books', candidates);
 
     t.equal(localResult.intent, 'find_material');
@@ -19,7 +38,7 @@ tap.test('tryLocalCatalogAnswer finds PPS book locally', async (t) => {
 });
 
 tap.test('isConfidentLocalMatch accepts single-subject PPS Books', async (t) => {
-    const candidates = broadSearchCatalogIndex('PPS Books', { limit: 15 });
+    const candidates = await broadSearchCatalogIndex('PPS Books', { limit: 15 });
     const localResult = tryLocalCatalogAnswer('PPS Books', candidates);
 
     t.ok(
@@ -30,7 +49,7 @@ tap.test('isConfidentLocalMatch accepts single-subject PPS Books', async (t) => 
 });
 
 tap.test('isConfidentLocalMatch rejects ambiguous maths books', async (t) => {
-    const candidates = broadSearchCatalogIndex('maths books', { limit: 15 });
+    const candidates = await broadSearchCatalogIndex('maths books', { limit: 15 });
     const localResult = tryLocalCatalogAnswer('maths books', candidates);
 
     t.ok(localResult.selectedRows.length > 1, 'expected multiple maths book rows');
@@ -42,7 +61,7 @@ tap.test('isConfidentLocalMatch rejects ambiguous maths books', async (t) => {
 });
 
 tap.test('isConfidentLocalMatch accepts confident local not-found paper requests', async (t) => {
-    const candidates = broadSearchCatalogIndex('pps summer 2010 paper', { limit: 15 });
+    const candidates = await broadSearchCatalogIndex('pps summer 2010 paper', { limit: 15 });
     const localResult = tryLocalCatalogAnswer('pps summer 2010 paper', candidates);
 
     t.equal(localResult.selectedRows.length, 0);
@@ -132,7 +151,7 @@ tap.test('runCatalogFindWithAi uses local path for explicit subject code query',
 });
 
 tap.test('isConfidentLocalMatch accepts explicit subject code with generic token', async (t) => {
-    const candidates = broadSearchCatalogIndex('3110002 data', { limit: 15 });
+    const candidates = await broadSearchCatalogIndex('3110002 data', { limit: 15 });
     const localResult = tryLocalCatalogAnswer('3110002 data', candidates);
 
     t.ok(

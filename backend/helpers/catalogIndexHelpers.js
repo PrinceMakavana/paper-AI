@@ -1,6 +1,4 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { getCatalogDataDir } from './catalogDataHelpers.js';
+import { loadAllCatalogSubjects } from './catalogDataHelpers.js';
 
 const CATALOG_GLOBAL_SESSION_ID = 'catalog:global';
 
@@ -60,25 +58,14 @@ function buildRow({
     };
 }
 
-function buildCatalogIndex() {
-    const dir = getCatalogDataDir();
-    if (!fs.existsSync(dir)) {
-        return [];
-    }
-
+async function buildCatalogIndex() {
+    const subjects = await loadAllCatalogSubjects();
     const rows = [];
-    const files = fs.readdirSync(dir).filter((name) => name.endsWith('.json')).sort();
 
-    for (const filename of files) {
-        const subjectCode = filename.replace(/\.json$/, '');
-        let subject;
-        try {
-            subject = JSON.parse(fs.readFileSync(path.join(dir, filename), 'utf8'));
-        } catch {
-            continue;
-        }
+    for (const subject of subjects) {
+        const code = String(subject.subjecet_code || subject.subject_code || '').trim();
+        if (!code) continue;
 
-        const code = String(subject.subjecet_code || subjectCode).trim();
         const subjectName = subject.subject_name || '';
         const knownAs = subject.known_as || '';
         const books = subject.Books || [];
@@ -173,9 +160,9 @@ function buildCatalogIndex() {
     return rows;
 }
 
-function getCatalogIndex({ forceRefresh = false } = {}) {
+async function getCatalogIndex({ forceRefresh = false } = {}) {
     if (!cachedIndex || forceRefresh) {
-        cachedIndex = buildCatalogIndex();
+        cachedIndex = await buildCatalogIndex();
     }
     return cachedIndex;
 }
@@ -281,8 +268,8 @@ function scoreRow(row, tokens, normalizedQuery) {
     return score;
 }
 
-function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
-    const index = getCatalogIndex();
+async function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
+    const index = await getCatalogIndex();
     const normalizedQuery = String(question || '').toLowerCase().trim();
     const tokens = tokenize(normalizedQuery);
     const explicitSubjectCode = extractSubjectCodeFromQuery(question);
@@ -332,8 +319,8 @@ function broadSearchCatalogIndex(question, { limit = 50 } = {}) {
     return scored.slice(0, limit).map((item) => item.row);
 }
 
-function getCatalogRowsByIds(ids = []) {
-    const index = getCatalogIndex();
+async function getCatalogRowsByIds(ids = []) {
+    const index = await getCatalogIndex();
     const byId = new Map(index.map((row) => [row.id, row]));
     return ids.map((id) => byId.get(id)).filter(Boolean);
 }

@@ -671,7 +671,7 @@ async function subjectQuestionVectorlessRag(req, res) {
 
         await assertUserHasTokens(req.user.userId);
 
-        const { subject: rawSubject } = loadSubjectByCode(subjectCode);
+        const { subject: rawSubject } = await loadSubjectByCode(subjectCode);
         const readyBooks = getReadyBooks(rawSubject);
         if (!readyBooks.length) {
             return res.json({
@@ -719,7 +719,7 @@ async function subjectQuestionVectorlessRag(req, res) {
         contextStr = await appendCatalogPageTextContext(bookTrees, retrievalQuestion, contextStr);
         contextStr = truncateToBudget(contextStr, MAX_COMBINED_CONTEXT_CHARS);
 
-        const subjectMeta = getSubject(subjectCode);
+        const subjectMeta = await getSubject(subjectCode);
         const prompt = buildSubjectChatPrompt(subjectMeta, contextStr, retrievalQuestion, markHint);
 
         savedUserMessage = await savePageIndexChatMessage({
@@ -785,7 +785,7 @@ async function getSubjectChatMessages(req, res) {
     try {
         const { subjectCode } = req.params;
         const sessionId = getSubjectChatSessionId(subjectCode);
-        getSubject(subjectCode);
+        await getSubject(subjectCode);
 
         const messages = await getPageIndexChatMessages({
             user_id: req.user.userId,
@@ -813,7 +813,7 @@ async function deleteSubjectChatMessages(req, res) {
     try {
         const { subjectCode } = req.params;
         const sessionId = getSubjectChatSessionId(subjectCode);
-        getSubject(subjectCode);
+        await getSubject(subjectCode);
 
         const result = await deletePageIndexChatMessages({
             user_id: req.user.userId,

@@ -1,12 +1,32 @@
+import 'dotenv/config';
 import tap from 'tap';
+import mongoose from 'mongoose';
 import {
     broadSearchCatalogIndex,
     buildCatalogIndex,
+    clearCatalogIndexCache,
     getCatalogRowsByIds,
 } from '../helpers/catalogIndexHelpers.js';
 
+async function waitForMongo() {
+    if (mongoose.connection.readyState === 1) {
+        return;
+    }
+    if (!process.env.MONGODB_URI) {
+        throw new Error('MONGODB_URI is required for catalog index tests');
+    }
+    await mongoose.connect(process.env.MONGODB_URI, {
+        dbName: process.env.MONGODB_DB_NAME || 'page-index-chatbot',
+    });
+}
+
+tap.before(async () => {
+    await waitForMongo();
+    clearCatalogIndexCache();
+});
+
 tap.test('buildCatalogIndex includes old papers and books', async (t) => {
-    const index = buildCatalogIndex();
+    const index = await buildCatalogIndex();
     t.ok(index.length > 100, 'expected a large catalog index');
 
     const mathsPaper = index.find(
@@ -21,7 +41,7 @@ tap.test('buildCatalogIndex includes old papers and books', async (t) => {
 });
 
 tap.test('broadSearchCatalogIndex finds maths summer 2023 paper', async (t) => {
-    const results = broadSearchCatalogIndex('give me summer 2023 old paper link of maths', {
+    const results = await broadSearchCatalogIndex('give me summer 2023 old paper link of maths', {
         limit: 20,
     });
 
@@ -34,7 +54,7 @@ tap.test('broadSearchCatalogIndex finds maths summer 2023 paper', async (t) => {
 });
 
 tap.test('broadSearchCatalogIndex limits PPS Books to PPS subject rows', async (t) => {
-    const results = broadSearchCatalogIndex('PPS Books', { limit: 55 });
+    const results = await broadSearchCatalogIndex('PPS Books', { limit: 55 });
 
     t.ok(results.length > 0, 'expected PPS search results');
     t.ok(
@@ -49,7 +69,7 @@ tap.test('broadSearchCatalogIndex limits PPS Books to PPS subject rows', async (
 });
 
 tap.test('broadSearchCatalogIndex anchors explicit subject code queries', async (t) => {
-    const results = broadSearchCatalogIndex('3110002 data', { limit: 15 });
+    const results = await broadSearchCatalogIndex('3110002 data', { limit: 15 });
 
     t.ok(results.length > 0, 'expected English subject search results');
     t.ok(
@@ -60,9 +80,9 @@ tap.test('broadSearchCatalogIndex anchors explicit subject code queries', async 
 });
 
 tap.test('getCatalogRowsByIds returns only known ids', async (t) => {
-    const index = buildCatalogIndex();
+    const index = await buildCatalogIndex();
     const sample = index[0];
-    const rows = getCatalogRowsByIds([sample.id, 'missing:id']);
+    const rows = await getCatalogRowsByIds([sample.id, 'missing:id']);
     t.equal(rows.length, 1);
     t.equal(rows[0].id, sample.id);
     t.end();

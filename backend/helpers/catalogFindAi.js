@@ -321,7 +321,7 @@ function buildLocalCatalogResult(localResult) {
     };
 }
 
-function normalizeAiCatalogResult(parsed, candidates, question) {
+async function normalizeAiCatalogResult(parsed, candidates, question) {
     const candidateIds = new Set(candidates.map((row) => row.id));
     const constraints = parseFindMaterialConstraints(question);
     const intent = parsed?.intent === 'study_question' || looksLikeStudyQuestion(question)
@@ -344,7 +344,7 @@ function normalizeAiCatalogResult(parsed, candidates, question) {
     const selectedIds = Array.isArray(parsed?.selectedIds)
         ? parsed.selectedIds.filter((id) => candidateIds.has(String(id)))
         : [];
-    const selectedRows = getCatalogRowsByIds(selectedIds);
+    const selectedRows = await getCatalogRowsByIds(selectedIds);
     const parsedAnswer = String(parsed?.answer || '').trim();
     const { answer, selectedRows: validatedRows } = resolveFindMaterialAnswer({
         question,
@@ -370,7 +370,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
         throw error;
     }
 
-    const candidates = broadSearchCatalogIndex(trimmed, { limit: AI_CANDIDATE_LIMIT });
+    const candidates = await broadSearchCatalogIndex(trimmed, { limit: AI_CANDIDATE_LIMIT });
     const explicitSubjectCode = extractSubjectCodeFromQuery(trimmed);
     const localResult = tryLocalCatalogAnswer(trimmed, candidates);
     const confidentLocal = isConfidentLocalMatch(trimmed, candidates, localResult.selectedRows);
@@ -440,7 +440,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
     });
 
     const normalized = parsed
-        ? normalizeAiCatalogResult(parsed, candidates, trimmed)
+        ? await normalizeAiCatalogResult(parsed, candidates, trimmed)
         : (() => {
               const constraints = parseFindMaterialConstraints(trimmed);
               if (looksLikeStudyQuestion(trimmed)) {

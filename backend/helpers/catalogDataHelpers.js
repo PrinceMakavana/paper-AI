@@ -1,22 +1,28 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import mongoose from 'mongoose';
+import CatalogSubject from '../models/catalogSubjectModel.js';
 
-const __dirname = import.meta.dirname ?? path.dirname(fileURLToPath(import.meta.url));
-
-function getCatalogDataDir() {
-    const configured = process.env.CATALOG_DATA_DIR;
-    if (configured) {
-        return path.isAbsolute(configured)
-            ? configured
-            : path.resolve(__dirname, '..', configured);
+function ensureMongoConnected() {
+    if (mongoose.connection.readyState !== 1) {
+        const error = new Error('MongoDB is not connected');
+        error.statusCode = 503;
+        throw error;
     }
-    return path.resolve(__dirname, '..', '..', 'data');
 }
 
-function readSubjectFile(filePath) {
-    const raw = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(raw);
+function normalizeSubjectRecord(doc) {
+    if (!doc) return null;
+
+    const plain = typeof doc.toObject === 'function' ? doc.toObject() : { ...doc };
+    const code = String(plain.subjecet_code || plain.subject_code || '').trim();
+    const books = plain.Books ?? plain.books ?? [];
+
+    return {
+        ...plain,
+        subjecet_code: code,
+        subject_code: plain.subject_code || code,
+        Books: books,
+        books,
+    };
 }
 
 function inferBookId(book, subjectCode, index) {
@@ -89,22 +95,36 @@ function mapSubjectDetail(subject, subjectCode) {
     };
 }
 
-function loadSubjectByCode(subjectCode) {
-    const dir = getCatalogDataDir();
-    const filePath = path.join(dir, `${subjectCode}.json`);
+async function loadAllCatalogSubjects() {
+    ensureMongoConnected();
 
-    if (!fs.existsSync(filePath)) {
+    const docs = await CatalogSubject.find({})
+        .sort({ subjecet_code: 1, subject_code: 1 })
+        .lean();
+
+    return docs.map(normalizeSubjectRecord).filter(Boolean);
+}
+
+async function loadSubjectByCode(subjectCode) {
+    ensureMongoConnected();
+
+    const trimmed = String(subjectCode).trim();
+    const doc = await CatalogSubject.findOne({
+        $or: [{ subjecet_code: trimmed }, { subject_code: trimmed }],
+    }).lean();
+
+    if (!doc) {
         const error = new Error(`Subject not found: ${subjectCode}`);
         error.statusCode = 404;
         throw error;
     }
 
-    const subject = readSubjectFile(filePath);
+    const subject = normalizeSubjectRecord(doc);
     const code = String(subject.subjecet_code || subjectCode).trim();
 
-    if (code !== String(subjectCode).trim()) {
+    if (code !== trimmed) {
         const error = new Error(
-            `Subject code mismatch in ${subjectCode}.json (expected ${subjectCode}, found ${code})`
+            `Subject code mismatch for ${subjectCode} (expected ${subjectCode}, found ${code})`
         );
         error.statusCode = 500;
         throw error;
@@ -114,7 +134,7 @@ function loadSubjectByCode(subjectCode) {
 }
 
 function getReadyBooks(subject) {
-    const subjectCode = String(subject.subjecet_code || '').trim();
+    const subjectCode = String(subject.subjecet_code || subject.subject_code || '').trim();
     return (subject.Books || [])
         .map((book, index) => ({
             ...book,
@@ -124,26 +144,17 @@ function getReadyBooks(subject) {
         .filter((book) => book.pageindex_status === 'ready' && book.pageindex_s3_uri);
 }
 
-function listSubjects() {
-    const dir = getCatalogDataDir();
-    if (!fs.existsSync(dir)) {
-        return [];
-    }
+async function listSubjects() {
+    const subjects = await loadAllCatalogSubjects();
 
-    const files = fs
-        .readdirSync(dir)
-        .filter((name) => name.endsWith('.json'))
-        .sort();
-
-    return files.map((filename) => {
-        const subjectCode = filename.replace(/\.json$/, '');
-        const subject = readSubjectFile(path.join(dir, filename));
+    return subjects.map((subject) => {
+        const subjectCode = String(subject.subjecet_code || subject.subject_code || '').trim();
         return mapSubjectSummary(subject, subjectCode);
     });
 }
 
-function getSubject(subjectCode) {
-    const { subject, subjectCode: code } = loadSubjectByCode(subjectCode);
+async function getSubject(subjectCode) {
+    const { subject, subjectCode: code } = await loadSubjectByCode(subjectCode);
     return mapSubjectDetail(subject, code);
 }
 
@@ -151,8 +162,8 @@ function getSubjectChatSessionId(subjectCode) {
     return `subject:${String(subjectCode).trim()}`;
 }
 
-function findBookInSubject(subjectCode, bookId) {
-    const detail = getSubject(subjectCode);
+async function findBookInSubject(subjectCode, bookId) {
+    const detail = await getSubject(subjectCode);
     const book = detail.books.find((item) => item.bookId === bookId);
     if (!book) {
         const error = new Error(`Book not found: ${bookId}`);
@@ -163,7 +174,7 @@ function findBookInSubject(subjectCode, bookId) {
 }
 
 export {
-    getCatalogDataDir,
+    loadAllCatalogSubjects,
     listSubjects,
     getSubject,
     getReadyBooks,
@@ -171,4 +182,5 @@ export {
     getSubjectChatSessionId,
     findBookInSubject,
     mapBookForClient,
+    normalizeSubjectRecord,
 };

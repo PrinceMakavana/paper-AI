@@ -11,7 +11,7 @@ import {
 
 async function listCatalogSubjects(req, res) {
     try {
-        const subjects = listSubjects();
+        const subjects = await listSubjects();
         return res.json({ status: 200, subjects });
     } catch (error) {
         console.error('Error listing catalog subjects:', error);
@@ -25,7 +25,7 @@ async function listCatalogSubjects(req, res) {
 async function getCatalogSubject(req, res) {
     try {
         const { subjectCode } = req.params;
-        const subject = getSubject(subjectCode);
+        const subject = await getSubject(subjectCode);
         return res.json({ status: 200, subject });
     } catch (error) {
         console.error('Error fetching catalog subject:', error);
@@ -39,7 +39,7 @@ async function getCatalogSubject(req, res) {
 async function getCatalogBookPdfUrl(req, res) {
     try {
         const { subjectCode, bookId } = req.params;
-        const { book } = findBookInSubject(subjectCode, bookId);
+        const { book } = await findBookInSubject(subjectCode, bookId);
 
         const location = book.pdfS3Uri || book.pdfStoragePath;
         if (!location) {
