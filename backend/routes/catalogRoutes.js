@@ -93,13 +93,13 @@ function requirePublicCatalogSecret(req, res, next) {
 }
 
 const publicSubjectListRateLimit = createPublicCatalogRateLimit({
-    max: 10,
+    max: 120,
     windowMs: 60 * 1000,
     message: 'Too many subject list requests. Please try again in a minute.',
 });
 
 const publicSubjectDetailRateLimit = createPublicCatalogRateLimit({
-    max: 5,
+    max: 120,
     windowMs: 60 * 1000,
     message: 'Too many subject detail requests. Please try again in a minute.',
 });

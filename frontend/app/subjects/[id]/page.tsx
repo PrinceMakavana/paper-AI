@@ -5,6 +5,7 @@ import type { CatalogBook, SubjectDetail } from "@/lib/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 type SubjectPageProps = {
   params: Promise<{ id: string }>;
@@ -66,7 +67,9 @@ function getCatalogApiHeaders() {
   return headers;
 }
 
-async function fetchSubject(subjectCode: string): Promise<FetchSubjectResult> {
+const fetchSubject = cache(async function fetchSubject(
+  subjectCode: string,
+): Promise<FetchSubjectResult> {
   if (!SUBJECT_CODE_PATTERN.test(subjectCode)) {
     return { status: "not-found" };
   }
@@ -119,7 +122,7 @@ async function fetchSubject(subjectCode: string): Promise<FetchSubjectResult> {
       message: "Unable to connect to the catalog service.",
     };
   }
-}
+});
 
 function getSubjectTitle(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` | ${subject.knownAs}` : "";
@@ -259,7 +262,7 @@ export async function generateMetadata({ params }: SubjectPageProps): Promise<Me
   const subjectCode = normalizeSubjectCode(id);
   const result = await fetchSubject(subjectCode);
 
-  if (result.status !== "ok") {
+  if (result.status === "not-found") {
     return {
       title: `${subjectCode} | paperAI`,
       description: "Browse GTU syllabus, old papers, books, and paper solutions on paperAI.",
@@ -269,6 +272,16 @@ export async function generateMetadata({ params }: SubjectPageProps): Promise<Me
       robots: {
         index: false,
         follow: false,
+      },
+    };
+  }
+
+  if (result.status === "error") {
+    return {
+      title: `${subjectCode} | paperAI`,
+      description: "Browse GTU syllabus, old papers, books, and paper solutions on paperAI.",
+      alternates: {
+        canonical: getSubjectUrl(subjectCode),
       },
     };
   }
