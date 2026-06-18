@@ -22,6 +22,8 @@ const STATIC_ROUTES = [
   "/disclaimer",
 ];
 
+export const dynamic = "force-dynamic";
+
 function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 }
@@ -59,17 +61,23 @@ async function fetchPublicSubjects() {
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
       headers: getCatalogApiHeaders(),
     });
 
     if (!response.ok) {
+      console.error(
+        `Failed to fetch public catalog subjects for sitemap: ${response.status} ${response.statusText}`,
+      );
+
       return [];
     }
 
     const data = (await response.json()) as PublicSubjectsResponse;
     return data.subjects ?? [];
-  } catch {
+  } catch (error) {
+    console.error("Error fetching public catalog subjects for sitemap:", error);
+
     return [];
   }
 }

@@ -6,7 +6,14 @@ import type { Metadata } from "next";
 
 type PublicSubjectsResponse = {
   subjects?: SubjectSummary[];
+  message?: string;
 };
+
+type PublicSubjectsResult =
+  | { status: "ok"; subjects: SubjectSummary[] }
+  | { status: "error"; message: string };
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "GTU Subjects | Syllabus, Papers, Books, Solutions | paperAI",
@@ -55,32 +62,52 @@ function getCatalogApiHeaders() {
   return headers;
 }
 
-async function fetchPublicSubjects() {
+async function fetchPublicSubjects(): Promise<PublicSubjectsResult> {
   const url = buildApiUrl("/public/catalog/subjects");
 
   if (!url) {
-    return [];
+    return {
+      status: "error",
+      message: "Catalog API is not configured.",
+    };
   }
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
       headers: getCatalogApiHeaders(),
     });
 
     if (!response.ok) {
-      return [];
+      console.error(
+        `Failed to fetch public catalog subjects: ${response.status} ${response.statusText}`,
+      );
+
+      return {
+        status: "error",
+        message: "Unable to load GTU subjects right now.",
+      };
     }
 
     const data = (await response.json()) as PublicSubjectsResponse;
-    return (data.subjects ?? []).filter((subject) => subject.subjectCode);
-  } catch {
-    return [];
+    return {
+      status: "ok",
+      subjects: (data.subjects ?? []).filter((subject) => subject.subjectCode),
+    };
+  } catch (error) {
+    console.error("Error fetching public catalog subjects:", error);
+
+    return {
+      status: "error",
+      message: "Unable to connect to the catalog service.",
+    };
   }
 }
 
 export default async function SubjectsPage() {
-  const subjects = await fetchPublicSubjects();
+  const result = await fetchPublicSubjects();
+  const subjects = result.status === "ok" ? result.subjects : [];
+  const errorMessage = result.status === "error" ? result.message : undefined;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -99,7 +126,7 @@ export default async function SubjectsPage() {
           </p>
         </header>
 
-        <SubjectsGrid subjects={subjects} />
+        <SubjectsGrid subjects={subjects} errorMessage={errorMessage} />
       </main>
       <SiteFooter />
     </div>

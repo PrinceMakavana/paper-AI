@@ -22,6 +22,11 @@ function getValidatedSearchQuery(value: string) {
   );
 }
 
+type SubjectsGridProps = {
+  subjects: SubjectSummary[];
+  errorMessage?: string;
+};
+
 function SubjectCard({ subject }: { subject: SubjectSummary }) {
   return (
     <Link
@@ -51,7 +56,7 @@ function SubjectCard({ subject }: { subject: SubjectSummary }) {
   );
 }
 
-export function SubjectsGrid({ subjects }: { subjects: SubjectSummary[] }) {
+export function SubjectsGrid({ subjects, errorMessage }: SubjectsGridProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [searchQuery, setSearchQuery] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -89,6 +94,17 @@ export function SubjectsGrid({ subjects }: { subjects: SubjectSummary[] }) {
   };
 
   if (subjects.length === 0) {
+    if (errorMessage) {
+      return (
+        <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
+          <h2 className="text-lg font-semibold text-foreground">
+            Subjects temporarily unavailable
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">{errorMessage}</p>
+        </div>
+      );
+    }
+
     return (
       <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
         <h2 className="text-lg font-semibold text-foreground">No subjects available</h2>

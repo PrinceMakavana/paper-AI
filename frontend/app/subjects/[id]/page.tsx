@@ -24,6 +24,8 @@ type FetchSubjectResult =
 const SUBJECT_CODE_PATTERN = /^[A-Za-z0-9_-]{3,32}$/;
 const SITE_NAME = "paperAI";
 
+export const dynamic = "force-dynamic";
+
 function normalizeSubjectCode(id: string) {
   return decodeURIComponent(id).trim().toUpperCase();
 }
@@ -80,7 +82,7 @@ async function fetchSubject(subjectCode: string): Promise<FetchSubjectResult> {
 
   try {
     const response = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
       headers: getCatalogApiHeaders(),
     });
 
@@ -89,6 +91,10 @@ async function fetchSubject(subjectCode: string): Promise<FetchSubjectResult> {
     }
 
     if (!response.ok) {
+      console.error(
+        `Failed to fetch public catalog subject ${subjectCode}: ${response.status} ${response.statusText}`,
+      );
+
       return {
         status: "error",
         message: "Unable to load this subject right now.",
@@ -105,7 +111,9 @@ async function fetchSubject(subjectCode: string): Promise<FetchSubjectResult> {
     }
 
     return { status: "ok", subject: data.subject };
-  } catch {
+  } catch (error) {
+    console.error(`Error fetching public catalog subject ${subjectCode}:`, error);
+
     return {
       status: "error",
       message: "Unable to connect to the catalog service.",
