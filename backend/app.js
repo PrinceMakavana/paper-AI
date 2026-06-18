@@ -70,29 +70,36 @@ const isMainModule =
     import.meta.main ??
     (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]);
 
-if (isMainModule) {
-    app.listen(port, () => {
-        console.log(`🚀 paperAI API listening at http://localhost:${port}`);
-
-    });
-}
-
 const MONGODB_URI = process.env.MONGODB_URI || '';
 const MONGODB_DB_NAME = process.env.MONGODB_DB_NAME || 'page-index-chatbot';
-if (MONGODB_URI) {
-    mongoose
-        .connect(MONGODB_URI , {
-            dbName: MONGODB_DB_NAME
-        })
-        .then(async () => {
-            console.log('✅ Connected to MongoDB');
-            startHostedJobRecovery();
-        })
-        .catch((err) => {
-            console.error('❌ MongoDB connection error:', err.message);
+
+async function connectMongoIfConfigured() {
+    if (!MONGODB_URI) {
+        console.warn('⚠️  MONGODB_URI not set — auth routes unavailable.');
+        return;
+    }
+
+    await mongoose.connect(MONGODB_URI, {
+        dbName: MONGODB_DB_NAME
+    });
+    console.log('✅ Connected to MongoDB');
+    startHostedJobRecovery();
+}
+
+async function startServer() {
+    try {
+        await connectMongoIfConfigured();
+        app.listen(port, () => {
+            console.log(`🚀 paperAI API listening at http://localhost:${port}`);
         });
-} else {
-    console.warn('⚠️  MONGODB_URI not set — auth routes unavailable.');
+    } catch (err) {
+        console.error('❌ MongoDB connection error:', err.message);
+        process.exitCode = 1;
+    }
+}
+
+if (isMainModule) {
+    startServer();
 }
 
 export default app;
