@@ -2,6 +2,7 @@ export const ROUTES = {
   chat: "/chat",
   login: "/login",
   register: "/register",
+  subjects: "/subjects",
 } as const;
 
 export function startChatHref(isLoggedIn: boolean) {

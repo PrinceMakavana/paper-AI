@@ -12,7 +12,7 @@ import { ROUTES, signupHref, startChatHref } from "@/lib/landing-links";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/", label: "Home", exact: true },
+  { href: ROUTES.subjects, label: "Subjects", exact: false },
   { href: "/about", label: "About", exact: false },
   { href: "/contribute", label: "Contribute", exact: false },
   { href: "/contact", label: "Contact", exact: false },
@@ -51,9 +51,6 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2 justify-self-end">
           <ThemeToggle />
-          <Button asChild variant="ghost" className="hidden sm:inline-flex">
-            <Link href="/#features">Features</Link>
-          </Button>
           {!isUserLoggedIn && (
             <Button asChild variant="ghost" className="hidden sm:inline-flex">
               <Link href={ROUTES.login}>Login</Link>
@@ -90,13 +87,6 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <Link
-              href="/#features"
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              Features
-            </Link>
             {!isUserLoggedIn && (
               <Link
                 href={ROUTES.login}

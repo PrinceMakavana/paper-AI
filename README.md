@@ -65,11 +65,12 @@ Create `frontend/.env` or `frontend/.env.local`:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
+PUBLIC_CATALOG_API_SECRET=generate-a-long-random-secret
 # Production only — omit locally so dev traffic is not sent to GA4
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-WPXWX6KJ1V
 ```
 
-Because these values are exposed to the browser, only put the public Express API URL and GA measurement ID here.
+Only `NEXT_PUBLIC_*` values are exposed to the browser. `PUBLIC_CATALOG_API_SECRET` is server-only in Next.js and must match the backend value so public subject pages can call the catalog API.
 
 ### Express Backend
 
@@ -79,6 +80,7 @@ Create `backend/.env` from `backend/.env.example`:
 PORT=5000
 FRONTEND_URL=http://localhost:3000
 PAGEINDEX_BACKEND_API_URL=http://127.0.0.1:8000
+PUBLIC_CATALOG_API_SECRET=generate-a-long-random-secret
 
 GEMINI_API_KEY=
 GEMINI_MODEL_NAME=gemini-2.5-flash-lite
@@ -101,6 +103,7 @@ Key variables:
 | `PAGEINDEX_API_DASHBOARD_URL` | Hosted PageIndex dashboard URL (password reset, API keys) |
 | `PAGEINDEX_SECRETS_KEY` | Base64 32-byte key for encrypting stored PageIndex credentials |
 | `PAGEINDEX_JOB_TEMP_ROOT` | Temp directory for staged PDFs during hosted upload jobs |
+| `PUBLIC_CATALOG_API_SECRET` | Shared server-only secret used by Next.js to access Express public catalog APIs |
 | `MONGODB_URI` | MongoDB connection string for users, documents, chat, and catalog (`catalog_subjects`) |
 | `JWT_SECRET` | Secret used to sign login and verification tokens |
 | `SMTP_HOST` | SMTP server host for verification and password-reset emails |

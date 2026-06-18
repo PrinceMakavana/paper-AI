@@ -20,6 +20,9 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3075;
+const trustProxy = process.env.TRUST_PROXY;
+
+app.set('trust proxy', trustProxy === undefined ? 1 : trustProxy);
 
 const allowedOrigins = [
     process.env.FRONTEND_URL,

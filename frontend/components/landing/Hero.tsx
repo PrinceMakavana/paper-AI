@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Sparkles, Check, FileText, MessageSquare } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import type { Components } from "react-markdown";
+import { ArrowRight, Sparkles, Check, MessageSquare, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/layout/Reveal";
-import { useAuth } from "@/components/context/auth/auth-context";
-import { signupHref, startChatHref } from "@/lib/landing-links";
+import { ExternalLinkAnchor } from "@/components/external-link-anchor";
+import { ROUTES } from "@/lib/landing-links";
+import landingChat from "@/data/landing-chat-sample.json";
 
 const TRUST = [
   "10,00+ Study Material Processed",
@@ -13,9 +18,9 @@ const TRUST = [
   "Secure Workspace",
   "Google Gemini Support",
 ];
+const INITIAL_VISIBLE_MESSAGE_COUNT = 4;
 
 export function Hero() {
-  const { isUserLoggedIn } = useAuth();
 
   return (
     <section className="relative overflow-hidden border-b border-border pt-24">
@@ -45,16 +50,15 @@ export function Hero() {
           <Reveal delay={240}>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button size="lg" className="h-11 px-6" asChild>
-                <Link href={signupHref(isUserLoggedIn)}>
+                <Link href={ROUTES.subjects}>
                   Start Studying
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
-              {!isUserLoggedIn && (
+              
               <Button size="lg" variant="outline" className="h-11 px-6" asChild>
-                  <Link href={startChatHref(isUserLoggedIn)}>Try Demo</Link>
-                </Button>
-              )}
+                <Link href={ROUTES.subjects}>Browse Subjects <Package className="size-4" /></Link>
+              </Button>
             </div>
           </Reveal>
           <Reveal delay={320}>
@@ -69,71 +73,169 @@ export function Hero() {
           </Reveal>
         </div>
         <Reveal delay={200}>
-          <MockAnswer />
+          <WorkspaceConversation />
         </Reveal>
       </div>
     </section>
   );
 }
 
-function MockAnswer() {
+function WorkspaceConversation() {
+  const timeline = useMemo(() => buildConversationTimeline(landingChat.messages as LandingChatMessage[]), []);
+  const initialVisibleSteps = useMemo(
+    () => getVisibleStepCountForMessages(timeline, INITIAL_VISIBLE_MESSAGE_COUNT),
+    [timeline],
+  );
+  const [visibleSteps, setVisibleSteps] = useState(initialVisibleSteps);
+
+  useEffect(() => {
+    const isLoopComplete = visibleSteps >= timeline.length;
+    const delay = isLoopComplete ? 2200 : timeline[visibleSteps]?.duration ?? 1200;
+    const timeout = window.setTimeout(() => {
+      setVisibleSteps((currentStep) =>
+        currentStep >= timeline.length ? initialVisibleSteps : currentStep + 1,
+      );
+    }, delay);
+
+    return () => window.clearTimeout(timeout);
+  }, [initialVisibleSteps, timeline, visibleSteps]);
+
+  const visibleTimeline = timeline.slice(0, visibleSteps);
+  const displayedTimeline = visibleTimeline.filter(
+    (step, index) => step.type !== "thinking" || index === visibleTimeline.length - 1,
+  );
+
   return (
-    <div className="relative rounded-2xl border border-border bg-card p-1.5 shadow-[var(--shadow-elevated)]">
-      <div className="flex items-center justify-between rounded-t-xl bg-muted/60 px-4 py-2.5">
+    <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-elevated)]">
+      <div className="absolute inset-x-8 top-8 h-28 rounded-full bg-brand/15 blur-3xl" />
+      <div className="relative flex items-center justify-between rounded-t-2xl border-b border-border/70 bg-muted/60 px-4 py-2.5">
         <div className="flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-destructive/70" />
           <span className="size-2.5 rounded-full bg-spark/80" />
           <span className="size-2.5 rounded-full bg-brand/80" />
         </div>
-        <span className="text-xs text-muted-foreground">paperAI workspace</span>
+        <span className="text-xs text-muted-foreground">{landingChat.workspaceLabel}</span>
       </div>
-      <div className="rounded-b-xl bg-card p-5">
-        <div className="flex items-center items-start gap-3 rounded-lg border border-border bg-muted/40 px-4 py-2">
-          <div className="grid size-8 shrink-0 place-items-center rounded-md bg-background text-muted-foreground">
-            <MessageSquare className="size-4" />
-          </div>
-          <p className="text-sm">
-            Explain the difference between <span className="font-medium">Abstract Class</span> and{" "}
-            <span className="font-medium">Interface</span>.
-          </p>
+      <div className="relative rounded-b-2xl bg-card p-4 sm:p-5">
+        <div className="grid grid-cols-1 min-h-[390px] max-h-[430px] flex-col justify-end gap-3 overflow-auto">
+          <BotBubble>
+            Hi, I can help you find GTU subject material. Try asking by subject code or branch.
+          </BotBubble>
+
+          {displayedTimeline.map((step) => {
+            if (step.type === "thinking") {
+              return <ThinkingBubble key={step.id} />;
+            }
+
+            return step.message.role === "user" ? (
+              <UserBubble key={step.id} message={step.message.content} />
+            ) : (
+              <AssistantBubble key={step.id} message={step.message} />
+            );
+          })}
         </div>
 
-        <div className="mt-4 rounded-lg border border-border bg-background p-4">
-          <div className="mb-3 flex items-center gap-2 text-xs font-medium text-brand">
-            <Sparkles className="size-3.5" />
-            AI Generated Answer
-          </div>
-          <div className="space-y-3 text-sm">
-            <Block label="Definition">
-              An abstract class can have both implemented and abstract methods. An interface defines a
-              contract of methods a class must implement.
-            </Block>
-            <Block label="Example">
-              <code className="rounded bg-muted px-1.5 py-0.5 text-xs">abstract class Shape</code> vs{" "}
-              <code className="rounded bg-muted px-1.5 py-0.5 text-xs">interface Drawable</code>
-            </Block>
-            <Block label="Key Differences">
-              Inheritance type, constructors, access modifiers, multiple inheritance support.
-            </Block>
-            <Block label="Exam Important Notes" highlight>
-              Frequently asked 7-mark question. Mention at least 4 differences with examples.
-            </Block>
-          </div>
-        </div>
-
-        <div className="mt-4 flex items-center justify-between rounded-lg border border-dashed border-border px-4 py-2.5 text-xs text-muted-foreground">
-          <span className="flex items-center gap-2">
-            <FileText className="size-3.5" />
-            Generated from Winter 2024 GTU Paper
-          </span>
-          {/* <span className="font-medium text-brand">Gemini · OOP2</span> */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {["Browse subjects"].map((label) => (
+            <Link
+              key={label}
+              href={ROUTES.subjects}
+              className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-brand/40 hover:text-brand"
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function Block({
+function AssistantBubble({ message }: { message: LandingChatMessage }) {
+  const sections = parseAssistantSections(message.content);
+
+  return (
+    <BotBubble>
+      <div className="mb-2 flex items-center gap-2 text-xs font-medium text-brand">
+        <Sparkles className="size-3.5" />
+        {message.documentId === "catalog:global" ? "Found in catalog" : "AI response"}
+      </div>
+      <div className="space-y-3">
+        {sections.map((section, index) =>
+          section.label ? (
+            <AnswerBlock key={index} label={section.label} highlight={isHighlightSection(section.label)}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={landingMarkdownComponents}>
+                {section.body}
+              </ReactMarkdown>
+            </AnswerBlock>
+          ) : (
+            <div key={index} className="text-sm leading-relaxed text-foreground">
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={landingMarkdownComponents}>
+                {section.body}
+              </ReactMarkdown>
+            </div>
+          ),
+        )}
+      </div>
+    </BotBubble>
+  );
+}
+
+function BotBubble({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="animate-reveal flex items-start gap-3">
+      <div className="grid size-9 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+        <Sparkles className="size-4" />
+      </div>
+      <div className="max-w-[86%] rounded-2xl rounded-tl-md border border-border bg-background p-3 text-sm leading-relaxed text-foreground">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function UserBubble({ message }: { message: string }) {
+  return (
+    <div className="animate-reveal flex justify-end">
+      <div className="flex max-w-[82%] items-center gap-2 rounded-2xl rounded-tr-md border border-brand/25 bg-brand/10 px-3 py-2.5 text-sm leading-relaxed">
+        <span>{message}</span>
+        <MessageSquare className="size-4 shrink-0 text-brand" />
+      </div>
+    </div>
+  );
+}
+
+function ThinkingBubble() {
+  return (
+    <div className="animate-reveal flex items-center gap-2 pl-12">
+      <div className="flex rounded-2xl border border-border bg-background px-3 py-2">
+        <span className="mx-0.5 size-1.5 animate-pulse rounded-full bg-muted-foreground/60" />
+        <span className="mx-0.5 size-1.5 animate-pulse rounded-full bg-muted-foreground/60 [animation-delay:150ms]" />
+        <span className="mx-0.5 size-1.5 animate-pulse rounded-full bg-muted-foreground/60 [animation-delay:300ms]" />
+      </div>
+      <span className="text-xs text-muted-foreground">paperAI is thinking...</span>
+    </div>
+  );
+}
+
+function isHighlightSection(label: string) {
+  return /exam|important|note/i.test(label);
+}
+
+function parseAssistantSections(content: string): { label?: string; body: string }[] {
+  const chunks = content.split(/(?=^#{2,3}\s)/m).filter((chunk) => chunk.trim());
+  if (chunks.length <= 1 && !/^#{2,3}\s/m.test(content)) {
+    return [{ body: content.trim() }];
+  }
+
+  return chunks.map((chunk) => {
+    const match = chunk.match(/^#{2,3}\s+(.+?)\n([\s\S]*)/);
+    if (match) return { label: match[1].trim(), body: match[2].trim() };
+    return { body: chunk.trim() };
+  });
+}
+
+function AnswerBlock({
   label,
   children,
   highlight,
@@ -145,7 +247,7 @@ function Block({
   return (
     <div
       className={
-        "rounded-md border p-3 " +
+        "rounded-lg border p-3 " +
         (highlight
           ? "border-brand/40 bg-[color-mix(in_oklab,var(--brand)_8%,transparent)]"
           : "border-border bg-muted/30")
@@ -154,7 +256,102 @@ function Block({
       <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </div>
-      <div className="text-sm">{children}</div>
+      <div className="text-sm leading-relaxed text-foreground">{children}</div>
     </div>
   );
 }
+
+const landingMarkdownComponents: Components = {
+  p: ({ children }) => <p className="mb-3 text-sm leading-relaxed last:mb-0">{children}</p>,
+  ul: ({ children }) => (
+    <ul className="mb-3 list-disc space-y-1 pl-5 text-sm leading-relaxed last:mb-0">{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mb-3 list-decimal space-y-1 pl-5 text-sm leading-relaxed last:mb-0">{children}</ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+  a: ({ href, children }) =>
+    href ? <ExternalLinkAnchor href={href}>{children}</ExternalLinkAnchor> : <span>{children}</span>,
+  code: ({ className, children, ...props }) => {
+    const inline = !className;
+    return inline ? (
+      <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]" {...props}>
+        {children}
+      </code>
+    ) : (
+      <code className={`block font-mono text-xs ${className ?? ""}`} {...props}>
+        {children}
+      </code>
+    );
+  },
+  pre: ({ children }) => (
+    <pre className="mb-2 max-w-full overflow-x-auto rounded bg-muted p-3 text-xs last:mb-0">{children}</pre>
+  ),
+  h1: ({ children }) => <h1 className="mb-2 text-lg font-semibold leading-snug">{children}</h1>,
+  h2: ({ children }) => <h2 className="mb-2 text-base font-semibold leading-snug">{children}</h2>,
+  h3: ({ children }) => <h3 className="mb-2 text-sm font-semibold leading-snug">{children}</h3>,
+  blockquote: ({ children }) => (
+    <div className="mb-3 rounded-lg border border-brand/40 bg-[color-mix(in_oklab,var(--brand)_8%,transparent)] p-3 last:mb-0">
+      <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+        Note
+      </div>
+      <div className="text-sm leading-relaxed">{children}</div>
+    </div>
+  ),
+  hr: () => <hr className="my-3 border-current opacity-20" />,
+};
+
+function buildConversationTimeline(messages: LandingChatMessage[]): ConversationTimelineStep[] {
+  return messages.flatMap((message) => {
+    if (message.role === "user") {
+      return [
+        { id: message.id, type: "message" as const, message, duration: 1100 },
+        { id: `${message.id}-thinking`, type: "thinking" as const, duration: 1350 },
+      ];
+    }
+
+    return [{ id: message.id, type: "message" as const, message, duration: 2300 }];
+  });
+}
+
+function getVisibleStepCountForMessages(
+  timeline: ConversationTimelineStep[],
+  messageCount: number,
+) {
+  let visibleMessages = 0;
+
+  for (let index = 0; index < timeline.length; index += 1) {
+    if (timeline[index].type === "message") {
+      visibleMessages += 1;
+    }
+
+    if (visibleMessages >= messageCount) {
+      return index + 1;
+    }
+  }
+
+  return timeline.length;
+}
+
+type ConversationTimelineStep =
+  | {
+      id: string;
+      type: "message";
+      message: LandingChatMessage;
+      duration: number;
+    }
+  | {
+      id: string;
+      type: "thinking";
+      duration: number;
+    };
+
+type LandingChatMessage = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  chatModel?: string;
+  documentId?: string;
+  displayContent?: string;
+};

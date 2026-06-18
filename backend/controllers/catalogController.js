@@ -9,6 +9,10 @@ import {
     parseS3Location,
 } from './pageIndexController.js';
 
+function setPublicCatalogCacheHeaders(res) {
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=3600');
+}
+
 async function listCatalogSubjects(req, res) {
     try {
         const subjects = await listSubjects();
@@ -29,6 +33,73 @@ async function getCatalogSubject(req, res) {
         return res.json({ status: 200, subject });
     } catch (error) {
         console.error('Error fetching catalog subject:', error);
+        return res.status(error.statusCode || 500).json({
+            message: error instanceof Error ? error.message : 'Failed to fetch subject',
+            status: error.statusCode || 500,
+        });
+    }
+}
+
+function mapPublicSubject(subject) {
+    return {
+        subjectCode: subject.subjectCode,
+        subjectName: subject.subjectName,
+        knownAs: subject.knownAs,
+        pageindexStatus: subject.pageindexStatus,
+        indexedBookCount: subject.indexedBookCount,
+        bookCount: subject.bookCount,
+        chatMode: subject.chatMode,
+        primaryBookId: subject.primaryBookId,
+        syllabus: subject.syllabus,
+        paperSolution: subject.paperSolution,
+        oldPaper: subject.oldPaper,
+        books: (subject.books || []).map((book) => ({
+            bookId: book.bookId,
+            title: book.title,
+            img: book.img,
+            altData: book.altData,
+            downloadLink: book.downloadLink,
+            pageindexStatus: book.pageindexStatus,
+        })),
+    };
+}
+
+function mapPublicSubjectSummary(subject) {
+    return {
+        subjectCode: subject.subjectCode,
+        subjectName: subject.subjectName,
+        knownAs: subject.knownAs,
+        pageindexStatus: subject.pageindexStatus,
+        indexedBookCount: subject.indexedBookCount,
+        bookCount: subject.bookCount,
+    };
+}
+
+async function listPublicCatalogSubjects(req, res) {
+    try {
+        const subjects = await listSubjects();
+        setPublicCatalogCacheHeaders(res);
+        return res.json({
+            status: 200,
+            subjects: subjects.map(mapPublicSubjectSummary),
+        });
+    } catch (error) {
+        console.error('Error listing public catalog subjects:', error);
+        return res.status(error.statusCode || 500).json({
+            message: error instanceof Error ? error.message : 'Failed to list subjects',
+            status: error.statusCode || 500,
+        });
+    }
+}
+
+async function getPublicCatalogSubject(req, res) {
+    try {
+        const { subjectCode } = req.params;
+        const subject = await getSubject(subjectCode);
+        setPublicCatalogCacheHeaders(res);
+        return res.json({ status: 200, subject: mapPublicSubject(subject) });
+    } catch (error) {
+        console.error('Error fetching public catalog subject:', error);
         return res.status(error.statusCode || 500).json({
             message: error instanceof Error ? error.message : 'Failed to fetch subject',
             status: error.statusCode || 500,
@@ -77,6 +148,8 @@ async function getCatalogBookPdfUrl(req, res) {
 
 export {
     listCatalogSubjects,
+    listPublicCatalogSubjects,
     getCatalogSubject,
+    getPublicCatalogSubject,
     getCatalogBookPdfUrl,
 };
