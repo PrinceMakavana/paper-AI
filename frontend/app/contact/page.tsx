@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageShell } from "@/components/layout/PageShell";
 import { ContactSection } from "@/components/landing/ContactSection";
-import { Briefcase, HelpCircle, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact paperAI — Support, Feedback, Partnerships",

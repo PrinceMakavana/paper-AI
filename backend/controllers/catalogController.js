@@ -1,6 +1,7 @@
 import {
     findBookInSubject,
     getSubject,
+    listSubjectDetails,
     listSubjects,
 } from '../helpers/catalogDataHelpers.js';
 import {
@@ -77,11 +78,12 @@ function mapPublicSubjectSummary(subject) {
 
 async function listPublicCatalogSubjects(req, res) {
     try {
-        const subjects = await listSubjects();
+        const includeDetails = req.query.include === 'details';
+        const subjects = includeDetails ? await listSubjectDetails() : await listSubjects();
         setPublicCatalogCacheHeaders(res);
         return res.json({
             status: 200,
-            subjects: subjects.map(mapPublicSubjectSummary),
+            subjects: subjects.map(includeDetails ? mapPublicSubject : mapPublicSubjectSummary),
         });
     } catch (error) {
         console.error('Error listing public catalog subjects:', error);

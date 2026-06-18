@@ -531,7 +531,6 @@ export default function ChatPage() {
                 onTokenBalanceChange={setAvailableTokenCount}
                 onRefreshUser={refreshUser}
                 onViewPdf={handleViewPdf}
-                onSelectSubject={handleSubjectSelect}
               />
             </div>
           </div>

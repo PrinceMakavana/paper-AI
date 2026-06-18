@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import freeEmailDomains from "free-email-domains";
-import { Mail, LifeBuoy, Briefcase, Clock } from "lucide-react";
 import { Reveal } from "@/components/layout/Reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,13 +29,6 @@ const contactSchema = z.object({
   subject: z.string().min(1, "Subject is required"),
   message: z.string().min(1, "Message is required"),
 });
-
-const INFO = [
-  { icon: Mail, title: "Email Support", text: "support@paperai.app" },
-  { icon: LifeBuoy, title: "Technical Support", text: "tech@paperai.app" },
-  { icon: Briefcase, title: "Business Inquiry", text: "business@paperai.app" },
-  { icon: Clock, title: "Response Time", text: "Within 24 hours, Mon – Fri" },
-];
 
 type ApiError = { data?: { error?: string; message?: string } };
 

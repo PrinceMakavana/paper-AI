@@ -153,6 +153,15 @@ async function listSubjects() {
     });
 }
 
+async function listSubjectDetails() {
+    const subjects = await loadAllCatalogSubjects();
+
+    return subjects.map((subject) => {
+        const subjectCode = String(subject.subjecet_code || subject.subject_code || '').trim();
+        return mapSubjectDetail(subject, subjectCode);
+    });
+}
+
 async function getSubject(subjectCode) {
     const { subject, subjectCode: code } = await loadSubjectByCode(subjectCode);
     return mapSubjectDetail(subject, code);
@@ -176,6 +185,7 @@ async function findBookInSubject(subjectCode, bookId) {
 export {
     loadAllCatalogSubjects,
     listSubjects,
+    listSubjectDetails,
     getSubject,
     getReadyBooks,
     loadSubjectByCode,

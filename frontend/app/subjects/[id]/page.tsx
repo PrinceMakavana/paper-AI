@@ -3,12 +3,18 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import type { CatalogBook, SubjectDetail } from "@/lib/types";
 import type { Metadata } from "next";
+import http from "node:http";
+import https from "node:https";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
 type SubjectPageProps = {
   params: Promise<{ id: string }>;
+};
+
+type PublicSubjectsResponse = {
+  subjects?: SubjectDetail[];
 };
 
 type SubjectResponse = {
@@ -25,7 +31,13 @@ type FetchSubjectResult =
 const SUBJECT_CODE_PATTERN = /^[A-Za-z0-9_-]{3,32}$/;
 const SITE_NAME = "paperAI";
 
-export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+
+let publicSubjectDetailsPromise: Promise<SubjectDetail[]> | undefined;
+
+function isSubjectDetail(subject: SubjectDetail) {
+  return Boolean(subject.subjectCode) && Array.isArray(subject.books);
+}
 
 function normalizeSubjectCode(id: string) {
   return decodeURIComponent(id).trim().toUpperCase();
@@ -67,11 +79,60 @@ function getCatalogApiHeaders() {
   return headers;
 }
 
+function fetchJsonWithNode<T>(url: string, headers: Record<string, string>): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const parsedUrl = new URL(url);
+    const client = parsedUrl.protocol === "https:" ? https : http;
+    const request = client.request(
+      parsedUrl,
+      {
+        method: "GET",
+        headers,
+      },
+      (response) => {
+        const chunks: Buffer[] = [];
+
+        response.on("data", (chunk: Buffer) => {
+          chunks.push(chunk);
+        });
+
+        response.on("end", () => {
+          const statusCode = response.statusCode ?? 500;
+          const body = Buffer.concat(chunks).toString("utf8");
+
+          if (statusCode < 200 || statusCode >= 300) {
+            reject(new Error(`${statusCode} ${response.statusMessage || "Request failed"}`));
+            return;
+          }
+
+          try {
+            resolve(JSON.parse(body) as T);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      },
+    );
+
+    request.on("error", reject);
+    request.end();
+  });
+}
+
 const fetchSubject = cache(async function fetchSubject(
   subjectCode: string,
 ): Promise<FetchSubjectResult> {
   if (!SUBJECT_CODE_PATTERN.test(subjectCode)) {
     return { status: "not-found" };
+  }
+
+  const subjects = await fetchPublicSubjectDetails();
+  const subject = subjects.find(
+    (item) => normalizeSubjectCode(item.subjectCode) === normalizeSubjectCode(subjectCode),
+  );
+
+  if (subject) {
+    return { status: "ok", subject };
   }
 
   const url = buildApiUrl(`/public/catalog/subjects/${encodeURIComponent(subjectCode)}`);
@@ -85,7 +146,6 @@ const fetchSubject = cache(async function fetchSubject(
 
   try {
     const response = await fetch(url, {
-      cache: "no-store",
       headers: getCatalogApiHeaders(),
     });
 
@@ -123,6 +183,44 @@ const fetchSubject = cache(async function fetchSubject(
     };
   }
 });
+
+function fetchPublicSubjectDetails() {
+  publicSubjectDetailsPromise ??= loadPublicSubjectDetails().then((subjects) => {
+    if (subjects.length === 0) {
+      publicSubjectDetailsPromise = undefined;
+    }
+
+    return subjects;
+  });
+
+  return publicSubjectDetailsPromise;
+}
+
+async function loadPublicSubjectDetails() {
+  const url = buildApiUrl("/public/catalog/subjects?include=details");
+
+  if (!url) {
+    console.error("Catalog API is not configured for subject static generation.");
+    return [];
+  }
+
+  try {
+    const data = await fetchJsonWithNode<PublicSubjectsResponse>(url, getCatalogApiHeaders());
+    return (data.subjects ?? []).filter(isSubjectDetail);
+  } catch (error) {
+    console.error("Error fetching public catalog subject details for static generation:", error);
+
+    return [];
+  }
+}
+
+export async function generateStaticParams() {
+  const subjects = await fetchPublicSubjectDetails();
+
+  return subjects.map((subject) => ({
+    id: subject.subjectCode,
+  }));
+}
 
 function getSubjectTitle(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` | ${subject.knownAs}` : "";

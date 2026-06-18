@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bug, FileUp, Lightbulb, NotebookPen, Sparkles } from "lucide-react";
-import { ROUTES } from "@/lib/landing-links";
+import { Bug, FileUp, Lightbulb, NotebookPen, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contribute to paperAI — Help GTU Students Learn Smarter",

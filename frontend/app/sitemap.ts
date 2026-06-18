@@ -22,7 +22,7 @@ const STATIC_ROUTES = [
   "/disclaimer",
 ];
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
@@ -61,7 +61,7 @@ async function fetchPublicSubjects() {
 
   try {
     const response = await fetch(url, {
-      cache: "no-store",
+      cache: "force-cache",
       headers: getCatalogApiHeaders(),
     });
 

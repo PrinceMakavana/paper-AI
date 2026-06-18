@@ -60,7 +60,7 @@ function AnswerBlock({
   );
 }
 
-function markdownComponents(role: "user" | "assistant"): Components {
+function markdownComponents(): Components {
   const codeBase = "rounded bg-muted px-1.5 py-0.5 text-xs font-mono text-foreground";
 
   return {
@@ -151,7 +151,7 @@ function markdownComponents(role: "user" | "assistant"): Components {
   };
 }
 
-function UserMessage({ content, timestamp }: { content: string; timestamp: Date | string }) {
+function UserMessage({ content }: { content: string }) {
   return (
     <div className="w-[85%] self-end">
       <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 px-2 py-1">
@@ -160,7 +160,7 @@ function UserMessage({ content, timestamp }: { content: string; timestamp: Date 
         </div>
         <div className="min-w-0 flex-1 ">
           <div className="text-sm leading-relaxed text-foreground">
-            <ReactMarkdown  remarkPlugins={[remarkGfm]} components={markdownComponents("user")}>
+            <ReactMarkdown  remarkPlugins={[remarkGfm]} components={markdownComponents()}>
               {content}
             </ReactMarkdown>
           </div>
@@ -175,12 +175,8 @@ function UserMessage({ content, timestamp }: { content: string; timestamp: Date 
 
 function AssistantMessage({
   content,
-  timestamp,
-  sourceLabel,
 }: {
   content: string;
-  timestamp: Date | string;
-  sourceLabel?: string;
 }) {
   const sections = parseAssistantSections(content);
 
@@ -198,13 +194,13 @@ function AssistantMessage({
                 label={section.label}
                 highlight={isHighlightSection(section.label)}
               >
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents("assistant")}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents()}>
                   {section.body}
                 </ReactMarkdown>
               </AnswerBlock>
             ) : (
               <div key={index} className="text-sm leading-relaxed text-foreground">
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents("assistant")}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents()}>
                   {section.body}
                 </ReactMarkdown>
               </div>
@@ -253,7 +249,6 @@ interface ChatInterFaceProps {
   onTokenBalanceChange?: (availableTokenCount: number) => void;
   onRefreshUser?: () => Promise<void>;
   onViewPdf?: (document: DocumentMetaData) => void;
-  onSelectSubject?: (subjectCode: string) => void;
 }
 
 function getApiErrorMessage(error: unknown, fallback: string) {
@@ -291,7 +286,6 @@ export function ChatInterFace({
   onTokenBalanceChange,
   onRefreshUser,
   onViewPdf,
-  onSelectSubject,
 }: ChatInterFaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState<string>("");
@@ -526,14 +520,9 @@ export function ChatInterFace({
 
           {messages.map((message, index) =>
             message.role === "user" ? (
-              <UserMessage key={index} content={message.content} timestamp={message.timestamp} />
+              <UserMessage key={index} content={message.content} />
             ) : (
-              <AssistantMessage
-                key={index}
-                content={message.content}
-                timestamp={message.timestamp}
-                sourceLabel={contextLabel}
-              />
+              <AssistantMessage key={index} content={message.content} />
             ),
           )}
           {loading && <LoadingMessage />}

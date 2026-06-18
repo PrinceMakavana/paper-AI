@@ -3,7 +3,6 @@ import {
   MessageSquareText,
   FileText,
   TrendingUp,
-  Cpu,
   History,
 } from "lucide-react";
 import { Reveal } from "@/components/layout/Reveal";

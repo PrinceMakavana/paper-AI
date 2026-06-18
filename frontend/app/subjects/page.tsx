@@ -13,7 +13,6 @@ type PublicSubjectsResult =
   | { status: "ok"; subjects: SubjectSummary[] }
   | { status: "error"; message: string };
 
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "GTU Subjects | Syllabus, Papers, Books, Solutions | paperAI",
@@ -74,7 +73,6 @@ async function fetchPublicSubjects(): Promise<PublicSubjectsResult> {
 
   try {
     const response = await fetch(url, {
-      cache: "no-store",
       headers: getCatalogApiHeaders(),
     });
 
