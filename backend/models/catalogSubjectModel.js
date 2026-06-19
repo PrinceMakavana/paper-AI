@@ -8,6 +8,17 @@ const oldPaperSchema = new mongoose.Schema(
     { _id: false }
 );
 
+const catalogMaterialFileSchema = new mongoose.Schema(
+    {
+        title: { type: String, trim: true },
+        original_name: { type: String, trim: true },
+        storage_path: { type: String, trim: true },
+        s3_uri: { type: String, trim: true },
+        uploaded_at: { type: String, trim: true },
+    },
+    { _id: false }
+);
+
 const catalogBookSchema = new mongoose.Schema(
     {
         book_id: { type: String, trim: true },
@@ -52,12 +63,12 @@ const catalogSubjectSchema = new mongoose.Schema(
             enum: ['ready', 'partial', 'pending', 'failed'],
         },
         indexed_book_count: { type: Number },
-        syllabus: { type: String, trim: true },
-        paper_solution: { type: String, trim: true },
-        prectical: { type: String, trim: true },
-        viva_questions: { type: String, trim: true },
-        imp_material: { type: String, trim: true },
-        assignments: { type: String, trim: true },
+        syllabus: { type: [catalogMaterialFileSchema], default: [] },
+        paper_solution: { type: [catalogMaterialFileSchema], default: [] },
+        prectical: { type: [catalogMaterialFileSchema], default: [] },
+        viva_questions: { type: [catalogMaterialFileSchema], default: [] },
+        imp_material: { type: [catalogMaterialFileSchema], default: [] },
+        assignments: { type: [catalogMaterialFileSchema], default: [] },
         old_paper: { type: [oldPaperSchema], default: [] },
         books: { type: [catalogBookSchema], default: [] },
     },

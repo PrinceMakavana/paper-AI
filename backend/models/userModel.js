@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
             enum: ['user', 'admin'],
             default: 'user',
         },
+        isAdmin: {
+            type: Boolean,
+            default: false,
+        },
         available_token_count: {
             type: Number,
             required: true,

@@ -1,7 +1,7 @@
 import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import type { CatalogBook, SubjectDetail } from "@/lib/types";
+import type { CatalogBook, CatalogMaterialFile, SubjectDetail } from "@/lib/types";
 import type { Metadata } from "next";
 import http from "node:http";
 import https from "node:https";
@@ -81,6 +81,22 @@ function getDownloadHref(url?: string) {
   }
 
   return buildApiUrl(`/public/catalog/download-url?url=${encodeURIComponent(trimmedUrl)}`);
+}
+
+function getMaterialFiles(value?: CatalogMaterialFile[] | string) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (typeof value === "string" && value.trim()) {
+    return [{ title: "", url: value }];
+  }
+
+  return [];
+}
+
+function getMaterialFileUrl(file?: CatalogMaterialFile) {
+  return file?.url || file?.s3Uri || file?.storagePath;
 }
 
 function getCatalogApiHeaders() {
@@ -270,15 +286,15 @@ function getSubjectKeywords(subject: SubjectDetail) {
 function createMaterialItems(subject: SubjectDetail) {
   const items: { name: string; url: string }[] = [];
 
-  if (subject.syllabus) {
-    const url = getDownloadHref(subject.syllabus);
+  getMaterialFiles(subject.syllabus).forEach((file, index) => {
+    const url = getDownloadHref(getMaterialFileUrl(file));
     if (url) {
       items.push({
-        name: `${subject.subjectCode} ${subject.subjectName} GTU syllabus`,
+        name: file.title || `${subject.subjectCode} ${subject.subjectName} GTU syllabus ${index + 1}`,
         url,
       });
     }
-  }
+  });
 
   (subject.oldPaper ?? []).forEach((paper) => {
     const url = getDownloadHref(paper.link);
@@ -302,15 +318,15 @@ function createMaterialItems(subject: SubjectDetail) {
     }
   });
 
-  if (subject.paperSolution) {
-    const url = getDownloadHref(subject.paperSolution);
+  getMaterialFiles(subject.paperSolution).forEach((file, index) => {
+    const url = getDownloadHref(getMaterialFileUrl(file));
     if (url) {
       items.push({
-        name: `${subject.subjectCode} ${subject.subjectName} GTU paper solution`,
+        name: file.title || `${subject.subjectCode} ${subject.subjectName} GTU paper solution ${index + 1}`,
         url,
       });
     }
-  }
+  });
 
   return items;
 }
@@ -507,6 +523,39 @@ function SubjectMaterialCard({
   );
 }
 
+function MaterialFilesGrid({
+  files,
+  initials,
+  fallbackTitle,
+  subtitle,
+  actionPrefix,
+}: {
+  files: CatalogMaterialFile[];
+  initials: string;
+  fallbackTitle: string;
+  subtitle: string;
+  actionPrefix: string;
+}) {
+  if (files.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      {files.map((file, index) => (
+        <SubjectMaterialCard
+          key={`${getMaterialFileUrl(file) || file.title || index}`}
+          initials={initials}
+          title={file.title || fallbackTitle}
+          subtitle={file.originalName || subtitle}
+          href={getDownloadHref(getMaterialFileUrl(file))}
+          actionLabel={`${actionPrefix}${files.length > 1 ? ` ${index + 1}` : ""}`}
+        />
+      ))}
+    </div>
+  );
+}
+
 function EmptySection({ message }: { message: string }) {
   return <p className="text-sm text-muted-foreground">{message}</p>;
 }
@@ -656,13 +705,13 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                 Syllabus
               </h2>
               <div className="mt-4">
-                {subject.syllabus ? (
-                  <SubjectMaterialCard
+                {getMaterialFiles(subject.syllabus).length > 0 ? (
+                  <MaterialFilesGrid
+                    files={getMaterialFiles(subject.syllabus)}
                     initials={initials}
-                    title={subject.subjectName}
+                    fallbackTitle={subject.subjectName}
                     subtitle={subject.subjectCode}
-                    href={getDownloadHref(subject.syllabus)}
-                    actionLabel={`Download ${subject.subjectCode} syllabus`}
+                    actionPrefix={`Download ${subject.subjectCode} syllabus`}
                   />
                 ) : (
                   <EmptySection message="No syllabus is available yet." />
@@ -683,13 +732,13 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                 Paper Solutions
               </h2>
               <div className="mt-4">
-                {subject.paperSolution ? (
-                  <SubjectMaterialCard
+                {getMaterialFiles(subject.paperSolution).length > 0 ? (
+                  <MaterialFilesGrid
+                    files={getMaterialFiles(subject.paperSolution)}
                     initials={initials}
-                    title={subject.subjectName}
+                    fallbackTitle={subject.subjectName}
                     subtitle={subject.subjectCode}
-                    href={getDownloadHref(subject.paperSolution)}
-                    actionLabel={`View ${subject.subjectCode} paper solution`}
+                    actionPrefix={`View ${subject.subjectCode} paper solution`}
                   />
                 ) : (
                   <EmptySection message="No paper solution is available yet." />

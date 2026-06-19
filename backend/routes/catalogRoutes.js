@@ -1,10 +1,19 @@
 import express from 'express';
 import crypto from 'node:crypto';
+import multer from 'multer';
 import authMiddleware from '../middleware/authMiddleware.js';
+import requireAdmin from '../middleware/adminMiddleware.js';
 import * as catalogController from '../controllers/catalogController.js';
 
 const router = express.Router();
 const PUBLIC_SUBJECT_CODE_PATTERN = /^[A-Za-z0-9_-]{3,32}$/;
+const adminCatalogUpload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        files: Number(process.env.ADMIN_CATALOG_UPLOAD_MAX_FILES || 10),
+        fileSize: Number(process.env.ADMIN_CATALOG_UPLOAD_MAX_FILE_SIZE_MB || 10) * 1024 * 1024,
+    },
+});
 
 function createPublicCatalogRateLimit({ max, windowMs, message }) {
     const hits = new Map();
@@ -127,6 +136,20 @@ router.get(
     publicSubjectDetailRateLimit,
     validatePublicSubjectCode,
     catalogController.getPublicCatalogSubject
+);
+
+router.get(
+    '/admin/catalog/subjects',
+    authMiddleware,
+    requireAdmin,
+    catalogController.listAdminCatalogSubjects
+);
+router.post(
+    '/admin/catalog/subjects/:subjectCode/content/upload',
+    authMiddleware,
+    requireAdmin,
+    adminCatalogUpload.array('files', Number(process.env.ADMIN_CATALOG_UPLOAD_MAX_FILES || 10)),
+    catalogController.uploadAdminCatalogContent
 );
 
 router.get('/catalog/subjects', authMiddleware, catalogController.listCatalogSubjects);

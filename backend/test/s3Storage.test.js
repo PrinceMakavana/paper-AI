@@ -1,5 +1,10 @@
 import { test } from 'tap';
-import { buildObjectKey, parseS3Uri, resolveObjectLocation } from '../utils/s3Storage.js';
+import {
+    buildCatalogObjectKey,
+    buildObjectKey,
+    parseS3Uri,
+    resolveObjectLocation,
+} from '../utils/s3Storage.js';
 
 test('buildObjectKey uses pageindex prefix and sanitized path parts', (t) => {
     const originalPrefix = process.env.AWS_S3_PREFIX;
@@ -12,6 +17,24 @@ test('buildObjectKey uses pageindex prefix and sanitized path parts', (t) => {
     t.equal(
         buildObjectKey('6a1ff4cce22bcbc7b53d5d2', '289488a7-07b4-4020-a487-3b63b49ed5c7', 'page_index.json'),
         'pageindex/6a1ff4cce22bcbc7b53d5d2/289488a7-07b4-4020-a487-3b63b49ed5c7/page_index.json',
+    );
+
+    if (originalPrefix === undefined) {
+        delete process.env.AWS_S3_PREFIX;
+    } else {
+        process.env.AWS_S3_PREFIX = originalPrefix;
+    }
+
+    t.end();
+});
+
+test('buildCatalogObjectKey uses catalog path and sanitized parts', (t) => {
+    const originalPrefix = process.env.AWS_S3_PREFIX;
+    process.env.AWS_S3_PREFIX = 'pageindex';
+
+    t.equal(
+        buildCatalogObjectKey('311/0005', 'paper_solution', 'Summer 2024', 'paper solution.pdf'),
+        'pageindex/catalog/311-0005/paper_solution/Summer 2024/paper solution.pdf',
     );
 
     if (originalPrefix === undefined) {

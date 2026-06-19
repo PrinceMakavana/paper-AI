@@ -1,4 +1,4 @@
-import { loadAllCatalogSubjects } from './catalogDataHelpers.js';
+import { loadAllCatalogSubjects, mapMaterialFilesForClient } from './catalogDataHelpers.js';
 
 const CATALOG_GLOBAL_SESSION_ID = 'catalog:global';
 
@@ -58,6 +58,38 @@ function buildRow({
     };
 }
 
+function addMaterialFileRows({
+    rows,
+    subject,
+    field,
+    materialType,
+    label,
+    subjectCode,
+    subjectName,
+    knownAs,
+    chatReady,
+    searchableText,
+}) {
+    const files = mapMaterialFilesForClient(subject[field], label);
+
+    files.forEach((file, index) => {
+        if (!file.url) return;
+        rows.push(
+            buildRow({
+                id: `${subjectCode}:${materialType}:${slugify(file.title || file.originalName) || index}`,
+                subjectCode,
+                subjectName,
+                knownAs,
+                materialType,
+                label: file.title || file.originalName || label,
+                url: file.url,
+                chatReady,
+                searchableText: `${searchableText} ${label} ${file.title || ''} ${file.originalName || ''}`,
+            })
+        );
+    });
+}
+
 async function buildCatalogIndex() {
     const subjects = await loadAllCatalogSubjects();
     const rows = [];
@@ -87,37 +119,27 @@ async function buildCatalogIndex() {
             })
         );
 
-        if (subject.syllabus) {
-            rows.push(
-                buildRow({
-                    id: `${code}:syllabus:main`,
-                    subjectCode: code,
-                    subjectName,
-                    knownAs,
-                    materialType: 'syllabus',
-                    label: 'Syllabus',
-                    url: subject.syllabus,
-                    chatReady,
-                    searchableText: `${subjectHaystack} syllabus`,
-                })
-            );
-        }
-
-        if (subject.paper_solution) {
-            rows.push(
-                buildRow({
-                    id: `${code}:paper_solution:main`,
-                    subjectCode: code,
-                    subjectName,
-                    knownAs,
-                    materialType: 'paper_solution',
-                    label: 'Paper solutions',
-                    url: subject.paper_solution,
-                    chatReady,
-                    searchableText: `${subjectHaystack} paper solution solutions`,
-                })
-            );
-        }
+        [
+            ['syllabus', 'syllabus', 'Syllabus'],
+            ['paper_solution', 'paper_solution', 'Paper solutions'],
+            ['prectical', 'prectical', 'Practical'],
+            ['viva_questions', 'viva_questions', 'Viva questions'],
+            ['imp_material', 'imp_material', 'Important material'],
+            ['assignments', 'assignments', 'Assignments'],
+        ].forEach(([field, materialType, label]) => {
+            addMaterialFileRows({
+                rows,
+                subject,
+                field,
+                materialType,
+                label,
+                subjectCode: code,
+                subjectName,
+                knownAs,
+                chatReady,
+                searchableText: subjectHaystack,
+            });
+        });
 
         for (const paper of subject.old_paper || []) {
             if (!paper?.link) continue;

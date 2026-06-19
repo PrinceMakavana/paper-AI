@@ -49,6 +49,47 @@ function mapBookForClient(book, subjectCode, index) {
     };
 }
 
+function mapMaterialFileForClient(file, fallbackTitle) {
+    if (!file) return null;
+
+    if (typeof file === 'string') {
+        const trimmed = file.trim();
+        if (!trimmed) return null;
+        return {
+            title: fallbackTitle,
+            originalName: '',
+            storagePath: trimmed.startsWith('s3://') ? '' : trimmed,
+            s3Uri: trimmed.startsWith('s3://') ? trimmed : '',
+            url: trimmed,
+            uploadedAt: '',
+        };
+    }
+
+    const s3Uri = file.s3_uri || file.s3Uri || '';
+    const storagePath = file.storage_path || file.storagePath || '';
+    const url = s3Uri || storagePath;
+
+    if (!url && !file.title && !file.original_name) {
+        return null;
+    }
+
+    return {
+        title: file.title || fallbackTitle,
+        originalName: file.original_name || file.originalName || '',
+        storagePath,
+        s3Uri,
+        url,
+        uploadedAt: file.uploaded_at || file.uploadedAt || '',
+    };
+}
+
+function mapMaterialFilesForClient(value, fallbackTitle) {
+    const files = Array.isArray(value) ? value : [value];
+    return files
+        .map((file) => mapMaterialFileForClient(file, fallbackTitle))
+        .filter(Boolean);
+}
+
 function countReadyBooks(books = []) {
     return books.filter(
         (book) => book.pageindex_status === 'ready' && book.pageindex_s3_uri
@@ -85,8 +126,12 @@ function mapSubjectDetail(subject, subjectCode) {
     return {
         ...summary,
         primaryBookId: subject.primary_book_id,
-        syllabus: subject.syllabus,
-        paperSolution: subject.paper_solution,
+        syllabus: mapMaterialFilesForClient(subject.syllabus, 'Syllabus'),
+        paperSolution: mapMaterialFilesForClient(subject.paper_solution, 'Paper solution'),
+        prectical: mapMaterialFilesForClient(subject.prectical, 'Practical'),
+        vivaQuestions: mapMaterialFilesForClient(subject.viva_questions, 'Viva questions'),
+        impMaterial: mapMaterialFilesForClient(subject.imp_material, 'Important material'),
+        assignments: mapMaterialFilesForClient(subject.assignments, 'Assignment'),
         oldPaper: (subject.old_paper || []).map((item) => ({
             year: item.year,
             link: item.link,
@@ -192,5 +237,6 @@ export {
     getSubjectChatSessionId,
     findBookInSubject,
     mapBookForClient,
+    mapMaterialFilesForClient,
     normalizeSubjectRecord,
 };

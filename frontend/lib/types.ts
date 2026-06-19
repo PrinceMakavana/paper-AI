@@ -30,6 +30,15 @@ export interface CatalogBook {
     indexVersion?: number;
 }
 
+export interface CatalogMaterialFile {
+    title?: string;
+    originalName?: string;
+    storagePath?: string;
+    s3Uri?: string;
+    url?: string;
+    uploadedAt?: string;
+}
+
 export interface SubjectSummary {
     subjectCode: string;
     subjectName: string;
@@ -42,8 +51,12 @@ export interface SubjectSummary {
 
 export interface SubjectDetail extends SubjectSummary {
     primaryBookId?: string;
-    syllabus?: string;
-    paperSolution?: string;
+    syllabus?: CatalogMaterialFile[];
+    paperSolution?: CatalogMaterialFile[];
+    prectical?: CatalogMaterialFile[];
+    vivaQuestions?: CatalogMaterialFile[];
+    impMaterial?: CatalogMaterialFile[];
+    assignments?: CatalogMaterialFile[];
     oldPaper?: { year: string; link: string }[];
     books: CatalogBook[];
 }

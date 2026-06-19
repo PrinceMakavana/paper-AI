@@ -39,6 +39,14 @@ function buildObjectKey(userId, documentId, filename) {
     return `${getPrefix()}/${safeUserId}/${safeDocId}/${filename}`;
 }
 
+function buildCatalogObjectKey(subjectCode, contentType, contentId, filename) {
+    const safeSubjectCode = safePathPart(subjectCode, 'subject');
+    const safeContentType = safePathPart(contentType, 'content');
+    const safeContentId = safePathPart(contentId, 'file');
+    const safeFilename = safePathPart(filename, 'source.pdf');
+    return `${getPrefix()}/catalog/${safeSubjectCode}/${safeContentType}/${safeContentId}/${safeFilename}`;
+}
+
 function getS3Client() {
     return new S3Client({ region: getRegion() });
 }
@@ -171,6 +179,7 @@ export {
     PDF_CONTENT_TYPE,
     JSON_CONTENT_TYPE,
     buildObjectKey,
+    buildCatalogObjectKey,
     uploadBytes,
     uploadJson,
     uploadPdf,

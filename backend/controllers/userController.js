@@ -129,11 +129,16 @@ const loginUser = async (req, res) => {
 
         const token = signSessionToken(user);
         const profile = await User.findById(user._id).select('-password').lean();
+        const clientUser = mapUserForClient(profile);
+
+        if (profile.isAdmin === true) {
+            clientUser.isAdmin = true;
+        }
 
         res.status(200).json({
             message: 'Login successful.',
             token,
-            user: mapUserForClient(profile),
+            user: clientUser,
         });
     } catch (err) {
         res.status(500).json({ error: 'Login failed.', details: err.message });

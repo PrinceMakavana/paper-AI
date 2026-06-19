@@ -7,6 +7,7 @@ import { LogoutConfirmDialog } from "@/components/logout-confirm-dialog";
 import { DocumentHistory } from "@/components/document-history";
 import { PdfViewerDialog } from "@/components/pdf-viewer-dialog";
 import { SubjectCatalog } from "@/components/subject-catalog";
+import type { CatalogMaterialFile } from "@/lib/types";
 import { DocumentMetaData } from "@/lib/types";
 import { Coins, Loader2, LogOut, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -35,6 +36,16 @@ function getApiErrorMessage(error: unknown, fallback: string) {
   }
   if (error instanceof Error) return error.message;
   return fallback;
+}
+
+function getMaterialFiles(value?: CatalogMaterialFile[] | string) {
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string" && value.trim()) return [{ url: value }];
+  return [];
+}
+
+function getMaterialFileUrl(file?: CatalogMaterialFile) {
+  return file?.url || file?.s3Uri || file?.storagePath;
 }
 
 export default function ChatPage() {
@@ -394,17 +405,17 @@ export default function ChatPage() {
                   {currentSubject.knownAs ? ` · ${currentSubject.knownAs}` : ""}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-                  {currentSubject.syllabus ? (
+                  {getMaterialFiles(currentSubject.syllabus).length > 0 ? (
                     <ExternalLinkAnchor
-                      href={currentSubject.syllabus}
+                      href={getMaterialFileUrl(getMaterialFiles(currentSubject.syllabus)[0])}
                       className="text-sm text-brand"
                     >
                       Syllabus
                     </ExternalLinkAnchor>
                   ) : null}
-                  {currentSubject.paperSolution ? (
+                  {getMaterialFiles(currentSubject.paperSolution).length > 0 ? (
                     <ExternalLinkAnchor
-                      href={currentSubject.paperSolution}
+                      href={getMaterialFileUrl(getMaterialFiles(currentSubject.paperSolution)[0])}
                       className="text-sm text-brand"
                     >
                       Paper solutions
