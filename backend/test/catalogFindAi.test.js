@@ -3,6 +3,7 @@ import tap from 'tap';
 import mongoose from 'mongoose';
 import { broadSearchCatalogIndex, clearCatalogIndexCache } from '../helpers/catalogIndexHelpers.js';
 import {
+    formatFallbackFindAnswer,
     isConfidentLocalMatch,
     runCatalogFindWithAi,
     tryLocalCatalogAnswer,
@@ -147,6 +148,29 @@ tap.test('runCatalogFindWithAi uses local path for explicit subject code query',
     t.equal(result.answerSource, 'local');
     t.equal(result.aiTokenCount, LOCAL_CATALOG_FIND_TOKEN_COST);
     t.ok(result.selectedRows.every((row) => row.subjectCode === '3110002'));
+    t.end();
+});
+
+tap.test('formatFallbackFindAnswer resolves S3 links for chat downloads', (t) => {
+    const answer = formatFallbackFindAnswer(
+        [
+            {
+                subjectCode: '1015502',
+                subjectName: 'Fundamentals Of Building Structures',
+                materialType: 'old_paper',
+                label: 'Summer-2015',
+                url: 's3://pageindex-json-store/old_papers/1015502/summer-2015.pdf',
+            },
+        ],
+        {
+            linkResolver: (url) => `/public/catalog/download-url?url=${encodeURIComponent(url)}`,
+        }
+    );
+
+    t.match(
+        answer,
+        '[Summer-2015](/public/catalog/download-url?url=s3%3A%2F%2Fpageindex-json-store%2Fold_papers%2F1015502%2Fsummer-2015.pdf)'
+    );
     t.end();
 });
 

@@ -18,10 +18,57 @@ const instrumentSans = Instrument_Sans({
   weight: ["400", "500", "600"],
 });
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
+const siteName = "paperAI";
+const title = "paperAI — AI-Powered GTU Paper Solutions & PDF Chat";
+const description =
+  "Find GTU syllabus, old exam papers, books, and paper solutions, then upload PDFs to generate AI answers, summaries, and document-grounded chat.";
+
 export const metadata: Metadata = {
-  title: "paperAI — AI-Powered GTU Paper Solutions & Document Assistant",
-  description:
-    "Upload GTU papers, generate accurate AI solutions, chat with PDFs, summarize notes, and prepare smarter for exams. Gemini + Ollama support.",
+  metadataBase: new URL(siteUrl),
+  applicationName: siteName,
+  title: {
+    default: title,
+    template: `%s | ${siteName}`,
+  },
+  description,
+  keywords: [
+    "paperAI",
+    "GTU paper solutions",
+    "GTU syllabus",
+    "old exam papers",
+    "PDF chat",
+    "AI study assistant",
+    "GTU books",
+  ],
+  authors: [{ name: "paperAI" }],
+  creator: "paperAI",
+  publisher: "paperAI",
+  category: "education",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName,
+    title,
+    description,
+    images: [
+      {
+        url: "/paper_ai_logo.png",
+        width: 280,
+        height: 72,
+        alt: "paperAI",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+    images: ["/paper_ai_logo.png"],
+  },
   icons: {
     icon: [
       { url: "/paper_ai_logo.png", media: "(prefers-color-scheme: light)" },

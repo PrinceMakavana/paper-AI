@@ -10,3 +10,5 @@ Disallow: /profile
 Disallow: /forgot-password
 Disallow: /reset-password
 Disallow: /verify-email
+
+Sitemap: /sitemap.xml

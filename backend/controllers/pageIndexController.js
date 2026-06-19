@@ -237,6 +237,36 @@ function getPageIndexBaseUrl() {
     return process.env.PAGEINDEX_BACKEND_API_URL || process.env.BACKEND_API_URL || 'http://127.0.0.1:8000';
 }
 
+function getRequestOrigin(req) {
+    const configuredOrigin = (
+        process.env.PUBLIC_API_URL
+        || process.env.API_PUBLIC_URL
+        || process.env.BACKEND_PUBLIC_URL
+        || ''
+    ).trim();
+    if (configuredOrigin) {
+        return configuredOrigin.replace(/\/+$/, '');
+    }
+
+    const forwardedProto = req.get('x-forwarded-proto')?.split(',')[0]?.trim();
+    const forwardedHost = req.get('x-forwarded-host')?.split(',')[0]?.trim();
+    const proto = forwardedProto || req.protocol || 'http';
+    const host = forwardedHost || req.get('host');
+
+    return host ? `${proto}://${host}` : '';
+}
+
+function buildCatalogDownloadLinkResolver(req) {
+    const origin = getRequestOrigin(req);
+    return (url) => {
+        const trimmed = String(url || '').trim();
+        if (!trimmed.startsWith('s3://')) return trimmed;
+
+        const path = `/public/catalog/download-url?url=${encodeURIComponent(trimmed)}`;
+        return origin ? `${origin}${path}` : path;
+    };
+}
+
 function getDefaultModelForProvider(modelProvider) {
     switch (modelProvider) {
         case 'ollama':
@@ -852,6 +882,7 @@ async function catalogFindQuestion(req, res) {
             question: question.trim(),
             model,
             userId: req.user.userId,
+            linkResolver: buildCatalogDownloadLinkResolver(req),
         });
 
         console.log('[CatalogFind] billed', JSON.stringify({

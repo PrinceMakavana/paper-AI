@@ -138,15 +138,14 @@ Rules:
 9. Do not include any text outside the JSON object.`;
 }
 
-function resolveFindMaterialAnswer({ question, constraints, selectedRows, parsedAnswer }) {
+function resolveFindMaterialAnswer({ question, constraints, selectedRows, linkResolver }) {
     const validatedRows = validateSelectedRowsForQuestion(selectedRows, constraints);
 
     if (validatedRows.length) {
-        const aiAnswer = String(parsedAnswer || '').trim();
-        if (aiAnswer && !/^DATA_NOT_AVAILABLE$/i.test(aiAnswer)) {
-            return { answer: aiAnswer, selectedRows: validatedRows };
-        }
-        return { answer: formatFallbackFindAnswer(validatedRows), selectedRows: validatedRows };
+        return {
+            answer: formatFallbackFindAnswer(validatedRows, { linkResolver }),
+            selectedRows: validatedRows,
+        };
     }
 
     return {
@@ -155,19 +154,25 @@ function resolveFindMaterialAnswer({ question, constraints, selectedRows, parsed
     };
 }
 
-function formatFallbackFindAnswer(rows) {
+function resolveCatalogLink(url, linkResolver) {
+    const trimmed = String(url || '').trim();
+    if (!trimmed) return '';
+    return typeof linkResolver === 'function' ? linkResolver(trimmed) : trimmed;
+}
+
+function formatFallbackFindAnswer(rows, { linkResolver } = {}) {
     if (!rows.length) {
         return buildDataNotAvailableAnswer();
     }
 
     const grouped = groupMatchesBySubject(rows);
-    const lines = ['Here is what I found in the catalog:', ''];
+    const lines = ['', ''];
 
     for (const subject of grouped) {
         const alias = subject.knownAs ? ` (${subject.knownAs})` : '';
         lines.push(`**${subject.subjectCode} – ${subject.subjectName}**${alias}`);
         for (const item of subject.items) {
-            lines.push(`- [${item.label}](${item.url})`);
+            lines.push(`- [${item.label}](${resolveCatalogLink(item.url, linkResolver)})`);
         }
         lines.push('');
     }
@@ -207,7 +212,7 @@ function buildStudyRedirectAnswer(suggestedSubjectCodes, candidates) {
     return lines.join('\n');
 }
 
-function tryLocalCatalogAnswer(question, candidates) {
+function tryLocalCatalogAnswer(question, candidates, { linkResolver } = {}) {
     const trimmed = String(question || '').trim();
     const constraints = parseFindMaterialConstraints(trimmed);
 
@@ -225,7 +230,7 @@ function tryLocalCatalogAnswer(question, candidates) {
         question: trimmed,
         constraints,
         selectedRows: candidates.slice(0, LOCAL_CANDIDATE_LIMIT),
-        parsedAnswer: '',
+        linkResolver,
     });
 
     return {
@@ -321,7 +326,7 @@ function buildLocalCatalogResult(localResult) {
     };
 }
 
-async function normalizeAiCatalogResult(parsed, candidates, question) {
+async function normalizeAiCatalogResult(parsed, candidates, question, { linkResolver } = {}) {
     const candidateIds = new Set(candidates.map((row) => row.id));
     const constraints = parseFindMaterialConstraints(question);
     const intent = parsed?.intent === 'study_question' || looksLikeStudyQuestion(question)
@@ -345,12 +350,11 @@ async function normalizeAiCatalogResult(parsed, candidates, question) {
         ? parsed.selectedIds.filter((id) => candidateIds.has(String(id)))
         : [];
     const selectedRows = await getCatalogRowsByIds(selectedIds);
-    const parsedAnswer = String(parsed?.answer || '').trim();
     const { answer, selectedRows: validatedRows } = resolveFindMaterialAnswer({
         question,
         constraints,
         selectedRows,
-        parsedAnswer,
+        linkResolver,
     });
 
     return {
@@ -362,7 +366,7 @@ async function normalizeAiCatalogResult(parsed, candidates, question) {
     };
 }
 
-async function runCatalogFindWithAi({ question, model, userId }) {
+async function runCatalogFindWithAi({ question, model, userId, linkResolver }) {
     const trimmed = String(question || '').trim();
     if (!trimmed) {
         const error = new Error('Missing question');
@@ -372,7 +376,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
 
     const candidates = await broadSearchCatalogIndex(trimmed, { limit: AI_CANDIDATE_LIMIT });
     const explicitSubjectCode = extractSubjectCodeFromQuery(trimmed);
-    const localResult = tryLocalCatalogAnswer(trimmed, candidates);
+    const localResult = tryLocalCatalogAnswer(trimmed, candidates, { linkResolver });
     const confidentLocal = isConfidentLocalMatch(trimmed, candidates, localResult.selectedRows);
 
     logCatalogFind('search', {
@@ -440,7 +444,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
     });
 
     const normalized = parsed
-        ? await normalizeAiCatalogResult(parsed, candidates, trimmed)
+        ? await normalizeAiCatalogResult(parsed, candidates, trimmed, { linkResolver })
         : (() => {
               const constraints = parseFindMaterialConstraints(trimmed);
               if (looksLikeStudyQuestion(trimmed)) {
@@ -456,7 +460,7 @@ async function runCatalogFindWithAi({ question, model, userId }) {
                   question: trimmed,
                   constraints,
                   selectedRows: candidates.slice(0, LOCAL_CANDIDATE_LIMIT),
-                  parsedAnswer: '',
+                  linkResolver,
               });
               return {
                   intent: 'find_material',
