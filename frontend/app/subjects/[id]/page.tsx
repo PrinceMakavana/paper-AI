@@ -66,6 +66,23 @@ function buildApiUrl(path: string) {
   return `${apiBase.replace(/\/$/, "")}${apiVersion}${path}`;
 }
 
+function isS3DownloadUrl(url?: string) {
+  return Boolean(url?.trim().startsWith("s3://"));
+}
+
+function getDownloadHref(url?: string) {
+  const trimmedUrl = url?.trim();
+  if (!trimmedUrl) {
+    return undefined;
+  }
+
+  if (!isS3DownloadUrl(trimmedUrl)) {
+    return trimmedUrl;
+  }
+
+  return buildApiUrl(`/public/catalog/download-url?url=${encodeURIComponent(trimmedUrl)}`);
+}
+
 function getCatalogApiHeaders() {
   const headers: Record<string, string> = {
     "ngrok-skip-browser-warning": "true",
@@ -254,33 +271,45 @@ function createMaterialItems(subject: SubjectDetail) {
   const items: { name: string; url: string }[] = [];
 
   if (subject.syllabus) {
-    items.push({
-      name: `${subject.subjectCode} ${subject.subjectName} GTU syllabus`,
-      url: subject.syllabus,
-    });
+    const url = getDownloadHref(subject.syllabus);
+    if (url) {
+      items.push({
+        name: `${subject.subjectCode} ${subject.subjectName} GTU syllabus`,
+        url,
+      });
+    }
   }
 
   (subject.oldPaper ?? []).forEach((paper) => {
-    items.push({
-      name: `${subject.subjectCode} ${subject.subjectName} ${paper.year} GTU old paper`,
-      url: paper.link,
-    });
+    const url = getDownloadHref(paper.link);
+    if (url) {
+      items.push({
+        name: `${subject.subjectCode} ${subject.subjectName} ${paper.year} GTU old paper`,
+        url,
+      });
+    }
   });
 
   (subject.books ?? []).forEach((book) => {
     if (!book.downloadLink) return;
 
-    items.push({
-      name: `${book.title || book.altData || book.bookId} book for ${subject.subjectCode}`,
-      url: book.downloadLink,
-    });
+    const url = getDownloadHref(book.downloadLink);
+    if (url) {
+      items.push({
+        name: `${book.title || book.altData || book.bookId} book for ${subject.subjectCode}`,
+        url,
+      });
+    }
   });
 
   if (subject.paperSolution) {
-    items.push({
-      name: `${subject.subjectCode} ${subject.subjectName} GTU paper solution`,
-      url: subject.paperSolution,
-    });
+    const url = getDownloadHref(subject.paperSolution);
+    if (url) {
+      items.push({
+        name: `${subject.subjectCode} ${subject.subjectName} GTU paper solution`,
+        url,
+      });
+    }
   }
 
   return items;
@@ -492,7 +521,7 @@ function OldPaperGrid({ papers }: { papers: NonNullable<SubjectDetail["oldPaper"
       {papers.map((paper) => (
         <ExternalLinkAnchor
           key={`${paper.year}-${paper.link}`}
-          href={paper.link}
+          href={getDownloadHref(paper.link)}
           className="flex min-h-9 items-center justify-center rounded-sm border border-primary px-2 text-center text-xs font-medium text-foreground no-underline opacity-100 hover:bg-muted"
           iconClassName="hidden"
         >
@@ -530,7 +559,7 @@ function BookCard({ book, subjectCode }: { book: CatalogBook; subjectCode: strin
       </div>
       {book.downloadLink ? (
         <ExternalLinkAnchor
-          href={book.downloadLink}
+          href={getDownloadHref(book.downloadLink)}
           className="mt-auto flex h-8 items-center justify-center rounded-sm border border-primary px-3 text-xs font-medium text-foreground no-underline opacity-100 hover:bg-muted"
           iconClassName="hidden"
         >
@@ -632,7 +661,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                     initials={initials}
                     title={subject.subjectName}
                     subtitle={subject.subjectCode}
-                    href={subject.syllabus}
+                    href={getDownloadHref(subject.syllabus)}
                     actionLabel={`Download ${subject.subjectCode} syllabus`}
                   />
                 ) : (
@@ -659,7 +688,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                     initials={initials}
                     title={subject.subjectName}
                     subtitle={subject.subjectCode}
-                    href={subject.paperSolution}
+                    href={getDownloadHref(subject.paperSolution)}
                     actionLabel={`View ${subject.subjectCode} paper solution`}
                   />
                 ) : (

@@ -129,7 +129,10 @@ function parseS3Location(location) {
         // Treat non-URL values as bucket-relative keys below.
     }
 
-    const bucket = process.env.PAGEINDEX_S3_BUCKET || process.env.S3_BUCKET || process.env.AWS_S3_BUCKET;
+    const bucket = process.env.PAGEINDEX_S3_BUCKET
+        || process.env.S3_BUCKET
+        || process.env.AWS_S3_BUCKET
+        || process.env.AWS_S3_BUCKET_NAME;
     if (!bucket) return null;
 
     return {

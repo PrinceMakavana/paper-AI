@@ -14,6 +14,48 @@ function setPublicCatalogCacheHeaders(res) {
     res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=3600');
 }
 
+function isExplicitS3Location(location) {
+    const trimmed = String(location || '').trim();
+    if (!trimmed) return false;
+    if (trimmed.startsWith('s3://')) return true;
+
+    try {
+        const parsedUrl = new URL(trimmed);
+        const hostParts = parsedUrl.hostname.split('.');
+        return parsedUrl.protocol === 'https:'
+            && (parsedUrl.hostname.includes('.s3.')
+                || parsedUrl.hostname.endsWith('.s3.amazonaws.com')
+                || hostParts[0] === 's3'
+                || hostParts[0].startsWith('s3-'));
+    } catch {
+        return false;
+    }
+}
+
+function getAllowedPublicDownloadBuckets() {
+    return new Set(
+        [
+            process.env.PAGEINDEX_S3_BUCKET,
+            process.env.S3_BUCKET,
+            process.env.AWS_S3_BUCKET,
+            process.env.AWS_S3_BUCKET_NAME,
+        ]
+            .map((bucket) => String(bucket || '').trim())
+            .filter(Boolean)
+    );
+}
+
+function getFilenameFromS3Key(key) {
+    const filename = String(key || '').split('/').filter(Boolean).pop();
+    if (!filename) return 'source.pdf';
+
+    try {
+        return decodeURIComponent(filename);
+    } catch {
+        return filename;
+    }
+}
+
 async function listCatalogSubjects(req, res) {
     try {
         const subjects = await listSubjects();
@@ -109,6 +151,65 @@ async function getPublicCatalogSubject(req, res) {
     }
 }
 
+async function getPublicCatalogDownloadUrl(req, res) {
+    try {
+        const location = req.query.url;
+        if (typeof location !== 'string' || !location.trim()) {
+            return res.status(400).json({
+                message: 'Download URL is required.',
+                status: 400,
+            });
+        }
+
+        if (!isExplicitS3Location(location)) {
+            return res.status(400).json({
+                message: 'Only S3 download URLs can be signed.',
+                status: 400,
+            });
+        }
+
+        const parsedLocation = parseS3Location(location);
+        if (!parsedLocation?.bucket || !parsedLocation?.key) {
+            return res.status(400).json({
+                message: 'S3 download URL is invalid.',
+                status: 400,
+            });
+        }
+
+        const allowedBuckets = getAllowedPublicDownloadBuckets();
+        if (allowedBuckets.size === 0) {
+            return res.status(503).json({
+                message: 'Public download signing is not configured.',
+                status: 503,
+            });
+        }
+
+        if (!allowedBuckets.has(parsedLocation.bucket)) {
+            return res.status(403).json({
+                message: 'S3 bucket is not allowed for public downloads.',
+                status: 403,
+            });
+        }
+
+        const expiresIn = getPdfSignedUrlExpiresSeconds();
+        const url = buildSignedPdfUrl({
+            bucket: parsedLocation.bucket,
+            key: parsedLocation.key,
+            filename: getFilenameFromS3Key(parsedLocation.key),
+            expiresIn,
+        });
+
+        res.set('Cache-Control', 'private, no-store');
+        return res.redirect(302, url);
+    } catch (error) {
+        console.error('Error creating public catalog download signed URL:', error);
+        return res.status(error.statusCode || 500).json({
+            message: error instanceof Error ? error.message : 'Failed to create download URL',
+            status: error.statusCode || 500,
+        });
+    }
+}
+
 async function getCatalogBookPdfUrl(req, res) {
     try {
         const { subjectCode, bookId } = req.params;
@@ -153,5 +254,6 @@ export {
     listPublicCatalogSubjects,
     getCatalogSubject,
     getPublicCatalogSubject,
+    getPublicCatalogDownloadUrl,
     getCatalogBookPdfUrl,
 };

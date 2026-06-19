@@ -104,6 +104,17 @@ const publicSubjectDetailRateLimit = createPublicCatalogRateLimit({
     message: 'Too many subject detail requests. Please try again in a minute.',
 });
 
+const publicDownloadRateLimit = createPublicCatalogRateLimit({
+    max: 100,
+    windowMs: 60 * 1000,
+    message: 'Too many download requests. Please try again in a minute.',
+});
+
+router.get(
+    '/public/catalog/download-url',
+    publicDownloadRateLimit,
+    catalogController.getPublicCatalogDownloadUrl
+);
 router.get(
     '/public/catalog/subjects',
     requirePublicCatalogSecret,
