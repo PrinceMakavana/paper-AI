@@ -7,6 +7,7 @@ import { LogoutConfirmDialog } from "@/components/logout-confirm-dialog";
 import { DocumentHistory } from "@/components/document-history";
 import { PdfViewerDialog } from "@/components/pdf-viewer-dialog";
 import { SubjectCatalog } from "@/components/subject-catalog";
+import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import type { CatalogMaterialFile } from "@/lib/types";
 import { DocumentMetaData } from "@/lib/types";
 import { Coins, Loader2, LogOut, UserCircle } from "lucide-react";
@@ -407,7 +408,9 @@ export default function ChatPage() {
                 <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
                   {getMaterialFiles(currentSubject.syllabus).length > 0 ? (
                     <ExternalLinkAnchor
-                      href={getMaterialFileUrl(getMaterialFiles(currentSubject.syllabus)[0])}
+                      href={getCatalogDownloadHref(
+                        getMaterialFileUrl(getMaterialFiles(currentSubject.syllabus)[0]),
+                      )}
                       className="text-sm text-brand"
                     >
                       Syllabus
@@ -415,7 +418,9 @@ export default function ChatPage() {
                   ) : null}
                   {getMaterialFiles(currentSubject.paperSolution).length > 0 ? (
                     <ExternalLinkAnchor
-                      href={getMaterialFileUrl(getMaterialFiles(currentSubject.paperSolution)[0])}
+                      href={getCatalogDownloadHref(
+                        getMaterialFileUrl(getMaterialFiles(currentSubject.paperSolution)[0]),
+                      )}
                       className="text-sm text-brand"
                     >
                       Paper solutions
@@ -427,7 +432,7 @@ export default function ChatPage() {
                       {(currentSubject.oldPaper ?? []).map((paper) => (
                         <ExternalLinkAnchor
                           key={`${paper.year}-${paper.link}`}
-                          href={paper.link}
+                          href={getCatalogDownloadHref(paper.link)}
                           className="text-sm text-muted-foreground"
                         >
                           {paper.year}

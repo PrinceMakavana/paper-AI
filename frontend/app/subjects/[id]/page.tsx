@@ -1,4 +1,5 @@
 import { ExternalLinkAnchor } from "@/components/external-link-anchor";
+import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import type { CatalogBook, CatalogMaterialFile, SubjectDetail } from "@/lib/types";
@@ -64,23 +65,6 @@ function buildApiUrl(path: string) {
   }
 
   return `${apiBase.replace(/\/$/, "")}${apiVersion}${path}`;
-}
-
-function isS3DownloadUrl(url?: string) {
-  return Boolean(url?.trim().startsWith("s3://"));
-}
-
-function getDownloadHref(url?: string) {
-  const trimmedUrl = url?.trim();
-  if (!trimmedUrl) {
-    return undefined;
-  }
-
-  if (!isS3DownloadUrl(trimmedUrl)) {
-    return trimmedUrl;
-  }
-
-  return buildApiUrl(`/public/catalog/download-url?url=${encodeURIComponent(trimmedUrl)}`);
 }
 
 function getMaterialFiles(value?: CatalogMaterialFile[] | string) {
@@ -287,7 +271,7 @@ function createMaterialItems(subject: SubjectDetail) {
   const items: { name: string; url: string }[] = [];
 
   getMaterialFiles(subject.syllabus).forEach((file, index) => {
-    const url = getDownloadHref(getMaterialFileUrl(file));
+    const url = getCatalogDownloadHref(getMaterialFileUrl(file));
     if (url) {
       items.push({
         name: file.title || `${subject.subjectCode} ${subject.subjectName} GTU syllabus ${index + 1}`,
@@ -297,7 +281,7 @@ function createMaterialItems(subject: SubjectDetail) {
   });
 
   (subject.oldPaper ?? []).forEach((paper) => {
-    const url = getDownloadHref(paper.link);
+    const url = getCatalogDownloadHref(paper.link);
     if (url) {
       items.push({
         name: `${subject.subjectCode} ${subject.subjectName} ${paper.year} GTU old paper`,
@@ -309,7 +293,7 @@ function createMaterialItems(subject: SubjectDetail) {
   (subject.books ?? []).forEach((book) => {
     if (!book.downloadLink) return;
 
-    const url = getDownloadHref(book.downloadLink);
+    const url = getCatalogDownloadHref(book.downloadLink);
     if (url) {
       items.push({
         name: `${book.title || book.altData || book.bookId} book for ${subject.subjectCode}`,
@@ -319,7 +303,7 @@ function createMaterialItems(subject: SubjectDetail) {
   });
 
   getMaterialFiles(subject.paperSolution).forEach((file, index) => {
-    const url = getDownloadHref(getMaterialFileUrl(file));
+    const url = getCatalogDownloadHref(getMaterialFileUrl(file));
     if (url) {
       items.push({
         name: file.title || `${subject.subjectCode} ${subject.subjectName} GTU paper solution ${index + 1}`,
@@ -548,7 +532,7 @@ function MaterialFilesGrid({
           initials={initials}
           title={file.title || fallbackTitle}
           subtitle={file.originalName || subtitle}
-          href={getDownloadHref(getMaterialFileUrl(file))}
+          href={getCatalogDownloadHref(getMaterialFileUrl(file))}
           actionLabel={`${actionPrefix}${files.length > 1 ? ` ${index + 1}` : ""}`}
         />
       ))}
@@ -570,7 +554,7 @@ function OldPaperGrid({ papers }: { papers: NonNullable<SubjectDetail["oldPaper"
       {papers.map((paper) => (
         <ExternalLinkAnchor
           key={`${paper.year}-${paper.link}`}
-          href={getDownloadHref(paper.link)}
+          href={getCatalogDownloadHref(paper.link)}
           className="flex min-h-9 items-center justify-center rounded-sm border border-primary px-2 text-center text-xs font-medium text-foreground no-underline opacity-100 hover:bg-muted"
           iconClassName="hidden"
         >
@@ -608,7 +592,7 @@ function BookCard({ book, subjectCode }: { book: CatalogBook; subjectCode: strin
       </div>
       {book.downloadLink ? (
         <ExternalLinkAnchor
-          href={getDownloadHref(book.downloadLink)}
+          href={getCatalogDownloadHref(book.downloadLink)}
           className="mt-auto flex h-8 items-center justify-center rounded-sm border border-primary px-3 text-xs font-medium text-foreground no-underline opacity-100 hover:bg-muted"
           iconClassName="hidden"
         >

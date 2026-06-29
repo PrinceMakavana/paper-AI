@@ -4,21 +4,18 @@ import { getModelConfig } from '../utils/modelSelector.js';
 import IndexStatus from '../utils/enums.js';
 import { localStructureToTreeNodes } from '../utils/localPageindexTree.js';
 import {
-    buildContextFromMultipleTrees,
     buildContextFromTree,
     formatPagesArg,
     pickTopPagesForFetch,
-    pickTopPagesForFetchByBook,
     truncateToBudget,
 } from '../utils/pageindexVectorlessContext.js';
 import {
-    getReadyBooks,
     getSubject,
     getSubjectChatSessionId,
-    loadSubjectByCode,
 } from '../helpers/catalogDataHelpers.js';
 import { getCatalogGlobalSessionId } from '../helpers/catalogIndexHelpers.js';
 import { runCatalogFindWithAi } from '../helpers/catalogFindAi.js';
+import { runSubjectChatWithAi } from '../helpers/subjectChatAi.js';
 import { getCatalogContributeFormUrl } from '../helpers/catalogQueryHelpers.js';
 import { requirePlainString } from '../utils/validateInput.js';
 import {
@@ -54,8 +51,6 @@ import {
     consumeUserPages,
     refundUserPages,
 } from '../helpers/userPageHelpers.js';
-import { parseSubjectExamQuestion } from '../utils/subjectExamQuestion.js';
-
 const MAX_TREE_CONTEXT_CHARS = 28_000;
 const MIN_CONTEXT_CHARS_BEFORE_PAGE_TEXT = 500;
 const MAX_PAGE_TEXT_PAGES = 8;
@@ -296,121 +291,6 @@ function contentToString(content) {
     if (typeof content === 'string') return content;
     if (content == null) return '';
     return JSON.stringify(content);
-}
-
-function stripAnswerBoilerplate(text) {
-    let answer = String(text || '').trim();
-    if (!answer) return answer;
-
-    const notFoundLead = /^based on the provided context[^\n.]*(?:\.|\n)\s*/i;
-    const leadMatch = answer.match(notFoundLead);
-    if (leadMatch) {
-        const lead = leadMatch[0];
-        if (/there is no|does not contain|no information|not mention|no specific section/i.test(lead)) {
-            answer = answer.slice(lead.length).replace(/^however,?\s*/i, '').trim();
-        }
-    }
-
-    return answer
-        .replace(/^according to the (provided )?(context|textbook|book)[^\n.]*\.\s*/i, '')
-        .trim();
-}
-
-function looksLikeNotFoundAnswer(text) {
-    const trimmed = String(text || '').trim();
-    if (/^NOT_FOUND$/i.test(trimmed)) return true;
-
-    const lower = trimmed.toLowerCase();
-    const hasSubstantiveAnswer = /(^|\n)\d+\.|•|example|e\.g\.|means |is defined|refers to|steps?:/i.test(
-        trimmed
-    );
-
-    if (hasSubstantiveAnswer && trimmed.length > 180) return false;
-
-    return (
-        lower.includes('there is no information regarding') ||
-        lower.includes('does not mention') ||
-        (lower.includes('there is no specific section') && trimmed.length < 400) ||
-        lower.includes('does not contain relevant information')
-    );
-}
-
-function polishSubjectAnswer(raw, subject) {
-    const stripped = stripAnswerBoilerplate(raw);
-
-    if (looksLikeNotFoundAnswer(stripped)) {
-        const link = subject.paper_solution;
-        return {
-            answer: link
-                ? `This topic was not found in the indexed textbook(s). Check official paper solutions: ${link}`
-                : 'This topic was not found in the indexed textbook(s). Try rephrasing using textbook chapter terms.',
-            answerSource: 'not_in_book',
-        };
-    }
-
-    return {
-        answer: stripped || stripAnswerBoilerplate(raw) || String(raw || '').trim(),
-        answerSource: 'book',
-    };
-}
-
-function buildSubjectChatPrompt(subjectMeta, contextStr, question, markHint) {
-    const formattingBlock = markHint
-        ? `
-Formatting request:
-- ${markHint.instruction}
-- Answer the topic from the textbook excerpts even if they do not contain exam-paper wording or mark allocations.
-- Do NOT reply NOT_FOUND only because the excerpts lack an official "X mark" exam answer.`
-        : '';
-
-    return `You are a GTU exam study assistant for "${subjectMeta.subjectName}" (${subjectMeta.subjectCode}).
-
-Rules:
-- Answer directly in clear, student-friendly language.
-- Do NOT open with phrases like "Based on the provided context", "According to the book", or mention book titles in your first sentence.
-- Use only the textbook excerpts below. If the exact exam wording is missing, search related sections (synonyms, chapter titles, nearby topics) and answer from those.
-- If the user asks for an N-mark or exam-style answer, treat that as formatting only. Answer the underlying topic from the excerpts; do not require exact exam wording.
-- Structure: short definition or direct answer first, then explanation, then examples if available.
-- If nothing relevant exists in the excerpts, reply with exactly: NOT_FOUND
-- Never invent facts not supported by the excerpts.
-${formattingBlock}
-
-Textbook excerpts:
-${contextStr}
-
-Question:
-${question}
-
-Answer:`;
-}
-
-async function appendCatalogPageTextContext(bookTrees, question, contextStr) {
-    const pagesToFetch = pickTopPagesForFetchByBook(bookTrees, question, MAX_PAGE_TEXT_PAGES);
-    if (!pagesToFetch.length) return contextStr;
-
-    const pageBlobs = [];
-
-    for (const { bookId, page, pdfStoragePath } of pagesToFetch) {
-        try {
-            const pageRes = await fetch(
-                `${getPageIndexBaseUrl()}/catalog/page-text?storage_path=${encodeURIComponent(pdfStoragePath)}&pages=${encodeURIComponent(String(page))}`
-            );
-            if (!pageRes.ok) continue;
-            const pageData = await pageRes.json();
-            for (const entry of pageData.pages || []) {
-                pageBlobs.push(`[Book: ${bookId} | Page ${entry.page}]:\n${entry.text}`);
-            }
-        } catch (error) {
-            console.error(`catalog page-text fallback failed for ${bookId}:`, error);
-        }
-    }
-
-    if (!pageBlobs.length) return contextStr;
-
-    return truncateToBudget(
-        [contextStr, pageBlobs.join('\n\n')].filter(Boolean).join('\n\n'),
-        MAX_COMBINED_CONTEXT_CHARS
-    );
 }
 
 function normalizeIndexStatus(status) {
@@ -683,13 +563,6 @@ async function questionVectorlessRag(req, res) {
     }
 }
 
-function catalogTreeToRoots(tree) {
-    if (!tree) return undefined;
-    if (Array.isArray(tree)) return localStructureToTreeNodes(tree);
-    if (Array.isArray(tree.structure)) return localStructureToTreeNodes(tree.structure);
-    return undefined;
-}
-
 async function subjectQuestionVectorlessRag(req, res) {
     let savedUserMessage = null;
     const { question, subjectCode: rawSubjectCode, chatModel } = req.body || {};
@@ -701,59 +574,13 @@ async function subjectQuestionVectorlessRag(req, res) {
         }
 
         const sessionId = getSubjectChatSessionId(subjectCode);
-
-        await assertUserHasTokens(req.user.userId);
-
-        const { subject: rawSubject } = await loadSubjectByCode(subjectCode);
-        const readyBooks = getReadyBooks(rawSubject);
-        if (!readyBooks.length) {
-            return res.json({
-                answer: 'This subject is not ready for questions yet. No indexed books are available.',
-                status: 503,
-            });
-        }
-
         const { model } = getModelConfig(chatModel);
-        const bookTrees = [];
-
-        for (const book of readyBooks) {
-            let roots;
-            try {
-                const tree = await loadHostedTreeJson({ pageindex_s3_uri: book.pageindex_s3_uri });
-                roots = catalogTreeToRoots(tree);
-            } catch (error) {
-                console.error(`catalog tree load failed for ${book.book_id}:`, error);
-                continue;
-            }
-            if (!roots?.length) continue;
-            bookTrees.push({
-                bookId: book.book_id,
-                title: book.title,
-                roots,
-                pdfStoragePath: book.pdf_storage_path,
-            });
-        }
-
-        if (!bookTrees.length) {
-            return res.json({
-                answer: 'Could not load indexed content for this subject. Please try again later.',
-                status: 503,
-            });
-        }
-
-        const { retrievalQuestion, markHint } = parseSubjectExamQuestion(question);
-
-        let { context: contextStr } = buildContextFromMultipleTrees(
-            bookTrees,
-            retrievalQuestion,
-            MAX_TREE_CONTEXT_CHARS
-        );
-
-        contextStr = await appendCatalogPageTextContext(bookTrees, retrievalQuestion, contextStr);
-        contextStr = truncateToBudget(contextStr, MAX_COMBINED_CONTEXT_CHARS);
-
-        const subjectMeta = await getSubject(subjectCode);
-        const prompt = buildSubjectChatPrompt(subjectMeta, contextStr, retrievalQuestion, markHint);
+        const result = await runSubjectChatWithAi({
+            question: question.trim(),
+            subjectCode,
+            model,
+            userId: req.user.userId,
+        });
 
         savedUserMessage = await savePageIndexChatMessage({
             user_id: req.user.userId,
@@ -764,30 +591,24 @@ async function subjectQuestionVectorlessRag(req, res) {
             token_count: 0,
         });
 
-        const response = await model.invoke(prompt);
-        const rawAnswer = contentToString(response.content);
-        const { answer, answerSource } = polishSubjectAnswer(rawAnswer, rawSubject);
-        const aiTokenCount = response.usage_metadata?.total_tokens ?? 0;
-        const aiInputTokenCount = response.usage_metadata?.input_tokens ?? 0;
-        const aiOutputTokenCount = response.usage_metadata?.output_tokens ?? 0;
-        const availableTokenCount = await consumeUserTokens(req.user.userId, aiTokenCount);
+        const availableTokenCount = await consumeUserTokens(req.user.userId, result.aiTokenCount);
 
         const savedAssistantMessage = await savePageIndexChatMessage({
             user_id: req.user.userId,
             document_id: sessionId,
             previous_message_id: savedUserMessage._id.toString(),
             role: 'assistant',
-            content: answer,
+            content: result.answer,
             chat_model: chatModel,
-            token_count: aiTokenCount,
-            input_token_count: aiInputTokenCount,
-            output_token_count: aiOutputTokenCount,
+            token_count: result.aiTokenCount,
+            input_token_count: result.aiInputTokenCount,
+            output_token_count: result.aiOutputTokenCount,
         });
 
         return res.json({
-            answer,
-            answer_source: answerSource,
-            paper_solution_url: rawSubject.paper_solution || null,
+            answer: result.answer,
+            answer_source: result.answerSource,
+            paper_solution_url: result.subjectMeta.paperSolution?.[0]?.url ?? null,
             message: mapChatMessageForClient(savedAssistantMessage),
             status: 200,
             available_token_count: availableTokenCount,

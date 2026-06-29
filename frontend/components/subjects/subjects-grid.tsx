@@ -1,26 +1,9 @@
 "use client";
 
-import { useDebounce } from "@/hooks/use-debounce";
+import { useSubjectListBrowse } from "@/hooks/useSubjectListBrowse";
 import type { SubjectSummary } from "@/lib/types";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState, useTransition } from "react";
-
-const PAGE_SIZE = 80;
-const SEARCH_DEBOUNCE_MS = 300;
-const INVALID_SUBJECT_CODE_SEARCH_PATTERN = /[^A-Z0-9 -]/;
-const INVALID_SUBJECT_CODE_SEARCH_PATTERN_GLOBAL = /[^A-Z0-9 -]/g;
-
-function normalizeSubjectCodeSearch(value: string) {
-  return value.trim().toUpperCase();
-}
-
-function getValidatedSearchQuery(value: string) {
-  return normalizeSubjectCodeSearch(value).replace(
-    INVALID_SUBJECT_CODE_SEARCH_PATTERN_GLOBAL,
-    "",
-  );
-}
 
 type SubjectsGridProps = {
   subjects: SubjectSummary[];
@@ -57,41 +40,17 @@ function SubjectCard({ subject }: { subject: SubjectSummary }) {
 }
 
 export function SubjectsGrid({ subjects, errorMessage }: SubjectsGridProps) {
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isPending, startTransition] = useTransition();
-  const debouncedSearchQuery = useDebounce(searchQuery, SEARCH_DEBOUNCE_MS);
-  const normalizedSearchQuery = normalizeSubjectCodeSearch(searchQuery);
-  const hasInvalidSearchCharacters = INVALID_SUBJECT_CODE_SEARCH_PATTERN.test(
-    normalizedSearchQuery,
-  );
-  const validatedSearchQuery = useMemo(
-    () => getValidatedSearchQuery(debouncedSearchQuery),
-    [debouncedSearchQuery],
-  );
-  const filteredSubjects = useMemo(() => {
-    if (!validatedSearchQuery) return subjects;
-
-    return subjects.filter((subject) =>
-      normalizeSubjectCodeSearch(subject.subjectCode).includes(validatedSearchQuery),
-    );
-  }, [subjects, validatedSearchQuery]);
-  const visibleSubjects = useMemo(
-    () => filteredSubjects.slice(0, visibleCount),
-    [filteredSubjects, visibleCount],
-  );
-  const hasMore = visibleCount < filteredSubjects.length;
-  const hasActiveSearch = validatedSearchQuery.length > 0;
-
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [validatedSearchQuery]);
-
-  const handleLoadMore = () => {
-    startTransition(() => {
-      setVisibleCount((current) => Math.min(current + PAGE_SIZE, filteredSubjects.length));
-    });
-  };
+  const {
+    searchQuery,
+    setSearchQuery,
+    hasInvalidSearchCharacters,
+    filteredSubjects,
+    visibleSubjects,
+    hasMore,
+    hasActiveSearch,
+    isPending,
+    handleLoadMore,
+  } = useSubjectListBrowse(subjects);
 
   if (subjects.length === 0) {
     if (errorMessage) {
