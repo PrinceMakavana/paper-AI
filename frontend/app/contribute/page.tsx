@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Contribute to paperAI — Help GTU Students Learn Smarter",
   description:
     "Ways you can help improve paperAI — share papers, notes, ideas, and report issues.",
+  alternates: {
+    canonical: "/contribute",
+  },
   openGraph: {
     title: "Contribute to paperAI",
     description: "Become a contributor and help us improve the platform.",

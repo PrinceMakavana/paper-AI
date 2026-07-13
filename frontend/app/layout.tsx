@@ -4,6 +4,7 @@ import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalyticsProvider } from "@/components/google-analytics";
 import { Providers } from "@/components/providers";
+import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE } from "@/lib/seo/site";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -18,20 +19,16 @@ const instrumentSans = Instrument_Sans({
   weight: ["400", "500", "600"],
 });
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
-const siteName = "paperAI";
-const title = "paperAI — AI-Powered GTU Paper Solutions & PDF Chat";
-const description =
-  "Find GTU syllabus, old exam papers, books, and paper solutions, then upload PDFs to generate AI answers, summaries, and document-grounded chat.";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  applicationName: siteName,
+  applicationName: SITE_NAME,
   title: {
-    default: title,
-    template: `%s | ${siteName}`,
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description,
+  description: SITE_DESCRIPTION,
   keywords: [
     "paperAI",
     "GTU paper solutions",
@@ -41,9 +38,9 @@ export const metadata: Metadata = {
     "AI study assistant",
     "GTU books",
   ],
-  authors: [{ name: "paperAI" }],
-  creator: "paperAI",
-  publisher: "paperAI",
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   category: "education",
   alternates: {
     canonical: "/",
@@ -51,22 +48,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName,
-    title,
-    description,
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/paper_ai_logo.png",
         width: 280,
         height: 72,
-        alt: "paperAI",
+        alt: SITE_NAME,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title,
-    description,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/paper_ai_logo.png"],
   },
   icons: {
@@ -93,6 +90,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site description" />
       </head>
       <body className={`${fraunces.variable} ${instrumentSans.variable} antialiased`}>
         <Providers>{children}</Providers>

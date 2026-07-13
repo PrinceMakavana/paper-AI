@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo/site";
 
 type PublicSubjectSummary = {
   subjectCode: string;
@@ -23,10 +24,6 @@ const STATIC_ROUTES = [
 ];
 
 export const dynamic = "force-static";
-
-function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
-}
 
 function buildApiUrl(path: string) {
   const apiBase = process.env.NEXT_PUBLIC_API_URL;

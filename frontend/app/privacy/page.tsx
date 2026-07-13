@@ -4,6 +4,9 @@ import { PageShell, Prose } from "@/components/layout/PageShell";
 export const metadata: Metadata = {
   title: "Privacy Policy — paperAI",
   description: "How paperAI collects, processes, and protects your data.",
+  alternates: {
+    canonical: "/privacy",
+  },
   openGraph: {
     title: "paperAI Privacy Policy",
     description: "Data collection, processing, and your rights.",

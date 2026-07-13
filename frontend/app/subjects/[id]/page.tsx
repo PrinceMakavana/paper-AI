@@ -2,6 +2,8 @@ import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { JsonLd } from "@/lib/seo/json-ld";
+import { getSiteUrl, getSubjectUrl, SITE_NAME } from "@/lib/seo/site";
 import type { CatalogBook, CatalogMaterialFile, SubjectDetail } from "@/lib/types";
 import type { Metadata } from "next";
 import http from "node:http";
@@ -30,7 +32,6 @@ type FetchSubjectResult =
   | { status: "error"; message: string };
 
 const SUBJECT_CODE_PATTERN = /^[A-Za-z0-9_-]{3,32}$/;
-const SITE_NAME = "paperAI";
 
 export const dynamicParams = true;
 
@@ -42,18 +43,6 @@ function isSubjectDetail(subject: SubjectDetail) {
 
 function normalizeSubjectCode(id: string) {
   return decodeURIComponent(id).trim().toUpperCase();
-}
-
-function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
-}
-
-function getSubjectPath(subjectCode: string) {
-  return `/subjects/${encodeURIComponent(subjectCode)}`;
-}
-
-function getSubjectUrl(subjectCode: string) {
-  return `${getSiteUrl()}${getSubjectPath(subjectCode)}`;
 }
 
 function buildApiUrl(path: string) {
@@ -371,17 +360,6 @@ function createSubjectJsonLd(subject: SubjectDetail) {
       },
     ],
   };
-}
-
-function JsonLd({ data }: { data: Record<string, unknown> }) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
-      }}
-    />
-  );
 }
 
 export async function generateMetadata({ params }: SubjectPageProps): Promise<Metadata> {
