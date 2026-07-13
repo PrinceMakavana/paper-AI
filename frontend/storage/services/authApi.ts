@@ -22,6 +22,7 @@ export interface AuthUser {
   email: string;
   role?: string;
   isEmailVerified?: boolean;
+  is_google_account?: boolean;
   available_token_count?: number;
   available_page_count?: number;
 }
@@ -82,6 +83,18 @@ export const authApi = createApi({
           data: credentials,
         };
       },
+      transformResponse: (response: AuthResponse) => {
+        persistAuthSession(response);
+        return response;
+      },
+      invalidatesTags: ['User'],
+    }),
+    googleLogin: builder.mutation<AuthResponse, { idToken: string }>({
+      query: (payload) => ({
+        url: "/users/google",
+        method: "POST",
+        data: payload,
+      }),
       transformResponse: (response: AuthResponse) => {
         persistAuthSession(response);
         return response;
@@ -200,6 +213,7 @@ export const authApi = createApi({
 
 export const {
   useLoginMutation,
+  useGoogleLoginMutation,
   useRegisterMutation,
   useVerifyEmailMutation,
   useResendVerificationMutation,

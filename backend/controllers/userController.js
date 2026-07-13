@@ -1,4 +1,5 @@
 import User from '../models/userModel.js';
+import { verifyGoogleIdToken } from '../utils/googleAuth.js';
 import {
     TOKEN_TYPES,
     verifyAuthToken,
@@ -16,6 +17,7 @@ const mapUserForClient = (user) => ({
     email: user.email,
     role: user.role,
     isEmailVerified: user.isEmailVerified ?? false,
+    is_google_account: user.is_google_account ?? false,
     available_token_count: user.available_token_count ?? 0,
     available_page_count: user.available_page_count ?? 0,
 });
@@ -114,6 +116,13 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ error: 'Invalid email or password.' });
         }
 
+        if (user.is_google_account && !user.password) {
+            return res.status(400).json({
+                error: 'This account is linked with Google only. Please sign in with Google.',
+                code: 'USE_GOOGLE_LOGIN',
+            });
+        }
+
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid email or password.' });
@@ -142,6 +151,83 @@ const loginUser = async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({ error: 'Login failed.', details: err.message });
+    }
+};
+
+/**
+ * POST /users/google
+ * Authenticate or register via Google ID token.
+ * Body: { idToken }
+ */
+const googleLogin = async (req, res) => {
+    try {
+        const { idToken } = req.body;
+
+        if (!idToken) {
+            return res.status(400).json({ error: 'Google ID token is required.' });
+        }
+
+        if (!process.env.GOOGLE_CLIENT_ID) {
+            return res.status(500).json({ error: 'Google Sign-In is not configured.' });
+        }
+
+        let payload;
+        try {
+            payload = await verifyGoogleIdToken(idToken, process.env.GOOGLE_CLIENT_ID);
+        } catch (err) {
+            return res.status(401).json({ error: 'Invalid Google token.', details: err.message });
+        }
+
+        const { sub: googleId, email, name, email_verified: emailVerified } = payload;
+
+        if (!email || !googleId) {
+            return res.status(400).json({ error: 'Google account is missing required profile information.' });
+        }
+
+        if (!emailVerified) {
+            return res.status(403).json({ error: 'Google email is not verified.' });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+
+        let user = await User.findOne({ googleId });
+        if (!user) {
+            user = await User.findOne({ email: normalizedEmail });
+        }
+
+        if (user) {
+            user.googleId = googleId;
+            user.is_google_account = true;
+            user.isEmailVerified = true;
+            if (name && !user.name) {
+                user.name = name;
+            }
+            await user.save();
+        } else {
+            user = await User.create({
+                name: name || normalizedEmail.split('@')[0],
+                email: normalizedEmail,
+                googleId,
+                is_google_account: true,
+                isEmailVerified: true,
+            });
+        }
+
+        const token = signSessionToken(user);
+        const profile = await User.findById(user._id).select('-password').lean();
+        const clientUser = mapUserForClient(profile);
+
+        if (profile.isAdmin === true) {
+            clientUser.isAdmin = true;
+        }
+
+        res.status(200).json({
+            message: 'Login successful.',
+            token,
+            user: clientUser,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'Google sign-in failed.', details: err.message });
     }
 };
 
@@ -444,6 +530,7 @@ const resetPassword = async (req, res) => {
 export {
     registerUser,
     loginUser,
+    googleLogin,
     logoutUser,
     getProfile,
     updateProfile,

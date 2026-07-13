@@ -18,6 +18,7 @@ import { clearAllCookies, clearLocalStorage, getCookie } from "@/lib/utils";
 import {
   type AuthUser,
   useLoginMutation,
+  useGoogleLoginMutation,
   useRegisterMutation,
   useLogoutUserMutation,
   useGetMeQuery,
@@ -32,12 +33,14 @@ import { COOKIE_STORAGE_KEYS } from "@/lib/constant";
  */
 interface AuthContextType {
   isLoginLoading: boolean;
+  isGoogleLoginLoading: boolean;
   isUserLoggedIn: boolean;
   isRegisterLoading: boolean;
   login: (
     email: string,
     password: string
   ) => Promise<void>;
+  loginWithGoogle: (idToken: string) => Promise<void>;
   register: (registerRequest: {
     name: string;
     email: string;
@@ -74,6 +77,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const router = useRouter();
   const { showAlert } = useAlert();
   const [loginMutation, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [googleLoginMutation, { isLoading: isGoogleLoginLoading }] = useGoogleLoginMutation();
   const [registerMutation, { isLoading: isRegisterLoading }] =
     useRegisterMutation();
   const [updateProfileMutation] = useUpdateProfileMutation();
@@ -196,6 +200,23 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   };
 
+  const loginWithGoogle = async (idToken: string) => {
+    try {
+      const result = await googleLoginMutation({ idToken }).unwrap();
+      showAlert(result?.message || "Login successful", "success");
+      setIsUserLoggedIn(true);
+      router.replace("/chat");
+      router.refresh();
+    } catch (err: unknown) {
+      const error = err as { data?: { error?: string; message?: string }; message?: string };
+      showAlert(
+        error?.data?.error || error?.data?.message || error?.message || "Google sign-in failed",
+        "error"
+      );
+      throw err;
+    }
+  };
+
   /**
    * Logs out: optionally calls logout API, then always clears auth store (cookies, state, navigation).
    * @param callAPI - If true, calls logout endpoint before clearing store; default true.
@@ -268,9 +289,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const value: AuthContextType = {
     isLoginLoading,
+    isGoogleLoginLoading,
     isUserLoggedIn,
     isRegisterLoading,
     login,
+    loginWithGoogle,
     register,
     logout,
     updateProfile,
