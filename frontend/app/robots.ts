@@ -1,18 +1,36 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/seo/site";
 
-function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
-}
+const DISALLOWED_ROUTES = [
+  "/chat",
+  "/login",
+  "/register",
+  "/profile",
+  "/forgot-password",
+  "/reset-password",
+  "/verify-email",
+];
+
+const PUBLIC_ALLOW_ROUTES = ["/", "/subjects", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
+
+const AI_USER_AGENTS = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"];
 
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = getSiteUrl();
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: ["/chat", "/login", "/register", "/profile"],
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: DISALLOWED_ROUTES,
+      },
+      ...AI_USER_AGENTS.map((userAgent) => ({
+        userAgent,
+        allow: PUBLIC_ALLOW_ROUTES,
+        disallow: DISALLOWED_ROUTES,
+      })),
+    ],
     sitemap: `${siteUrl}/sitemap.xml`,
     host: siteUrl,
   };

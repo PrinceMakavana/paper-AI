@@ -1,6 +1,9 @@
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SubjectsGrid } from "@/components/subjects/subjects-grid";
+import { JsonLd } from "@/lib/seo/json-ld";
+import { createItemListJsonLd } from "@/lib/seo/schemas";
+import { getSiteUrl, getSubjectUrl } from "@/lib/seo/site";
 import type { SubjectSummary } from "@/lib/types";
 import type { Metadata } from "next";
 
@@ -106,9 +109,19 @@ export default async function SubjectsPage() {
   const result = await fetchPublicSubjects();
   const subjects = result.status === "ok" ? result.subjects : [];
   const errorMessage = result.status === "error" ? result.message : undefined;
+  const siteUrl = getSiteUrl();
+  const subjectsJsonLd = createItemListJsonLd({
+    name: "GTU Subjects on paperAI",
+    url: `${siteUrl}/subjects`,
+    items: subjects.map((subject) => ({
+      name: `${subject.subjectCode} ${subject.subjectName}`,
+      url: getSubjectUrl(subject.subjectCode),
+    })),
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <JsonLd data={subjectsJsonLd} />
       <SiteHeader />
       <main className="mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-16 pt-24 sm:px-6">
         <header className="max-w-3xl">

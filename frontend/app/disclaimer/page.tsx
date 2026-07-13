@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Disclaimer — paperAI",
   description:
     "Important information about paperAI's educational purpose and AI-generated content.",
+  alternates: {
+    canonical: "/disclaimer",
+  },
   openGraph: {
     title: "paperAI Disclaimer",
     description: "Educational use, accuracy notes, and GTU affiliation disclaimer.",

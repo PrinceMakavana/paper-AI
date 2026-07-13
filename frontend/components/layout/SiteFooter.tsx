@@ -27,8 +27,8 @@ const COLS = [
     links: [
       { href: "/contribute", label: "Contribute" },
       { href: "/disclaimer", label: "Disclaimer" },
-      { href: "/", label: "GTU Materials" },
-      { href: "/", label: "Blog" },
+      { href: "/subjects", label: "GTU Materials" },
+      { href: "/subjects", label: "Blog" },
     ],
   },
 ];

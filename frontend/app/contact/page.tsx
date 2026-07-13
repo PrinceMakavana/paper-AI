@@ -5,6 +5,9 @@ import { ContactSection } from "@/components/landing/ContactSection";
 export const metadata: Metadata = {
   title: "Contact paperAI — Support, Feedback, Partnerships",
   description: "Get in touch with the paperAI team for support, feedback, and business inquiries.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contact paperAI",
     description: "Support, feedback, and partnerships.",

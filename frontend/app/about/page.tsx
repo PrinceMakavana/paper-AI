@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "About paperAI — Built for GTU Students",
   description:
     "Learn why paperAI was built, our mission to help GTU students learn faster with AI, and the technology behind the platform.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About paperAI",
     description: "Our mission, vision, and the technology powering paperAI.",

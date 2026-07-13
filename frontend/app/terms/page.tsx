@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Terms & Conditions — paperAI",
   description:
     "Terms of use for paperAI including acceptable use, intellectual property, and account policies.",
+  alternates: {
+    canonical: "/terms",
+  },
   openGraph: {
     title: "paperAI Terms & Conditions",
     description: "Read the terms before using paperAI.",
