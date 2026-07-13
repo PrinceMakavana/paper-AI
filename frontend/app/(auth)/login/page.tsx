@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { Input } from "@/components/ui/input";
-import { AlertCircle, Loader2, Eye, EyeOff } from "lucide-react"; // Added Eye icons
+import { AlertCircle, Loader2, Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import Link from 'next/link';
 import { useAuth } from '@/components/context/auth/auth-context';
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -13,7 +14,7 @@ const loginSchema = z.object({
 });
 
 export default function LoginPage() {
-  const { login, isLoginLoading } = useAuth();
+  const { login, loginWithGoogle, isLoginLoading, isGoogleLoginLoading } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +40,10 @@ export default function LoginPage() {
     try {
       await login(email, password);
     } catch (err) {
-      const error = err as { data?: { error?: string; message?: string }; message?: string };
+      const error = err as {
+        data?: { error?: string; message?: string; code?: string };
+        message?: string;
+      };
       setErrors({
         server:
           error?.data?.error ||
@@ -49,6 +53,28 @@ export default function LoginPage() {
       });
     }
   };
+
+  const handleGoogleSuccess = async (idToken: string) => {
+    setErrors({});
+    try {
+      await loginWithGoogle(idToken);
+    } catch (err) {
+      const error = err as { data?: { error?: string; message?: string }; message?: string };
+      setErrors({
+        server:
+          error?.data?.error ||
+          error?.data?.message ||
+          error?.message ||
+          "Google sign-in failed. Please try again.",
+      });
+    }
+  };
+
+  const handleGoogleError = () => {
+    setErrors({ server: "Google sign-in was cancelled or failed. Please try again." });
+  };
+
+  const isAuthLoading = isLoginLoading || isGoogleLoginLoading;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-background px-4">
@@ -66,6 +92,19 @@ export default function LoginPage() {
               <p>{errors.server}</p>
             </div>
           )}
+          <GoogleSignInButton
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            disabled={isAuthLoading}
+          />
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-zinc-200 dark:border-zinc-800" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white dark:bg-primary-foreground px-2 text-zinc-500">or</span>
+            </div>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none" htmlFor="email">
@@ -122,7 +161,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              disabled={isLoginLoading}
+              disabled={isAuthLoading}
               className="w-full flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 h-10 px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
             >
               {isLoginLoading && <Loader2 className="h-4 w-4 animate-spin" />}

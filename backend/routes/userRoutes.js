@@ -7,6 +7,7 @@ const router = express.Router();
 // Public routes (no auth required)
 router.post('/users/register', userController.registerUser);
 router.post('/users/login', userController.loginUser);
+router.post('/users/google', userController.googleLogin);
 router.post('/verify-email', userController.verifyEmail);
 router.post('/resend-verification', userController.resendVerification);
 router.post('/forgot-password', userController.forgotPassword);

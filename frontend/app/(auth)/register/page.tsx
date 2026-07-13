@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { useAuth } from '@/components/context/auth/auth-context';
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import freeEmailDomains from "free-email-domains";
 
  const isCompanyEmail = (value?: string) => {
@@ -40,7 +41,7 @@ export default function RegisterPage() {
 
   
   const router = useRouter();
-  const { register, isRegisterLoading } = useAuth();
+  const { register, loginWithGoogle, isRegisterLoading, isGoogleLoginLoading } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -79,6 +80,28 @@ export default function RegisterPage() {
     }
   };
 
+  const handleGoogleSuccess = async (idToken: string) => {
+    setErrors({});
+    try {
+      await loginWithGoogle(idToken);
+    } catch (err) {
+      const error = err as { data?: { error?: string; message?: string }; message?: string };
+      setErrors({
+        server:
+          error?.data?.error ||
+          error?.data?.message ||
+          error?.message ||
+          "Google sign-in failed. Please try again.",
+      });
+    }
+  };
+
+  const handleGoogleError = () => {
+    setErrors({ server: "Google sign-in was cancelled or failed. Please try again." });
+  };
+
+  const isAuthLoading = isRegisterLoading || isGoogleLoginLoading;
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-background px-4">
       <div className="w-full max-w-sm space-y-6">
@@ -95,6 +118,19 @@ export default function RegisterPage() {
               <p>{errors.server}</p>
             </div>
           )}
+          <GoogleSignInButton
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            disabled={isAuthLoading}
+          />
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-zinc-200 dark:border-zinc-800" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white dark:bg-primary-foreground px-2 text-zinc-500">or</span>
+            </div>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium leading-none" htmlFor="name">
@@ -146,7 +182,7 @@ export default function RegisterPage() {
 
             <button
               type="submit"
-              disabled={isRegisterLoading}
+              disabled={isAuthLoading}
               className="w-full flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 h-10 px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50 mt-2"
             >
               {isRegisterLoading && <Loader2 className="h-4 w-4 animate-spin" />}
