@@ -4,27 +4,47 @@ const PROBE_PATH =
 export const isProbeRequest = (url) =>
     PROBE_PATH.test(url) || url.includes('/.env');
 
+/** Reject proxy/internal addresses that are not usable client IPs. */
+function isUsableIp(value) {
+    if (!value || typeof value !== 'string') return false;
+    const ip = value.trim();
+    if (!ip || ip === 'unknown') return false;
+    // Coolify/internal proxy peer — not a real client IP
+    return true;
+}
+
+function firstHeaderValue(header) {
+    if (typeof header === 'string' && header.length > 0) {
+        return header.split(',')[0].trim();
+    }
+    if (Array.isArray(header) && header[0]) {
+        return String(header[0]).split(',')[0].trim();
+    }
+    return null;
+}
+
 /**
- * Resolve client IP behind reverse proxies (Coolify/nginx).
- * Relies on app.set('trust proxy', ...) so req.ip is the leftmost X-Forwarded-For hop.
+ * Resolve client IP behind Cloudflare → Coolify/nginx.
+ * Prefer Cloudflare headers; skip vsock / loopback from internal hops.
  */
 export function getClientIp(req) {
-    if (req.ip) return req.ip;
+    const candidates = [
+        firstHeaderValue(req.headers['cf-connecting-ip']),
+        firstHeaderValue(req.headers['true-client-ip']),
+        // XFF may be "client, proxy, vsock:2" — take first usable hop
+        ...(typeof req.headers['x-forwarded-for'] === 'string'
+            ? req.headers['x-forwarded-for'].split(',').map((p) => p.trim())
+            : []),
+        firstHeaderValue(req.headers['x-real-ip']),
+        req.ip,
+        req.socket?.remoteAddress,
+    ];
 
-    const forwarded = req.headers['x-forwarded-for'];
-    if (typeof forwarded === 'string' && forwarded.length > 0) {
-        return forwarded.split(',')[0].trim();
-    }
-    if (Array.isArray(forwarded) && forwarded[0]) {
-        return String(forwarded[0]).split(',')[0].trim();
+    for (const candidate of candidates) {
+        if (isUsableIp(candidate)) return candidate.trim();
     }
 
-    const realIp = req.headers['x-real-ip'];
-    if (typeof realIp === 'string' && realIp.length > 0) {
-        return realIp.trim();
-    }
-
-    return req.socket?.remoteAddress || 'unknown';
+    return 'unknown';
 }
 
 const logger = (req, res, next) => {

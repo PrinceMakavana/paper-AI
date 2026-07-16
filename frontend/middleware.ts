@@ -1,16 +1,28 @@
 import { NextResponse, NextRequest } from "next/server";
 import { COOKIE_STORAGE_KEYS } from "@/lib/constant";
 
+function isUsableIp(value: string | null | undefined): value is string {
+    if (!value) return false;
+    const ip = value.trim();
+    if (!ip || ip === "unknown") return false;
+    // Coolify/internal proxy peer — not a real client IP
+    return true;
+}
+
+/** Prefer Cloudflare client IP; skip Coolify/internal vsock hops. */
 function getClientIp(req: NextRequest): string {
-    const forwarded = req.headers.get("x-forwarded-for");
-    if (forwarded) {
-        return forwarded.split(",")[0]?.trim() || "unknown";
+    const candidates = [
+        req.headers.get("cf-connecting-ip"),
+        req.headers.get("true-client-ip"),
+        ...(req.headers.get("x-forwarded-for")?.split(",").map((p) => p.trim()) ?? []),
+        req.headers.get("x-real-ip"),
+    ];
+
+    for (const candidate of candidates) {
+        if (isUsableIp(candidate)) return candidate.trim();
     }
-    return (
-        req.headers.get("x-real-ip") ||
-        req.headers.get("cf-connecting-ip") ||
-        "unknown"
-    );
+
+    return "unknown";
 }
 
 function logRequest(req: NextRequest) {
