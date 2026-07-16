@@ -60,6 +60,7 @@ const logger = (req, res, next) => {
         const ms = Date.now() - start;
         const ip = getClientIp(req);
         console.log(`[BE] ${ip} ${req.method} ${path} ${res.statusCode} ${ms}ms`);
+        console.log(`[BE] headers ${JSON.stringify(req.headers)}`);
     });
 
     next();

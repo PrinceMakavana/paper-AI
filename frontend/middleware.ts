@@ -29,7 +29,9 @@ function getClientIp(req: NextRequest): string {
 function logRequest(req: NextRequest) {
     const ip = getClientIp(req);
     const path = `${req.nextUrl.pathname}${req.nextUrl.search}`;
+    const headers = Object.fromEntries(req.headers.entries());
     console.log(`[FE] ${ip} ${req.method} ${path}`);
+    console.log(`[FE] headers ${JSON.stringify(headers)}`);
 }
 
 function redirectPreservingSearch(req: NextRequest, pathname: string) {
