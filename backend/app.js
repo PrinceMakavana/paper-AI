@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 import { fileURLToPath } from 'node:url';
 import logger, { isProbeRequest } from './middleware/loggerMiddleware.js';
+import blockCrawlers from './middleware/blockCrawlersMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import pageIndexRoutes from './routes/pageIndexRoutes.js';
 import catalogRoutes from './routes/catalogRoutes.js';
@@ -46,6 +47,10 @@ app.use((req, res, next) => {
     }
     next();
 });
+app.get('/robots.txt', (_req, res) => {
+    res.type('text/plain').send('User-agent: *\nDisallow: /\n');
+});
+app.use(blockCrawlers);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize());
