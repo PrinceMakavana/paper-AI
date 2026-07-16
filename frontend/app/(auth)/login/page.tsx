@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { AlertCircle, Loader2, Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import Link from 'next/link';
 import { useAuth } from '@/components/context/auth/auth-context';
 import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/auth/TurnstileWidget';
+import { isTurnstileConfigured } from '@/lib/turnstile';
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -19,8 +21,15 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
   const [errors, setErrors] = useState<{ email?: string; password?: string; server?: string }>({});
+
+  const resetTurnstile = () => {
+    setTurnstileToken('');
+    turnstileRef.current?.reset();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,9 +46,15 @@ export default function LoginPage() {
       return;
     }
 
+    if (isTurnstileConfigured() && !turnstileToken) {
+      setErrors({ server: 'Please complete the verification check.' });
+      return;
+    }
+
     try {
-      await login(email, password);
+      await login(email, password, turnstileToken || undefined);
     } catch (err) {
+      resetTurnstile();
       const error = err as {
         data?: { error?: string; message?: string; code?: string };
         message?: string;
@@ -158,6 +173,13 @@ export default function LoginPage() {
                 Forgot password?
               </Link>
             </div>
+
+            <TurnstileWidget
+              ref={turnstileRef}
+              onVerify={setTurnstileToken}
+              onExpire={resetTurnstile}
+              onError={resetTurnstile}
+            />
 
             <button
               type="submit"

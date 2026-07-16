@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { TurnstileGate } from "@/components/auth/TurnstileGate";
 import { SubjectsGrid } from "@/components/subjects/subjects-grid";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { createItemListJsonLd } from "@/lib/seo/schemas";
@@ -137,7 +138,12 @@ export default async function SubjectsPage() {
           </p>
         </header>
 
-        <SubjectsGrid subjects={subjects} errorMessage={errorMessage} />
+        <TurnstileGate
+          title="Verify to browse subjects"
+          description="Complete this quick check to view the GTU subject catalog."
+        >
+          <SubjectsGrid subjects={subjects} errorMessage={errorMessage} />
+        </TurnstileGate>
       </main>
       <SiteFooter />
     </div>

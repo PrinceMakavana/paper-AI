@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { useAlert } from '@/components/context/alert/alert-context';
 import { useForgotPasswordMutation } from '@/storage/services/authApi';
+import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/auth/TurnstileWidget';
+import { isTurnstileConfigured } from '@/lib/turnstile';
 import { ArrowLeft, CheckCircle2, Loader2, LockKeyhole, Mail } from 'lucide-react';
 
 const RESEND_COOLDOWN_SECONDS = 60;
@@ -37,8 +39,15 @@ export default function ForgotPasswordPage() {
     const [errors, setErrors] = useState<{ email?: string }>({});
     const [submitted, setSubmitted] = useState(false);
     const [cooldownSeconds, setCooldownSeconds] = useState(0);
+    const [turnstileToken, setTurnstileToken] = useState('');
+    const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
     const isSubmitDisabled = isLoading || cooldownSeconds > 0;
+
+    const resetTurnstile = () => {
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
+    };
 
     const startCooldown = (seconds: number) => {
         const clamped = Math.max(1, Math.ceil(seconds));
@@ -87,11 +96,18 @@ export default function ForgotPasswordPage() {
             return;
         }
 
+        if (isTurnstileConfigured() && !turnstileToken) {
+            showAlert('Please complete the verification check.', 'error');
+            return;
+        }
+
         try {
             const data = await forgotPassword({
                 email: result.data.email.toLowerCase().trim(),
+                turnstileToken: turnstileToken || undefined,
             }).unwrap();
 
+            resetTurnstile();
             startCooldown(RESEND_COOLDOWN_SECONDS);
 
             if (data.token) {
@@ -105,6 +121,7 @@ export default function ForgotPasswordPage() {
                 'success'
             );
         } catch (err) {
+            resetTurnstile();
             const error = getApiError(err);
             if (error.status === 429) {
                 startCooldown(error.data?.retryAfterSeconds ?? RESEND_COOLDOWN_SECONDS);
@@ -191,6 +208,12 @@ export default function ForgotPasswordPage() {
                                 <p className="text-xs text-red-500 font-medium">{errors.email}</p>
                             )}
                         </div>
+                        <TurnstileWidget
+                            ref={turnstileRef}
+                            onVerify={setTurnstileToken}
+                            onExpire={resetTurnstile}
+                            onError={resetTurnstile}
+                        />
                         <button
                             type="submit"
                             disabled={isSubmitDisabled}

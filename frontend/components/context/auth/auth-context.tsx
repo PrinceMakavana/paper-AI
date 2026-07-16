@@ -38,13 +38,15 @@ interface AuthContextType {
   isRegisterLoading: boolean;
   login: (
     email: string,
-    password: string
+    password: string,
+    turnstileToken?: string,
   ) => Promise<void>;
   loginWithGoogle: (idToken: string) => Promise<void>;
   register: (registerRequest: {
     name: string;
     email: string;
     password: string;
+    turnstileToken?: string;
   }) => Promise<void>;
   logout: (callAPI?: boolean) => Promise<void>;
   updateProfile: (profileRequest: {
@@ -170,11 +172,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const login = async (
     email: string,
     password: string,
+    turnstileToken?: string,
   ) => {
     try {
       const result = await loginMutation({
         email,
         password,
+        turnstileToken,
       }).unwrap();
       showAlert(
         result?.message || "Login successful",
@@ -244,6 +248,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     name: string;
     email: string;
     password: string;
+    turnstileToken?: string;
   }) => {
     try {
       const result = await registerMutation(registerRequest).unwrap();

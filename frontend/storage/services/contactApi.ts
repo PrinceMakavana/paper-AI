@@ -6,6 +6,7 @@ export interface ContactFormRequest {
   email: string;
   subject: string;
   message: string;
+  turnstileToken?: string;
 }
 
 export interface ContactFormResponse {

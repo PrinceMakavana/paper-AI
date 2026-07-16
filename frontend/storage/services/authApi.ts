@@ -8,7 +8,11 @@ import {
   setLocalStorage,
 } from "@/lib/utils";
 import { COOKIE_STORAGE_KEYS, LOCAL_STORAGE_KEYS } from "@/lib/constant";
-interface LoginRequest {
+interface TurnstileRequest {
+  turnstileToken?: string;
+}
+
+interface LoginRequest extends TurnstileRequest {
   email: string;
   password: string;
 }
@@ -125,7 +129,7 @@ export const authApi = createApi({
         data: payload,
       }),
     }),
-    forgotPassword: builder.mutation<MessageResponse, { email: string }>({
+    forgotPassword: builder.mutation<MessageResponse, { email: string; turnstileToken?: string }>({
       query: (payload) => ({
         url: "/forgot-password",
         method: "POST",

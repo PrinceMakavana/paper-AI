@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { z } from "zod";
 import freeEmailDomains from "free-email-domains";
 import { Reveal } from "@/components/layout/Reveal";
@@ -9,6 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useAlert } from "@/components/context/alert/alert-context";
 import { useSubmitContactMutation } from "@/storage/services/contactApi";
+import { TurnstileWidget, type TurnstileWidgetHandle } from "@/components/auth/TurnstileWidget";
+import { isTurnstileConfigured } from "@/lib/turnstile";
 
 const isWorkEmail = (email: string) => {
   const domain = email.split("@")[1]?.toLowerCase();
@@ -35,6 +38,13 @@ type ApiError = { data?: { error?: string; message?: string } };
 export function ContactSection() {
   const { showAlert } = useAlert();
   const [submitContact, { isLoading }] = useSubmitContactMutation();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null);
+
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+    turnstileRef.current?.reset();
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,12 +65,22 @@ export function ContactSection() {
       return;
     }
 
+    if (isTurnstileConfigured() && !turnstileToken) {
+      showAlert("Please complete the verification check.", "error");
+      return;
+    }
+
     try {
-      const result = await submitContact(validation.data).unwrap();
+      const result = await submitContact({
+        ...validation.data,
+        turnstileToken: turnstileToken || undefined,
+      }).unwrap();
 
       showAlert(result.message || "Message sent. We'll get back to you shortly.", "success");
       form.reset();
+      resetTurnstile();
     } catch (err) {
+      resetTurnstile();
       const error = err as ApiError;
       showAlert(
         error.data?.error || error.data?.message || "Failed to send message. Please try again.",
@@ -102,6 +122,12 @@ export function ContactSection() {
                 <Label htmlFor="message">Message</Label>
                 <Textarea id="message" name="message" rows={5} required />
               </div>
+              <TurnstileWidget
+                ref={turnstileRef}
+                onVerify={setTurnstileToken}
+                onExpire={resetTurnstile}
+                onError={resetTurnstile}
+              />
               <Button type="submit" className="mt-6 h-11 w-full sm:w-auto" disabled={isLoading}>
                 {isLoading ? "Sending…" : "Send Message"}
               </Button>

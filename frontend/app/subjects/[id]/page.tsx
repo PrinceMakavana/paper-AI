@@ -1,4 +1,5 @@
 import { ExternalLinkAnchor } from "@/components/external-link-anchor";
+import { TurnstileGate } from "@/components/auth/TurnstileGate";
 import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -660,7 +661,11 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           </p>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_15rem]">
+        <TurnstileGate
+          title="Verify to view materials"
+          description="Complete this quick check to download syllabus, papers, books, and solutions."
+        >
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_15rem]">
           <div className="flex flex-col gap-6">
             <div>
               <h2 className="inline-block border-b border-foreground pb-1 text-xl font-medium text-foreground">
@@ -733,6 +738,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             </dl>
           </aside>
         </div>
+        </TurnstileGate>
       </main>
       <SiteFooter />
     </div>
