@@ -6,6 +6,7 @@ function isUsableIp(value: string | null | undefined): value is string {
     const ip = value.trim();
     if (!ip || ip === "unknown") return false;
     // Coolify/internal proxy peer — not a real client IP
+    if (ip.startsWith("vsock:")) return false;
     return true;
 }
 
