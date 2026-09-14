@@ -126,7 +126,7 @@ function fetchJsonWithNode<T>(url: string, headers: Record<string, string>): Pro
   });
 }
 
-const fetchSubject = cache(async function fetchSubject(
+const fetchSubject = cache(async function fetchSubject(  
   subjectCode: string,
 ): Promise<FetchSubjectResult> {
   if (!SUBJECT_CODE_PATTERN.test(subjectCode)) {
@@ -137,13 +137,11 @@ const fetchSubject = cache(async function fetchSubject(
   const subject = subjects.find(
     (item) => normalizeSubjectCode(item.subjectCode) === normalizeSubjectCode(subjectCode),
   );
-
   if (subject) {
     return { status: "ok", subject };
   }
 
   const url = buildApiUrl(`/public/catalog/subjects/${encodeURIComponent(subjectCode)}`);
-
   if (!url) {
     return {
       status: "error",
@@ -609,7 +607,6 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   const { id } = await params;
   const subjectCode = normalizeSubjectCode(id);
   const result = await fetchSubject(subjectCode);
-
   if (result.status === "not-found") {
     notFound();
   }

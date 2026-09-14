@@ -51,11 +51,10 @@ function mapBookForClient(book, subjectCode, index) {
 
 function mapMaterialFileForClient(file, fallbackTitle) {
     if (!file) return null;
-
     if (typeof file === 'string') {
         const trimmed = file.trim();
         if (!trimmed) return null;
-        return {
+        const result = {
             title: fallbackTitle,
             originalName: '',
             storagePath: trimmed.startsWith('s3://') ? '' : trimmed,
@@ -63,11 +62,13 @@ function mapMaterialFileForClient(file, fallbackTitle) {
             url: trimmed,
             uploadedAt: '',
         };
+        return result;
     }
 
     const s3Uri = file.s3_uri || file.s3Uri || '';
     const storagePath = file.storage_path || file.storagePath || '';
-    const url = s3Uri || storagePath;
+    
+    const url = s3Uri || storagePath || file.url || '';
 
     if (!url && !file.title && !file.original_name) {
         return null;
@@ -85,9 +86,10 @@ function mapMaterialFileForClient(file, fallbackTitle) {
 
 function mapMaterialFilesForClient(value, fallbackTitle) {
     const files = Array.isArray(value) ? value : [value];
-    return files
+    const result = files    
         .map((file) => mapMaterialFileForClient(file, fallbackTitle))
         .filter(Boolean);
+    return result;
 }
 
 function countReadyBooks(books = []) {
@@ -122,16 +124,15 @@ function mapSubjectSummary(subject, subjectCode) {
 function mapSubjectDetail(subject, subjectCode) {
     const books = subject.Books || [];
     const summary = mapSubjectSummary(subject, subjectCode);
-
     return {
         ...summary,
         primaryBookId: subject.primary_book_id,
-        syllabus: mapMaterialFilesForClient(subject.syllabus, 'Syllabus'),
-        paperSolution: mapMaterialFilesForClient(subject.paper_solution, 'Paper solution'),
-        prectical: mapMaterialFilesForClient(subject.prectical, 'Practical'),
-        vivaQuestions: mapMaterialFilesForClient(subject.viva_questions, 'Viva questions'),
-        impMaterial: mapMaterialFilesForClient(subject.imp_material, 'Important material'),
-        assignments: mapMaterialFilesForClient(subject.assignments, 'Assignment'),
+        syllabus: subject.syllabus ? mapMaterialFilesForClient(subject.syllabus, 'Syllabus') : [],
+        paperSolution: subject.paper_solution ? mapMaterialFilesForClient(subject.paper_solution, 'Paper solution') : [],
+        prectical: subject.prectical ? mapMaterialFilesForClient(subject.prectical, 'Practical') : [],
+        vivaQuestions: subject.viva_questions ? mapMaterialFilesForClient(subject.viva_questions, 'Viva questions') : [],
+        impMaterial: subject.imp_material ? mapMaterialFilesForClient(subject.imp_material, 'Important material') : [],
+        assignments: subject.assignments ? mapMaterialFilesForClient(subject.assignments, 'Assignment') : [],
         oldPaper: (subject.old_paper || []).map((item) => ({
             year: item.year,
             link: item.link,
@@ -203,13 +204,15 @@ async function listSubjectDetails() {
 
     return subjects.map((subject) => {
         const subjectCode = String(subject.subjecet_code || subject.subject_code || '').trim();
-        return mapSubjectDetail(subject, subjectCode);
+        const result = mapSubjectDetail(subject, subjectCode);
+        return result;
     });
 }
 
 async function getSubject(subjectCode) {
     const { subject, subjectCode: code } = await loadSubjectByCode(subjectCode);
-    return mapSubjectDetail(subject, code);
+    const result = mapSubjectDetail(subject, code);
+    return result;
 }
 
 function getSubjectChatSessionId(subjectCode) {

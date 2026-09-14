@@ -7,7 +7,7 @@ type Variant = "full" | "icon";
 const LOGO_SRC = {
   full: {
     light: "/paper_ai_with_name.png",
-    dark: "/paper_ai_with_name_dark_mode.png",
+    dark: "/paper_ai_logo_witn_name_dark_mode.png",
   },
   icon: {
     light: "/paper_ai_logo.png",
