@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: ROUTES.subjects, label: "Subjects", exact: false },
+  { href: ROUTES.paperSolution, label: "Solutions", exact: false },
   { href: "/about", label: "About", exact: false },
   { href: "/contribute", label: "Contribute", exact: false },
   { href: "/contact", label: "Contact", exact: false },
@@ -39,6 +40,7 @@ export function SiteHeader() {
             <Link
               key={n.href}
               href={n.href}
+              target="_blank"
               className={cn(
                 "rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
                 isActive(n.href, n.exact) && "bg-muted text-foreground",

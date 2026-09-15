@@ -28,7 +28,7 @@ export function ExternalLinkAnchor({
       )}
       {...props}
     >
-      <span>{children}</span>
+      <span className="flex gap-1">{children}</span>
       <ExternalLink className={cn("inline size-3 shrink-0 opacity-70", iconClassName)} aria-hidden />
     </a>
   );

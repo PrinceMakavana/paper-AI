@@ -1,5 +1,7 @@
 import { FileCheck2, ListChecks, GraduationCap, MessagesSquare } from "lucide-react";
+import Link from "next/link";
 import { Reveal } from "@/components/layout/Reveal";
+import { ROUTES } from "@/lib/landing-links";
 
 const ITEMS = [
   {
@@ -40,6 +42,12 @@ export function PaperSolution() {
               select subject and ask question paper related questions to AI and it will generate detailed solutions with
               explanations.
             </p>
+            <Link
+              href={ROUTES.paperSolution}
+              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+            >
+              Browse solutions
+            </Link>
           </div>
         </Reveal>
 

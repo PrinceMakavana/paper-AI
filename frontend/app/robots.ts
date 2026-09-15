@@ -11,7 +11,7 @@ const DISALLOWED_ROUTES = [
   "/verify-email",
 ];
 
-const PUBLIC_ALLOW_ROUTES = ["/", "/subjects", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
+const PUBLIC_ALLOW_ROUTES = ["/", "/subjects", "/paper-solution", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
 
 const AI_USER_AGENTS = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"];
 

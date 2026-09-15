@@ -18,6 +18,7 @@ const STATIC_ROUTES = [
   "/contact",
   "/contribute",
   "/subjects",
+  "/paper-solution",
   "/privacy",
   "/terms",
   "/disclaimer",
