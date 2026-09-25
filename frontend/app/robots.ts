@@ -3,15 +3,10 @@ import { getSiteUrl } from "@/lib/seo/site";
 
 const DISALLOWED_ROUTES = [
   "/chat",
-  "/login",
-  "/register",
   "/profile",
-  "/forgot-password",
-  "/reset-password",
-  "/verify-email",
 ];
 
-const PUBLIC_ALLOW_ROUTES = ["/", "/subjects", "/paper-solution", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
+const PUBLIC_ALLOW_ROUTES = ["/","subjects/[id]", "/subjects", "/paper-solution", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
 
 const AI_USER_AGENTS = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"];
 

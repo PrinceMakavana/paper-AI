@@ -229,12 +229,12 @@ export async function generateStaticParams() {
 
 function getSubjectTitle(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` | ${subject.knownAs}` : "";
-  return `${subject.subjectCode} ${subject.subjectName}${alias} | Syllabus, Papers, Books | GTU`;
+  return `${subject.subjectCode} | ${subject.subjectName} | ${alias} | Syllabus, Papers, Books  | GTU`;
 }
 
 function getSubjectDescription(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` (${subject.knownAs})` : "";
-  return `Download and view GTU ${subject.subjectName}${alias} ${subject.subjectCode} syllabus, old exam papers, books, and paper solutions on paperAI.`;
+  return `Download and view GTU ${subject.subjectName} | ${alias} |  ${subject.subjectCode} syllabus, old exam papers, books, and paper solutions on paperAI.`;
 }
 
 function getSubjectKeywords(subject: SubjectDetail) {
@@ -250,6 +250,11 @@ function getSubjectKeywords(subject: SubjectDetail) {
     `${subject.subjectName} GTU`,
     `${subject.subjectName} syllabus`,
     `${subject.subjectName} paper solution`,
+    `${subject.subjectName} PaperAI`,
+    `GTU ${subject.subjectName}`,
+    `GTU ${subject.subjectCode}`,
+    `${subject.subjectName} GTU material`,
+    `${subject.subjectCode} GTU books`
   ];
 
   return Array.from(new Set(parts.filter(Boolean) as string[]));
