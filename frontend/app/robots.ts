@@ -6,12 +6,29 @@ const DISALLOWED_ROUTES = [
   "/profile",
 ];
 
-const PUBLIC_ALLOW_ROUTES = ["/","subjects/[id]", "/subjects", "/paper-solution", "/about", "/contact", "/contribute", "/privacy", "/terms", "/disclaimer"];
+const PUBLIC_ALLOW_ROUTES = [
+  "/",
+  "/subjects/",
+  "/subjects",
+  "/paper-solution",
+  "/about",
+  "/contact",
+  "/contribute",
+  "/privacy",
+  "/terms",
+  "/disclaimer",
+];
 
 const AI_USER_AGENTS = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"];
 
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = getSiteUrl();
+  let host: string | undefined;
+  try {
+    host = new URL(siteUrl).host;
+  } catch {
+    host = undefined;
+  }
 
   return {
     rules: [
@@ -27,6 +44,6 @@ export default function robots(): MetadataRoute.Robots {
       })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl,
+    ...(host ? { host } : {}),
   };
 }

@@ -7,6 +7,14 @@ import { isTurnstileConfigured } from "@/lib/turnstile";
 const STORAGE_KEY = "paperai_turnstile_verified_at";
 const VERIFICATION_TTL_MS = 5 * 60 * 1000;
 
+const CRAWLER_UA =
+  /\b(googlebot|googleother|google-inspectiontool|bingbot|slurp|duckduckbot|baiduspider|yandex(bot|images)|applebot|gptbot|chatgpt-user|oai-searchbot|claudebot|claude-web|anthropic-ai|perplexitybot|ccbot|bytespider|amazonbot|facebookexternalhit|twitterbot|linkedinbot)\b/i;
+
+function isCrawlerUserAgent() {
+  if (typeof navigator === "undefined") return false;
+  return CRAWLER_UA.test(navigator.userAgent || "");
+}
+
 type TurnstileGateProps = {
   children: ReactNode;
   title?: string;
@@ -23,7 +31,7 @@ export function TurnstileGate({
   const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
   useEffect(() => {
-    if (!isTurnstileConfigured()) {
+    if (!isTurnstileConfigured() || isCrawlerUserAgent()) {
       setVerified(true);
       setReady(true);
       return;
