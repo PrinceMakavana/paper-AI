@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllProjects } from "@/lib/projects";
 import { getSiteUrl } from "@/lib/seo/site";
 
 type PublicSubjectSummary = {
@@ -19,6 +20,7 @@ const STATIC_ROUTES = [
   "/contribute",
   "/subjects",
   "/paper-solution",
+  "/projects",
   "/privacy",
   "/terms",
   "/disclaimer",
@@ -101,5 +103,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: subject.pageindexStatus === "ready" ? 0.9 : 0.8,
     }));
 
-  return [...staticEntries, ...subjectEntries];
+  const projectEntries = getAllProjects().map((project) => ({
+    url: `${siteUrl}/projects/${encodeURIComponent(project.slug)}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...subjectEntries, ...projectEntries];
 }

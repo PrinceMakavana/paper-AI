@@ -69,6 +69,16 @@ export interface CreateOrderResponse {
   order_id: string;
 }
 
+export interface CreateProductOrderResponse {
+  amount: number;
+  key_id: string;
+  currency: string;
+  notes?: Record<string, string>;
+  order_id: string;
+  product_slug: string;
+  product_title: string;
+}
+
 export type ChatContext =
   | { type: "document"; documentId: string }
   | { type: "subject"; subjectCode: string }

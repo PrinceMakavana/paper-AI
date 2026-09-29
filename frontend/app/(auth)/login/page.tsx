@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { AlertCircle, Loader2, Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
@@ -9,6 +9,7 @@ import { useAuth } from '@/components/context/auth/auth-context';
 import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/auth/TurnstileWidget';
 import { isTurnstileConfigured } from '@/lib/turnstile';
+import { getSafeInternalPath } from '@/lib/landing-links';
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -22,9 +23,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState('');
+  const [registerHref, setRegisterHref] = useState('/register');
   const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
   const [errors, setErrors] = useState<{ email?: string; password?: string; server?: string }>({});
+
+  useEffect(() => {
+    const next = getSafeInternalPath(new URLSearchParams(window.location.search).get('next'));
+    setRegisterHref(next ? `/register?next=${encodeURIComponent(next)}` : '/register');
+  }, []);
 
   const resetTurnstile = () => {
     setTurnstileToken('');
@@ -194,7 +201,7 @@ export default function LoginPage() {
           <div className="mt-6 text-center text-xs text-zinc-500">
             New here?{"  "}
             <Link
-              href="/register"
+              href={registerHref}
               className="font-medium text-blue-500 hover:underline underline-offset-4"
             >
               Create Account

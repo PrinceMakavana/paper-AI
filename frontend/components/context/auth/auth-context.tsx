@@ -27,6 +27,7 @@ import {
 import { resetAllApiState } from "@/storage/store";
 import { useAlert } from "../alert/alert-context";
 import { COOKIE_STORAGE_KEYS } from "@/lib/constant";
+import { getSafeInternalPath, ROUTES } from "@/lib/landing-links";
 
 /**
  * Shape of the auth context: loading flags, user, and auth actions.
@@ -93,6 +94,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
     skip: !hasAccessToken,
   });
   const user = profileResponse?.user;
+
+  const postAuthRedirect = useCallback(() => {
+    const next =
+      typeof window !== "undefined"
+        ? getSafeInternalPath(new URLSearchParams(window.location.search).get("next"))
+        : null;
+    router.replace(next || ROUTES.chat);
+    router.refresh();
+  }, [router]);
 
   const redirectToVerifyEmail = useCallback(
     (emailAddress: string) => {
@@ -185,8 +195,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         "success"
       );
       setIsUserLoggedIn(true);
-      router.replace("/chat");
-      router.refresh();
+      postAuthRedirect();
     } catch (err: unknown) {
       const notVerified = getEmailNotVerifiedPayload(err);
       if (notVerified) {
@@ -209,8 +218,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const result = await googleLoginMutation({ idToken }).unwrap();
       showAlert(result?.message || "Login successful", "success");
       setIsUserLoggedIn(true);
-      router.replace("/chat");
-      router.refresh();
+      postAuthRedirect();
     } catch (err: unknown) {
       const error = err as { data?: { error?: string; message?: string }; message?: string };
       showAlert(

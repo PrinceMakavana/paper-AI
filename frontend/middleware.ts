@@ -40,6 +40,15 @@ function redirectPreservingSearch(req: NextRequest, pathname: string) {
     return NextResponse.redirect(url);
 }
 
+function getSafeInternalPath(value: string | null | undefined): string | null {
+    if (!value) return null;
+    const path = value.trim();
+    if (!path.startsWith("/") || path.startsWith("//") || path.includes("://")) {
+        return null;
+    }
+    return path;
+}
+
 function nextWithNoStore() {
     const res = NextResponse.next();
     res.headers.set("Cache-Control", "private, no-store");
@@ -60,7 +69,8 @@ export async function middleware(req: NextRequest) {
             return nextWithNoStore();
         }
         if (token) {
-            return redirectPreservingSearch(req, "/chat");
+            const next = getSafeInternalPath(req.nextUrl.searchParams.get("next"));
+            return NextResponse.redirect(new URL(next || "/chat", req.url));
         }
         return nextWithNoStore();
     }

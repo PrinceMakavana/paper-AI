@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { AlertCircle, Loader2 } from "lucide-react";
@@ -10,6 +10,7 @@ import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { TurnstileWidget, type TurnstileWidgetHandle } from '@/components/auth/TurnstileWidget';
 import { isTurnstileConfigured } from '@/lib/turnstile';
 import freeEmailDomains from "free-email-domains";
+import { getSafeInternalPath } from '@/lib/landing-links';
 
  const isCompanyEmail = (value?: string) => {
     if (!value) {
@@ -50,9 +51,15 @@ export default function RegisterPage() {
     password: ''
   });
   const [turnstileToken, setTurnstileToken] = useState('');
+  const [loginHref, setLoginHref] = useState('/login');
   const turnstileRef = useRef<TurnstileWidgetHandle>(null);
 
   const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string; server?: string }>({});
+
+  useEffect(() => {
+    const next = getSafeInternalPath(new URLSearchParams(window.location.search).get('next'));
+    setLoginHref(next ? `/login?next=${encodeURIComponent(next)}` : '/login');
+  }, []);
 
   const resetTurnstile = () => {
     setTurnstileToken('');
@@ -218,7 +225,7 @@ export default function RegisterPage() {
           <div className="mt-6 text-center text-xs text-zinc-500">
             Already have an account?{" "}
             <button
-              onClick={() => router.push('/login')}
+              onClick={() => router.push(loginHref)}
               className="font-medium text-blue-500 hover:underline underline-offset-4"
             >
               Log in

@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "../axiosBaseQuery";
-import type { CreateOrderResponse } from "../types/paperai";
+import type { CreateOrderResponse, CreateProductOrderResponse } from "../types/paperai";
 
 export const paymentApi = createApi({
   reducerPath: "paymentApi",
@@ -13,7 +13,17 @@ export const paymentApi = createApi({
         data: payload,
       }),
     }),
+    createProductOrder: builder.mutation<
+      CreateProductOrderResponse,
+      { product_slug: string; name: string; email?: string }
+    >({
+      query: (payload) => ({
+        url: "/payment/create-product-order",
+        method: "POST",
+        data: payload,
+      }),
+    }),
   }),
 });
 
-export const { useCreateOrderMutation } = paymentApi;
+export const { useCreateOrderMutation, useCreateProductOrderMutation } = paymentApi;
