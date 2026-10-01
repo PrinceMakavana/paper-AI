@@ -28,7 +28,7 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
           src={current}
           alt={`${title} — image ${active + 1}`}
           fill
-          unoptimized={current.endsWith(".svg")}
+          unoptimized={current.startsWith("http") || current.endsWith(".svg")}
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority
@@ -51,7 +51,7 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
                 src={src}
                 alt=""
                 fill
-                unoptimized={src.endsWith(".svg")}
+                unoptimized={src.startsWith("http") || src.endsWith(".svg")}
                 className="object-cover"
                 sizes="96px"
               />

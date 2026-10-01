@@ -17,6 +17,7 @@ const COLS = [
     title: "Features",
     links: [
       { href: "/paper-solution", label: "Paper Solutions" },
+      { href: "/projects", label: "Projects" },
       { href: "/#features", label: "PDF Chat" },
       { href: "/#features", label: "AI Summary" },
       { href: "/#features", label: "Document History" },

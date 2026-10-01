@@ -5,7 +5,7 @@ Python utilities for auditing and fixing URLs in subject JSON files under `data/
 ## Setup
 
 ```bash
-# check_links.py and replace_bitly_links.py — stdlib only
+# check_links.py, replace_bitly_links.py, download_drive.py — stdlib only
 python3 --version   # 3.10+
 
 # fix_broken_link.py — Google Drive upload
@@ -18,6 +18,38 @@ pip install -r scripts/requirements-batch.txt
 For `fix_broken_link.py`, place a Google Cloud OAuth **Desktop** client JSON at `scripts/drive_credentials.json` (enable the Google Drive API first). On first run, a browser opens for consent; the token is saved to `scripts/drive_token.json`.
 
 Do not commit `drive_credentials.json`, `drive_token.json`, or other secrets.
+
+---
+
+## `download_drive.py`
+
+Download public Google Drive files or folders. Accepts share links, `uc?export=download` URLs, or raw IDs. Large files that hit Drive's virus-scan page are retried automatically. Google Docs / Sheets / Slides are exported as PDF / xlsx / pptx.
+
+```bash
+# Single public file
+python3 scripts/download_drive.py 'https://drive.google.com/file/d/FILE_ID/view?usp=sharing'
+
+# Raw file ID
+python3 scripts/download_drive.py FILE_ID --out downloads/drive
+
+# Public folder (subfolders need --recursive)
+python3 scripts/download_drive.py 'https://drive.google.com/drive/folders/FOLDER_ID' --recursive
+
+# Several URLs from a text file
+python3 scripts/download_drive.py --url-file scripts/drive_urls.txt
+```
+
+Folder listing uses the Drive API when `scripts/drive_credentials.json` exists (`pip install -r scripts/requirements-drive.txt`). Otherwise the public folder page is parsed.
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--out` | `downloads/drive` | Output directory |
+| `--url-file` | — | One Drive URL or ID per line |
+| `--recursive` | off | Also download subfolders |
+| `--timeout` | `60` | HTTP timeout (seconds) |
+| `--sleep` | `0.4` | Pause between targets |
+| `--credentials` | `scripts/drive_credentials.json` | Optional OAuth client secrets |
+| `--token` | `scripts/drive_token.json` | Saved OAuth token |
 
 ---
 
@@ -218,6 +250,7 @@ After a successful run, each subject JSON is updated with `pageindex_status`, `p
 
 | File | Purpose |
 |------|---------|
+| `download_drive.py` | Download public Drive files / folders |
 | `check_links.py` | URL audit |
 | `replace_bitly_links.py` | Bitly → original URL replacement |
 | `fix_broken_link.py` | Drive upload + JSON patch |

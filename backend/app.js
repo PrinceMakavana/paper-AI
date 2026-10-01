@@ -15,7 +15,9 @@ import PaymentRouter from './routes/paymentRoutes.js';
 import pageIndexAuthRoutes from './routes/pageindexAuthRoutes.js';
 import pageIndexHostedJobRoutes from './routes/pageIndexHostedJobRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import shopProjectRoutes from './routes/shopProjectRoutes.js';
 import { startHostedJobRecovery } from './services/pageindexHosted/jobRecovery.js';
+import { ensureDefaultShopProject } from './utils/seedShopProjects.js';
 
 dotenv.config();
 
@@ -27,8 +29,7 @@ app.set('trust proxy', trustProxy === undefined ? 1 : trustProxy);
 
 const allowedOrigins = [
     process.env.FRONTEND_URL,
-    'http://localhost:3000',
-    'http://localhost:3001',
+    process.env.FRONTEND_URL_ADMIN,
 ];
 app.use(cors({
     origin: function (origin, callback) {
@@ -64,6 +65,7 @@ app.use(PaymentRouter);
 app.use(pageIndexAuthRoutes);
 app.use(pageIndexHostedJobRoutes);
 app.use(contactRoutes);
+app.use(shopProjectRoutes);
 app.get('/', (req, res) => {
     res.status(200).json({
         message: 'paperAI API is running',
@@ -89,6 +91,7 @@ async function connectMongoIfConfigured() {
         dbName: MONGODB_DB_NAME
     });
     console.log('✅ Connected to MongoDB');
+    await ensureDefaultShopProject();
     startHostedJobRecovery();
 }
 

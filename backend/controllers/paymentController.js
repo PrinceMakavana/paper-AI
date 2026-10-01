@@ -5,7 +5,7 @@ import User from '../models/userModel.js';
 import dotenv from 'dotenv';
 import { pagesForTokenPurchase, TOKENS_PER_RUPEE } from '../utils/billingConstants.js';
 import { validateWebhookSignature } from 'razorpay/dist/utils/razorpay-utils.js';
-import { getShopProduct } from '../config/shopProducts.js';
+import { getActiveShopProduct } from './shopProjectController.js';
 import { sendPurchaseConfirmationEmail } from '../utils/emailService.js';
 
 dotenv.config();
@@ -87,7 +87,7 @@ async function createProductOrder(req, res) {
             return res.status(400).json({ message: 'A valid account email is required' });
         }
 
-        const product = getShopProduct(productSlug);
+        const product = await getActiveShopProduct(productSlug);
         if (!product) {
             return res.status(404).json({ message: 'Project not found or unavailable' });
         }

@@ -5,8 +5,8 @@ import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/button";
 import {
   discountPercent,
+  fetchPublicProjects,
   formatInr,
-  getAllProjects,
 } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -22,20 +22,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
-  const projects = getAllProjects();
+export const dynamic = "force-dynamic";
+
+export default async function ProjectsPage() {
+  const result = await fetchPublicProjects({ cache: "no-store" });
+  const projects = result.status === "ok" ? result.projects : [];
+  const errorMessage = result.status === "error" ? result.message : undefined;
 
   return (
     <PageShell
       eyebrow="Shop"
       title="Projects"
-      description="Digital study kits and tools you can purchase securely. Add another item to the catalog JSON and it appears here automatically."
+      description="Digital study kits and tools you can purchase securely."
     >
-      {projects.length === 0 ? (
+      {errorMessage ? (
+        <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
+          <h2 className="text-lg font-semibold text-foreground">Projects are unavailable</h2>
+          <p className="mt-2 text-sm text-muted-foreground">{errorMessage}</p>
+        </div>
+      ) : projects.length === 0 ? (
         <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
           <h2 className="text-lg font-semibold text-foreground">No projects yet</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Projects will appear here once they are added to the catalog.
+            Projects will appear here once they are published in the shop.
           </p>
         </div>
       ) : (
@@ -55,7 +64,7 @@ export default function ProjectsPage() {
                       src={image}
                       alt={project.title}
                       fill
-                      unoptimized={image.endsWith(".svg")}
+                      unoptimized={image.startsWith("http") || image.endsWith(".svg")}
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, 50vw"
                     />

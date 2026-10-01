@@ -103,7 +103,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: subject.pageindexStatus === "ready" ? 0.9 : 0.8,
     }));
 
-  const projectEntries = getAllProjects().map((project) => ({
+  const projects = await getAllProjects();
+  const projectEntries = projects.map((project) => ({
     url: `${siteUrl}/projects/${encodeURIComponent(project.slug)}`,
     lastModified: now,
     changeFrequency: "weekly" as const,

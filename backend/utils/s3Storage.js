@@ -47,6 +47,13 @@ function buildCatalogObjectKey(subjectCode, contentType, contentId, filename) {
     return `${getPrefix()}/catalog/${safeSubjectCode}/${safeContentType}/${safeContentId}/${safeFilename}`;
 }
 
+function buildShopProjectImageKey(slug, imageId, extension) {
+    const safeSlug = safePathPart(slug, 'project');
+    const safeImageId = safePathPart(imageId, 'image');
+    const safeExtension = safePathPart(extension, 'img').replace(/^\.+/, '');
+    return `${getPrefix()}/shop-projects/${safeSlug}/${safeImageId}.${safeExtension}`;
+}
+
 function getS3Client() {
     return new S3Client({ region: getRegion() });
 }
@@ -125,6 +132,29 @@ async function streamToBuffer(stream) {
     return Buffer.concat(chunks);
 }
 
+async function downloadObject({ s3Uri, storagePath }) {
+    const location = resolveObjectLocation({ s3Uri, storagePath });
+    if (!location?.bucket || !location?.key) {
+        const error = new Error('S3 object location is not available.');
+        error.statusCode = 404;
+        throw error;
+    }
+
+    const client = getS3Client();
+    const response = await client.send(
+        new GetObjectCommand({
+            Bucket: location.bucket,
+            Key: location.key,
+        }),
+    );
+
+    const buffer = await streamToBuffer(response.Body);
+    return {
+        buffer,
+        contentType: response.ContentType || 'application/octet-stream',
+    };
+}
+
 async function downloadJson({ s3Uri, storagePath }) {
     const location = resolveObjectLocation({ s3Uri, storagePath });
     if (!location?.bucket || !location?.key) {
@@ -180,10 +210,12 @@ export {
     JSON_CONTENT_TYPE,
     buildObjectKey,
     buildCatalogObjectKey,
+    buildShopProjectImageKey,
     uploadBytes,
     uploadJson,
     uploadPdf,
     uploadPageIndexJson,
+    downloadObject,
     downloadJson,
     deleteObjectsByLocation,
     resolveObjectLocation,

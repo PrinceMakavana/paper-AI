@@ -2,9 +2,11 @@
 
 import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { z } from "zod";
+import { TurnstileWidget, type TurnstileWidgetHandle } from "@/components/TurnstileWidget";
 import { loginAdmin } from "@/lib/auth";
+import { isTurnstileConfigured } from "@/lib/turnstile";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -16,7 +18,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null);
   const [errors, setErrors] = useState<{
     email?: string;
     password?: string;
@@ -37,12 +41,19 @@ export default function LoginPage() {
       return;
     }
 
+    if (isTurnstileConfigured() && !turnstileToken) {
+      setErrors({ server: "Please complete the verification check." });
+      return;
+    }
+
     setIsLoading(true);
     try {
-      await loginAdmin(email, password);
+      await loginAdmin(email, password, turnstileToken || undefined);
       router.replace("/");
       router.refresh();
     } catch (error) {
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
       setErrors({
         server: error instanceof Error ? error.message : "Login failed.",
       });
@@ -117,6 +128,13 @@ export default function LoginPage() {
               <p className="text-xs font-medium text-red-600">{errors.password}</p>
             ) : null}
           </div>
+
+          <TurnstileWidget
+            ref={turnstileRef}
+            onVerify={setTurnstileToken}
+            onExpire={() => setTurnstileToken("")}
+            onError={() => setTurnstileToken("")}
+          />
 
           <button
             type="submit"

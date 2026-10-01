@@ -176,14 +176,22 @@ export default function AdminHomePage() {
             </p>
             <h1 className="text-xl font-bold">Admin Portal</h1>
           </div>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted"
-          >
-            <LogOut className="h-4 w-4" />
-            Logout
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/projects"
+              className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted"
+            >
+              Projects
+            </Link>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 

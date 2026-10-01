@@ -2,6 +2,7 @@ import { test } from 'tap';
 import {
     buildCatalogObjectKey,
     buildObjectKey,
+    buildShopProjectImageKey,
     parseS3Uri,
     resolveObjectLocation,
 } from '../utils/s3Storage.js';
@@ -35,6 +36,24 @@ test('buildCatalogObjectKey uses catalog path and sanitized parts', (t) => {
     t.equal(
         buildCatalogObjectKey('311/0005', 'paper_solution', 'Summer 2024', 'paper solution.pdf'),
         'pageindex/catalog/311-0005/paper_solution/Summer 2024/paper solution.pdf',
+    );
+
+    if (originalPrefix === undefined) {
+        delete process.env.AWS_S3_PREFIX;
+    } else {
+        process.env.AWS_S3_PREFIX = originalPrefix;
+    }
+
+    t.end();
+});
+
+test('buildShopProjectImageKey uses shop-projects path', (t) => {
+    const originalPrefix = process.env.AWS_S3_PREFIX;
+    process.env.AWS_S3_PREFIX = 'pageindex';
+
+    t.equal(
+        buildShopProjectImageKey('document/ai', 'img/1', 'png'),
+        'pageindex/shop-projects/document-ai/img-1.png',
     );
 
     if (originalPrefix === undefined) {

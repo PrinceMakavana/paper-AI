@@ -20,6 +20,11 @@ const blockCrawlers = (req, res, next) => {
         return next();
     }
 
+    // Product gallery images are public marketing assets used by Open Graph.
+    if (req.method === 'GET' && /^\/public\/shop\/projects\/[^/]+\/images\/[^/]+$/.test(req.path)) {
+        return next();
+    }
+
     if (!isCrawlerRequest(req)) {
         return next();
     }

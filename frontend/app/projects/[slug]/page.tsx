@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   discountPercent,
   formatInr,
-  getAllProjects,
   getProjectBySlug,
 } from "@/lib/projects";
 
@@ -17,13 +16,12 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getAllProjects().map((project) => ({ slug: project.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const result = await getProjectBySlug(slug);
+  const project = result.status === "ok" ? result.project : null;
 
   if (!project) {
     return {
@@ -50,11 +48,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const result = await getProjectBySlug(slug);
 
-  if (!project) {
+  if (result.status === "not_found") {
     notFound();
   }
+
+  if (result.status === "error") {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <SiteHeader />
+        <main className="mx-auto max-w-3xl px-5 pb-20 pt-28">
+          <h1 className="text-3xl font-bold tracking-tight">Project unavailable</h1>
+          <p className="mt-4 text-muted-foreground">{result.message}</p>
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
+
+  const project = result.project;
 
   const discount = discountPercent(project.originalPrice, project.currentPrice);
 

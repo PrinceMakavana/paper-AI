@@ -37,14 +37,18 @@ function getApiBaseUrl() {
   return `${apiUrl.replace(/\/$/, "")}${apiVersion}`;
 }
 
-export async function loginAdmin(email: string, password: string) {
+export async function loginAdmin(email: string, password: string, turnstileToken?: string) {
   const response = await fetch(`${getApiBaseUrl()}/users/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({
+      email,
+      password,
+      ...(turnstileToken ? { turnstileToken } : {}),
+    }),
   });
 
   const data = (await response.json().catch(() => ({}))) as LoginResponse;
