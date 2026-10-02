@@ -1,6 +1,7 @@
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { TurnstileGate } from "@/components/auth/TurnstileGate";
+import { CareerKitsStrip } from "@/components/projects/CareerKitsStrip";
 import { SubjectsGrid } from "@/components/subjects/subjects-grid";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { createItemListJsonLd } from "@/lib/seo/schemas";
@@ -142,7 +143,10 @@ export default async function SubjectsPage() {
           title="Verify to browse subjects"
           description="Complete this quick check to view the GTU subject catalog."
         >
-          <SubjectsGrid subjects={subjects} errorMessage={errorMessage} />
+          <div className="flex flex-col gap-8">
+            <SubjectsGrid subjects={subjects} errorMessage={errorMessage} />
+            <CareerKitsStrip />
+          </div>
         </TurnstileGate>
       </main>
       <SiteFooter />

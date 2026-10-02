@@ -2,6 +2,7 @@ import { ExternalLinkAnchor } from "@/components/external-link-anchor";
 import { TurnstileGate } from "@/components/auth/TurnstileGate";
 import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { CareerKitsStrip } from "@/components/projects/CareerKitsStrip";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { getSiteUrl, getSubjectUrl, SITE_NAME } from "@/lib/seo/site";
@@ -639,6 +640,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <JsonLd data={jsonLd} />
+
       <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-16 pt-24 sm:px-6">
         <header className="border-b border-border pb-3">
           <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground" aria-label="Breadcrumb">
@@ -662,11 +664,13 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             {" "}study materials, including syllabus, old exam papers, books, and paper solutions.
           </p>
         </header>
+        <CareerKitsStrip />
 
         <TurnstileGate
           title="Verify to view materials"
           description="Complete this quick check to download syllabus, papers, books, and solutions."
         >
+          <div className="flex flex-col gap-6">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_15rem]">
           <div className="flex flex-col gap-6">
             <div>
@@ -740,6 +744,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             </dl>
           </aside>
         </div>
+          </div>
         </TurnstileGate>
       </main>
       <SiteFooter />

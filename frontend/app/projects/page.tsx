@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { PageShell } from "@/components/layout/PageShell";
-import { Button } from "@/components/ui/button";
-import {
-  discountPercent,
-  fetchPublicProjects,
-  formatInr,
-} from "@/lib/projects";
+import type { ReactNode } from "react";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { ProjectCard } from "@/components/projects/ProjectCard";
+import { fetchPublicProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Projects — paperAI",
@@ -24,83 +20,83 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+function CatalogFrame({
+  count,
+  children,
+}: {
+  count?: number;
+  children: ReactNode;
+}) {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
+      <main>
+        <header className="relative overflow-hidden border-b border-border">
+          <div className="pointer-events-none absolute inset-0 hero-bg" />
+          <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-5 pb-12 pt-28 sm:flex-row sm:items-end sm:justify-between sm:pb-14 sm:pt-32">
+            <div className="max-w-2xl">
+              <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                Catalog
+              </p>
+              <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+                Projects
+              </h1>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                Digital study kits and tools you can purchase securely.
+              </p>
+            </div>
+            {typeof count === "number" ? (
+              <p className="shrink-0 text-sm tabular-nums text-muted-foreground">
+                {count} {count === 1 ? "project" : "projects"}
+              </p>
+            ) : null}
+          </div>
+        </header>
+        <div className="mx-auto max-w-7xl px-5 py-12 sm:py-16">{children}</div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
+
 export default async function ProjectsPage() {
   const result = await fetchPublicProjects({ cache: "no-store" });
   const projects = result.status === "ok" ? result.projects : [];
   const errorMessage = result.status === "error" ? result.message : undefined;
 
-  return (
-    <PageShell
-      eyebrow="Shop"
-      title="Projects"
-      description="Digital study kits and tools you can purchase securely."
-    >
-      {errorMessage ? (
-        <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
-          <h2 className="text-lg font-semibold text-foreground">Projects are unavailable</h2>
-          <p className="mt-2 text-sm text-muted-foreground">{errorMessage}</p>
+  if (errorMessage) {
+    return (
+      <CatalogFrame>
+        <div className="max-w-lg rounded-lg border border-border bg-card px-6 py-8">
+          <h2 className="text-base font-medium tracking-tight text-foreground">
+            Projects are unavailable
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{errorMessage}</p>
         </div>
-      ) : projects.length === 0 ? (
-        <div className="rounded-xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
-          <h2 className="text-lg font-semibold text-foreground">No projects yet</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Projects will appear here once they are published in the shop.
+      </CatalogFrame>
+    );
+  }
+
+  if (projects.length === 0) {
+    return (
+      <CatalogFrame count={0}>
+        <div className="max-w-lg rounded-lg border border-border bg-card px-6 py-8">
+          <h2 className="text-base font-medium tracking-tight text-foreground">No projects yet</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Projects will appear here once they are published in the catalog.
           </p>
         </div>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((project) => {
-            const discount = discountPercent(project.originalPrice, project.currentPrice);
-            const image = project.images[0];
+      </CatalogFrame>
+    );
+  }
 
-            return (
-              <article
-                key={project.slug}
-                className="card-hover flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)]"
-              >
-                <div className="relative aspect-[16/10] bg-muted">
-                  {image ? (
-                    <Image
-                      src={image}
-                      alt={project.title}
-                      fill
-                      unoptimized={image.startsWith("http") || image.endsWith(".svg")}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                  ) : null}
-                  {discount > 0 ? (
-                    <span className="absolute left-3 top-3 rounded-md bg-brand px-2 py-1 text-xs font-semibold text-brand-foreground">
-                      {discount}% off
-                    </span>
-                  ) : null}
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                    {project.title}
-                  </h2>
-                  <p className="mt-2 line-clamp-3 flex-1 text-sm text-muted-foreground">
-                    {project.description}
-                  </p>
-                  <div className="mt-4 flex items-baseline gap-2">
-                    <span className="text-xl font-semibold text-foreground">
-                      {formatInr(project.currentPrice)}
-                    </span>
-                    {project.originalPrice > project.currentPrice ? (
-                      <span className="text-sm text-muted-foreground line-through">
-                        {formatInr(project.originalPrice)}
-                      </span>
-                    ) : null}
-                  </div>
-                  <Button asChild className="mt-5 w-full">
-                    <Link href={`/projects/${project.slug}`}>View Project</Link>
-                  </Button>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      )}
-    </PageShell>
+  return (
+    <CatalogFrame count={projects.length}>
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
+    </CatalogFrame>
   );
 }

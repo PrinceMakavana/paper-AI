@@ -2,6 +2,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { TurnstileGate } from "@/components/auth/TurnstileGate";
 import { PaperSolutionsGrid } from "@/components/paper-solution/paper-solutions-grid";
+import { CareerKitsStrip } from "@/components/projects/CareerKitsStrip";
 import { getMaterialFiles } from "@/lib/catalog-materials";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { createItemListJsonLd } from "@/lib/seo/schemas";
@@ -143,11 +144,14 @@ export default async function PaperSolutionPage() {
           </p>
         </header>
 
+        <CareerKitsStrip />
         <TurnstileGate
           title="Verify to browse paper solutions"
           description="Complete this quick check to view available GTU paper solutions."
         >
-          <PaperSolutionsGrid subjects={subjects} errorMessage={errorMessage} />
+          <div className="flex flex-col gap-8">
+            <PaperSolutionsGrid subjects={subjects} errorMessage={errorMessage} />
+          </div>
         </TurnstileGate>
       </main>
       <SiteFooter />

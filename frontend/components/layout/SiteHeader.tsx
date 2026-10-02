@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: ROUTES.subjects, label: "Subjects", exact: false },
   { href: ROUTES.paperSolution, label: "Solutions", exact: false },
-  { href: ROUTES.projects, label: "Projects", exact: false },
+  { href: ROUTES.projects, label: "Career kits", exact: false },
   { href: "/about", label: "About", exact: false },
   { href: "/contribute", label: "Contribute", exact: false },
   { href: "/contact", label: "Contact", exact: false },
