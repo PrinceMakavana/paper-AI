@@ -103,13 +103,11 @@ export function PdfViewerDialog({
               </div>
             </div>
           ) : url ? (
-            // dont show 
             <iframe
               key={url}
               title={filename ? `PDF preview for ${filename}` : "PDF preview"}
               src={url}
-              // src={url + '#toolbar=0'}
-
+              allow="autoplay"
               className="h-full w-full"
               style={{ border: "none", backgroundColor: "#ffffff" }}
             />

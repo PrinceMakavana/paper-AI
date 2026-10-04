@@ -1,12 +1,16 @@
 "use client";
 
+import {
+  CatalogPdfViewerDialog,
+  useCatalogPdfViewer,
+  type OpenCatalogPdfArgs,
+} from "@/components/catalog-pdf-viewer";
 import { useSubjectListBrowse } from "@/hooks/useSubjectListBrowse";
 import {
   getMaterialFiles,
   getMaterialFileUrl,
   getPaperSolutionLabel,
 } from "@/lib/catalog-materials";
-import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import type { SubjectDetail } from "@/lib/types";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import Link from "next/link";
@@ -16,7 +20,13 @@ type PaperSolutionsGridProps = {
   errorMessage?: string;
 };
 
-function SolutionCard({ subject }: { subject: SubjectDetail }) {
+function SolutionCard({
+  subject,
+  onOpenPdf,
+}: {
+  subject: SubjectDetail;
+  onOpenPdf: (args: OpenCatalogPdfArgs) => void;
+}) {
   const files = getMaterialFiles(subject.paperSolution);
   const subjectHref = `/subjects/${encodeURIComponent(subject.subjectCode)}`;
 
@@ -44,14 +54,14 @@ function SolutionCard({ subject }: { subject: SubjectDetail }) {
 
       <ul className="mt-2">
         {files.map((file, index) => {
-          const href = getCatalogDownloadHref(getMaterialFileUrl(file));
+          const fileUrl = getMaterialFileUrl(file);
           const label = getPaperSolutionLabel(file, index);
           const rowClassName =
-            "flex w-full items-center justify-between gap-2 py-2 text-sm font-medium text-foreground transition hover:text-brand";
+            "flex w-full items-center justify-between gap-2 py-2 text-left text-sm font-medium text-foreground transition hover:text-brand";
 
-          if (!href) {
+          if (!fileUrl?.trim()) {
             return (
-              <li key={`${getMaterialFileUrl(file) || file.title || index}`}>
+              <li key={`${fileUrl || file.title || index}`}>
                 <span className={rowClassName}>
                   <span className="min-w-0 truncate">{label}</span>
                   <ArrowUpRight className="size-3.5 shrink-0 text-brand" aria-hidden />
@@ -61,16 +71,15 @@ function SolutionCard({ subject }: { subject: SubjectDetail }) {
           }
 
           return (
-            <li key={`${getMaterialFileUrl(file) || file.title || index}`}>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+            <li key={`${fileUrl || file.title || index}`}>
+              <button
+                type="button"
+                onClick={() => onOpenPdf({ filename: label, url: fileUrl })}
                 className={rowClassName}
               >
                 <span className="min-w-0 truncate">{label}</span>
                 <ArrowUpRight className="size-3.5 shrink-0 text-brand" aria-hidden />
-              </a>
+              </button>
             </li>
           );
         })}
@@ -99,6 +108,7 @@ export function PaperSolutionsGrid({ subjects, errorMessage }: PaperSolutionsGri
     isPending,
     handleLoadMore,
   } = useSubjectListBrowse(subjects);
+  const { open, filename, url, openPdf, closePdf } = useCatalogPdfViewer();
 
   if (subjects.length === 0) {
     if (errorMessage) {
@@ -124,6 +134,13 @@ export function PaperSolutionsGrid({ subjects, errorMessage }: PaperSolutionsGri
 
   return (
     <div>
+      <CatalogPdfViewerDialog
+        open={open}
+        filename={filename}
+        url={url}
+        onClose={closePdf}
+      />
+
       <div className="mb-6 max-w-md">
         <label
           htmlFor="paper-solution-search"
@@ -166,6 +183,7 @@ export function PaperSolutionsGrid({ subjects, errorMessage }: PaperSolutionsGri
             <SolutionCard
               key={subject.subjectCode}
               subject={subject as SubjectDetail}
+              onOpenPdf={openPdf}
             />
           ))}
         </div>

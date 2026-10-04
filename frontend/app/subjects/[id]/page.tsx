@@ -4,6 +4,7 @@ import { getCatalogDownloadHref } from "@/lib/catalogDownload";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CareerKitsStrip } from "@/components/projects/CareerKitsStrip";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { PaperSolutionsFilesGrid } from "@/components/paper-solution/paper-solutions-files-grid";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { getSiteUrl, getSubjectUrl, SITE_NAME } from "@/lib/seo/site";
 import type { CatalogBook, CatalogMaterialFile, SubjectDetail } from "@/lib/types";
@@ -706,7 +707,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
               </h2>
               <div className="mt-4">
                 {getMaterialFiles(subject.paperSolution).length > 0 ? (
-                  <MaterialFilesGrid
+                  <PaperSolutionsFilesGrid
                     files={getMaterialFiles(subject.paperSolution)}
                     initials={initials}
                     fallbackTitle={subject.subjectName}
