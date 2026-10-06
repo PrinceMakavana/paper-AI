@@ -17,10 +17,8 @@ const COLS = [
     title: "Features",
     links: [
       { href: "/paper-solution", label: "Paper Solutions" },
-      { href: "/projects", label: "Projects" },
-      { href: "/#features", label: "PDF Chat" },
-      { href: "/#features", label: "AI Summary" },
-      { href: "/#features", label: "Document History" },
+      { href: "/projects", label: "Career Kits" },
+      { href: "/subjects", label: "Subject Materials" },
     ],
   },
   {
@@ -28,8 +26,6 @@ const COLS = [
     links: [
       { href: "/contribute", label: "Contribute" },
       { href: "/disclaimer", label: "Disclaimer" },
-      { href: "/subjects", label: "GTU Materials" },
-      { href: "/subjects", label: "Blog" },
     ],
   },
 ];

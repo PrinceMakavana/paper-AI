@@ -94,6 +94,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site description" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full catalog" />
       </head>
       <body className={`${fraunces.variable} ${instrumentSans.variable} antialiased`}>
         <Providers>{children}</Providers>

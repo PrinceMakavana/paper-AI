@@ -6,15 +6,15 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { fetchPublicProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Projects — paperAI",
+  title: "Career Kits — paperAI",
   description:
-    "Browse paperAI digital projects and study kits. Transparent pricing with secure Razorpay checkout.",
+    "Browse paperAI digital career kits and study kits. Transparent pricing with secure Razorpay checkout.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
-    title: "Projects — paperAI",
-    description: "Browse digital projects and study kits from paperAI.",
+    title: "Career Kits — paperAI",
+    description: "Browse digital career kits and study kits from paperAI. Transparent pricing with secure Razorpay checkout.",
   },
 };
 
@@ -39,7 +39,7 @@ function CatalogFrame({
                 Catalog
               </p>
               <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-                Projects
+                Career Kits
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Digital study kits and tools you can purchase securely.
@@ -47,7 +47,7 @@ function CatalogFrame({
             </div>
             {typeof count === "number" ? (
               <p className="shrink-0 text-sm tabular-nums text-muted-foreground">
-                {count} {count === 1 ? "project" : "projects"}
+                {count} {count === 1 ? "career kit" : "career kits"}
               </p>
             ) : null}
           </div>
@@ -69,7 +69,7 @@ export default async function ProjectsPage() {
       <CatalogFrame>
         <div className="max-w-lg rounded-lg border border-border bg-card px-6 py-8">
           <h2 className="text-base font-medium tracking-tight text-foreground">
-            Projects are unavailable
+            Career Kits are unavailable
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{errorMessage}</p>
         </div>
@@ -81,9 +81,9 @@ export default async function ProjectsPage() {
     return (
       <CatalogFrame count={0}>
         <div className="max-w-lg rounded-lg border border-border bg-card px-6 py-8">
-          <h2 className="text-base font-medium tracking-tight text-foreground">No projects yet</h2>
+          <h2 className="text-base font-medium tracking-tight text-foreground">No career kits yet</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Projects will appear here once they are published in the catalog.
+            Career kits will appear here once they are published in the catalog.
           </p>
         </div>
       </CatalogFrame>

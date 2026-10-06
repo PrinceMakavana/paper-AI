@@ -181,7 +181,7 @@ export default function AdminHomePage() {
               href="/projects"
               className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted"
             >
-              Projects
+              Career Kits
             </Link>
             <button
               type="button"

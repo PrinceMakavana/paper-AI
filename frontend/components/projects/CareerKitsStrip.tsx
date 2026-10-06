@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, FileText, Layers, Rocket } from "lucide-react";
-import { fetchPublicProjects, formatInr } from "@/lib/projects";
-
 const OFFERS = [
   {
     slug: "ats-resume-templates",
@@ -24,17 +22,7 @@ function OfferIcon({ icon }: { icon: (typeof OFFERS)[number]["icon"] }) {
   return <Icon className="size-4" aria-hidden />;
 }
 
-export async function CareerKitsStrip() {
-  const result = await fetchPublicProjects({ cache: "no-store" });
-  const projects = result.status === "ok" ? result.projects : [];
-
-  const offers = OFFERS.map((offer) => {
-    const project = projects.find((item) => item.slug === offer.slug);
-    return {
-      ...offer,
-    };
-  });
-
+export function CareerKitsStrip() {
   return (
     <section
       aria-label="Career kits"
@@ -67,7 +55,7 @@ export async function CareerKitsStrip() {
         </div>
 
         <div className="grid grid-cols-1 gap-3 lg:w-[34rem] lg:shrink-0 lg:grid-cols-2">
-          {offers.map((offer) => (
+          {OFFERS.map((offer) => (
             <Link
               key={offer.slug}
               href={offer.href}

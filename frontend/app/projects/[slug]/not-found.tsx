@@ -15,7 +15,7 @@ export default function ProjectNotFound() {
           or browse the full catalog.
         </p>
         <Button asChild className="mt-8">
-          <Link href="/projects">Browse projects</Link>
+          <Link href="/projects">Browse career kits</Link>
         </Button>
       </main>
       <SiteFooter />

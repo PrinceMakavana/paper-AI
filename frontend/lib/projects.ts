@@ -87,7 +87,7 @@ export async function fetchPublicProjects(init?: RequestInit): Promise<ProjectsR
   if (!url) {
     return {
       status: "error",
-      message: "Projects API is not configured.",
+      message: "Career Kits API is not configured.",
     };
   }
 
@@ -102,12 +102,12 @@ export async function fetchPublicProjects(init?: RequestInit): Promise<ProjectsR
 
     if (!response.ok) {
       console.error(
-        `Failed to fetch public shop projects: ${response.status} ${response.statusText}`,
+        `Failed to fetch public shop career kits : ${response.status} ${response.statusText}`,
       );
 
       return {
         status: "error",
-        message: "Unable to load projects right now.",
+        message: "Unable to load career kits right now.",
       };
     }
 
@@ -119,11 +119,11 @@ export async function fetchPublicProjects(init?: RequestInit): Promise<ProjectsR
         .filter((project): project is Project => project !== null),
     };
   } catch (error) {
-    console.error("Error fetching public shop projects:", error);
+    console.error("Error fetching public shop career kits:", error);
 
     return {
       status: "error",
-      message: "Unable to connect to the projects service.",
+      message: "Unable to connect to the career kits service.",
     };
   }
 }
@@ -139,7 +139,7 @@ export const getProjectBySlug = cache(async (slug: string): Promise<ProjectLooku
   if (!url) {
     return {
       status: "error",
-      message: "Projects API is not configured.",
+      message: "Career Kits API is not configured.",
     };
   }
 
@@ -178,7 +178,7 @@ export const getProjectBySlug = cache(async (slug: string): Promise<ProjectLooku
 
     return {
       status: "error",
-      message: "Unable to connect to the projects service.",
+      message: "Unable to connect to the career kits service.",
     };
   }
 });

@@ -231,12 +231,12 @@ export async function generateStaticParams() {
 
 function getSubjectTitle(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` | ${subject.knownAs}` : "";
-  return `${subject.subjectCode} | ${subject.subjectName} | ${alias} | Syllabus, Papers, Books  | GTU`;
+  return `${subject.subjectCode} | ${subject.subjectName} | ${alias ? `${alias} |` : ""}  GTU Material | Syllabus, Papers, Books  | GTU`;
 }
 
 function getSubjectDescription(subject: SubjectDetail) {
   const alias = subject.knownAs ? ` (${subject.knownAs})` : "";
-  return `Download and view GTU ${subject.subjectName} | ${alias} |  ${subject.subjectCode} syllabus, old exam papers, books, and paper solutions on paperAI.`;
+  return `Download and view GTU ${subject.subjectName} | ${subject.subjectCode} ${alias ? `${alias} |` : ""} syllabus, old exam papers, books, and paper solutions on paperAI.`;
 }
 
 function getSubjectKeywords(subject: SubjectDetail) {
@@ -244,6 +244,7 @@ function getSubjectKeywords(subject: SubjectDetail) {
     subject.subjectCode,
     subject.subjectName,
     subject.knownAs,
+    "GTU Material",
     "GTU",
     `${subject.subjectCode} syllabus`,
     `${subject.subjectCode} old papers`,

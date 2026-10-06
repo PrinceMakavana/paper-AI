@@ -77,7 +77,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       <main className="mx-auto max-w-6xl px-5 pb-20 pt-28">
         <div className="mb-6">
           <Button asChild variant="ghost" className="-ml-3 text-muted-foreground">
-            <Link href="/projects">← All projects</Link>
+            <Link href="/projects">← All career kits</Link>
           </Button>
         </div>
 
