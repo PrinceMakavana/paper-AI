@@ -14,9 +14,9 @@ export default function ProjectNotFound() {
           That project slug does not exist or is no longer available. Check the link
           or browse the full catalog.
         </p>
-        <Button asChild className="mt-8">
+        {/* <Button asChild className="mt-8">
           <Link href="/projects">Browse career kits</Link>
-        </Button>
+        </Button> */}
       </main>
       <SiteFooter />
     </div>

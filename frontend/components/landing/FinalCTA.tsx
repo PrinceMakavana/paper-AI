@@ -47,14 +47,14 @@ export function FinalCTA() {
                 <Link href={startChatHref(isUserLoggedIn)}>Open Chat</Link>
               </Button>
             )}
-            <Button
+            {/* <Button
               size="lg"
               variant="outline"
               className="h-11 border-primary-foreground/30 bg-transparent px-6 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground dark:border-primary-foreground/30 dark:text-primary-foreground dark:hover:bg-primary-foreground/10 dark:hover:text-primary-foreground"
               asChild
             >
               <Link href={ROUTES.projects}>Career Kits</Link>
-            </Button>
+            </Button> */}
           </div>
         </Reveal>
       </div>
