@@ -177,12 +177,12 @@ export default function AdminHomePage() {
             <h1 className="text-xl font-bold">Admin Portal</h1>
           </div>
           <div className="flex items-center gap-2">
-            {/* <Link
+            <Link
               href="/projects"
               className="rounded-lg border border-border px-3 py-2 text-sm font-medium transition hover:bg-muted"
             >
               Career Kits
-            </Link> */}
+            </Link> 
             <button
               type="button"
               onClick={handleLogout}
